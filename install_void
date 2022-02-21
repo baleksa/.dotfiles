@@ -1,5 +1,5 @@
 #!/bin/zsh
 
-sudo xbps-install -Su xtools
+sudo xbps-install -Su xtools xargs
 cat manually_installed_packages_void | xargs xi
 stow */
