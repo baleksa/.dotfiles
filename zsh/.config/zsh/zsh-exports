@@ -1,8 +1,12 @@
-#!/bin/sh
+#!/bin/zsh
 # HISTFILE="$XDG_DATA_HOME"/zsh/history
+
+export PATH="$PATH:$HOME/.local/bin"
 
 HISTSIZE=1000000
 SAVEHIST=1000000
+
+export GIT_REPOS_DIR=~/Repositories
 
 export FZF_DEFAULT_COMMAND='fd -H .'
 export FZF_CTRL_R_OPTS='--layout=reverse'

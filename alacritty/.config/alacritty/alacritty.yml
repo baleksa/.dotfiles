@@ -111,7 +111,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: monospace
+    family: Fira Code Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Medium
@@ -315,7 +315,7 @@ font:
 colors:
   # Default colors
   primary:
-    background: '0x1e2127'
+    background: '0x0d1117'
     foreground: '0xabb2bf'
 
   # Normal colors

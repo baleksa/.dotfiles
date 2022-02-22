@@ -252,8 +252,8 @@ for_window [title="^Firefox — Sharing Indicator$"] floating enable
 for_window [title="^zoom$"] floating enable
 for_window [title="^Settings$"] floating enable
 
-exec dbus-run-session pipewire
-exec dbus-run-session pipewire-pulse
+exec pipewire
+exec pipewire-pulse
 
 exec gammastep -l 44.6:20.3 -t 6500:3400 -b 1:0.7
 

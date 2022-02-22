@@ -714,9 +714,9 @@ nvim_lsp.kotlin_language_server.setup {
 -- TODO: do this in a simpler way
 -- Setup lua lsp
 -- Make runtime files discoverable to the server
-local system_name = "Linux" -- Linux, macOS or Windows
+-- local system_name = "Linux" -- Linux, macOS or Windows
 local sumneko_root_path = '/home/baleksa/Repositories/lua-language-server'
-local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
+local sumneko_binary = sumneko_root_path.."/bin/lua-language-server"
 nvim_lsp.sumneko_lua.setup {
   cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
   on_attach = on_attach,

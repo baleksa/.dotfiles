@@ -42,7 +42,6 @@ font-adobe-source-code-pro
 fonts-roboto-ttf
 fzf
 gammastep
-gcompat
 gdb
 github-cli
 glow
@@ -65,7 +64,6 @@ gvfs-smb
 htop
 hunspell-en_US
 imv
-intel-ucode
 intel-video-accel
 iwd
 lf
@@ -79,7 +77,6 @@ libreoffice
 libxkbcommon-tools
 libxml2-devel
 light
-linux-headers
 lua-devel
 luarocks
 lutris
@@ -107,7 +104,6 @@ opendoas
 openjdk11
 openjdk17
 openjdk8
-p7zip-unrar
 pandoc
 pdfgrep
 pfetch
@@ -149,7 +145,6 @@ tty-clock
 udisks2
 udisks2-devel
 ufetch
-unrar
 unzip
 v4l2loopback
 void-docs-browse

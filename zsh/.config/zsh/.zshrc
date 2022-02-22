@@ -1,8 +1,7 @@
-#!/bin/sh
 export ZDOTDIR=$HOME/.config/zsh
-HISTFILE=~/.zsh_history
-setopt appendhistory
 
+HISTFILE="$ZDOTDIR/.zsh_history"
+setopt appendhistory
 # some useful options (man zshoptions)
 setopt autocd extendedglob nomatch menucomplete
 setopt interactive_comments
@@ -18,10 +17,11 @@ autoload -Uz compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-# zstyle ':completion::complete:lsof:*' menu yes select
+zstyle ':completion::complete:lsof:*' menu yes select
 zmodload zsh/complist
-# compinit
+compinit
 _comp_options+=(globdots)		# Include hidden files.
+
 
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
@@ -35,18 +35,31 @@ autoload -Uz colors && colors
 source "$ZDOTDIR/zsh-functions"
 
 # Normal files to source
-zsh_add_file "zsh-exports"
-zsh_add_file "zsh-vim-mode"
-zsh_add_file "zsh-aliases"
+safe_source "$ZDOTDIR/zsh-exports"
+safe_source "$ZDOTDIR/zsh-vim-mode"
+safe_source "$ZDOTDIR/zsh-aliases"
 # zsh_add_file "zsh-prompt"
 
-# Plugins
-zsh_add_plugin "zsh-users/zsh-autosuggestions"
-zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
-zsh_add_plugin "hlissner/zsh-autopair"
-# zsh_add_completion "esc/conda-zsh-completion" false
-# For more plugins: https://github.com/unixorn/awesome-zsh-plugins
-# More completions https://github.com/zsh-users/zsh-completions
+
+# PLUGINS
+#
+ZSH_SYNTAX_HIGHLIGHT="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+safe_source "$ZSH_SYNTAX_HIGHLIGHT"
+
+ZSH_AUTO_SUGG="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+safe_source "$ZSH_AUTO_SUGG"
+
+# Autopair plugin
+ZSH_AUTOPAIR_DIR="$GIT_REPOS_DIR/.zsh-autopair"
+if [[ ! -d "$ZSH_AUTOPAIR_DIR" ]]; then
+  git clone https://github.com/hlissner/zsh-autopair $ZSH_AUTOPAIR_DIR
+fi
+safe_source "$ZSH_AUTOPAIR_DIR/autopair.zsh"
+autopair-init
+
+# Add completion folder to fpath
+[ -d $ZDOTDIR/completion/_fnm ] && fpath+="$ZDOTDIR/completion/"
+
 
 # Key-bindings
 bindkey -s '^o' 'lf^M'
@@ -70,9 +83,7 @@ bindkey -r "^d"
 [ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f $ZDOTDIR/completion/_fnm ] && fpath+="$ZDOTDIR/completion/"
-# export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
-compinit
+
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
@@ -82,6 +93,8 @@ bindkey '^e' edit-command-line
 export EDITOR="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox-wayland"
+
+alias luamake=/home/baleksa/Repositories/lua-language-server/3rd/luamake/luamake
 
 # For QT Themes
 # export QT_QPA_PLATFORMTHEME=qt5ct
@@ -94,4 +107,3 @@ eval "$(starship init zsh)"
 
 
 
-alias luamake=/home/baleksa/Repositories/lua-language-server/3rd/luamake/luamake
