@@ -1,5 +1,32 @@
-#!/bin/zsh
+#!/bin/sh
 
-sudo xbps-install -Su xtools findutils
-cat manually_installed_packages_void | xargs  xi -y
+add_service() {
+	sudo ln -s /etc/"$1" /var/service
+}
+
+sudo xbps-install -Su -y xtools void-repo-nonfree
+xi -y zsh
+sudo chsh -s /bin/zsh baleksa
+xi -y mesa-dri mesa-vaapi mesa-vdpau mesa-vulkan-intel
+xi -y intel-ucode
+xi -y dbus && sudo ln -s /etc/sv/dbus /var/service
+xi -y socklog-void &&
+	add_service socklog_unix &&
+	add_service nanoklogd
+echo 'export HARDWARECLOCK=localtime' | sudo tee -a /etc/rc.conf
+xi -y chrony && add_service chronyd
+xi -y tlp && add_service tlp
+xi -y seatd && add_service seatd && sudo usermod -a -G _seatd baleksa
+xi -y sway swayidle swaylock
+xi -y qt5-wayland qt6-wayland
+xi -y kwayland
+xi -y iwd && add_service iwd && printf '[General]\nUseDefaultInterface=true' | sudo tee -a /etc/iwd/main.conf 
+xi zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-history-substring-search
+xi alacritty 
+xi -y pipewire libspa-bluetoots alsa-pipewire
+sudo mkdir -p /etc/alsa/conf.d
+sudo ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
+sudo ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
+xi bluez
+xargs -a ./manually_installed_packages_void xi -y
 stow */
