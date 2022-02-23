@@ -1,7 +1,7 @@
 #!/bin/sh
 
 add_service() {
-	sudo ln -s /etc/"$1" /var/service
+	sudo ln -s /etc/sv/"$1" /var/service
 }
 
 sudo xbps-install -Su -y xtools void-repo-nonfree
@@ -20,13 +20,14 @@ xi -y seatd && add_service seatd && sudo usermod -a -G _seatd baleksa
 xi -y sway swayidle swaylock
 xi -y qt5-wayland qt6-wayland
 xi -y kwayland
-xi -y iwd && add_service iwd && printf '[General]\nUseDefaultInterface=true' | sudo tee -a /etc/iwd/main.conf 
+xi -y iwd && add_service iwd && printf '[General]\nUseDefaultInterface=true' | sudo tee -a /etc/iwd/main.conf
 xi zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-history-substring-search
-xi alacritty 
+xi alacritty
 xi -y pipewire libspa-bluetoots alsa-pipewire
 sudo mkdir -p /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
-xi bluez
+xi bluez && add_service bluetoothd && sudo usermod -a -G bluetooth baleksa
 xargs -a ./manually_installed_packages_void xi -y
 stow */
+sudo reboot now
