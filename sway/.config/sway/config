@@ -1,5 +1,4 @@
 # This should make env vars visible to dbus and fix screensharing
-# exec dbus-update-activation-environment DISPLAY SWAYSOCK I3SOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 # Default config for sway
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
@@ -25,7 +24,7 @@ set $doc_reader zathura
 set $menu bemenu-run | xargs swaymsg exec --
 
 
-
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway DISPLAY SWAYSOCK I3SOCK
 
 ### Output configuration
 #
@@ -245,8 +244,9 @@ gaps inner 2
 
 font pango:NotoSansMono Medium 12
 
+
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
+exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 
 for_window [title="^Firefox — Sharing Indicator$"] floating enable
 for_window [title="^zoom$"] floating enable
