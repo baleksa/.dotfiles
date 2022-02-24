@@ -48,6 +48,12 @@ xi -y bluez && add_service bluetoothd && sudo usermod -a -G bluetooth "$USER"
 message "STOW DOTFILES"
 xi -y stow
 stow */
+message "FLATPAK AND FLATPAK APPS (zoom, joplin)"
+xi -y flatpak
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak --user install flathub net.cozic.joplin_desktop
+flatpak --user install flathub us.zoom.Zoom
 message "INSTALL OTHER PACKAGES"
 xi -Su -y
 xargs -a ./manually_installed_packages_void_test xi -y

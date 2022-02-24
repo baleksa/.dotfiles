@@ -1,7 +1,7 @@
 #!/bin/sh
 
 add_service() {
-	sudo ln -s /etc/sv/"$1" /var/service
+        [ ! -d /var/service/"$1" ] && sudo ln -s /etc/sv/"$1" /var/service
 }
 message() {
     echo "$1:"
@@ -12,12 +12,12 @@ message "INSTALLING XTOOLS AND ENABLING NONFREE REPO"
 sudo xbps-install -Su -y xtools void-repo-nonfree
 message "INSTALLING ZSH AND SETTING IT AS DEFAULT SHELL"
 xi -y zsh
-sudo chsh -s /bin/zsh baleksa
+chsh -s /bin/zsh
 message "INSTALLING MESA VGA DRIVERS AND INTEL-UCODE"
 xi -y mesa-dri mesa-vaapi mesa-vdpau mesa-vulkan-intel
 xi -y intel-ucode
 message "DBUS"
-xi -y dbus && sudo ln -s /etc/sv/dbus /var/service
+xi -y dbus && add_service dbus
 message "LOGGING"
 xi -y socklog-void &&
 	add_service socklog_unix &&
@@ -28,7 +28,7 @@ xi -y chrony && add_service chronyd
 message "TLP FOR POWER MANAGEMENT"
 xi -y tlp && add_service tlp
 message "SEATD"
-xi -y seatd && add_service seatd && sudo usermod -a -G _seatd baleksa
+xi -y seatd && add_service seatd && sudo usermod -a -G _seatd "$USER"
 message "SWAY"
 xi -y sway swayidle swaylock
 xi -y qt5-wayland qt6-wayland
@@ -36,18 +36,26 @@ xi -y kwayland
 message "IWD"
 xi -y iwd && add_service iwd && printf '[General]\nUseDefaultInterface=true' | sudo tee -a /etc/iwd/main.conf
 message "ZSH"
-xi zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-history-substring-search
+xi -y zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-history-substring-search
 message "ALACRITTY"
-xi alacritty
+xi -y alacritty
 message "PIPEWIRE, ALSA AND BLUETOOTH"
-xi -y pipewire libspa-bluetoots alsa-pipewire
+xi -y pipewire libspa-bluetooth alsa-pipewire
 sudo mkdir -p /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
-xi bluez && add_service bluetoothd && sudo usermod -a -G bluetooth baleksa
-message "INSTALL OTHER PACKAGES"
-xargs -a ./manually_installed_packages_void xi -y
+xi -y bluez && add_service bluetoothd && sudo usermod -a -G bluetooth "$USER"
 message "STOW DOTFILES"
+xi -y stow
 stow */
+message "FLATPAK AND FLATPAK APPS (zoom, joplin)"
+xi -y flatpak
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak --user install flathub net.cozic.joplin_desktop
+flatpak --user install flathub us.zoom.Zoom
+message "INSTALL OTHER PACKAGES"
+xi -Su -y
+xargs -a ./manually_installed_packages_void_test xi -y
 message "REBOOTING NOW"
 sudo reboot now
