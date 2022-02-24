@@ -49,5 +49,5 @@ xi bluez && add_service bluetoothd && sudo usermod -a -G bluetooth baleksa
 # xargs -a ./manually_installed_packages_void xi -y
 message "STOW DOTFILES"
 stow */
-message "REBOOTING NOW"
-sudo reboot now
+# message "REBOOTING NOW"
+# sudo reboot now
