@@ -1,7 +1,7 @@
 #!/bin/sh
 
 add_service() {
-	sudo ln -s /etc/sv/"$1" /var/service
+        [ ! -f /var/service/"$1" ] && sudo ln -s /etc/sv/"$1" /var/service
 }
 message() {
     echo "$1:"
@@ -12,7 +12,7 @@ message "INSTALLING XTOOLS AND ENABLING NONFREE REPO"
 sudo xbps-install -Su -y xtools void-repo-nonfree
 message "INSTALLING ZSH AND SETTING IT AS DEFAULT SHELL"
 xi -y zsh
-sudo chsh -s /bin/zsh baleksa
+sudo chsh -s /bin/zsh "$USER"
 message "INSTALLING MESA VGA DRIVERS AND INTEL-UCODE"
 xi -y mesa-dri mesa-vaapi mesa-vdpau mesa-vulkan-intel
 xi -y intel-ucode
@@ -40,7 +40,7 @@ xi zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-history-subst
 message "ALACRITTY"
 xi alacritty
 message "PIPEWIRE, ALSA AND BLUETOOTH"
-xi -y pipewire libspa-bluetoots alsa-pipewire
+xi -y pipewire libspa-bluetooth alsa-pipewire
 sudo mkdir -p /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
@@ -48,6 +48,7 @@ xi bluez && add_service bluetoothd && sudo usermod -a -G bluetooth baleksa
 # message "INSTALL OTHER PACKAGES"
 # xargs -a ./manually_installed_packages_void xi -y
 message "STOW DOTFILES"
+xi -y stow
 stow */
-# message "REBOOTING NOW"
-# sudo reboot now
+message "REBOOTING NOW"
+sudo reboot now
