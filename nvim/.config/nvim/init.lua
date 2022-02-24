@@ -698,6 +698,10 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
+-- Kotlin server
+nvim_lsp.kotlin_language_server.setup {
+  cmd = { '/home/baleksa/Repositories/kotlin-language-server/server/build/install/server/bin/kotlin-language-server' }
+}
 
 require 'lsp_signature'.setup({ -- Enable function signature popup helper while in insert mode
   bind = true,
@@ -705,11 +709,6 @@ require 'lsp_signature'.setup({ -- Enable function signature popup helper while 
     border = "rounded"
   }
 })
-
--- Kotlin server
-nvim_lsp.kotlin_language_server.setup {
-  cmd = { '/home/baleksa/Repositories/kotlin-language-server/server/build/install/server/bin/kotlin-language-server' }
-}
 
 -- TODO: do this in a simpler way
 -- Setup lua lsp
