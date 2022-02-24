@@ -28,7 +28,7 @@ xi -y chrony && add_service chronyd
 message "TLP FOR POWER MANAGEMENT"
 xi -y tlp && add_service tlp
 message "SEATD"
-xi -y seatd && add_service seatd && sudo usermod -a -G _seatd baleksa
+xi -y seatd && add_service seatd && sudo usermod -a -G _seatd "$USER"
 message "SWAY"
 xi -y sway swayidle swaylock
 xi -y qt5-wayland qt6-wayland
@@ -36,15 +36,15 @@ xi -y kwayland
 message "IWD"
 xi -y iwd && add_service iwd && printf '[General]\nUseDefaultInterface=true' | sudo tee -a /etc/iwd/main.conf
 message "ZSH"
-xi zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-history-substring-search
+xi -y zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-history-substring-search
 message "ALACRITTY"
-xi alacritty
+xi -y alacritty
 message "PIPEWIRE, ALSA AND BLUETOOTH"
 xi -y pipewire libspa-bluetooth alsa-pipewire
 sudo mkdir -p /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
-xi bluez && add_service bluetoothd && sudo usermod -a -G bluetooth baleksa
+xi -y bluez && add_service bluetoothd && sudo usermod -a -G bluetooth "$USER"
 # message "INSTALL OTHER PACKAGES"
 # xargs -a ./manually_installed_packages_void xi -y
 message "STOW DOTFILES"
