@@ -30,7 +30,6 @@ cmake
 cryptsetup
 ctags
 dbus-elogind-x11
-discord
 dmenu
 efivar
 exa
