@@ -17,7 +17,7 @@ message "INSTALLING MESA VGA DRIVERS AND INTEL-UCODE"
 xi -y mesa-dri mesa-vaapi mesa-vdpau mesa-vulkan-intel
 xi -y intel-ucode
 message "DBUS"
-xi -y dbus && sudo ln -s /etc/sv/dbus /var/service
+xi -y dbus && add_service dbus
 message "LOGGING"
 xi -y socklog-void &&
 	add_service socklog_unix &&
