@@ -49,6 +49,9 @@ safe_source "$ZSH_SYNTAX_HIGHLIGHT"
 ZSH_AUTO_SUGG="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 safe_source "$ZSH_AUTO_SUGG"
 
+ZSH_HISTORY_SUBSTRING_SEARCH="/usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
+safe_source "$ZSH_HISTORY_SUBSTRING_SEARCH"
+
 # Autopair plugin
 ZSH_AUTOPAIR_DIR="$GIT_REPOS_DIR/.zsh-autopair"
 if [[ ! -d "$ZSH_AUTOPAIR_DIR" ]]; then
@@ -56,6 +59,7 @@ if [[ ! -d "$ZSH_AUTOPAIR_DIR" ]]; then
 fi
 safe_source "$ZSH_AUTOPAIR_DIR/autopair.zsh"
 autopair-init
+
 
 # Add completion folder to fpath
 [ -d $ZDOTDIR/completion/_fnm ] && fpath+="$ZDOTDIR/completion/"

@@ -45,10 +45,11 @@ sudo mkdir -p /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
 xi -y bluez && add_service bluetoothd && sudo usermod -a -G bluetooth "$USER"
-message "INSTALL OTHER PACKAGES"
-xargs -a ./manually_installed_packages_void_test xi -y
 message "STOW DOTFILES"
 xi -y stow
 stow */
+message "INSTALL OTHER PACKAGES"
+xi -Su -y
+xargs -a ./manually_installed_packages_void_test xi -y
 message "REBOOTING NOW"
 sudo reboot now
