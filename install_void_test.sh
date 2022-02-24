@@ -12,7 +12,7 @@ message "INSTALLING XTOOLS AND ENABLING NONFREE REPO"
 sudo xbps-install -Su -y xtools void-repo-nonfree
 message "INSTALLING ZSH AND SETTING IT AS DEFAULT SHELL"
 xi -y zsh
-sudo chsh -s /bin/zsh "$USER"
+chsh -s /bin/zsh
 message "INSTALLING MESA VGA DRIVERS AND INTEL-UCODE"
 xi -y mesa-dri mesa-vaapi mesa-vdpau mesa-vulkan-intel
 xi -y intel-ucode
