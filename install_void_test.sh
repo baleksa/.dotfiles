@@ -1,7 +1,7 @@
 #!/bin/sh
 
 add_service() {
-        [ ! -f /var/service/"$1" ] && sudo ln -s /etc/sv/"$1" /var/service
+        [ ! -d /var/service/"$1" ] && sudo ln -s /etc/sv/"$1" /var/service
 }
 message() {
     echo "$1:"
