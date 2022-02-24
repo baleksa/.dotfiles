@@ -1,5 +1,3 @@
-export ZDOTDIR=$HOME/.config/zsh
-
 HISTFILE="$ZDOTDIR/.zsh_history"
 setopt appendhistory
 # some useful options (man zshoptions)
@@ -94,9 +92,6 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Environment variables set everywhere
-export EDITOR="nvim"
-export TERMINAL="alacritty"
-export BROWSER="firefox-wayland"
 
 alias luamake=/home/baleksa/Repositories/lua-language-server/3rd/luamake/luamake
 
