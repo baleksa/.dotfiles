@@ -13,13 +13,15 @@ Use default `acpid`, dont install `elogind` because it will conflict with acpid,
 Sway needs XDG_RUNDIR set and access to seats, elogind doesn't work on voidlinux so you have to install `seatd`, add user to _seatd group, start seatd service and then start Sway. Qt5-based applications require installing the qt5-wayland package and setting the environment variable QT_QPA_PLATFORM=wayland-egl to enable their Wayland backend. Some KDE specific applications also require installing the kwayland package.
 
 #### IWD
-Use IWD for wireless network. It needs dbus service started or to be started with dbus-launch. IWD clashes with udevd, to surpress udev's message about error with changing net interface prevent IWD from  manipulating the network interfaces in this way by adding
+Use IWD for wireless network. It needs dbus service started or to be started with dbus-launch. IWD clashes with udevd, to surpress udev's message about error with changing net interface prevent IWD from  manipulating the network interfaces in this way by adding:
 ```
 [General]
 UseDefaultInterface=true
-``` 
+```
 to `/etc/iwd/main.conf`.
 
 #### ZSH
 After stowing dotfiles install plugins and clone needed repositories to repos folder, then set up paths if needed. On void `zsh-autosuggestions` and `zsh-syntax-highlighting` are available from official repo. 
 
+#### VScode
+Add `"keyboard.dispatch": "keyCode"` to settings.json for swapcapsesc to work with extensions.
