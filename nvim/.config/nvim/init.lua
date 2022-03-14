@@ -136,9 +136,9 @@ require('packer').startup(function()
 end)
 
 vim.opt.colorcolumn = '72'
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.cmd('autocmd FileType c,cpp setlocal shiftwidth=2 softtabstop=2')
+vim.opt.softtabstop = 8
+vim.opt.shiftwidth = 8
+vim.cmd('autocmd FileType c,cpp setlocal shiftwidth=8 softtabstop=8')
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
