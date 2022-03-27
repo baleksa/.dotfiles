@@ -355,7 +355,7 @@ require("nvim-tree").setup({ -- Call setup function
 		ignore_list = {},
 	},
 	log = {
-		enable = true,
+		enable = false,
 		truncate = false,
 		types = {
 			all = true,
