@@ -4,11 +4,6 @@ alias f='zi'
 alias g='lazygit'
 alias nvimrc='nvim ~/.config/nvim/'
 alias sc='nvim $(find ~/.config | fzf || .)^M'
-# alias lvim='nvim -u ~/.local/share/lunarvim/lvim/init.lua --cmd "set runtimepath+=~/.local/share/lunarvim/lvim"'
-
-# Remarkable
-# alias remarkable_ssh='ssh root@10.11.99.1'
-# alias restream='restream -p'
 
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
@@ -40,29 +35,11 @@ alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 alias m="git checkout master"
 alias s="git checkout stable"
 
-case "$(uname -s)" in
-
-Darwin)
-	# echo 'Mac OS X'
-	alias ls='ls -G'
-	;;
-
-Linux)
-	alias ls='ls --color=auto'
-	;;
-
-CYGWIN* | MINGW32* | MSYS* | MINGW*)
-	# echo 'MS Windows'
-	;;
-*)
-	# echo 'Other OS'
-	;;
-esac
-
+alias ls='ls --color=auto'
 alias pip='pip3'
 alias la='ls -a'
 alias ll='ls -la'
 alias xqr='xbps-query -Rs'
 alias xr='sudo xbps-remove'
 alias luamake='/home/baleksa/Repositories/lua-language-server/3rd/luamake/luamake'
-
+alias clangse='clang -Wall -g3 -Werror -pedantic -std=c11'

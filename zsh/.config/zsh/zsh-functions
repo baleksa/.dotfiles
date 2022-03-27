@@ -8,3 +8,5 @@ function d()
 {
    sdcv "$1" | nvim +Man!
 }
+
+function dmalloc { eval `command dmalloc -b $*`; }
