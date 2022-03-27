@@ -225,7 +225,7 @@ bar {
     # The default just shows the current date and time.
     status_command while date +'%d-%m-%Y %R:%S %p'; do sleep 1; done
 
-    modifier $mod
+    modifier Mod5
 
     colors {
         statusline #ffffff
@@ -235,7 +235,7 @@ bar {
 }
 input "type:keyboard" {
    xkb_layout us,rs,rs
-   xkb_variant ,,latinyz
+   xkb_variant ,latinyz,
    xkb_options grp:win_space_toggle,caps:swapescape
 }
 input "type:touchpad" {
