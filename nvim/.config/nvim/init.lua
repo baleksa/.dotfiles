@@ -1,4 +1,6 @@
--- Install packer
+-----------------------------------------------------------------------
+-- PACKER
+-----------------------------------------------------------------------
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -22,8 +24,11 @@ require("packer").init({ -- Make packer use a popup window
 
 -- Uncomment this to fix fatal: Not possible to fast-forward, aborting :PackerUpdate error
 -- require('packer').init({git = { subcommands = { update = 'pull --progress --rebase=true'}}})
+
 local use = require("packer").use
 require("packer").startup(function()
+	-- INSTALLED PACKAGES
+
 	use("wbthomason/packer.nvim") -- Package manager
 
 	-- Tpope's phenomenal plugins
@@ -141,8 +146,32 @@ require("packer").startup(function()
 	use("SidOfc/mkdx") -- Easier working with md files
 
 	use("andymass/vim-matchup") -- More options to do on matching text and extends vim's %
+
+	use({
+		"folke/which-key.nvim",
+		config = function()
+			require("which-key").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	})
+
+	use({
+		"glacambre/firenvim",
+		run = function()
+			vim.fn["firenvim#install"](0)
+		end,
+	})
 end)
 
+-- end of PACKER
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- GLOBALS and MISC
+-----------------------------------------------------------------------
 vim.opt.colorcolumn = "72"
 vim.opt.softtabstop = 8
 vim.opt.shiftwidth = 8
@@ -196,7 +225,12 @@ vim.g.indent_blankline_filetype_exclude = { "help", "packer" }
 vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
 vim.g.indent_blankline_show_trailing_blankline_indent = false
 
--- Gitsigns
+-- end of GLOBALS and MISC
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- GITSIGNS
+-----------------------------------------------------------------------
 require("gitsigns").setup({
 	-- signs = {
 	--   add = { hl = 'GitGutterAdd', text = '+' },
@@ -214,13 +248,12 @@ require("gitsigns").setup({
 	},
 })
 
-require("onedark").setup({ -- Set colorcheme options
-	style = "deep",
-	toggle_style_key = "<leader>tc",
-}) -- Set the colorscheme
--- require('onedark').load()
+-- end of GITSINGS
+-----------------------------------------------------------------------
 
--- Set lualine
+-----------------------------------------------------------------------
+-- LUALINE
+-----------------------------------------------------------------------
 require("lualine").setup({
 	options = {
 		-- theme = 'onedark',
@@ -228,6 +261,19 @@ require("lualine").setup({
 		section_separators = { left = "", right = "" },
 	},
 })
+
+-- end of LUALINE
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- COLORSCHEME
+-----------------------------------------------------------------------
+require("onedark").setup({ -- Set colorcheme options
+	style = "deep",
+	toggle_style_key = "<leader>tc",
+})
+
+vim.cmd("hi rainbowcol1 guifg=#ffffff") -- Fix color of one rainbow parentheses which wasn't blending nicely with OneDark colorscheme
 
 local setOneDark = function()
 	require("onedark").load()
@@ -256,6 +302,12 @@ ChangeTheme = function()
 end
 vim.api.nvim_set_keymap("n", "<leader>ct", "<CMD>lua ChangeTheme()<CR>", { noremap = true, silent = true })
 
+-- end of COLORSCHEME
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- TOGGLETERM
+-----------------------------------------------------------------------
 require("toggleterm").setup({
 	open_mapping = [[<c-\>]],
 	border = "curved",
@@ -272,7 +324,12 @@ function _G.set_terminal_keymaps() -- Set keymaps for terminal mode
 end
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()") -- Call mappings for terminal mode in a right way
 
---   NVIM-TREE
+-- end of TOGGLETERM
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- NVIM-TREE
+-----------------------------------------------------------------------
 vim.opt.splitright = true -- Make nvim-tree to open files on right
 
 vim.api.nvim_set_keymap("n", "<leader>h", ":NvimTreeToggle<CR>", { noremap = true, silent = true }) -- Open file explorer
@@ -363,6 +420,12 @@ require("nvim-tree").setup({ -- Call setup function
 	},
 })
 
+-- end of NVIM-TREE
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- BUFFERLINE
+-----------------------------------------------------------------------
 -- require("bufferline").setup{ -- Set bufferline
 --   numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
 --   close_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions
@@ -370,7 +433,6 @@ require("nvim-tree").setup({ -- Call setup function
 --   left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
 --   offsets = { { filetype = "NvimTree", text = ""} },
 -- }
-
 vim.api.nvim_set_keymap("n", "<leader>q", "<cmd>Bdelete<cr>", { noremap = true, silent = true })
 require("bufferline").setup({
 	options = {
@@ -535,8 +597,20 @@ require("bufferline").setup({
 	},
 })
 
+-- end of BUFFERLINE
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- COMMENT
+-----------------------------------------------------------------------
 require("Comment").setup() -- Setup smart comment plugin for neovim written in Lua
 
+-- end of COMMENT
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- MARKDOWN-PREVIEW
+-----------------------------------------------------------------------
 vim.g.mkdp_browser = "firefox-wayland" -- Browser which MarkdownPreview will use to show markdown file preview
 
 vim.cmd([[
@@ -547,7 +621,12 @@ let g:mkdx#settings     = { 'highlight': { 'enable': 0 },
                         \ 'fold': { 'enable': 1 } }
 ]])
 
--- Telescope
+-- end of MARKDOWN-PREVIEW
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- TELESCOPE
+-----------------------------------------------------------------------
 require("telescope").setup({
 	defaults = {
 		mappings = {
@@ -564,6 +643,12 @@ require("telescope").setup({
 	},
 })
 
+-- end of TELESCOPE
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- KEYMAPS
+-----------------------------------------------------------------------
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
@@ -634,9 +719,13 @@ vim.api.nvim_set_keymap("n", "<leader>sp", [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap("n", "<leader>so", [[<cmd>lua require('telescope.builtin').current_buffer_tags()>]], opts)
 vim.api.nvim_set_keymap("n", "<leader>?", [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], opts)
 
-vim.cmd("hi rainbowcol1 guifg=#ffffff") -- Fix one rainbow parentheses color which wasn't blending nicely with OneDark colorscheme
 
--- Treesitter configuration
+-- end of KEYMAPS
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- TREESITTER
+-----------------------------------------------------------------------
 -- Parsers must be installed manually via :TSInstall
 require("nvim-treesitter.configs").setup({
 	matchup = { -- Enable match-up plugin to work with treesitter
@@ -707,7 +796,12 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
--- LSP settings
+-- end of TREESITTER
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- NVIM-LSP and SERVERS
+-----------------------------------------------------------------------
 local nvim_lsp = require("lspconfig")
 
 local function lsp_highlight_document(client) -- Highlight references of object under cursor if server supports that
@@ -803,9 +897,7 @@ require("lsp_signature").setup({ -- Enable function signature popup helper while
 })
 
 -- TODO: do this in a simpler way
--- Setup lua lsp
--- Make runtime files discoverable to the server
--- local system_name = "Linux" -- Linux, macOS or Windows
+-- Lua server
 local sumneko_root_path = "/home/baleksa/Repositories/lua-language-server"
 local sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"
 nvim_lsp.sumneko_lua.setup({
@@ -841,6 +933,12 @@ nvim_lsp.sumneko_lua.setup({
 	},
 })
 
+-- end of NVIM-LSP and SERVERS
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- NULL-LS
+-----------------------------------------------------------------------
 local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
@@ -863,6 +961,12 @@ for type, icon in pairs(signs) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
+-- end of NULL-LS
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- DIAGNOSTIC
+-----------------------------------------------------------------------
 vim.diagnostic.config({
 	virtual_text = false, -- Don't print diagnostics in virtual text because it's not pretty and it takes a lot of space
 	update_in_insert = true,
@@ -897,9 +1001,21 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
 
+-- end of DIAGNOSTIC
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- LUASNIP
+-----------------------------------------------------------------------
 local luasnip = require("luasnip") -- Setup LuaSnip
 require("luasnip.loaders.from_vscode").lazy_load() -- Load friendly-snippets
 
+-- end of LUASNIP
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- NVIM-CMP
+-----------------------------------------------------------------------
 local has_words_before = function() -- Function from nvim-cmp examples on github, figure it out
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -933,7 +1049,6 @@ local kind_icons = { -- Icons for nvim-cmp completion popup
 	TypeParameter = "",
 }
 
--- nvim-cmp setup
 local cmp = require("cmp")
 cmp.setup({
 	snippet = {
@@ -1043,3 +1158,87 @@ npairs.setup({
 -- If you want insert `(` after select function or method item
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+
+-- end of NVIM-CMP
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- FIRENVIM
+-----------------------------------------------------------------------
+vim.cmd(
+	'let g:firenvim_config = { "globalSettings": { "alt": "all", }, "localSettings": { ".*": { "cmdline": "neovim", "content": "text", "priority": 0, "selector": "textarea", "takeover": "always", }, } }'
+)
+
+-- Disable `firenvim` for the particular webiste
+vim.cmd('let fc = g:firenvim_config["localSettings"]')
+vim.cmd('let fc["https?://twitter.com/"] = { "takeover": "never", "priority": 1 }')
+vim.cmd('let fc["https?://twitter.tv/"] = { "takeover": "never", "priority": 1 }')
+vim.cmd('let fc["https?://mail.google.com/"] = { "takeover": "never", "priority": 1 }')
+
+-- Change `firenvim` file type to enable syntax highlight, `coc` works perfectly
+-- " after this settings!!!
+vim.cmd("autocmd BufEnter github.com_*.txt set filetype=markdown")
+vim.cmd("autocmd BufEnter txti.es_*.txt set filetype=typescript")
+
+-- Increase the font size to solve the `text too small` issue
+function IsFirenvimActive(event)
+	if vim.g.enable_vim_debug then
+		print("IsFirenvimActive, event: ", vim.inspect(event))
+	end
+
+	if vim.fn.exists("*nvim_get_chan_info") == 0 then
+		return 0
+	end
+
+	local ui = vim.api.nvim_get_chan_info(event.chan)
+	if vim.g.enable_vim_debug then
+		print("IsFirenvimActive, ui: ", vim.inspect(ui))
+	end
+
+	--[[
+    If this function is running in browser, the `ui` looks like below:
+    {
+        client = {
+            attributes = {
+                [true] = 6 -- The channel number
+            },
+            methods = {
+                [true] = 6 -- The channel number
+            },
+            name = "Firenvim",
+            type = "ui",
+            version = {
+                -- ignore more info here
+            }
+        },
+        id = 5, -- 
+        mode = "rpc",
+        stream = "socket
+    }
+
+    Otherwise, it looks like this:
+    {
+        [true] = 6 -- The channel name
+    }
+    --]]
+	local is_firenvim_active_in_browser = (ui["client"] ~= nil and ui["client"]["name"] ~= nil)
+	if vim.g.enable_vim_debug then
+		print("is_firenvim_active_in_browser: ", is_firenvim_active_in_browser)
+	end
+	return is_firenvim_active_in_browser
+end
+
+function OnUIEnter(event)
+	if IsFirenvimActive(event) then
+		-- Disable the status bar
+		vim.cmd("set laststatus=0")
+
+		-- Increase the font size
+		vim.cmd("set guifont=:h25")
+	end
+end
+
+vim.cmd([[autocmd UIEnter * :call luaeval('OnUIEnter(vim.fn.deepcopy(vim.v.event))')]])
+
+-- end of FIRENVIM
+-----------------------------------------------------------------------
