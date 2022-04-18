@@ -37,11 +37,18 @@ require("packer").startup(function()
 	use("tpope/vim-surround")
 	use("tpope/vim-repeat")
 
-	use("numToStr/Comment.nvim") -- Comment plugin written in Lua '
+	-- Comment plugin written in Lua '
+	use({
+		"numToStr/Comment.nvim",
+                -- commit = "0aaea32f27315e2a99ba4c12ab9def5cbb4842e4",
+		config = function()
+			require("Comment").setup()
+		end,
+	})
 
 	use("ludovicchabant/vim-gutentags") -- Automatic tags management
 
-	use({ "akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons" }) -- Powerful buffer plugin which shows all buffers in topline
+	use({ "akinsho/bufferline.nvim", branch = "main", requires = "kyazdani42/nvim-web-devicons" }) -- Powerful buffer plugin which shows all buffers in topline
 
 	use("moll/vim-bbye") -- Don't close vim and dont lose window layout when closing buffers
 
@@ -49,7 +56,7 @@ require("packer").startup(function()
 	use({ "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- Fzf algorithm in C too make telescope faster
 
-	use("akinsho/toggleterm.nvim") -- Spawn multiple terminals in nvim with many orientations and send commands to them
+	use({ "akinsho/toggleterm.nvim", branch = "main" }) -- Spawn multiple terminals in nvim with many orientations and send commands to them
 
 	use("navarasu/onedark.nvim") -- Onedark theme with treesitter support
 	use("tanvirtin/monokai.nvim") -- Monokai theme with treesitter support
@@ -112,7 +119,7 @@ require("packer").startup(function()
 	use("ray-x/lsp_signature.nvim") -- Add function signature help while in insert mode
 
 	-- Completion plugin and its sources
-	use("hrsh7th/nvim-cmp") -- Autocompletion plugin
+	use("hrsh7th/nvim-cmp") --, commit = "f573479528cac39ff5917a4679529e4435b71ffe" }) -- Autocompletion plugin
 	use("hrsh7th/cmp-nvim-lsp") -- nvim-cmp nvim-lsp completion source
 	use("hrsh7th/cmp-path") -- nvim-cmp filesystem paths completion source
 	use("hrsh7th/cmp-buffer") -- Words from current buffer completion source
@@ -158,12 +165,12 @@ require("packer").startup(function()
 		end,
 	})
 
-	use({
-		"glacambre/firenvim",
-		run = function()
-			vim.fn["firenvim#install"](0)
-		end,
-	})
+	-- use({
+	-- 	"glacambre/firenvim",
+	-- 	run = function()
+	-- 		vim.fn["firenvim#install"](0)
+	-- 	end,
+	-- })
 end)
 
 -- end of PACKER
@@ -173,12 +180,13 @@ end)
 -- GLOBALS and MISC
 -----------------------------------------------------------------------
 vim.opt.colorcolumn = "72"
-vim.opt.softtabstop = 8
-vim.opt.shiftwidth = 8
+-- vim.opt.softtabstop = 8
+-- vim.opt.shiftwidth = 8
 vim.cmd("autocmd FileType c,cpp setlocal shiftwidth=8 softtabstop=8")
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
+
 
 vim.opt.spell = false -- Spellcheck
 vim.opt.spelllang = { "en_us" }
@@ -273,8 +281,6 @@ require("onedark").setup({ -- Set colorcheme options
 	toggle_style_key = "<leader>tc",
 })
 
-vim.cmd("hi rainbowcol1 guifg=#ffffff") -- Fix color of one rainbow parentheses which wasn't blending nicely with OneDark colorscheme
-
 local setOneDark = function()
 	require("onedark").load()
 	require("lualine").setup({ options = { theme = "onedark" } })
@@ -301,6 +307,8 @@ ChangeTheme = function()
 	setThemeFunctions[theme_index]()
 end
 vim.api.nvim_set_keymap("n", "<leader>ct", "<CMD>lua ChangeTheme()<CR>", { noremap = true, silent = true })
+
+vim.cmd("hi rainbowcol1 guifg=#ffffff") -- Fix color of one rainbow parentheses which wasn't blending nicely with OneDark colorscheme
 
 -- end of COLORSCHEME
 -----------------------------------------------------------------------
@@ -601,14 +609,6 @@ require("bufferline").setup({
 -----------------------------------------------------------------------
 
 -----------------------------------------------------------------------
--- COMMENT
------------------------------------------------------------------------
-require("Comment").setup() -- Setup smart comment plugin for neovim written in Lua
-
--- end of COMMENT
------------------------------------------------------------------------
-
------------------------------------------------------------------------
 -- MARKDOWN-PREVIEW
 -----------------------------------------------------------------------
 vim.g.mkdp_browser = "firefox-wayland" -- Browser which MarkdownPreview will use to show markdown file preview
@@ -718,7 +718,6 @@ vim.api.nvim_set_keymap("n", "<leader>sp", [[<cmd>lua require('telescope.builtin
 -- vim.api.nvim_set_keymap('n', '<leader>so', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], opts)
 vim.api.nvim_set_keymap("n", "<leader>so", [[<cmd>lua require('telescope.builtin').current_buffer_tags()>]], opts)
 vim.api.nvim_set_keymap("n", "<leader>?", [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], opts)
-
 
 -- end of KEYMAPS
 -----------------------------------------------------------------------
@@ -1117,8 +1116,10 @@ cmp.setup({
 			return vim_item
 		end,
 	},
-	documentation = {
-		border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+	window = {
+		documentation = {
+			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+		},
 	},
 })
 
@@ -1126,6 +1127,9 @@ require("cmp").setup.cmdline(":", { -- Set up nvim-cmp completion for vim comman
 	sources = {
 		{ name = "cmdline" },
 	},
+	mapping = cmp.mapping.preset.cmdline({
+		-- Your configuration here.
+	}),
 })
 
 require("cmp").setup.cmdline("/", { -- Set up nvim-cmp completion for / search
@@ -1163,82 +1167,11 @@ cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = 
 -----------------------------------------------------------------------
 
 -----------------------------------------------------------------------
--- FIRENVIM
+-- COMMENT
 -----------------------------------------------------------------------
-vim.cmd(
-	'let g:firenvim_config = { "globalSettings": { "alt": "all", }, "localSettings": { ".*": { "cmdline": "neovim", "content": "text", "priority": 0, "selector": "textarea", "takeover": "always", }, } }'
-)
+require("Comment").setup() -- Setup smart comment plugin for neovim written in Lua
 
--- Disable `firenvim` for the particular webiste
-vim.cmd('let fc = g:firenvim_config["localSettings"]')
-vim.cmd('let fc["https?://twitter.com/"] = { "takeover": "never", "priority": 1 }')
-vim.cmd('let fc["https?://twitter.tv/"] = { "takeover": "never", "priority": 1 }')
-vim.cmd('let fc["https?://mail.google.com/"] = { "takeover": "never", "priority": 1 }')
-
--- Change `firenvim` file type to enable syntax highlight, `coc` works perfectly
--- " after this settings!!!
-vim.cmd("autocmd BufEnter github.com_*.txt set filetype=markdown")
-vim.cmd("autocmd BufEnter txti.es_*.txt set filetype=typescript")
-
--- Increase the font size to solve the `text too small` issue
-function IsFirenvimActive(event)
-	if vim.g.enable_vim_debug then
-		print("IsFirenvimActive, event: ", vim.inspect(event))
-	end
-
-	if vim.fn.exists("*nvim_get_chan_info") == 0 then
-		return 0
-	end
-
-	local ui = vim.api.nvim_get_chan_info(event.chan)
-	if vim.g.enable_vim_debug then
-		print("IsFirenvimActive, ui: ", vim.inspect(ui))
-	end
-
-	--[[
-    If this function is running in browser, the `ui` looks like below:
-    {
-        client = {
-            attributes = {
-                [true] = 6 -- The channel number
-            },
-            methods = {
-                [true] = 6 -- The channel number
-            },
-            name = "Firenvim",
-            type = "ui",
-            version = {
-                -- ignore more info here
-            }
-        },
-        id = 5, -- 
-        mode = "rpc",
-        stream = "socket
-    }
-
-    Otherwise, it looks like this:
-    {
-        [true] = 6 -- The channel name
-    }
-    --]]
-	local is_firenvim_active_in_browser = (ui["client"] ~= nil and ui["client"]["name"] ~= nil)
-	if vim.g.enable_vim_debug then
-		print("is_firenvim_active_in_browser: ", is_firenvim_active_in_browser)
-	end
-	return is_firenvim_active_in_browser
-end
-
-function OnUIEnter(event)
-	if IsFirenvimActive(event) then
-		-- Disable the status bar
-		vim.cmd("set laststatus=0")
-
-		-- Increase the font size
-		vim.cmd("set guifont=:h25")
-	end
-end
-
-vim.cmd([[autocmd UIEnter * :call luaeval('OnUIEnter(vim.fn.deepcopy(vim.v.event))')]])
-
--- end of FIRENVIM
+-- end of COMMENT
 -----------------------------------------------------------------------
+vim.opt.laststatus = 3 -- Set global statusbar. It needs to be at the end of file because someplugin overrides it
+vim.cmd("highlight WinSeparator guibg=None") -- Crisp whiteline between windows
