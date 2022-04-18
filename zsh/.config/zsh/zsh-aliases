@@ -1,4 +1,5 @@
 #!/bin/zsh
+#
 alias j='z'
 alias f='zi'
 alias g='lazygit'
@@ -33,7 +34,7 @@ alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 
 alias luamake=/home/baleksa/Repositories/lua-language-server/3rd/luamake/luamake
 
-alias m="git checkout master"
+alias m="git checkout main"
 alias s="git checkout stable"
 
 alias ls='ls --color=auto'
@@ -44,5 +45,5 @@ alias xqr='xbps-query -Rs'
 alias xr='sudo xbps-remove'
 alias luamake='/home/baleksa/Repositories/lua-language-server/3rd/luamake/luamake'
 alias clangse='clang -Wall -g3 -Werror -pedantic -std=c11'
-
+alias t='todo.sh -d ~/.config/todo/todo.conf'
 
