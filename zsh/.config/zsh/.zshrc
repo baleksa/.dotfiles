@@ -36,7 +36,6 @@ source "$ZDOTDIR/zsh-functions"
 safe_source "$ZDOTDIR/zsh-exports"
 safe_source "$ZDOTDIR/zsh-vim-mode"
 safe_source "$ZDOTDIR/zsh-aliases"
-# zsh_add_file "zsh-prompt"
 
 
 # PLUGINS
@@ -65,25 +64,17 @@ autopair-init
 
 # Key-bindings
 bindkey -s '^o' 'lf^M'
-bindkey -s '^f' 'zi^M'
-# bindkey -s '^s' 'ncdu^M'
 bindkey -s '^n' 'nvim $(fzf)^M'
 bindkey -s '^v' 'nvim\n'
 bindkey -s '^z' 'zi^M'
-# bindkey '^[[P' delete-char
-# bindkey "^p" up-line-or-beginning-search # Up
-# bindkey "^n" down-line-or-beginning-search # Down
 bindkey "^k" up-line-or-beginning-search # Up
 bindkey "^j" down-line-or-beginning-search # Down
 bindkey -r "^u"
 bindkey -r "^d"
 
 # FZF 
-# TODO update for mac
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
-[ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
-[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
@@ -91,17 +82,7 @@ bindkey -r "^d"
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-# Environment variables set everywhere
-
-alias luamake=/home/baleksa/Repositories/lua-language-server/3rd/luamake/luamake
-
-# For QT Themes
-# export QT_QPA_PLATFORMTHEME=qt5ct
-
-# remap caps to escape
-# setxkbmap -option caps:escape
-# swap escape and caps
-# setxkbmap -option caps:swapescape
+# Use starship for prompt https://github.com/starship/starship
 eval "$(starship init zsh)"
 
 
