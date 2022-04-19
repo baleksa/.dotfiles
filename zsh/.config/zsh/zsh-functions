@@ -5,9 +5,12 @@ safe_source()
 }
 
 get_latest_git_release() {
-  curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
-    grep '"tag_name":' |                                            # Get tag line
-    sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
+    # Get latest release from GitHub api
+    curl --silent "https://api.github.com/repos/$1/releases/latest" | 
+    grep '"tag_name":' |             # Get tag line
+    sed -E 's/.*"([^"]+)".*/\1/'     # Pluck JSON value
 }
 
-dmalloc { eval `command dmalloc -b $*`; }
+dmalloc(){
+    eval `command dmalloc -b $*`;
+}
