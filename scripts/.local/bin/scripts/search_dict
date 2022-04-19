@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Search words with sdcv
+word="$1"
+sdcv -n "$word"| nvim +Man!
+
