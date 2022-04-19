@@ -1,12 +1,13 @@
 # Function to source files if they exist
-function safe_source() {
+safe_source()
+{
     [ -f "$1" ] && source "$1"
 }
 
-# Search words with sdcv
-function d()
-{
-   sdcv "$1" | nvim +Man!
+get_latest_git_release() {
+  curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
+    grep '"tag_name":' |                                            # Get tag line
+    sed -E 's/.*"([^"]+)".*/\1/'                                    # Pluck JSON value
 }
 
-function dmalloc { eval `command dmalloc -b $*`; }
+dmalloc { eval `command dmalloc -b $*`; }

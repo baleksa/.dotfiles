@@ -4,7 +4,7 @@
 HISTSIZE=1000000
 SAVEHIST=1000000
 
-export GIT_REPOS_DIR=~/Repositories
+export GIT_REPOS_DIR=~/repositories
 
 export FZF_DEFAULT_COMMAND='fd -H .'
 export FZF_CTRL_R_OPTS='--layout=reverse'

@@ -1,10 +1,13 @@
 #!/bin/zsh
-#
+
+
 alias j='z'
 alias f='zi'
 alias g='lazygit'
+
+alias ec='nvim $(ls ~/.config | fzf || .)^M'
 alias nvimrc='nvim ~/.config/nvim/'
-alias sc='nvim $(find ~/.config | fzf || .)^M'
+alias zshrc='nvim ~/.config/zsh/'
 
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
@@ -40,6 +43,7 @@ alias gc="git commit"
 alias ga="git add"
 alias gs="git status"
 alias gp="git push"
+alias gd="git diff"
 
 alias ls='ls --color=auto'
 alias pip='pip3'
@@ -50,4 +54,5 @@ alias xr='sudo xbps-remove'
 alias luamake='/home/baleksa/Repositories/lua-language-server/3rd/luamake/luamake'
 alias clangse='clang -Wall -g3 -Werror -pedantic -std=c11'
 alias t='todo.sh -d ~/.config/todo/todo.conf'
-
+alias es='edit_script'
+alias sd='dict_search'
