@@ -7,7 +7,7 @@ export JAVA_HOME="/usr/lib/jvm/openjdk17"
 ANDROID_SDK_PATH="$HOME/Android/Sdk"
 ANDROID_STUDIO_PATH="$HOME/Repositories/android-studio/bin"
 
-MY_SCRIPTS_PATH="$HOME/.local/bin/scripts"
+export MY_SCRIPTS_PATH="$HOME/.local/bin/scripts"
 
 export PATH="$MY_SCRIPTS_PATH:$PATH:$HOME/.local/bin:$ANDROID_STUDIO_PATH:$GOPATH/bin:$ANDROID_SDK_PATH/emulator:$ANDROID_SDK_PATH/tools"
 
