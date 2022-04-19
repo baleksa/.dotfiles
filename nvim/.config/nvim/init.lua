@@ -40,7 +40,7 @@ require("packer").startup(function()
 	-- Comment plugin written in Lua '
 	use({
 		"numToStr/Comment.nvim",
-                -- commit = "0aaea32f27315e2a99ba4c12ab9def5cbb4842e4",
+		-- commit = "0aaea32f27315e2a99ba4c12ab9def5cbb4842e4",
 		config = function()
 			require("Comment").setup()
 		end,
@@ -180,13 +180,12 @@ end)
 -- GLOBALS and MISC
 -----------------------------------------------------------------------
 vim.opt.colorcolumn = "72"
--- vim.opt.softtabstop = 8
--- vim.opt.shiftwidth = 8
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 vim.cmd("autocmd FileType c,cpp setlocal shiftwidth=8 softtabstop=8")
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
-
 
 vim.opt.spell = false -- Spellcheck
 vim.opt.spelllang = { "en_us" }
@@ -897,7 +896,7 @@ require("lsp_signature").setup({ -- Enable function signature popup helper while
 
 -- TODO: do this in a simpler way
 -- Lua server
-local sumneko_root_path = "/home/baleksa/Repositories/lua-language-server"
+local sumneko_root_path = os.getenv("GIT_REPOS_DIR") .. "/lua-language-server"
 local sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"
 nvim_lsp.sumneko_lua.setup({
 	cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
