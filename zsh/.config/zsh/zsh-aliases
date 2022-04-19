@@ -36,6 +36,10 @@ alias luamake=/home/baleksa/Repositories/lua-language-server/3rd/luamake/luamake
 
 alias m="git checkout main"
 alias s="git checkout stable"
+alias gc="git commit"
+alias ga="git add"
+alias gs="git status"
+alias gp="git push"
 
 alias ls='ls --color=auto'
 alias pip='pip3'
