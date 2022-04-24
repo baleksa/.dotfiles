@@ -5,6 +5,16 @@ PURPLE='\033[35m'
 GREEN='\033[32m'
 NC='\033[0m' # No Color
 
+do_job() {
+    hello_msg="$1"
+    shift
+    bye_msg="$1"
+    shift
+    colored_echo "$hello_msg" "$PURPLE"
+    "$@"
+    colored_echo "$bye_msg" "$GREEN"
+}
+
 colored_echo() {
 	msg="$1"
 	color="$2"
@@ -12,7 +22,6 @@ colored_echo() {
 }
 
 update_nvim() {
-	colored_echo "Updating neovim from github" "$PURPLE"
 	cwd=$(pwd)
         echo test
 	cd "$GIT_REPOS_DIR/neovim" || return
@@ -30,19 +39,25 @@ update_nvim() {
 	make CMAKE_BUILD_TYPE=Release
 	sudo make install
 	cd "$cwd" || exit
-	colored_echo "Done!" "$GREEN"
 }
 
-colored_echo "Updating xbps packages:" "$PURPLE"
-xi
-colored_echo "Done!" "$GREEN"
+# colored_echo "Updating xbps packages:" "$PURPLE"
+# xi -Su
+# colored_echo "Done!" "$GREEN"
+do_job "Updating xbps packages:" "Done!" xi -Su
 
-colored_echo "Updating sumneko lua language server:" "$PURPLE"
-update_sumneko_server
-colored_echo "Done!" "$GREEN"
+# colored_echo "Updating sumneko lua language server:" "$PURPLE"
+# update_sumneko_server
+# colored_echo "Done!" "$GREEN"
+do_job "Updating sumneko lua language server:" "Done!" update_sumneko_server
 
-update_nvim
+# colored_echo "Updating neovim from github" "$PURPLE"
+# update_nvim
+# colored_echo "Done!" "$GREEN"
+do_job "Updating neovim from github" "Done!" update_nvim
 
-colored_echo "Updating neovim packages via packer.nvim:" "$PURPLE"
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-colored_echo "Done!" "$GREEN"
+# colored_echo "Updating neovim packages via packer.nvim:" "$PURPLE"
+# nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+# colored_echo "Done!" "$GREEN"
+do_job "Updating neovim packages via packer.nvim:" "Done!" nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
