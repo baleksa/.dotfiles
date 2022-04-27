@@ -54,7 +54,12 @@ require("packer").startup(function()
 
 	-- UI to select things (files, grep results, open buffers...)
 	use({ "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- Fzf algorithm in C too make telescope faster
+	-- It sets vim.ui.select to telescope. That means for example that
+	-- neovim core stuff can fill the telescope picker. Example would
+	-- be lua vim.lsp.buf.code_action().
+	use({ "nvim-telescope/telescope-ui-select.nvim" })
+	-- Fzf algorithm in C too make telescope faster
+	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
 	use({ "akinsho/toggleterm.nvim", branch = "main" }) -- Spawn multiple terminals in nvim with many orientations and send commands to them
 
@@ -165,12 +170,9 @@ require("packer").startup(function()
 		end,
 	})
 
-	-- use({
-	-- 	"glacambre/firenvim",
-	-- 	run = function()
-	-- 		vim.fn["firenvim#install"](0)
-	-- 	end,
-	-- })
+	-- Extensions for the built-in Language Server Protocol support in
+	-- Neovim (>= 0.6.0) for eclipse.jdt.ls.
+	use("mfussenegger/nvim-jdtls")
 end)
 
 -- end of PACKER
@@ -329,6 +331,7 @@ function _G.set_terminal_keymaps() -- Set keymaps for terminal mode
 	vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
 	vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
 end
+
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()") -- Call mappings for terminal mode in a right way
 
 -- end of TOGGLETERM
@@ -640,7 +643,30 @@ require("telescope").setup({
 			find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
 		},
 	},
+	extensions = {
+		["ui-select"] = {
+			require("telescope.themes").get_dropdown({
+				-- even more opts
+			}),
+
+			-- pseudo code / specification for writing custom displays, like the one
+			-- for "codeactions"
+			-- specific_opts = {
+			--   [kind] = {
+			--     make_indexed = function(items) -> indexed_items, width,
+			--     make_displayer = function(widths) -> displayer
+			--     make_display = function(displayer) -> function(e)
+			--     make_ordinal = function(e) -> string
+			--   },
+			--   -- for example to disable the custom builtin "codeactions" display
+			--      do the following
+			--   codeactions = false,
+			-- }
+		},
+	},
 })
+
+require("telescope").load_extension("ui-select")
 
 -- end of TELESCOPE
 -----------------------------------------------------------------------
@@ -953,18 +979,18 @@ null_ls.setup({
 	},
 })
 
-local signs = { Error = "", Warn = "", Hint = "", Info = "" } -- Change diagnostics signs
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 -- end of NULL-LS
 -----------------------------------------------------------------------
 
 -----------------------------------------------------------------------
 -- DIAGNOSTIC
 -----------------------------------------------------------------------
+local signs = { Error = "", Warn = "", Hint = "", Info = "" } -- Change diagnostics signs
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
 vim.diagnostic.config({
 	virtual_text = false, -- Don't print diagnostics in virtual text because it's not pretty and it takes a lot of space
 	update_in_insert = true,
