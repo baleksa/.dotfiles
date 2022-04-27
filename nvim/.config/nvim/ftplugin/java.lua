@@ -65,6 +65,7 @@ local on_attach = function(_, bufnr)
 
 	require("lsp_signature").on_attach()
 	lsp_highlight_document(_) -- Add function to highlight
+	require("jdtls.setup").add_commands()
 end
 
 -- nvim-cmp supports additional completion capabilities
