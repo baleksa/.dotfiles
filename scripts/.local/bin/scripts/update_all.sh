@@ -49,7 +49,7 @@ do_job "Updating xbps packages:" "Done!" xi -Su
 # colored_echo "Updating sumneko lua language server:" "$PURPLE"
 # update_sumneko_server
 # colored_echo "Done!" "$GREEN"
-do_job "Updating sumneko lua language server:" "Done!" update_sumneko_server
+do_job "Updating sumneko lua language server:" "Done!" update_sumneko_server.sh
 
 # colored_echo "Updating neovim from github" "$PURPLE"
 # update_nvim
