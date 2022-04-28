@@ -887,9 +887,8 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- Enable the following language servers
+-- Enable the following language servers with the default setup
 local servers = {
-	"clangd",
 	"rust_analyzer",
 	"pylsp",
 	"tsserver",
@@ -906,6 +905,9 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
+
+-- Setup servers which need custom setup function
+
 -- Kotlin server
 nvim_lsp.kotlin_language_server.setup({
 	cmd = {
@@ -913,14 +915,24 @@ nvim_lsp.kotlin_language_server.setup({
 	},
 })
 
-require("lsp_signature").setup({ -- Enable function signature popup helper while in insert mode
+nvim_lsp.clangd.setup({
+	cmd = {
+		"clangd",
+		"--header-insertion=iwyu", -- Offer code action to include headers that are used
+		"--clang-tidy",
+	},
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
+
+-- Enable function signature popup helper while in insert mode
+require("lsp_signature").setup({
 	bind = true,
 	handler_opts = {
 		border = "rounded",
 	},
 })
 
--- TODO: do this in a simpler way
 -- Lua server
 local sumneko_root_path = os.getenv("GIT_REPOS_DIR") .. "/lua-language-server"
 local sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"
