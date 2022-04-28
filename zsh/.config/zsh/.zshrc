@@ -68,8 +68,8 @@ autopair-init
 
 # Key-bindings
 bindkey -s '^o' 'lf^M'
-bindkey -s '^n' 'nvim $(fzf)^M'
-bindkey -s '^v' 'nvim\n'
+bindkey -s '^n' 'nvim "$(fzf || .)"^M'
+bindkey -s '^v' 'nvim '
 bindkey -s '^z' 'zi^M'
 bindkey "^k" up-line-or-beginning-search # Up
 bindkey "^j" down-line-or-beginning-search # Down
@@ -88,8 +88,3 @@ bindkey '^e' edit-command-line
 
 # Use starship for prompt https://github.com/starship/starship
 eval "$(starship init zsh)"
-
-
-
-
-alias luamake=/home/baleksa/repositories/lua-language-server/3rd/luamake/luamake

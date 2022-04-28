@@ -5,7 +5,7 @@ alias j='z'
 alias f='zi'
 alias g='lazygit'
 
-alias ec='nvim $(ls ~/.config | fzf || .)^M'
+alias ec='nvim "$(fd -LH . /home/baleksa/.config | fzf || .)"'
 alias nvimrc='nvim ~/.config/nvim/'
 alias zshrc='nvim ~/.config/zsh/'
 
