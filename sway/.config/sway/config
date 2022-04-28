@@ -9,21 +9,25 @@
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
+
 # Your preferred programs
 set $term alacritty
 set $browser firefox-wayland
 set $doc_reader zathura
+
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu bemenu-run | xargs swaymsg exec --
 
 
+# I am not sure if this line does anything
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway DISPLAY SWAYSOCK I3SOCK
 
 ### Output configuration
@@ -233,21 +237,26 @@ bar {
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
+
 input "type:keyboard" {
    xkb_layout us,rs,rs
    xkb_variant ,latinyz,
    xkb_options grp:win_space_toggle,caps:swapescape
 }
+
 input "type:touchpad" {
    tap enabled
    natural_scroll enabled
 }
+
+# Thin border and inner gaps
 default_border pixel 2
 gaps inner 2
 
 font pango:NotoSansMono Medium 12
 
 
+# See https://github.com/francma/wob
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 
@@ -258,17 +267,25 @@ for_window [title="^Settings$"] floating enable
 exec pipewire
 exec pipewire-pulse
 
-exec gammastep -l 44.6:20.3 -t 6500:3400 -b 1:0.7
+# Bluelight filter
+exec gammastep -l 44.6:20.3 -t 6500:3400 -b 1.0:0.2
 
 bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $WOBSOCK
 bindsym XF86AudioLowerVolume exec amixer sset Master 5%- | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $WOBSOCK
+# Use XF86AudioPlay as mute
 bindsym XF86AudioPlay exec amixer sset Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' | head -1 > $WOBSOCK
 
+# Use XF86AudioNext and Prev to change brightness
 bindsym XF86AudioNext exec light -A 5 && light -G | cut -d'.' -f1 > $WOBSOCK
 bindsym XF86AudioPrev exec light -U 5 && light -G | cut -d'.' -f1 > $WOBSOCK
 
+# Script that switches audio output between analog and hdmi
+bindsym XF86AudioStop exec switch_audio.sh
+
+# Sshot is a small script to screenshot
 bindsym print exec sshot
 
+# Screen locking
 bindsym $mod+q exec swaylock -f -c 000000
 
 include /etc/sway/config.d/*
