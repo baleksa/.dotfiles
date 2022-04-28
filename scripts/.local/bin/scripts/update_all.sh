@@ -59,5 +59,5 @@ do_job "Updating neovim from github" "Done!" update_nvim
 # colored_echo "Updating neovim packages via packer.nvim:" "$PURPLE"
 # nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 # colored_echo "Done!" "$GREEN"
-do_job "Updating neovim packages via packer.nvim:" "Done!" nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+do_job "Updating neovim packages via packer.nvim:" "\nDone!" nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
