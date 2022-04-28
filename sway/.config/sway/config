@@ -238,6 +238,10 @@ bar {
     }
 }
 
+# Make touchscreen work precisely by mapping touchsreen to laptop screen
+input 1267:9527:ELAN0732:00_04F3:2537 map_to_output eDP-1
+#      touchscreen input device ID              laptop screen ID
+
 input "type:keyboard" {
    xkb_layout us,rs,rs
    xkb_variant ,latinyz,
