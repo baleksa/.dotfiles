@@ -189,8 +189,9 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
+vim.opt.spelllang =  "en_us,rs"
+vim.opt.spelloptions = "camel"
 vim.opt.spell = false -- Spellcheck
-vim.opt.spelllang = { "en_us" }
 
 vim.opt.termguicolors = true -- Pretty much sure this is default but who gives a fuck
 
@@ -920,7 +921,6 @@ nvim_lsp.clangd.setup({
 	cmd = {
 		"clangd",
 		"--header-insertion=iwyu", -- Offer code action to include headers that are used
-		"--clang-tidy",
 	},
 	on_attach = on_attach,
 	capabilities = capabilities,
