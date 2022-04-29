@@ -898,6 +898,7 @@ local servers = {
 	"r_language_server",
 	"vimls",
 	"bashls",
+	"awk_ls",
 }
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
