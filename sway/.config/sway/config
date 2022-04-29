@@ -272,7 +272,7 @@ exec pipewire
 exec pipewire-pulse
 
 # Bluelight filter
-exec gammastep -l 44.6:20.3 -t 6500:3400 -b 1.0:0.2
+exec gammastep -l 44.6:20.3 -t 6500:3400 -b 1.0:0.8
 
 bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $WOBSOCK
 bindsym XF86AudioLowerVolume exec amixer sset Master 5%- | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $WOBSOCK
