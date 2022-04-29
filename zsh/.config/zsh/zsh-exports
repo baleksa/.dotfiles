@@ -16,6 +16,7 @@ export VOIDNSRUN_DIR=/glibc
 export VOIDNSUNDO_BIN=/usr/local/bin/voidnsundo
 
 export STARDICT_DATA_DIR=~/.config/stardict
+export SDCV_PAGER="nvim +Man!"
 
 #export GTK_BACKED=wayland
 
