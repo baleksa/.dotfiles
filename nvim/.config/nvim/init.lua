@@ -189,7 +189,7 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
-vim.opt.spelllang =  "en_us,rs"
+vim.opt.spelllang = "en_us,rs"
 vim.opt.spelloptions = "camel"
 vim.opt.spell = false -- Spellcheck
 
@@ -890,6 +890,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Enable the following language servers with the default setup
 local servers = {
+	-- "clangd",
 	"rust_analyzer",
 	"pylsp",
 	"tsserver",
@@ -921,6 +922,8 @@ nvim_lsp.clangd.setup({
 	cmd = {
 		"clangd",
 		"--header-insertion=iwyu", -- Offer code action to include headers that are used
+		-- "--clang-tidy",
+		-- "--header-insertion-decorators",
 	},
 	on_attach = on_attach,
 	capabilities = capabilities,
