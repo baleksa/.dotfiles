@@ -67,8 +67,8 @@ autopair-init
 
 
 # Key-bindings
-bindkey -s '^o' 'lf^M'
-bindkey -s '^n' 'nvim "$(fzf || .)"^M'
+bindkey -s '^f' 'lf^M'
+bindkey -s '^n' 'nvim "$(find -L ~/.config | fzf || .)"^M'
 bindkey -s '^v' 'nvim '
 bindkey -s '^z' 'zi^M'
 bindkey "^k" up-line-or-beginning-search # Up
