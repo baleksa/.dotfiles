@@ -35,7 +35,7 @@ alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
 # receive the key of a developer
 alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 
-alias luamake=/home/baleksa/Repositories/lua-language-server/3rd/luamake/luamake
+alias luamake=/home/baleksa/repositories/lua-language-server/3rd/luamake/luamake
 
 alias m="git checkout main"
 alias s="git checkout stable"
