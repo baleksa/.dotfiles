@@ -59,11 +59,7 @@ autopair-init
 
 
 # Add completion folder to fpath
-[ -d $ZDOTDIR/completion/_fnm ] && fpath+="$ZDOTDIR/completion/"
-# Load todo.sh completion
-# autoload bashcompinit
-# bashcompinit
-# source /home/baleksa/.config/zsh/completion/_todo_completion
+[ -d $ZDOTDIR/completion ] && fpath+="$ZDOTDIR/completion/"
 
 
 # Key-bindings
