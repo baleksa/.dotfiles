@@ -80,7 +80,7 @@ local config = {
 	cmd = {
 
 		-- 💀
-		"/usr/lib/jvm/openjdk17/bin/java", -- or '/path/to/java11_or_newer/bin/java'
+		"java", -- or '/path/to/java11_or_newer/bin/java'
 		-- depends on if `java` is in your $PATH env variable and if it points to the right version.
 
 		"-Declipse.application=org.eclipse.jdt.ls.core.id1",
