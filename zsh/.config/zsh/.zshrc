@@ -1,5 +1,9 @@
-HISTFILE="$ZDOTDIR/.zsh_history"
+# History setup
 setopt appendhistory
+HISTFILE="$ZDOTDIR/.zsh_history"
+HISTSIZE=1000000
+SAVEHIST=1000000
+
 # some useful options (man zshoptions)
 setopt autocd extendedglob nomatch menucomplete
 setopt interactive_comments
@@ -81,6 +85,7 @@ safe_source /usr/share/fzf/key-bindings.zsh
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
+eval "$(zoxide init zsh)"
 
 # Use starship for prompt https://github.com/starship/starship
 eval "$(starship init zsh)"
