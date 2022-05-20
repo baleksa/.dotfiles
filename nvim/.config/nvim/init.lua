@@ -155,7 +155,7 @@ require("packer").startup(function()
 
 	use("Vimjas/vim-python-pep8-indent") -- Better python indent
 
-	use("SidOfc/mkdx") -- Easier working with md files
+        use("ixru/nvim-markdown") -- Markdown highlighting and some other features
 
 	use("andymass/vim-matchup") -- More options to do on matching text and extends vim's %
 
@@ -1214,5 +1214,14 @@ require("Comment").setup() -- Setup smart comment plugin for neovim written in L
 
 -- end of COMMENT
 -----------------------------------------------------------------------
-vim.opt.laststatus = 3 -- Set global statusbar. It needs to be at the end of file because someplugin overrides it
+
+-----------------------------------------------------------------------
+-- NVIM-MARKDOWN
+-----------------------------------------------------------------------
+vim.g.vim_markdown_frontmatter = 1 -- Enable frontmatter syntax extension
+vim.g.vim_markdown_math = 1 -- Enable latex syntax extension
+
+-- end of NVIM-MARKDOWN
+-----------------------------------------------------------------------
+vim.opt.laststatus = 3 -- Set global statusbar. It needs to be at the end of the file because someplugin overrides it
 vim.cmd("highlight WinSeparator guibg=None") -- Crisp whiteline between windows
