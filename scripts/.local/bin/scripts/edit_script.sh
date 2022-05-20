@@ -3,14 +3,14 @@
 # Edit an old or make a new script
 
 if [ "$#" = "0" ]; then
-    script="$(find /home/baleksa/.local/bin/scripts/ -type f | fzf)"
-    script=${script:=$MY_SCRIPTS_PATH}
-else 
-    script="$MY_SCRIPTS_PATH/$1"
-fi
-if [ ! -f "$script" ]; then
-   touch "$script"
-   chmod +x "$script"
+	script="$(find -H "$MY_SCRIPTS_DIR" -type f | fzf)"
+	script=${script:=$MY_SCRIPTS_DIR}
+else
+	script="$MY_SCRIPTS_DIR/$1"
+	if [ ! -f "$script" ]; then
+		touch "$script"
+		chmod +x "$script"
+	fi
 fi
 nvim "$script"
-[ ! -s "$script" ] && rm "$script"
+[ -e "$script" ] && [ ! -s "$script" ] && rm "$script"

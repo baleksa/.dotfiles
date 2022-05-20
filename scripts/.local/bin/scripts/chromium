@@ -1,2 +1,8 @@
 #!/bin/sh
-exec dbus-run-session /usr/bin/chromium
+# D-Bus
+# If the session bus is not available it is spawned and wrapper round our program
+# Otherwise we spawn our program directly
+if [ -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
+    drs=dbus-run-session
+fi
+exec "$drs" /usr/bin/chromium
