@@ -1,1 +1,1 @@
-exec "$MY_SCRIPTS_DIR/start_sway.sh"
+exec "$MY_ENV_DIR/start_sway.sh"
