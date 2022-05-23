@@ -1,8 +1,8 @@
 #!/bin/zsh
 
 
-alias j='z'
 alias f='zi'
+
 alias g='lazygit'
 
 alias ec='nvim "$(fd -LH . /home/baleksa/.config | fzf || .)"'
