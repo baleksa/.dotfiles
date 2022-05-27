@@ -9,9 +9,7 @@ export QT_QPA_PLATFORM=wayland-egl
 # # D-Bus
 # # If the session bus is not available it is spawned and wrapper round our program
 # # Otherwise we spawn our program directly
-# drs=
-# if [ -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
-#     drs=dbus-run-session
-# fi
-# "$drs" sway
-exec sway
+if [ -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
+    drs=dbus-run-session
+fi
+exec ${drs} sway
