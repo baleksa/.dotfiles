@@ -51,10 +51,12 @@ require("packer").startup(function()
 
 	-- UI to select things (files, grep results, open buffers...)
 	use({ "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
+
 	-- It sets vim.ui.select to telescope. That means for example that
 	-- neovim core stuff can fill the telescope picker. Example would
 	-- be lua vim.lsp.buf.code_action().
 	use({ "nvim-telescope/telescope-ui-select.nvim" })
+
 	-- Fzf algorithm in C too make telescope faster
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
@@ -171,4 +173,3 @@ require("packer").startup(function()
 	-- Neovim (>= 0.6.0) for eclipse.jdt.ls.
 	use("mfussenegger/nvim-jdtls")
 end)
-

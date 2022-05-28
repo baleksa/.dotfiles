@@ -2,6 +2,9 @@ require "ba.vim"
 require "ba.packer"
 require "ba.nvim-lsp"
 require "ba.diagnostic"
+require "ba.colorscheme"
+require "ba.keymaps"
+
 local plugins = {
 	"bufferline",
 	"comment",
@@ -23,5 +26,3 @@ for _, plugin in pairs(plugins) do
 	require("ba.plugins." .. plugin)
 end
 
-require "ba.colorscheme"
-require "ba.keymaps"

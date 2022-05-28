@@ -2,8 +2,8 @@ vim.opt.colorcolumn = "80"
 -- vim.opt.textwidth = 80
 vim.opt.wrap = true
 vim.opt.linebreak = true
-vim.opt.tabstop = 8
-vim.opt.shiftwidth = 8
+-- vim.opt.tabstop = 8
+-- vim.opt.shiftwidth = 8
 -- vim.opt.expandtab = true
 vim.opt.autoindent = true
 
@@ -40,35 +40,35 @@ vim.g.maplocalleader = " "
 vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
 vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
 
-vim.api.nvim_create_autocmd("FileType", { pattern = "c", command = "setlocal noet ts=8 sw=8 tw=80" })
-vim.api.nvim_create_autocmd("FileType", { pattern = "h", command = "setlocal noet ts=8 sw=8 tw=80" })
-vim.api.nvim_create_autocmd("FileType", { pattern = "cpp", command = "setlocal noet ts=8 sw=8 tw=80" })
-vim.api.nvim_create_autocmd("FileType", { pattern = "s", command = "setlocal noet ts=8 sw=8" })
-vim.api.nvim_create_autocmd("FileType", { pattern = "go", command = "setlocal noet ts=4 sw=4" })
-vim.api.nvim_create_autocmd("FileType", { pattern = "lua", command = "setlocal noet ts=4 sw=4" })
-vim.api.nvim_create_autocmd("FileType", { pattern = "sh", command = "setlocal noet ts=8 sw=8" })
-vim.api.nvim_create_autocmd("BufRead, BufNewFile", { pattern = "*.js", command = "setlocal et ts=2 sw=2" })
-vim.api.nvim_create_autocmd("FileType", { pattern = "html", command = "setlocal et ts=2 sw=2" })
-vim.api.nvim_create_autocmd("FileType", { pattern = "htmldjango", command = "setlocal et ts=2 sw=2" })
-vim.api.nvim_create_autocmd("FileType", { pattern = "scss", command = "setlocal et ts=2 sw=2" })
-vim.api.nvim_create_autocmd("FileType", { pattern = "yaml", command = "setlocal et ts=2 sw=2" })
-vim.api.nvim_create_autocmd("FileType", { pattern = "markdown", command = "setlocal tw=80 et ts=2 sw=2" })
-vim.api.nvim_create_autocmd("FileType", { pattern = "text", command = "setlocal tw=80" })
-vim.api.nvim_create_autocmd("FileType", { pattern = "meson", command = "setlocal noet ts=2 sw=2" })
-vim.api.nvim_create_autocmd("FileType", { pattern = "python", command = "setlocal et ts=4 sw=4" })
--- vim.api.nvim_create_autocmd("FileType", { pattern="tex ", command = "hi Error ctermbg=NONE"})
-vim.api.nvim_create_autocmd("FileType", { pattern = "mail", command = "setlocal noautoindent" })
-vim.api.nvim_create_autocmd("FileType", { pattern = "gmi", command = "set wrap linebreak" })
-vim.api.nvim_create_autocmd(
-	"BufRead, BufNewFile",
-	{ pattern = "*", command = "if expand('%:t') == 'APKBUILD' | set ft=sh | endif" }
-)
-vim.api.nvim_create_autocmd(
-	"BufRead, BufNewFile",
-	{ pattern = "*", command = "if expand('%:t') == 'PKGBUILD' | set ft=sh | endif" }
-)
-vim.api.nvim_create_autocmd("BufRead, BufNewFile", { pattern = "*/sway/config.d/*", command = "set ft=i3config" })
-vim.api.nvim_create_autocmd("BufRead, BufNewFile", { pattern = "*/.config/myenv/*", command = "set syntax=sh" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "c", command = "setlocal noet ts=8 sw=8 tw=80" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "h", command = "setlocal noet ts=8 sw=8 tw=80" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "cpp", command = "setlocal noet ts=8 sw=8 tw=80" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "s", command = "setlocal noet ts=8 sw=8" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "go", command = "setlocal noet ts=4 sw=4" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "lua", command = "setlocal noet ts=4 sw=4" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "sh", command = "setlocal noet ts=8 sw=8" })
+-- vim.api.nvim_create_autocmd("BufRead, BufNewFile", { pattern = "*.js", command = "setlocal et ts=2 sw=2" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "html", command = "setlocal et ts=2 sw=2" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "htmldjango", command = "setlocal et ts=2 sw=2" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "scss", command = "setlocal et ts=2 sw=2" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "yaml", command = "setlocal et ts=2 sw=2" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "markdown", command = "setlocal tw=80 et ts=2 sw=2" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "text", command = "setlocal tw=80" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "meson", command = "setlocal noet ts=2 sw=2" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "python", command = "setlocal et ts=4 sw=4" })
+-- -- vim.api.nvim_create_autocmd("FileType", { pattern="tex ", command = "hi Error ctermbg=NONE"})
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "mail", command = "setlocal noautoindent" })
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "gmi", command = "set wrap linebreak" })
+-- vim.api.nvim_create_autocmd(
+-- 	"BufRead, BufNewFile",
+-- 	{ pattern = "*", command = "if expand('%:t') == 'APKBUILD' | set ft=sh | endif" }
+-- )
+-- vim.api.nvim_create_autocmd(
+-- 	"BufRead, BufNewFile",
+-- 	{ pattern = "*", command = "if expand('%:t') == 'PKGBUILD' | set ft=sh | endif" }
+-- )
+-- vim.api.nvim_create_autocmd("BufRead, BufNewFile", { pattern = "*/sway/config.d/*", command = "set ft=i3config" })
+-- vim.api.nvim_create_autocmd("BufRead, BufNewFile", { pattern = "*/.config/myenv/*", command = "set syntax=sh" })
 
 -- Highlight on yank
 vim.cmd([[
@@ -84,4 +84,5 @@ vim.g.indent_blankline_filetype_exclude = { "help", "packer" }
 vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
 vim.g.indent_blankline_show_trailing_blankline_indent = false
 
-vim.opt.laststatus = 3 -- Set global statusbar. It needs to be at the end of the file because someplugin overrides it
+vim.opt.laststatus = 3 -- Set global statusbar.
+
