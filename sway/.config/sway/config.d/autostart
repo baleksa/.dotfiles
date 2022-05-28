@@ -10,3 +10,5 @@ exec syncthing --no-browser
 
 # Bluelight filter
 exec gammastep -l 44.6:20.3 -t 6500:3400 -b 1.0:0.8
+
+exec foot --server

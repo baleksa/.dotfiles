@@ -16,7 +16,7 @@ set $up k
 set $right l
 
 # Your preferred programs
-set $term $TERMINAL
+set $term footclient
 set $browser $BROWSER
 set $doc_reader $DOC_READER
 
