@@ -1,6 +1,6 @@
 export MY_SCRIPTS_DIR="$HOME/.local/bin/scripts"
 export MY_NOTES_DIR="$HOME/notes"
-export MY_ENV_DIR="$HOME/.config/myenv" 
+export MY_ENV_DIR="$HOME/.config/myenv"
 
 export GOPATH="$HOME/go"
 
@@ -9,11 +9,9 @@ export JAVA_HOME="/usr/lib/jvm/openjdk17"
 export ANDROID_SDK_PATH="$HOME/Android/Sdk"
 export ANDROID_STUDIO_PATH="$HOME/Repositories/android-studio/bin"
 
-
 export PATH="$MY_SCRIPTS_DIR:$HOME/.local/bin:$PATH:$ANDROID_STUDIO_PATH:$GOPATH/bin:$ANDROID_SDK_PATH/emulator:$ANDROID_SDK_PATH/tools"
 
-#export XDG_RUNTIME_DIR=/run/user/$(id -u)
-export XDG_RUNTIME_DIR=~/.run
+# export XDG_RUNTIME_DIR=~/.run
 
 export EDITOR="nvim"
 export TERMINAL="foot"
@@ -35,4 +33,3 @@ export VOIDNSUNDO_BIN=/usr/local/bin/voidnsundo
 
 export STARDICT_DATA_DIR=~/.config/stardict
 export SDCV_PAGER="nvim +Man!"
-
