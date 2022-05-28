@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd(
 	{ pattern = "*", command = "if expand('%:t') == 'PKGBUILD' | set ft=sh | endif" }
 )
 vim.api.nvim_create_autocmd("BufRead, BufNewFile", { pattern = "*/sway/config.d/*", command = "set ft=i3config" })
-vim.api.nvim_create_autocmd("BufRead, BufNewFile", { pattern = "*/.config/myenv/*", command = "set syntax=sh" })
+vim.api.nvim_create_autocmd("BufRead, BufNewFile", { pattern = "*/.config/myenv/*", command = "set ft=sh" })
 
 -- Highlight on yank
 vim.cmd([[
