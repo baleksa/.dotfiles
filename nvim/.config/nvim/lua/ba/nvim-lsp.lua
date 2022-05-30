@@ -3,7 +3,7 @@
 local nvim_lsp = require("lspconfig")
 
 local function lsp_highlight_document(client) -- Highlight references of object under cursor if server supports that
-	if client.resolved_capabilities.document_highlight then
+	if client.server_capabilities.document_highlight then
 		vim.api.nvim_exec(
 			[[
       augroup lsp_document_highlight
@@ -51,8 +51,7 @@ local on_attach = function(_, bufnr)
 		[[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]],
 		opts
 	)
-	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "ff", "<cmd>Format<CR><cmd>w<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "ff", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
 	require("lsp_signature").on_attach()
 	lsp_highlight_document(_) -- Add function to highlight

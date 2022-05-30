@@ -60,6 +60,8 @@ require("packer").startup(function()
 	-- Fzf algorithm in C too make telescope faster
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
+	use({ "stevearc/dressing.nvim" })
+
 	use({ "akinsho/toggleterm.nvim", branch = "main" }) -- Spawn multiple terminals in nvim with many orientations and send commands to them
 
 	use("navarasu/onedark.nvim") -- Onedark theme with treesitter support
@@ -113,9 +115,7 @@ require("packer").startup(function()
 		requires = {
 			"kyazdani42/nvim-web-devicons", -- optional, for file icon
 		},
-		config = function()
-			require("nvim-tree").setup({ diagnostics = { enable = true } })
-		end,
+		tag = 'nightly'
 	})
 
 	use("neovim/nvim-lspconfig") -- Collection of configurations for built-in LSP client

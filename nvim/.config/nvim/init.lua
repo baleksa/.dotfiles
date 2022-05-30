@@ -1,1 +1,1 @@
-require "ba"
+require("ba")
