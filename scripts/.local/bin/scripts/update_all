@@ -34,12 +34,12 @@ do_job "Updating xbps packages:" "Done!" "Failed!" xi -Su
 # colored_echo "Updating sumneko lua language server:" "$PURPLE"
 # update_sumneko_server
 # colored_echo "Done!" "$GREEN"
-do_job "Updating sumneko lua language server:" "Done!" "Failed!" update_sumneko_lua_server.sh
+do_job "Updating sumneko lua language server:" "Done!" "Failed!" update_sumneko_lua_server
 
 # colored_echo "Updating neovim from github" "$PURPLE"
 # update_nvim
 # colored_echo "Done!" "$GREEN"
-do_job "Updating neovim from github" "Done!" "Failed!" update_neovim.sh
+# do_job "Updating neovim from github" "Done!" "Failed!" update_neovim.sh
 
 # colored_echo "Updating neovim packages via packer.nvim:" "$PURPLE"
 # nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
