@@ -143,6 +143,7 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
 bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $WOBSOCK
 bindsym XF86AudioLowerVolume exec amixer sset Master 5%- | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $WOBSOCK
 # Use XF86AudioPlay as mute
@@ -153,10 +154,10 @@ bindsym XF86AudioNext exec light -A 5 && light -G | cut -d'.' -f1 > $WOBSOCK
 bindsym XF86AudioPrev exec light -U 5 && light -G | cut -d'.' -f1 > $WOBSOCK
 
 # Script that switches audio output between analog and hdmi
-bindsym XF86AudioStop exec switch_audio.sh
+bindsym XF86AudioStop exec switch_audio
 
 # Sshot is a small script to screenshot
-bindsym print exec sshot.sh
+bindsym print exec sshot
 
 # Screen locking
 bindsym $mod+q exec swaylock -f -c 000000
