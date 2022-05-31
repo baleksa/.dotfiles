@@ -1,17 +1,17 @@
-vim.opt.colorcolumn = "80"
+vim.wo.colorcolumn = "80"
 -- vim.opt.textwidth = 80
-vim.opt.wrap = true
-vim.opt.linebreak = true
+vim.wo.wrap = true
+vim.wo.linebreak = true
 -- vim.opt.tabstop = 8
 -- vim.opt.shiftwidth = 8
 -- vim.opt.expandtab = true
-vim.opt.autoindent = true
+vim.bo.autoindent = true
 
-vim.opt.spelllang = "en_us,rs"
-vim.opt.spelloptions = "camel"
-vim.opt.spell = false -- Spellcheck
+vim.bo.spelllang = "en_us,rs"
+vim.bo.spelloptions = "camel"
+vim.wo.spell = false -- Spellcheck
 
-vim.opt.termguicolors = true -- Pretty much sure this is default but who gives a fuck
+vim.o.termguicolors = true -- Pretty much sure this is default but who gives a fuck
 
 vim.o.hlsearch = false -- Set highlight on search
 vim.o.incsearch = true
@@ -20,9 +20,9 @@ vim.wo.number = true -- Make line numbers default
 
 vim.o.mouse = "a" -- Enable mouse mode
 
-vim.o.breakindent = true -- Enable break indent
+vim.wo.breakindent = true -- Enable break indent
 
-vim.opt.undofile = true -- Save undo history
+vim.bo.undofile = true -- Save undo history
 
 vim.o.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
 vim.o.smartcase = true

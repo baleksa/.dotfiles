@@ -1,6 +1,8 @@
 require("onedark").setup({ -- Set colorcheme options
 	style = "deep",
-	toggle_style_key = "<leader>tc",
+	code_style = {
+		comments = "none",
+	},
 })
 
 local setOneDark = function()
@@ -28,8 +30,19 @@ ChangeTheme = function()
 	end
 	setThemeFunctions[theme_index]()
 end
-vim.api.nvim_set_keymap("n", "<leader>ct", "<CMD>lua ChangeTheme()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>tc", "<CMD>lua ChangeTheme()<CR>", { noremap = true, silent = true })
 
-vim.cmd("hi rainbowcol1 guifg=#ffffff") -- Fix color of one rainbow parentheses which wasn't blending nicely with OneDark colorscheme
+-- Fix color of one rainbow parentheses which wasn't blending nicely with
+-- OneDark colorscheme
+vim.cmd("hi rainbowcol1 guifg=#ffffff")
 
 vim.cmd("highlight WinSeparator guibg=None") -- Crisp whiteline between windows
+
+-- Set color for filenames of unstaged files in nvim-tree.lua to the current
+-- theme's red color
+local setNvimTreeGitDirtyHighlighColor = function()
+	local red = require("onedark.colors").red
+	vim.cmd("highlight NvimTreeGitDirty guifg=" .. red)
+end
+setNvimTreeGitDirtyHighlighColor()
+vim.api.nvim_create_autocmd("ColorScheme", { pattern = "onedark", callback = setNvimTreeGitDirtyHighlighColor })

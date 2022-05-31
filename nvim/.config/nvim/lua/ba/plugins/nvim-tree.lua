@@ -65,6 +65,7 @@ require("nvim-tree").setup({ -- Call setup function
 		},
 	},
 	renderer = {
+		highlight_git = true,
 		icons = {
 			glyphs = {
 				git = {
