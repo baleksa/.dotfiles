@@ -50,9 +50,6 @@ end
 
 require("nvim-tree").setup({ -- Call setup function
 	hijack_cursor = true,
-	update_cwd = true,
-	reload_on_bufenter = true,
-
 	update_focused_file = {
 		enable = true,
 		update_cwd = true,
