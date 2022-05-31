@@ -115,7 +115,7 @@ require("packer").startup(function()
 		requires = {
 			"kyazdani42/nvim-web-devicons", -- optional, for file icon
 		},
-		tag = 'nightly'
+		-- tag = 'nightly'
 	})
 
 	use("neovim/nvim-lspconfig") -- Collection of configurations for built-in LSP client
