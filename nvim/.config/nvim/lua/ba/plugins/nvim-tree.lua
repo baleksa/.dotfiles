@@ -1,6 +1,6 @@
 -- Open file explorer
 vim.api.nvim_set_keymap("n", "<leader>h", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
- -- Open file explorer and position cursor on file thats opened
+-- Open file explorer and position cursor on file thats opened
 vim.api.nvim_set_keymap("n", "<leader>ff", ":NvimTreeFindFile<CR>", { noremap = true, silent = true })
 
 -- automatically close the tab/vim when nvim-tree is the last window in the tab
