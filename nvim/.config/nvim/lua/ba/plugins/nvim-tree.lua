@@ -1,8 +1,11 @@
-vim.api.nvim_set_keymap("n", "<leader>h", ":NvimTreeToggle<CR>", { noremap = true, silent = true }) -- Open file explorer
-vim.api.nvim_set_keymap("n", "<leader>ff", ":NvimTreeFindFile<CR>", { noremap = true, silent = true }) -- Open file explorer
+-- Open file explorer
+vim.api.nvim_set_keymap("n", "<leader>h", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+ -- Open file explorer and position cursor on file thats opened
+vim.api.nvim_set_keymap("n", "<leader>ff", ":NvimTreeFindFile<CR>", { noremap = true, silent = true })
 
 -- automatically close the tab/vim when nvim-tree is the last window in the tab
 vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
+
 local lib = require("nvim-tree.lib")
 local view = require("nvim-tree.view")
 -- Helper functions
@@ -46,7 +49,14 @@ local function vsplit_preview()
 end
 
 require("nvim-tree").setup({ -- Call setup function
+	hijack_cursor = true,
 	update_cwd = true,
+	reload_on_bufenter = true,
+
+	update_focused_file = {
+		enable = true,
+		update_cwd = true,
+	},
 	view = {
 		mappings = {
 			list = {
@@ -57,21 +67,21 @@ require("nvim-tree").setup({ -- Call setup function
 			},
 		},
 	},
-	-- renderer = {
-	-- 	icons = {
-	-- 		glyphs = {
-	-- 			git = {
-	-- 				unstaged = "✗",
-	-- 				staged = "✓",
-	-- 				unmerged = "",
-	-- 				renamed = "➜",
-	-- 				untracked = "★",
-	-- 				deleted = "",
-	-- 				ignored = "◌",
-	-- 			},
-	-- 		},
-	-- 	},
-	-- },
+	renderer = {
+		icons = {
+			glyphs = {
+				git = {
+					unstaged = "x",
+					staged = "+",
+					unmerged = "",
+					renamed = "➜",
+					untracked = "?",
+					deleted = "",
+					ignored = "",
+				},
+			},
+		},
+	},
 	diagnostics = {
 		enable = true,
 		icons = {
@@ -79,15 +89,6 @@ require("nvim-tree").setup({ -- Call setup function
 			info = "",
 			warning = "",
 			error = "",
-		},
-	},
-	update_focused_file = {
-		enable = true,
-		update_cwd = true,
-	},
-	log = {
-		types = {
-			all = true,
 		},
 	},
 })
