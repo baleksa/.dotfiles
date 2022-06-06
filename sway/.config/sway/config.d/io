@@ -6,11 +6,10 @@ output * bg /home/baleksa/Pictures/purple_planet_w11_bg.jpg fill
 # Example configuration:
 #
 set $laptop eDP-1
-output $laptop scale 1.20 resolution 1920x1080 position 0,0
-output DP-1 resolution 1920x1080 position 1600,0
+output $laptop resolution 1920x1080 position 0,0
+output DP-1 position 1920,0 resolution 1920x1080 
 
 # Enable clamshell mode AKA Closed laptopdisplay mode
-set $laptop <laptop_output_identifier>
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
 exec_always $HOME/.config/sway/scripts/disable_laptop_display_if_lid_closed
