@@ -1,5 +1,3 @@
--- NVIM-LSP and SERVERS
------------------------------------------------------------------------
 local nvim_lsp = require("lspconfig")
 
 local function lsp_highlight_document(client) -- Highlight references of object under cursor if server supports that
@@ -51,7 +49,7 @@ local on_attach = function(_, bufnr)
 		[[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]],
 		opts
 	)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "ff", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "ff", "<cmd>lua vim.lsp.buf.format {async = true}<CR>", opts)
 
 	require("lsp_signature").on_attach()
 	lsp_highlight_document(_) -- Add function to highlight
@@ -149,5 +147,3 @@ nvim_lsp.sumneko_lua.setup({
 		},
 	},
 })
-
--- end of NVIM-LSP and SERVERS

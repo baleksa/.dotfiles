@@ -120,10 +120,16 @@ require("packer").startup(function()
 
 	use("neovim/nvim-lspconfig") -- Collection of configurations for built-in LSP client
 
+	use("mfussenegger/nvim-dap") -- Debug adapter Protocol client implementation
+	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+	use("theHamsta/nvim-dap-virtual-text")
+	use("nvim-telescope/telescope-dap.nvim")
+	use("mfussenegger/nvim-dap-python")
+
 	use("ray-x/lsp_signature.nvim") -- Add function signature help while in insert mode
 
 	-- Completion plugin and its sources
-	use("hrsh7th/nvim-cmp") --, commit = "f573479528cac39ff5917a4679529e4435b71ffe" }) -- Autocompletion plugin
+	use("hrsh7th/nvim-cmp") -- Autocompletion plugin
 	use("hrsh7th/cmp-nvim-lsp") -- nvim-cmp nvim-lsp completion source
 	use("hrsh7th/cmp-path") -- nvim-cmp filesystem paths completion source
 	use("hrsh7th/cmp-buffer") -- Words from current buffer completion source

@@ -20,10 +20,9 @@ local plugins = {
 	"nvim-markdown",
 	"toggleterm",
 	"treesitter",
+	"nvim-dap",
 }
 
 for _, plugin in pairs(plugins) do
 	require("ba.plugins." .. plugin)
 end
-
--- require'nvim-tree'.setup {}
