@@ -71,7 +71,6 @@ dap.configurations.cpp = {
 		cwd = "${workspaceFolder}",
 		stopOnEntry = false,
 		args = {},
-
 		-- 💀
 		-- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
 		--
