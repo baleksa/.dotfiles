@@ -45,5 +45,7 @@ popup_during_fullscreen smart
 
 font pango:monospace Medium 12
 
+seat seat0 hide_cursor 3000
+
 include $HOME/.config/sway/config.d/*
 include /etc/sway/config.d/*

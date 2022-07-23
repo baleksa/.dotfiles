@@ -4,3 +4,5 @@ for_window [app_id="zoom" title="Zoom Meeting"] floating disable
 for_window [app_id="zoom" title="Choose ONE of the audio conference options"] floating enable
 for_window [app_id="zoom" title="zoom.real "] floating enable
 for_window [app_id="zoom" title="Settings"] floating enable
+for_window [app_id="foot" title="footlauncher"] enable floating
+
