@@ -11,7 +11,7 @@ else
 		# touch "$note"
 		echo "Enter a title for the note:"
 		read -r title
-		printf "%s\ntitle: %s\ncreated: %s\n%s\n" '---' "$title" "$(date -u -Is)" '---' >> "$note"
+		printf "%s\ntitle: \"%s\"\ncreated: \"%s\"\n%s\n" '---' "$title" "$(date -u -Is)" '---' >> "$note"
 	fi
 fi
 
