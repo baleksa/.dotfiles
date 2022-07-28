@@ -16,7 +16,7 @@ export PATH="$MY_SCRIPTS_DIR:$HOME/.local/bin:$PATH:$ANDROID_STUDIO_PATH:$GOPATH
 export EDITOR="nvim"
 export TERMINAL="foot"
 export BROWSER="firefox-wayland"
-export DOC_READER="zathura"
+export DOC_READER="sway_zathura_open"
 
 export GIT_REPOS_DIR=~/repositories
 
