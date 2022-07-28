@@ -8,8 +8,11 @@
     # Start a browser
     bindsym $mod+s exec $browser
 
-    # Start a document reader
-    bindsym $mod+z exec $doc_reader
+    # Start zathura
+    bindsym $mod+z exec zathura
+
+    # Choose a document in $HOME and open it in zathura
+    bindsym $mod+Shift+z exec $doc_reader
 
     # Kill focused window
     bindsym $mod+Shift+q kill
