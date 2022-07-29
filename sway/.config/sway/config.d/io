@@ -50,7 +50,9 @@ input 1267:9527:ELAN0732:00_04F3:2537 map_to_output eDP-1
 
 input "type:keyboard" {
    xkb_layout us,rs,rs
-   xkb_variant ,latinyz,
+   # Use variants of latin and cyrilic where z and з are at the same place as
+   # in us
+   xkb_variant ,latinyz,yz
    xkb_options grp:alt_space_toggle,caps:escape_shifted_capslock
 }
 
