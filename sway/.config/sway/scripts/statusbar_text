@@ -1,0 +1,8 @@
+#!/bin/sh
+
+current_kblayout=$(swaymsg -t get_inputs | jq 'map(select(has("xkb_active_layout_name")))[0].xkb_active_layout_name' | cut -d\" -f 2)
+date=$(date +'%a %d-%m-%Y %R:%S')
+bat_perc="$(cat /sys/class/power_supply/BAT0/capacity)%"
+echo "${current_kblayout} ${date} ${bat_perc}"
+
+
