@@ -1,16 +1,17 @@
 #!/bin/sh
 
-current_kblayout=$(swaymsg -t get_inputs | jq 'map(select(has("xkb_active_layout_name")))[0].xkb_active_layout_name' | cut -d\" -f 2)
+current_kblayout=$(
+	swaymsg -t get_inputs |
+		jq -r '.[0] | select(.identifier == "0:0:Wireless_hotkeys") | .xkb_active_layout_name'
+)
 
 date=$(date +'%a %d-%m-%Y %R:%S')
 
 bat_perc="$(cat /sys/class/power_supply/BAT0/capacity)"
-if [ "$bat_perc" -lt 100 ];then
-	bat_perc="  ${bat_perc}%"
+if [ "$bat_perc" -lt 100 ]; then
+	bat_perc="  ${bat_perc}%"
 else
 	bat_perc=""
 fi
 
 echo "${current_kblayout}  ${date}${bat_perc}"
-
-
