@@ -23,7 +23,7 @@ set $doc_reader $DOC_READER
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window 
 # can be opened on the original workspace that the command was run on.
-set $menu bemenu-run | xargs swaymsg exec --
+set $menu bemenu-run -p "run:" -i -w -n --fn "font pango:monospace Medium 12" | xargs swaymsg exec --
 
 
 # If you run apps that need dbus then you need to run this
