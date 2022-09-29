@@ -9,26 +9,6 @@ get_latest_git_release() {
 		sed -E 's/.*"([^"]+)".*/\1/' # Pluck JSON value
 }
 
-update_nvim() {
-	cwd=$(pwd)
-	echo test
-	cd "$GIT_REPOS_DIR/neovim" || return
-	git checkout master 2>/dev/null
-	git pull --rebase
-	git checkout stable 2>/dev/null
-	latest_stable_version=$(git log | sed '5q;d' | sed 's/.*NVIM //')".0"
-	installed_version=$(nvim -v | sed 's/.*NVIM v//;1q')
-	printf "The latest stable version: %s\n" "$latest_stable_version"
-	printf "Installed version: %s\n" "$installed_version"
-	if [ "$latest_stable_version" = "$installed_version" ]; then
-		colored_echo "Neovim is already up to date with the latest stable version" "$GREEN"
-		return
-	fi
-	make CMAKE_BUILD_TYPE=Release
-	sudo make install
-	cd "$cwd" || exit
-}
-
 latest_stable_version=$(
 	get_latest_git_release "neovim/neovim" | cut -c2-
 )
