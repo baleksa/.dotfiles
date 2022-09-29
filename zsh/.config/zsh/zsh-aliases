@@ -9,6 +9,7 @@ alias ec='nvim "$(fd -LH . /home/baleksa/.config | fzf || .)"'
 alias nvimrc='nvim ~/.config/nvim/'
 alias zshrc='nvim ~/.config/zsh/'
 alias swayrc='nvim ~/.config/sway'
+alias mrc='nvim ~/.config/myenv'
 
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
