@@ -139,10 +139,8 @@ require("packer").startup(function()
 	-- use 'uga-rosa/cmp-dictionary' -- nvim-cmp dictionaries source
 
 	use({ -- Make non-lsp sources able to hook into its LSP client
-		"jose-elias-alvarez/null-ls.nvim",
-		config = function()
-			require("null-ls").setup()
-		end,
+		'jose-elias-alvarez/null-ls.nvim',
+		commit = '76d0573fc159839a9c4e62a0ac4f1046845cdd50',
 		requires = { "nvim-lua/plenary.nvim" },
 	})
 
