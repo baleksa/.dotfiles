@@ -1,3 +1,4 @@
+#!/bin/sh
 export MY_SCRIPTS_DIR="$HOME/.local/bin/scripts"
 export MY_NOTES_DIR="$HOME/notes"
 export MY_ENV_DIR="$HOME/.config/myenv"
@@ -32,5 +33,4 @@ export VOIDNSRUN_DIR=/glibc
 export VOIDNSUNDO_BIN=/usr/local/bin/voidnsundo
 
 export STARDICT_DATA_DIR=~/.config/stardict
-# export SDCV_PAGER="nvim +Man!"
 export SDCV_PAGER="less -ri"
