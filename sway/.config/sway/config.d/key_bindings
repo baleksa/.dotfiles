@@ -165,4 +165,4 @@ bindsym print exec sshot
 # Screen locking
 bindsym $mod+q exec swaylock -f -c 000000
 
-bindsym Pause exec $SWAY_SCRIPTS/toggle_displays
+bindsym Pause exec $sway_scripts_dir/toggle_displays

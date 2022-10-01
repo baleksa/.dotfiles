@@ -7,7 +7,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while $HOME/.config/sway/scripts/statusbar_text ; do sleep 1; done
+    status_command while $sway_scripts_dir/statusbar_text ; do sleep 1; done
 
     modifier Mod5
 
