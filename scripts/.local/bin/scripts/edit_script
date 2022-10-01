@@ -3,10 +3,10 @@
 # Edit an old or make a new script
 
 if [ "$#" = "0" ]; then
-	script="$(find -H "$MY_SCRIPTS_DIR" -type f | fzf)"
-	script=${script:=$MY_SCRIPTS_DIR}
+	script="$(find -H "$MYSCRIPTS_DIR" -type f | fzf)"
+	script=${script:=$MYSCRIPTS_DIR}
 else
-	script="$MY_SCRIPTS_DIR/$1"
+	script="$MYSCRIPTS_DIR/$1"
 	if [ ! -f "$script" ]; then
 		touch "$script"
 		chmod +x "$script"

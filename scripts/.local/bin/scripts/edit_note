@@ -3,10 +3,10 @@
 # Edit an old or make a new note
 
 if [ "$#" = "0" ]; then
-	note="$(find -H "$MY_NOTES_DIR" -name '*.md' | fzf)"
-	note=${note:=$MY_NOTES_DIR}
+	note="$(find -H "$MYNOTES_DIR" -name '*.md' | fzf)"
+	note=${note:=$MYNOTES_DIR}
 else
-	note="$MY_NOTES_DIR/$1"
+	note="$MYNOTES_DIR/$1"
 	if [ ! -f "$note" ]; then
 		# touch "$note"
 		echo "Enter a title for the note:"
