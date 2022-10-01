@@ -8,9 +8,10 @@ export SWAY_SCRIPTS="$HOME/.config/sway/scripts"
 export BEMENU_BACKEND="wayland"
 # export GTK_BACKED=wayland
 # export WAYLAND_DEBUG=1 # Uncomment this line to enable more verbose logging
-# # D-Bus
-# # If the session bus is not available it is spawned and wrapper round our program
-# # Otherwise we spawn our program directly
+
+# D-Bus
+# If the session bus is not available it is spawned and wrapper round our program
+# Otherwise we spawn our program directly
 if [ -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
     drs=dbus-run-session
 fi
