@@ -1,8 +1,9 @@
 #!/bin/sh
-export MY_SCRIPTS_DIR="$HOME/.local/bin/scripts"
-export MY_NOTES_DIR="$HOME/notes"
-export MY_ENV_DIR="$HOME/.config/myenv"
+export MYSCRIPTS_DIR="$HOME/.local/bin/scripts"
+export MYNOTES_DIR="$HOME/notes"
+export MYRC_DIR="$HOME/.config/myrc"
 
+export XDG_CONFIG_HOME=~/.config
 export GOPATH="$HOME/go"
 
 export JAVA_HOME="/usr/lib/jvm/openjdk17"
@@ -10,14 +11,14 @@ export JAVA_HOME="/usr/lib/jvm/openjdk17"
 export ANDROID_SDK_PATH="$HOME/Android/Sdk"
 export ANDROID_STUDIO_PATH="$HOME/Repositories/android-studio/bin"
 
-export PATH="$MY_SCRIPTS_DIR:$HOME/.local/bin:$PATH:$ANDROID_STUDIO_PATH:$GOPATH/bin:$ANDROID_SDK_PATH/emulator:$ANDROID_SDK_PATH/tools"
+export PATH="$MYSCRIPTS_DIR:$HOME/.local/bin:$PATH:$ANDROID_STUDIO_PATH:$GOPATH/bin:$ANDROID_SDK_PATH/emulator:$ANDROID_SDK_PATH/tools"
 
 # export XDG_RUNTIME_DIR=~/.run
 
 export EDITOR="nvim"
-export TERMINAL="foot"
-export BROWSER="firefox-wayland"
-export DOC_READER="sway_zathura_open"
+# export TERMINAL="foot"
+# export BROWSER="firefox-wayland"
+# export DOC_READER="sway_zathura_open"
 
 export GIT_REPOS_DIR=~/repositories
 

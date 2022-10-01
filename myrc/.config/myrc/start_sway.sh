@@ -2,9 +2,15 @@
 export XDG_SESSION_TYPE=wayland
 export XDG_SESSION_DESKTOP=sway
 export XDG_CURRENT_DESKTOP=sway
+
+export TERMINAL="footclient"
+export BROWSER="firefox-wayland"
+export DOC_READER="sway_zathura_open"
+
+export SWAY_SCRIPTS="$HOME/.config/sway/scripts"
+
 export _JAVA_AWT_WM_NONREPARENTING=1 # Fix gray window in java apps
 export QT_QPA_PLATFORM=wayland-egl
-export SWAY_SCRIPTS="$HOME/.config/sway/scripts"
 export BEMENU_BACKEND="wayland"
 # export GTK_BACKED=wayland
 # export WAYLAND_DEBUG=1 # Uncomment this line to enable more verbose logging
