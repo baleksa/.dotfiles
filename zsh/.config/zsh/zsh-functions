@@ -4,13 +4,6 @@ safe_source()
     [ -f "$1" ] && source "$1"
 }
 
-get_latest_git_release() {
-    # Get latest release from GitHub api
-    curl --silent "https://api.github.com/repos/$1/releases/latest" | 
-    grep '"tag_name":' |             # Get tag line
-    sed -E 's/.*"([^"]+)".*/\1/'     # Pluck JSON value
-}
-
 dmalloc(){
     eval `command dmalloc -b $*`;
 }

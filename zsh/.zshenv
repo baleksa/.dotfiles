@@ -1,3 +1,3 @@
 export ZDOTDIR=$HOME/.config/zsh
 
-. "$HOME/.config/myenv/.myenv"
+. "$HOME/.config/myrc/env"

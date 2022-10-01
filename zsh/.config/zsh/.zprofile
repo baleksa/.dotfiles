@@ -1,1 +1,1 @@
-. "$MY_ENV_DIR/.profile"
+. "$MYRC_DIR/profile"
