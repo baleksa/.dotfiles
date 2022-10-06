@@ -115,6 +115,7 @@ require("packer").startup(function()
 		requires = {
 			"kyazdani42/nvim-web-devicons", -- optional, for file icon
 		},
+		-- Don't use this before help and docs of the plugin gets better
 		-- tag = 'nightly'
 	})
 
@@ -140,11 +141,11 @@ require("packer").startup(function()
 
 	use({ -- Make non-lsp sources able to hook into its LSP client
 		'jose-elias-alvarez/null-ls.nvim',
-		commit = '76d0573fc159839a9c4e62a0ac4f1046845cdd50',
+		-- commit = '76d0573fc159839a9c4e62a0ac4f1046845cdd50',
 		requires = { "nvim-lua/plenary.nvim" },
 	})
 
-	use("L3MON4D3/LuaSnip") -- Snippets plugin
+	use({"L3MON4D3/LuaSnip"}) -- Snippets plugin
 	use("rafamadriz/friendly-snippets") -- vscode snippets
 
 	use({ -- Priview markdown files in browser with auto scroll sync
@@ -158,7 +159,8 @@ require("packer").startup(function()
 
 	use("Vimjas/vim-python-pep8-indent") -- Better python indent
 
-	use("ixru/nvim-markdown") -- Markdown highlighting and some other features
+	-- Disabled because nvim-treesitter markdown highlighting works well now
+	-- use("ixru/nvim-markdown") -- Markdown highlighting and some other features
 
 	use("andymass/vim-matchup") -- More options to do on matching text and extends vim's %
 
