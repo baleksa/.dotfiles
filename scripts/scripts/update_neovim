@@ -1,45 +1,23 @@
 #!/bin/sh
 
-# Update neovim to the latest stable release from github
+# Update neovim to the HEAD github branch
 
-get_latest_git_release() {
-	# Get latest release from GitHub api
-	curl --silent "https://api.github.com/repos/$1/releases/latest" |
-		grep '"tag_name":' |         # Get tag line
-		sed -E 's/.*"([^"]+)".*/\1/' # Pluck JSON value
-}
+while true; do
+	printf "Do you wish to update neovim? [y/N]: "
+	read -r yn
+	case $yn in
+	[Yy]*) break ;;
+	*) exit ;;
+	esac
+done
 
-latest_stable_version=$(
-	get_latest_git_release "neovim/neovim" | cut -c2-
-)
-
-installed_version=$(nvim -v | sed 's/.*NVIM v//;1q')
-
-if [ "$latest_stable_version" = "$installed_version" ]; then
-	echo "The latest $latest_stable_version stable version of neovim is already installed!"
+cd "$GIT_REPOS_DIR/neovim" || exit
+if [ "$(git pull)" = "Already up to date." ]; then
+	echo "Repository is already up to date."
 	exit 0
 fi
 
+make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local"
 
-tmp_tarball="/tmp/neovim.tar.gz"
-echo "Getting the latest release from github."
-curl -s https://api.github.com/repos/neovim/neovim/releases/latest |
-	grep "browser_download_url.*linux.*64.*tar" |
-	sed 1q |
-	cut -d'"' -f4 |
-	wget -q -i - -O "$tmp_tarball"
+make install
 
-install_location="$GIT_REPOS_DIR"
-
-if [ -d "$install_location/neovim" ]; then
-    echo "Removing an old install of neovim."
-    rm -rf "$install_location/neovim"
-    rm "$HOME/.local/bin/nvim"
-fi
-
-echo "Uncompressing it to $install_location."
-tar xf "$tmp_tarball" -C "$install_location"
-mv "$install_location/nvim-linux64" "$install_location/neovim"
-echo "Making $install_location/neovim/bin/nvim link in $HOME/.local/bin/ ."
-ln -s "$install_location/neovim/bin/nvim" "$HOME/.local/bin"
-exit
