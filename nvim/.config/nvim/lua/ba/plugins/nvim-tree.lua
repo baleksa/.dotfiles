@@ -1,5 +1,5 @@
--- disable netrw at the very start of your init.lua (strongly advised)
-vim.g.loaded = 1
+-- disable netrw (strongly advised)
+vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- Needed to fix nvim-tree openning on the right side
@@ -10,8 +10,7 @@ vim.api.nvim_set_keymap("n", "<leader>h", ":NvimTreeToggle<CR>", { noremap = tru
 -- Open file explorer and position cursor on file thats opened
 vim.api.nvim_set_keymap("n", "<leader>ff", ":NvimTreeFindFile<CR>", { noremap = true, silent = true })
 
--- Autoclose is turned off because it doesn't work nicely with other plugins and
--- features
+-- Autoclose is turned off because it doesn't work nicely with other plugins and features
 -- vim.api.nvim_create_autocmd("BufEnter", {
 --   group = vim.api.nvim_create_augroup("NvimTreeClose", {clear = true}),
 --   pattern = "NvimTree_*",
@@ -65,6 +64,7 @@ end
 
 require("nvim-tree").setup({ -- Call setup function
 	hijack_cursor = true,
+	disable_netrw = true,
 	update_focused_file = {
 		enable = true,
 		update_cwd = true,

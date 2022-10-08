@@ -110,13 +110,15 @@ require("packer").startup(function()
 		end,
 	})
 
+	-- A File Explorer For Neovim Written In Lua
 	use({
-		"kyazdani42/nvim-tree.lua", -- A File Explorer For Neovim Written In Lua
+		"kyazdani42/nvim-tree.lua",
 		requires = {
-			"kyazdani42/nvim-web-devicons", -- optional, for file icon
+			"kyazdani42/nvim-web-devicons",
 		},
 		-- Don't use this before help and docs of the plugin gets better
-		-- tag = 'nightly'
+		--  Sat Oct  8 09:27:54 AM UTC 2022 It worked.
+		tag = 'nightly'
 	})
 
 	use("neovim/nvim-lspconfig") -- Collection of configurations for built-in LSP client
@@ -140,12 +142,12 @@ require("packer").startup(function()
 	-- use 'uga-rosa/cmp-dictionary' -- nvim-cmp dictionaries source
 
 	use({ -- Make non-lsp sources able to hook into its LSP client
-		'jose-elias-alvarez/null-ls.nvim',
+		"jose-elias-alvarez/null-ls.nvim",
 		-- commit = '76d0573fc159839a9c4e62a0ac4f1046845cdd50',
 		requires = { "nvim-lua/plenary.nvim" },
 	})
 
-	use({"L3MON4D3/LuaSnip"}) -- Snippets plugin
+	use({ "L3MON4D3/LuaSnip" }) -- Snippets plugin
 	use("rafamadriz/friendly-snippets") -- vscode snippets
 
 	use({ -- Priview markdown files in browser with auto scroll sync

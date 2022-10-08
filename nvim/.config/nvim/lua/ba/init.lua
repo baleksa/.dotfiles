@@ -4,6 +4,7 @@ require("ba.nvim-lsp")
 require("ba.diagnostic")
 require("ba.colorscheme")
 require("ba.keymaps")
+-- require("ba.netrw")
 
 local plugins = {
 	"telescope",
