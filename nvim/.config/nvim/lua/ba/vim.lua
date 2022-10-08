@@ -16,7 +16,8 @@ vim.opt.termguicolors = true -- Pretty much sure this is default but who gives a
 vim.opt.hlsearch = false -- Set highlight on search
 vim.opt.incsearch = true
 
-vim.opt.number = true -- Make line numbers default
+vim.opt.number = true
+vim.opt.rnu = true
 
 vim.opt.mouse = "a" -- Enable mouse mode
 
@@ -27,7 +28,7 @@ vim.opt.undofile = true -- Save undo history
 vim.opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
 vim.opt.smartcase = true
 
-vim.opt.updatetime = 100 -- Decrease update time
+vim.opt.updatetime = 50 -- Decrease update time
 
 vim.opt.signcolumn = "yes" -- Always show column next to the number column used for git and diagnostics sign
 
