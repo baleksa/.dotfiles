@@ -152,9 +152,16 @@ bindsym XF86AudioLowerVolume exec amixer sset Master 5%- | sed -En 's/.*\[([0-9]
 # Use XF86AudioPlay as mute
 bindsym XF86AudioPlay exec amixer sset Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' | head -1 > $WOBSOCK
 
-# Use XF86AudioNext and Prev to change brightness
-bindsym XF86AudioNext exec light -A 5 && light -G | cut -d'.' -f1 > $WOBSOCK
+# On this laptop XF86brightness keys change brightness by default using builtin
+# way that works without any aditional bindings. Two lines below add bindings to
+# these keys which will show progress bar to signal brightness level after
+# changing it
+bindsym XF86MonBrightnessUp exec light -G | cut -d'.' -f1 > $WOBSOCK
+bindsym XF86MonBrightnessDown exec light -G | cut -d'.' -f1 > $WOBSOCK
+
+# Use XF86AudioNext and Prev to change brightness also
 bindsym XF86AudioPrev exec light -U 5 && light -G | cut -d'.' -f1 > $WOBSOCK
+bindsym XF86AudioNext exec light -A 5 && light -G | cut -d'.' -f1 > $WOBSOCK
 
 # Script that switches audio output between analog and hdmi
 bindsym XF86AudioStop exec switch_audio
