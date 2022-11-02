@@ -4,6 +4,9 @@ HISTFILE="$ZDOTDIR/.zsh_history"
 HISTSIZE=1000000
 SAVEHIST=1000000
 
+# Add completion folder to fpath
+[ -d $ZDOTDIR/completion ] && fpath+="$ZDOTDIR/completion/"
+
 # some useful options (man zshoptions)
 setopt autocd extendedglob nomatch menucomplete
 setopt interactive_comments
@@ -62,8 +65,6 @@ safe_source "$ZSH_AUTOPAIR_DIR/autopair.zsh"
 autopair-init
 
 
-# Add completion folder to fpath
-[ -d $ZDOTDIR/completion ] && fpath+="$ZDOTDIR/completion/"
 
 
 # Key-bindings
