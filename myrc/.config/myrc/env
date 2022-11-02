@@ -35,3 +35,11 @@ export VOIDNSUNDO_BIN=/usr/local/bin/voidnsundo
 
 export STARDICT_DATA_DIR=~/.config/stardict
 export SDCV_PAGER="less -ri"
+
+export BEMENU_BACKEND="wayland"
+
+export TERMINAL="footclient"
+export BROWSER="firefox-wayland"
+export DOC_READER="sway_zathura_open"
+
+export SWAY_SCRIPTS="$HOME/.config/sway/scripts"

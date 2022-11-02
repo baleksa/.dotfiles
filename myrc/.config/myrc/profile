@@ -1,7 +1,5 @@
 #!/bin/sh
 # My .profile called from mathing profile file of shell I am using
 
-udiskie &
-
 . "$MYRC_DIR/start_sway"
 
