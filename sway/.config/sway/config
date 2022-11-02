@@ -25,16 +25,8 @@ set $sway_scripts_dir $XDG_CONFIG_HOME/sway/scripts
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window 
 # can be opened on the original workspace that the command was run on.
-set $menu bemenu-run -p "run:" -i -w -n --fn "font pango:monospace Medium 12" | xargs swaymsg exec --
-
-
-# If you run apps that need dbus then you need to run this
-# command so env vars would be visible to dbus and so to the apps.
-exec \
-    dbus-update-activation-environment \
-    DISPLAY XAUTHORITY SWAYSOCK I3SOCK WAYLAND_DISPLAY XDG_SESSION_TYPE \
-    XDG_SESSION_DESKTOP XDG_CURRENT_DESKTOP XDG_RUNTIME_DIR
-
+# set $menu bemenu-run -p "run:" -i -w -n --fn "font pango:monospace Medium 12" | xargs swaymsg exec --
+set $menu tofi-run --fuzzy-match=true | xargs swaymsg exec --
 
 # Thin border and inner gaps
 default_border pixel 1
@@ -51,3 +43,8 @@ seat seat0 hide_cursor 3000
 
 include $HOME/.config/sway/config.d/*
 include /etc/sway/config.d/*
+
+# If you run apps that need dbus then you need to run this
+# command so env vars would be visible to dbus and so to the apps.
+exec hash dbus-update-activation-environment 2>/dev/null && \
+	dbus-update-activation-environment --all
