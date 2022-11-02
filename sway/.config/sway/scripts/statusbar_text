@@ -2,7 +2,7 @@
 
 current_kblayout=$(
 	swaymsg -t get_inputs |
-		jq -r '.[0] | select(.identifier == "0:0:Wireless_hotkeys") | .xkb_active_layout_name'
+		jq -r '.[] | select(.identifier == "0:0:Wireless_hotkeys") | .xkb_active_layout_name'
 )
 
 date=$(date +'%a %d-%m-%Y %R:%S')
