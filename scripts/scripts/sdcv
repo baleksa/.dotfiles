@@ -1,0 +1,4 @@
+#!/bin/sh
+
+word="$(fzf < /usr/share/dict/words)"
+/bin/sdcv --color "$word"

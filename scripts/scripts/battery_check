@@ -1,10 +1,11 @@
 #!/bin/sh
 
 while true; do
+	pidof sway || exit
 	perc="$(cat /sys/class/power_supply/BAT0/capacity)"
 	status="$(cat /sys/class/power_supply/BAT0/status)"
 
-	if [ "$status" = "Charging" ] && [ "$perc" -gt 80 ]; then
+	if { [ "$status" = "Charging" ] || [ "$status" = "Full" ]; } && [ "$perc" -gt 80 ]; then
 		swaynag -t warning -m "Disconnect charger please!"
 	elif [ "$status" = "Discharging" ] && [ "$perc" -lt 50 ]; then
 		swaynag -t warning -m "Connect charger please!"
