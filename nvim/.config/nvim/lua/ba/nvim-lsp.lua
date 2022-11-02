@@ -50,7 +50,7 @@ local on_attach = function(client, bufnr)
 end
 
 -- nvim-cmp supports additional completion capabilities
-local capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Enable the following language servers with the default setup
 local servers = {
