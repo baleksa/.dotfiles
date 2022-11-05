@@ -4,7 +4,7 @@ exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 
 # Bluelight filter
 exec gammastep -l 44.6:20.3 -t 6500:3400 -b 1.0:0.8
-exec $ sway-xkb-switcher --default-lang "English (US)"
+exec sway-xkb-switcher --default-lang "English (US)"
 # exec battery_check
 exec pipewire
 exec pipewire-pulse
