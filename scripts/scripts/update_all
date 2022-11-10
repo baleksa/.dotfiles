@@ -32,10 +32,12 @@ do_job "Updating sumneko lua language server:" "Done!" "Failed!" update_sumneko_
 
 do_job "Updating neovim to the HEAD github branch." "Done!" "Failed!" update_neovim
 
-do_job "Updating neovim packages with packer.nvim:" "\nDone!" "\nFailed!" nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+do_job "Updating neovim packages via packer.nvim:" "\nDone!" "\nFailed!" nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
-# You need to call TSUpdateSync to update syncroniously because async command TSUpdate doesn't work in scripts. I guess main process quits and take other threads and forks with it.
-do_job "Update all nvim-treesitter installed parsers:" "\nDone!" "\nFailed!" nvim --headless -c 'TSUpdateSync all' -c "quitall"
+# You need to call TSUpdateSync to update syncroniously because async command doesn't work in scripts. I guess main process quits and take other threads and forks with it.
+do_job "Updating all installed nvim-treesitter parsers:" "\nDone!" "\nFailed!" nvim --headless -c 'TSUpdateSync all' -c "quitall"
 
+
+do_job "Updating rust toolchain:" "\nDone!" "\nFailed!" rustup update
 
 
