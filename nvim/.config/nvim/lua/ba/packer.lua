@@ -1,15 +1,15 @@
+-- Bootstrap packer.nvim if it is not installed
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	vim.fn.execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
 end
 
-vim.cmd([[
-  augroup Packer
-    autocmd!
-    autocmd BufWritePost init.lua PackerCompile
-  augroup end
-]])
+-- Run PackerCompile after changing this file
+vim.api.nvim_create_autocmd("BufWritePost", {
+	pattern = "packer.lua",
+	command = "source <afile> | PackerCompile",
+	group = vim.api.nvim_create_augroup("PackerCompile", {}),
+})
 
 require("packer").init({ -- Make packer use a popup window
 	display = {
@@ -26,13 +26,16 @@ local use = require("packer").use
 require("packer").startup(function()
 	-- INSTALLED PACKAGES
 
-	use("wbthomason/packer.nvim") -- Package manager
+	use({ "wbthomason/packer.nvim" }) -- Package manager
 
 	-- Tpope's phenomenal plugins
-	use("tpope/vim-fugitive") -- Git commands in nvim
-	use("tpope/vim-rhubarb") -- Fugitive-companion to interact with github
-	use("tpope/vim-surround")
-	use("tpope/vim-repeat")
+	use({ "tpope/vim-fugitive" }) -- Git commands in nvim
+	use({ "tpope/vim-rhubarb" }) -- Fugitive-companion to interact with github
+	use({ "tpope/vim-surround" })
+	use({ "tpope/vim-repeat" })
+	-- use({ "tpope/vim-vinegar" })
+	
+	use({ "ap/vim-buftabline" })
 
 	-- Comment plugin written in Lua '
 	use({
@@ -61,6 +64,9 @@ require("packer").startup(function()
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
 	use({ "stevearc/dressing.nvim" })
+	use({ "rcarriga/nvim-notify" })
+
+	use({ "chrisgrieser/nvim-ghengis", requires = "stevearc/dressing.nvim" })
 
 	use({ "akinsho/toggleterm.nvim", branch = "main" }) -- Spawn multiple terminals in nvim with many orientations and send commands to them
 
@@ -118,8 +124,9 @@ require("packer").startup(function()
 		},
 		-- Don't use this before help and docs of the plugin gets better
 		--  Sat Oct  8 09:27:54 AM UTC 2022 It worked.
-		tag = 'nightly'
+		tag = "nightly",
 	})
+	use({ "prichrd/netrw.nvim" })
 
 	use("neovim/nvim-lspconfig") -- Collection of configurations for built-in LSP client
 

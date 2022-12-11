@@ -1,15 +1,17 @@
 require("ba.vim")
 require("ba.packer")
+require("ba.keymaps")
 require("ba.nvim-lsp")
 require("ba.diagnostic")
 require("ba.colorscheme")
-require("ba.keymaps")
--- require("ba.netrw")
+require("ba.autocmd")
+require("ba.netrw")
 
 local plugins = {
 	"telescope",
-	"bufferline",
-	"nvim-tree",
+	-- "buffeline",
+	-- "nvim-tree",
+	"netrw-nvim",
 	"comment",
 	"gitsigns",
 	"lualine",

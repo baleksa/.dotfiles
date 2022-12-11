@@ -1,3 +1,8 @@
+if vim.b.did_my_ftplugin then
+	return
+end
+vim.b.did_my_ftplugin = true
+
 -- If you started neovim within `~/dev/xy/project-1` this would resolve to `project-1`
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
