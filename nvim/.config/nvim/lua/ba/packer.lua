@@ -34,7 +34,7 @@ require("packer").startup(function()
 	use({ "tpope/vim-surround" })
 	use({ "tpope/vim-repeat" })
 	-- use({ "tpope/vim-vinegar" })
-	
+
 	use({ "ap/vim-buftabline" })
 
 	-- Comment plugin written in Lua '
@@ -70,9 +70,11 @@ require("packer").startup(function()
 
 	use({ "akinsho/toggleterm.nvim", branch = "main" }) -- Spawn multiple terminals in nvim with many orientations and send commands to them
 
-	use("navarasu/onedark.nvim") -- Onedark theme with treesitter support
-	use("tanvirtin/monokai.nvim") -- Monokai theme with treesitter support
-	use("shaunsingh/moonlight.nvim") -- Moonlight theme with treesitter support
+	-- Colorschemes
+	use("navarasu/onedark.nvim")
+	use("tanvirtin/monokai.nvim")
+	use("shaunsingh/moonlight.nvim")
+	use({ "nyoom-engineering/oxocarbon.nvim" })
 
 	use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }) -- Fast and simple statusline written in lua
 	use("lukas-reineke/indent-blankline.nvim") -- Add indentation guides even on blank lines
