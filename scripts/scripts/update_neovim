@@ -12,12 +12,15 @@ while true; do
 done
 
 cd "$GIT_REPOS_DIR/neovim" || exit
+
 if [ "$(git pull)" = "Already up to date." ]; then
 	echo "Repository is already up to date."
 	exit 0
 fi
 
-make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local"
+rm -rf /home/baleksa/.local/share/nvim/runtime && echo "Removed old VIMRUNTIME"
+make distclean && echo "Cleaned build dirs."
+make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local" && echo "Built nvim."
 
-make install
+make install && echo "Installed nvim."
 
