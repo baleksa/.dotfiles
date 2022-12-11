@@ -8,7 +8,7 @@ vim.opt.splitright = true
 -- Open file explorer
 vim.keymap.set("n", "-", "<cmd>NvimTreeToggle<CR>", { silent = true })
 -- Open file explorer and position cursor on file thats opened
-vim.api.nvim_set_keymap("n", "<leader>ff", ":NvimTreeFindFile<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>-", "<cmd>NvimTreeFindFile<CR>", { silent = true })
 
 -- Autoclose is turned off because it doesn't work nicely with other plugins and features
 -- vim.api.nvim_create_autocmd("BufEnter", {
