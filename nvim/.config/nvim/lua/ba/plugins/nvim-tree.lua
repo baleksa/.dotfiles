@@ -6,7 +6,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.splitright = true
 
 -- Open file explorer
-vim.api.nvim_set_keymap("n", "<leader>h", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "-", "<cmd>NvimTreeToggle<CR>", { silent = true })
 -- Open file explorer and position cursor on file thats opened
 vim.api.nvim_set_keymap("n", "<leader>ff", ":NvimTreeFindFile<CR>", { noremap = true, silent = true })
 
