@@ -10,8 +10,8 @@ require("ba.netrw")
 local plugins = {
 	"telescope",
 	-- "buffeline",
-	-- "nvim-tree",
-	"netrw-nvim",
+	"nvim-tree",
+	-- "netrw-nvim",
 	"comment",
 	"gitsigns",
 	"lualine",
