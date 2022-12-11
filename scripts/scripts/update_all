@@ -40,4 +40,6 @@ do_job "Updating all installed nvim-treesitter parsers:" "\nDone!" "\nFailed!" n
 
 do_job "Updating rust toolchain:" "\nDone!" "\nFailed!" rustup update
 
+do_job "Updating gopls:" "\nDone!" "\nFailed!" go install golang.org/x/tools/gopls@latest
+
 
