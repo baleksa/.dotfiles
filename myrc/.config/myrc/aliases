@@ -4,11 +4,11 @@ alias f='zi'
 
 alias g='lazygit'
 
-alias ec='nvim "$(fd -LH . /home/baleksa/.config | fzf || .)"'
-alias nvimrc='nvim ~/.config/nvim/'
-alias zshrc='nvim ~/.config/zsh/'
-alias swayrc='nvim ~/.config/sway'
-alias mrc='nvim ~/.config/myrc'
+alias ec='nvim "$({fd -LH . /home/baleksa/.config | fzf} || /home/baleksa/.config)"'
+alias nvimrc='find ~/.config/nvim/ -type f | fzf | xargs nvim'
+alias zshrc='find ~/.config/zsh/ -type f | fzf | xargs nvim'
+alias swayrc='find ~/.config/sway/ -type f | fzf | xargs nvim'
+alias mrc='find ~/.config/myrc/ -type f | fzf | xargs nvim'
 
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
@@ -26,9 +26,9 @@ alias free='free -m' # show sizes in MB
 
 # get top process eating memory
 alias psmem='ps auxf | sort -nr -k 4 | head -5'
-
 # get top process eating cpu ##
 alias pscpu='ps auxf | sort -nr -k 3 | head -5'
+alias p='ps aux | grep '
 
 alias luamake=/home/baleksa/repositories/lua-language-server/3rd/luamake/luamake
 
@@ -41,23 +41,31 @@ alias gp="git push"
 alias gd="git diff"
 
 alias ls='ls --color=auto'
-alias pip='pip3'
 alias la='ls -a'
 alias ll='ls -la'
+
+alias pip='pip3'
+
 alias xqr='xbps-query -Rs'
 alias xr='sudo xbps-remove'
+
 alias luamake='/home/baleksa/Repositories/lua-language-server/3rd/luamake/luamake'
+
 alias clangse='clang -Wall -g3 -Werror -pedantic -std=c11'
 alias c='clang -Wall -g3 -Werror -pedantic -std=c11'
 alias c++='clang++ -Wall -g3 -Werror -pedantic -std=c++11'
+
 alias t='todo.sh -d ~/.config/todo/todo.conf'
+
 alias es='edit_script'
 alias en='edit_note'
+
 alias u='update_all'
+
 alias d='sdcv --color'
+
 alias st='sync_todo'
 alias stc='rclone bisync gdrive_void_hpi5:todo /home/baleksa/Documents/todo --exclude "todo.txt.bak" --exclude "report.txt"'
-alias p='ps aux | grep '
 
 alias reboot='sudo reboot'
 alias poweroff='sudo poweroff'
