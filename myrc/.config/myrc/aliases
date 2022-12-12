@@ -1,14 +1,11 @@
 #!/bin/sh
 
-alias f='zi'
-
-alias g='lazygit'
-
-alias ec='nvim "$({fd -LH . /home/baleksa/.config | fzf} || /home/baleksa/.config)"'
-alias nvimrc='find ~/.config/nvim/ -type f | fzf | xargs nvim'
-alias zshrc='find ~/.config/zsh/ -type f | fzf | xargs nvim'
-alias swayrc='find ~/.config/sway/ -type f | fzf | xargs nvim'
-alias mrc='find ~/.config/myrc/ -type f | fzf | xargs nvim'
+# shellcheck disable=2154
+alias ec='file="$(fd -LH . /home/baleksa/.config | fzf)"; nvim ${file:-/home/baleksa/.config}'
+alias nvimrc='file="$(fd -LH . /home/baleksa/.config/nvim | fzf)"; nvim ${file:-/home/baleksa/.config/nvim}'
+alias zshrc='file="$(fd -LH . /home/baleksa/.config/zsh | fzf)"; nvim ${file:-/home/baleksa/.config/zsh}'
+alias swayrc='file="$(fd -LH . /home/baleksa/.config/sway | fzf)"; nvim ${file:-/home/baleksa/.config/sway}'
+alias mrc='file="$(fd -LH . /home/baleksa/.config/myrc | fzf)"; nvim ${file:-/home/baleksa/.config/myrc}'
 
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
@@ -32,6 +29,7 @@ alias p='ps aux | grep '
 
 alias luamake=/home/baleksa/repositories/lua-language-server/3rd/luamake/luamake
 
+alias g='lazygit'
 alias m="git checkout main"
 alias s="git checkout stable"
 alias gc="git commit"
@@ -39,6 +37,8 @@ alias ga="git add"
 alias gs="git status"
 alias gp="git push"
 alias gd="git diff"
+
+alias f='zi'
 
 alias ls='ls --color=auto'
 alias la='ls -a'
