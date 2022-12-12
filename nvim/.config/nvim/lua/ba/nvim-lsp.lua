@@ -83,18 +83,20 @@ nvim_lsp.kotlin_language_server.setup({
 	},
 })
 
-nvim_lsp.clangd.setup({
-	cmd = {
-		"clangd",
-		"--background-index",
-		"--suggest-missing-includes",
-		"--clang-tidy",
-		"--header-insertion=iwyu",
+require("clangd_extensions").setup({
+	server = {
+		cmd = {
+			"clangd",
+			"--background-index",
+			"--suggest-missing-includes",
+			"--clang-tidy",
+			"--header-insertion=iwyu",
+		},
+		on_attach = on_attach,
+		capabilities = capabilities,
 	},
-
-	on_attach = on_attach,
-	capabilities = capabilities,
 })
+-- require("clangd_extensions").setup()
 
 -- Enable function signature popup helper while in insert mode
 require("lsp_signature").setup({
