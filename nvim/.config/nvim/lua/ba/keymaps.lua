@@ -33,8 +33,8 @@ vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
-vim.keymap.set("n", "<leader>l", ":bnext<CR>", opts)
-vim.keymap.set("n", "<leader>h", ":bprevious<CR>", opts)
+vim.keymap.set("n", "<A-l>", "<cmd>bnext<CR>", opts)
+vim.keymap.set("n", "<A-h>", "<cmd>bprevious<CR>", opts)
 
 -- Stay in indent mode
 vim.keymap.set("v", "<", "<gv", opts)
