@@ -84,6 +84,11 @@ cmp.setup({
 		{ name = "path" },
 		-- { name = 'dictionary', keyword_length = 2, },
 	},
+	sorting = {
+		comparators = {
+			require("clangd_extensions.cmp_scores"),
+		},
+	},
 	fields = { "kind", "abbr" },
 	formatting = {
 		format = function(entry, vim_item)
@@ -103,7 +108,8 @@ cmp.setup({
 	},
 	window = {
 		documentation = {
-			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			completion = cmp.config.window.bordered(),
+			documentation = cmp.config.window.bordered(),
 		},
 	},
 })
