@@ -48,4 +48,4 @@ ChangeTheme = function()
 end
 vim.api.nvim_set_keymap("n", "<leader>tc", "<CMD>lua ChangeTheme()<CR>", { noremap = true, silent = true })
 
-vim.cmd("highlight WinSeparator guibg=None") -- Crisp whiteline between windows
+-- vim.cmd("highlight WinSeparator guibg=None") -- Crisp whiteline between windows
