@@ -25,59 +25,44 @@ local function lsp_highlight_document(client) -- Highlight references of object 
 	end
 end
 
-local opts = { noremap = true, silent = true } -- Opts for a lots of mappings
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-	-- vim.api.nvim_buf_set_keymap(bufnr, 'i', '<C-k>', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	-- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(
-		bufnr,
-		"n",
-		"<leader>wl",
-		"<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-		opts
-	)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gR", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>d", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>dl", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(
-		bufnr,
-		"n",
-		"<leader>so",
-		[[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]],
-		opts
-	)
-	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "ff", "<cmd>Format<CR><cmd>w<CR>", opts)
 
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<A-o>", "<Cmd>lua require'jdtls'.organize_imports()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "crv", "<Cmd>lua require('jdtls').extract_variable()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "v", "crv", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "crc", "<Cmd>lua require('jdtls').extract_constant()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "v", "crc", "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "v", "crm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
+	local bufopts = { noremap = true, silent = true, buffer = bufnr }
+	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+	-- vim.keymap.set('i', '<C-k>', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+	-- vim.keymap.set('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+	vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+	vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+	vim.keymap.set("n", "<leader>wl", function()
+		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+	end, bufopts)
+	vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
+	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
+	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set("n", "<leader>so", require("telescope.builtin").lsp_document_symbols, bufopts)
+	vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, bufopts)
+
+	vim.keymap.set("n", "<A-o>", require'jdtls'.organize_imports, bufopts)
+	vim.keymap.set("n", "crv", require('jdtls').extract_variable, bufopts)
+	vim.keymap.set("v", "crv", function() require('jdtls').extract_variable(true) end, bufopts)
+	vim.keymap.set("n", "crc", require('jdtls').extract_constant, bufopts)
+	vim.keymap.set("v", "crc", function() require('jdtls').extract_constant(true) end, bufopts)
+	vim.keymap.set("v", "crm", function() require('jdtls').extract_method(true) end, bufopts)
 
 	require("lsp_signature").on_attach()
-	lsp_highlight_document(_) -- Add function to highlight
+
+	lsp_highlight_document(client)
+
 	require("jdtls.setup").add_commands()
 end
 
 -- nvim-cmp supports additional completion capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
 	-- The command that starts the language server
