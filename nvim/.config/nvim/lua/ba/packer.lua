@@ -189,4 +189,5 @@ require("packer").startup(function()
 	-- Extensions for the built-in Language Server Protocol support in
 	-- Neovim (>= 0.6.0) for eclipse.jdt.ls.
 	use("mfussenegger/nvim-jdtls")
+	use("nvim-tree/nvim-web-devicons")
 end)
