@@ -131,6 +131,7 @@ require("packer").startup(function()
 	use({ "prichrd/netrw.nvim" })
 
 	use("neovim/nvim-lspconfig") -- Collection of configurations for built-in LSP client
+	use("https://git.sr.ht/~p00f/clangd_extensions.nvim")
 
 	use("mfussenegger/nvim-dap") -- Debug adapter Protocol client implementation
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
