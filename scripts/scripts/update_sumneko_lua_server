@@ -17,7 +17,7 @@ server_location="$GIT_REPOS_DIR/lua-language-server"
 
 if [ -d "$server_location" ]; then
 	installed_version=$(
-		head -3 "$server_location/changelog.md" | grep '##' | sed -E 's/[^0-9]+?//'
+		head -4 "$server_location/changelog.md" | grep '##' | sed -E 's/[^0-9]+?//'
 	)
 else
         mkdir "$server_location"
@@ -41,4 +41,5 @@ curl -s https://api.github.com/repos/sumneko/lua-language-server/releases/latest
 
 echo "Uncompressing it to $server_location."
 tar xf "$server_tarball" -C "$server_location"
+ln -s "$GIT_REPOS_DIR/lua-language-server/bin/lua-language-server" ~/.local/bin
 exit
