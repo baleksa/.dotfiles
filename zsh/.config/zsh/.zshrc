@@ -7,6 +7,7 @@ SAVEHIST=1000000
 # Add completion folder to fpath
 [ -d $ZDOTDIR/completion ] && fpath+="$ZDOTDIR/completion/"
 
+
 # some useful options (man zshoptions)
 setopt autocd extendedglob nomatch menucomplete
 setopt interactive_comments
@@ -15,7 +16,6 @@ zle_highlight=('paste:none')
 
 # beeping is annoying
 unsetopt BEEP
-
 
 # completions
 autoload -Uz compinit
@@ -33,6 +33,8 @@ autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
+autoload -Uz add-zsh-hook
+
 # Colors
 autoload -Uz colors && colors
 
@@ -44,6 +46,8 @@ safe_source "$ZDOTDIR/zsh-exports"
 safe_source "$ZDOTDIR/zsh-vim-mode"
 safe_source "$ZDOTDIR/zsh-aliases"
 
+# Source additional organized into files in $ZDOTDIR/conf.d
+[ -d $ZDOTDIR/conf.d ] && source $ZDOTDIR/conf.d/*
 
 # PLUGINS
 #
