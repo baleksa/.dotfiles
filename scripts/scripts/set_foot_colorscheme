@@ -1,0 +1,5 @@
+#!/bin/sh
+
+foot_conf_dir=~/.config/foot
+sed -i '/\[colors\]/q' "$foot_conf_dir/foot.ini"
+cat "$(find $foot_conf_dir/colorschemes -type f | fzf)" >> ~/.config/foot/foot.ini
