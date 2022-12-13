@@ -107,10 +107,10 @@ require("lsp_signature").setup({
 })
 
 -- Lua server
-local sumneko_root_path = os.getenv("GIT_REPOS_DIR") .. "/lua-language-server"
-local sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"
+-- local sumneko_root_path = os.getenv("GIT_REPOS_DIR") .. "/lua-language-server"
+-- local sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"
 nvim_lsp.sumneko_lua.setup({
-	cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
+	-- cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {
@@ -119,7 +119,7 @@ nvim_lsp.sumneko_lua.setup({
 				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
 				version = "LuaJIT",
 				-- Setup your lua path
-				path = vim.split(package.path, ";"),
+				-- path = vim.split(package.path, ";"),
 			},
 			diagnostics = {
 				-- Get the language server to recognize the `vim` global
