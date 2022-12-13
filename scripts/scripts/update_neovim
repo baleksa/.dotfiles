@@ -14,7 +14,7 @@ done
 cd "$GIT_REPOS_DIR/neovim" || exit
 
 if [ "$(git pull)" = "Already up to date." ]; then
-	echo "Repository is already up to date."
+	echo "Neovim is up-to-date."
 	exit 0
 fi
 

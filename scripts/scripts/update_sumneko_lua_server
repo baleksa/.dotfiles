@@ -25,7 +25,8 @@ else
 fi
 
 if [ "$installed_version" = "$latest_version" ]; then
-	echo "The latest $latest_version release of sumneko lua-language-server is already installed!"
+	echo "Sumneko lua-language-server is up-to-date."
+	echo "The latest $latest_version is already installed!"
 	exit 0
 else
 	printf "Installed release is %s, latest release is %s.\n" "$installed_version" "$latest_version"
