@@ -71,10 +71,13 @@ require("packer").startup(function()
 	use({ "akinsho/toggleterm.nvim", branch = "main" }) -- Spawn multiple terminals in nvim with many orientations and send commands to them
 
 	-- Colorschemes
-	use("navarasu/onedark.nvim")
+	-- use("navarasu/onedark.nvim")
 	use("tanvirtin/monokai.nvim")
 	use("shaunsingh/moonlight.nvim")
 	use({ "nyoom-engineering/oxocarbon.nvim" })
+	use("sainnhe/everforest")
+	use("sainnhe/gruvbox-material")
+	use("ishan9299/nvim-solarized-lua")
 
 	use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }) -- Fast and simple statusline written in lua
 	use("lukas-reineke/indent-blankline.nvim") -- Add indentation guides even on blank lines
