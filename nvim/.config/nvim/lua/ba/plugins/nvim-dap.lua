@@ -18,14 +18,14 @@ require("nvim-dap-virtual-text").setup {
 	-- virt_text_win_col = 70
 }
 
-require("dap-python").setup("~/repositories/pyvirtualenvs/debugpy/bin/python")
-table.insert(require("dap").configurations.python, {
-	python = "/bin/python",
-	type = "python",
-	request = "launch",
-	name = "Lauch with global python install, without virtualenv",
-	program = "${file}",
-})
+-- require("dap-python").setup("~/repositories/pyvirtualenvs/debugpy/bin/python")
+-- table.insert(require("dap").configurations.python, {
+-- 	python = "/bin/python",
+-- 	type = "python",
+-- 	request = "launch",
+-- 	name = "Lauch with global python install, without virtualenv",
+-- 	program = "${file}",
+-- })
 
 -- Setup nvim-dap
 
