@@ -28,7 +28,7 @@ colored_echo() {
 
 do_job "Updating xbps packages:" "Done!" "Failed!" xi -Su
 
-do_job "Updating sumneko lua language server:" "Done!" "Failed!" update_sumneko_lua_server
+# do_job "Updating sumneko lua language server:" "Done!" "Failed!" update_sumneko_lua_server
 
 do_job "Updating neovim to the HEAD github branch." "Done!" "Failed!" update_neovim
 
