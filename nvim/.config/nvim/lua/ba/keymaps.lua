@@ -17,7 +17,16 @@ vim.g.maplocalleader = " "
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
 
---Close buffer with <leader>q
+-- Easier +" yanking
+vim.keymap.set("v", "<leader>y", "\"+y")
+vim.keymap.set("n", "<leader>Y", "\"+yg_")
+vim.keymap.set("n", "<leader>y", "\"+y")
+-- and pasting
+vim.keymap.set("n", "<leader>p", "\"+p")
+vim.keymap.set("n", "<leader>P", "\"+P")
+vim.keymap.set("v", "<leader>p", "\"+p")
+vim.keymap.set("v", "<leader>P", "\"+P")
+
 vim.keymap.set("n", "<leader>q", "<cmd>bdelete<cr>")
 
 -- Easier window navigation
@@ -33,8 +42,8 @@ vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
-vim.keymap.set("n", "<A-l>", "<cmd>bnext<CR>", opts)
-vim.keymap.set("n", "<A-h>", "<cmd>bprevious<CR>", opts)
+vim.keymap.set("n", "]b", "<cmd>bnext<CR>", opts)
+vim.keymap.set("n", "[b", "<cmd>bprevious<CR>", opts)
 
 -- Stay in indent mode
 vim.keymap.set("v", "<", "<gv", opts)
