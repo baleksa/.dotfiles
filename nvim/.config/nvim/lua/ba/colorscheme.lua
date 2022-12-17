@@ -1,51 +1,44 @@
+local default_colorscheme = "everforest_hard"
+local current_colorscheme = "everforest_hard"
+
 local default_setup = function()
 	vim.opt.background = "light"
 end
-local default_colorscheme = "everforest"
-
 local Colorschemes = {
 	oxocarbon = function()
 		vim.cmd.colorscheme("oxocarbon")
 	end,
-	everforest = function()
-		vim.g.everforest_background = "soft"
+	everforest_hard = function()
+		vim.g.everforest_background = "hard"
 		vim.g.everforest_better_performance = 1
+		vim.g.everforest_disable_italic_comment = 1
+		vim.g.everforest_enable_italic = 0
 		vim.cmd.colorscheme("everforest")
 		require("lualine").setup({
 			options = {
 				theme = "everforest",
 			},
 		})
+		current_colorscheme = "everforest_hard"
 	end,
-	onedark = function()
-		require("onedark").setup({ -- Set colorcheme options
-			style = "deep",
-			code_style = {
-				comments = "none",
-			},
-		})
-		require("onedark").load()
-		require("lualine").setup({ options = { theme = "onedark" } })
-		-- Fix color of one rainbow parentheses which wasn't blending nicely with
-		-- OneDark colorscheme
-		vim.cmd("hi rainbowcol1 guifg=#ffffff")
-
-		-- Set color for filenames of unstaged files in nvim-tree.lua to the current
-		-- theme's red color
-		local setNvimTreeGitDirtyHighlighColor = function()
-			local red = require("onedark.colors").red
-			vim.cmd("highlight NvimTreeGitDirty guifg=" .. red)
-		end
-		setNvimTreeGitDirtyHighlighColor()
-		vim.api.nvim_create_autocmd("ColorScheme", { pattern = "onedark", callback = setNvimTreeGitDirtyHighlighColor })
+	rose_pine = function()
+		vim.cmd.colorscheme("rose-pine")
+		current_colorscheme = "rose_pine"
+	end,
+	rose_pine_moon = function()
+		require("rose-pine").setup({ dark_variant = "moon" })
+		vim.cmd.colorscheme("rose-pine")
+		current_colorscheme = "rose_pine_moon"
 	end,
 	monokai = function()
 		require("monokai").setup()
 		require("lualine").setup({ options = { theme = "powerline" } })
+		current_colorscheme = "monokai"
 	end,
 	moonlight = function()
 		require("moonlight").set()
 		require("lualine").setup({ options = { theme = "moonlight" } })
+		current_colorscheme = "moonlight"
 	end,
 	gruvbox_original = function()
 		vim.g.gruvbox_material_background = "hard"
@@ -57,6 +50,7 @@ local Colorschemes = {
 				theme = "gruvbox-material",
 			},
 		})
+		current_colorscheme = "gruvbox_original"
 	end,
 	gruvbox_mix = function()
 		vim.g.gruvbox_material_background = "hard"
@@ -68,6 +62,7 @@ local Colorschemes = {
 				theme = "gruvbox-material",
 			},
 		})
+		current_colorscheme = "gruvbox_mix"
 	end,
 	gruvbox_material = function()
 		vim.g.gruvbox_material_background = "hard"
@@ -79,6 +74,7 @@ local Colorschemes = {
 				theme = "gruvbox-material",
 			},
 		})
+		current_colorscheme = "gruvbox-material"
 	end,
 }
 
@@ -87,7 +83,7 @@ for k, _ in pairs(Colorschemes) do
 	colorscheme_names[#colorscheme_names + 1] = k
 end
 
-local ChangeColorscheme = function()
+local changeColorscheme = function()
 	-- local opts = { require("telescope.themes").get_dropdown({}) }
 	local opts = {}
 	local pickers = require("telescope.pickers")
@@ -117,16 +113,17 @@ local ChangeColorscheme = function()
 		})
 		:find()
 end
-vim.keymap.set("n", "<leader>cc", ChangeColorscheme, { silent = true })
+vim.keymap.set("n", "<leader>cc", changeColorscheme, { silent = true })
 
 local swap_background = function()
----@diagnostic disable-next-line: undefined-field
+	---@diagnostic disable-next-line: undefined-field
 	if vim.opt.background:get() == "light" then
 		vim.opt.background = "dark"
----@diagnostic disable-next-line: undefined-field
+		---@diagnostic disable-next-line: undefined-field
 	elseif vim.opt.background:get() == "dark" then
 		vim.opt.background = "light"
 	end
+	Colorschemes[current_colorscheme]()
 end
 vim.keymap.set("n", "<leader>cbg", swap_background, { silent = true })
 
