@@ -19,14 +19,11 @@ require("packer").init({ -- Make packer use a popup window
 	},
 })
 
--- Uncomment this to fix fatal: Not possible to fast-forward, aborting :PackerUpdate error
--- require('packer').init({git = { subcommands = { update = 'pull --progress --rebase=true'}}})
-
 local use = require("packer").use
 require("packer").startup(function()
-	-- INSTALLED PACKAGES
+	use({ "wbthomason/packer.nvim" })
 
-	use({ "wbthomason/packer.nvim" }) -- Package manager
+	use({ "lewis6991/impatient.nvim" }) -- Speed up loading Lua modules
 
 	-- Tpope's phenomenal plugins
 	use({ "tpope/vim-fugitive" }) -- Git commands in nvim
@@ -35,12 +32,9 @@ require("packer").startup(function()
 	use({ "tpope/vim-repeat" })
 	-- use({ "tpope/vim-vinegar" })
 
-	use({ "ap/vim-buftabline" })
-
 	-- Comment plugin written in Lua '
 	use({
 		"numToStr/Comment.nvim",
-		-- commit = "0aaea32f27315e2a99ba4c12ab9def5cbb4842e4",
 		config = function()
 			require("Comment").setup()
 		end,
@@ -48,18 +42,63 @@ require("packer").startup(function()
 
 	use("ludovicchabant/vim-gutentags") -- Automatic tags management
 
-	use({ "akinsho/bufferline.nvim", branch = "main", requires = "kyazdani42/nvim-web-devicons" }) -- Powerful buffer plugin which shows all buffers in topline
+	-- use({ "ap/vim-buftabline" })
+	use({
+		"akinsho/bufferline.nvim",
+		-- tag = "v3.*",
+		branch = "main",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("bufferline").setup({
+				options = {
+					right_mouse_command = nil,
+					indicator = {
+						style = "none",
+					},
+					modified_icon = "[+]",
+					diagnostics = "nvim_lsp",
+					show_buffer_close_icons = false,
+					show_close_icon = false,
+					separator_style = { "", "" },
+					highlights = {
+						buffer_selected = { italic = false },
+						numbers_selected = { italic = false },
+						diagnostic_selected = { italic = false },
+						hint_selected = { italic = false },
+						hint_diagnostic_selected = { italic = false },
+						info_selected = { italic = false },
+						info_diagnostic_selected = { italic = false },
+						warning_selected = { italic = false },
+						warning_diagnostic_selected = { italic = false },
+						pick_selected = { italic = false },
+						pick_visible = { italic = false },
+						pick = { italic = false },
+					},
+					offsets = {
+						{
+							filetype = "NvimTree",
+							text = function()
+								return "cwd: " .. vim.fn.getcwd()
+							end,
+							highlight = "Directory",
+							separator = "",
+							text_align = "left",
+						},
+					},
+				},
+			})
+		end,
+	})
 
-	use("moll/vim-bbye") -- Don't close vim and dont lose window layout when closing buffers
+	-- Don't close vim and don't lose window layout when closing buffers
+	use("moll/vim-bbye")
 
 	-- UI to select things (files, grep results, open buffers...)
 	use({ "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
-
 	-- It sets vim.ui.select to telescope. That means for example that
 	-- neovim core stuff can fill the telescope picker. Example would
 	-- be lua vim.lsp.buf.code_action().
 	use({ "nvim-telescope/telescope-ui-select.nvim" })
-
 	-- Fzf algorithm in C too make telescope faster
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
@@ -70,16 +109,26 @@ require("packer").startup(function()
 
 	use({ "akinsho/toggleterm.nvim", branch = "main" }) -- Spawn multiple terminals in nvim with many orientations and send commands to them
 
+	use({
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
+		end,
+	})
+
+	---
 	-- Colorschemes
-	-- use("navarasu/onedark.nvim")
+	---
 	use("tanvirtin/monokai.nvim")
 	use("shaunsingh/moonlight.nvim")
 	use({ "nyoom-engineering/oxocarbon.nvim" })
 	use("sainnhe/everforest")
 	use("sainnhe/gruvbox-material")
 	use("ishan9299/nvim-solarized-lua")
+	use({ "rose-pine/neovim", as = "rose-pine" })
 
 	use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } }) -- Fast and simple statusline written in lua
+
 	use("lukas-reineke/indent-blankline.nvim") -- Add indentation guides even on blank lines
 
 	use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } }) -- Add git related info in the signs columns and popups
@@ -93,7 +142,7 @@ require("packer").startup(function()
 			require("spellsitter").setup()
 		end,
 	})
-	use("p00f/nvim-ts-rainbow") -- Color nested parentheses diferently for cleaner view
+	use("https://git.sr.ht/~p00f/nvim-ts-rainbow") -- Color nested parentheses diferently for cleaner view
 	use("JoosepAlviste/nvim-ts-context-commentstring") -- Comment embedded languages in a right way
 
 	use("windwp/nvim-autopairs") -- auto insert } after {<CR>
@@ -133,35 +182,7 @@ require("packer").startup(function()
 	})
 	use({ "prichrd/netrw.nvim" })
 
-	use("neovim/nvim-lspconfig") -- Collection of configurations for built-in LSP client
-	use("https://git.sr.ht/~p00f/clangd_extensions.nvim")
-
-	use("mfussenegger/nvim-dap") -- Debug adapter Protocol client implementation
-	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-	use("theHamsta/nvim-dap-virtual-text")
-	use("nvim-telescope/telescope-dap.nvim")
-	use("mfussenegger/nvim-dap-python")
-
-	use("ray-x/lsp_signature.nvim") -- Add function signature help while in insert mode
-
-	-- Completion plugin and its sources
-	use("hrsh7th/nvim-cmp") -- Autocompletion plugin
-	use("hrsh7th/cmp-nvim-lsp") -- nvim-cmp nvim-lsp completion source
-	use("hrsh7th/cmp-path") -- nvim-cmp filesystem paths completion source
-	use("hrsh7th/cmp-buffer") -- Words from current buffer completion source
-	use("hrsh7th/cmp-cmdline") -- Vim's command mode completion source
-	use("hrsh7th/cmp-nvim-lua") -- Neovim Lua API completion source
-	use("saadparwaiz1/cmp_luasnip") -- nvim-cmp luasnip completion source
-	-- use 'uga-rosa/cmp-dictionary' -- nvim-cmp dictionaries source
-
-	use({ -- Make non-lsp sources able to hook into its LSP client
-		"jose-elias-alvarez/null-ls.nvim",
-		-- commit = '76d0573fc159839a9c4e62a0ac4f1046845cdd50',
-		requires = { "nvim-lua/plenary.nvim" },
-	})
-
-	use({ "L3MON4D3/LuaSnip" }) -- Snippets plugin
-	use("rafamadriz/friendly-snippets") -- vscode snippets
+	-- use("ray-x/lsp_signature.nvim") -- Add function signature help while in insert mode
 
 	use({ -- Priview markdown files in browser with auto scroll sync
 		"iamcco/markdown-preview.nvim",
@@ -174,24 +195,48 @@ require("packer").startup(function()
 
 	use("Vimjas/vim-python-pep8-indent") -- Better python indent
 
-	-- Disabled because nvim-treesitter markdown highlighting works well now
-	-- use("ixru/nvim-markdown") -- Markdown highlighting and some other features
-
 	use("andymass/vim-matchup") -- More options to do on matching text and extends vim's %
 
 	use({
 		"folke/which-key.nvim",
 		config = function()
-			require("which-key").setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
+			require("which-key").setup({})
 		end,
 	})
 
-	-- Extensions for the built-in Language Server Protocol support in
-	-- Neovim (>= 0.6.0) for eclipse.jdt.ls.
-	use("mfussenegger/nvim-jdtls")
+	use({
+		"VonHeikemen/lsp-zero.nvim",
+		"neovim/nvim-lspconfig",
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+
+		-- Autocompletion
+		"hrsh7th/nvim-cmp",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-cmdline",
+		"saadparwaiz1/cmp_luasnip",
+		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-nvim-lua",
+
+		-- Snippets
+		"L3MON4D3/LuaSnip",
+		"rafamadriz/friendly-snippets",
+	})
+
+	use({
+		"jose-elias-alvarez/null-ls.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+	})
+
+	use("https://git.sr.ht/~p00f/clangd_extensions.nvim")
+	-- use("mfussenegger/nvim-jdtls")
+
+	use("mfussenegger/nvim-dap") -- Debug adapter Protocol client implementation
+	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+	use("theHamsta/nvim-dap-virtual-text")
+	use("nvim-telescope/telescope-dap.nvim")
+	-- use("mfussenegger/nvim-dap-python")
+
 	use("nvim-tree/nvim-web-devicons")
 end)
