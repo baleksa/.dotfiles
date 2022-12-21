@@ -1,4 +1,4 @@
-local file_exp = "nvim-tree" -- nvim_tree or netrw
+local file_exp = "nvim_tree" -- nvim_tree or netrw
 
 local file_explorers = {
 	nvim_tree = function()
