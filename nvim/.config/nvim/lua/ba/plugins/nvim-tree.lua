@@ -5,11 +5,6 @@ vim.g.loaded_netrwPlugin = 1
 -- Needed to fix nvim-tree openning on the right side
 vim.opt.splitright = true
 
--- Open file explorer
-vim.keymap.set("n", "-", "<cmd>NvimTreeToggle<CR>", { silent = true })
--- Open file explorer and position cursor on file thats opened
-vim.keymap.set("n", "<leader>-", "<cmd>NvimTreeFindFile<CR>", { silent = true })
-
 -- Autoclose is turned off because it doesn't work nicely with other plugins and features
 -- vim.api.nvim_create_autocmd("BufEnter", {
 --   group = vim.api.nvim_create_augroup("NvimTreeClose", {clear = true}),
@@ -65,9 +60,10 @@ end
 require("nvim-tree").setup({ -- Call setup function
 	hijack_cursor = true,
 	disable_netrw = true,
-	update_focused_file = {
-		enable = true,
-		update_cwd = true,
+	actions = {
+		change_dir = {
+			enable = true,
+		},
 	},
 	view = {
 		mappings = {
@@ -87,15 +83,17 @@ require("nvim-tree").setup({ -- Call setup function
 			enable = true,
 		},
 		icons = {
+			symlink_arrow = " -> ",
 			glyphs = {
+				bookmark = "▐",
+				folder = {
+					symlink_open = "",
+				},
 				git = {
 					unstaged = "x",
-					staged = "+",
-					unmerged = "",
-					renamed = "➜",
 					untracked = "?",
-					deleted = "",
-					ignored = "",
+					ignored = "",
+					renamed = "",
 				},
 			},
 			show = {
@@ -113,3 +111,5 @@ require("nvim-tree").setup({ -- Call setup function
 		},
 	},
 })
+-- Open file explorer
+vim.keymap.set("n", "-", "<cmd>NvimTreeToggle<CR>", { silent = true })
