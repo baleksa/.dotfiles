@@ -25,7 +25,7 @@ require("packer").startup(function()
 
 	use({ "lewis6991/impatient.nvim" }) -- Speed up loading Lua modules
 
-	-- Tpope's phenomenal plugins
+	-- tpope's phenomenal plugins
 	use({ "tpope/vim-fugitive" }) -- Git commands in nvim
 	use({ "tpope/vim-rhubarb" }) -- Fugitive-companion to interact with github
 	use({ "tpope/vim-surround" })
@@ -46,50 +46,11 @@ require("packer").startup(function()
 	use({
 		"akinsho/bufferline.nvim",
 		-- tag = "v3.*",
-		branch = "main",
+		branch = "dev",
 		requires = "kyazdani42/nvim-web-devicons",
-		config = function()
-			require("bufferline").setup({
-				options = {
-					right_mouse_command = nil,
-					indicator = {
-						style = "none",
-					},
-					modified_icon = "[+]",
-					diagnostics = "nvim_lsp",
-					show_buffer_close_icons = false,
-					show_close_icon = false,
-					separator_style = { "", "" },
-					highlights = {
-						buffer_selected = { italic = false },
-						numbers_selected = { italic = false },
-						diagnostic_selected = { italic = false },
-						hint_selected = { italic = false },
-						hint_diagnostic_selected = { italic = false },
-						info_selected = { italic = false },
-						info_diagnostic_selected = { italic = false },
-						warning_selected = { italic = false },
-						warning_diagnostic_selected = { italic = false },
-						pick_selected = { italic = false },
-						pick_visible = { italic = false },
-						pick = { italic = false },
-					},
-					offsets = {
-						{
-							filetype = "NvimTree",
-							text = function()
-								return "cwd: " .. vim.fn.getcwd()
-							end,
-							highlight = "Directory",
-							separator = "",
-							text_align = "left",
-						},
-					},
-				},
-			})
-		end,
 	})
 
+	-- use({ "karb94/neoscroll.nvim" })
 	-- Don't close vim and don't lose window layout when closing buffers
 	use("moll/vim-bbye")
 
@@ -204,6 +165,7 @@ require("packer").startup(function()
 		end,
 	})
 
+	-- Lsp, completion, null-ls, debugging
 	use({
 		"VonHeikemen/lsp-zero.nvim",
 		"neovim/nvim-lspconfig",
@@ -222,21 +184,30 @@ require("packer").startup(function()
 		-- Snippets
 		"L3MON4D3/LuaSnip",
 		"rafamadriz/friendly-snippets",
-	})
 
-	use({
+		-- null-ls
 		"jose-elias-alvarez/null-ls.nvim",
-		requires = { "nvim-lua/plenary.nvim" },
+		"jayp0521/mason-null-ls.nvim",
+
+		-- Debugging
+		"mfussenegger/nvim-dap",
+		"jayp0521/mason-nvim-dap.nvim",
 	})
-
+	-- Aditional lsp plugins
 	use("https://git.sr.ht/~p00f/clangd_extensions.nvim")
-	-- use("mfussenegger/nvim-jdtls")
+	use("mfussenegger/nvim-jdtls")
 
-	use("mfussenegger/nvim-dap") -- Debug adapter Protocol client implementation
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 	use("theHamsta/nvim-dap-virtual-text")
 	use("nvim-telescope/telescope-dap.nvim")
 	-- use("mfussenegger/nvim-dap-python")
 
-	use("nvim-tree/nvim-web-devicons")
+	use({
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup()
+		end,
+	})
+
+	use("DaikyXendo/nvim-material-icon")
 end)
