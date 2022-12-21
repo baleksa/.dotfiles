@@ -7,6 +7,7 @@ end
 local Colorschemes = {
 	oxocarbon = function()
 		vim.cmd.colorscheme("oxocarbon")
+		current_colorscheme = "oxocarbon"
 	end,
 	everforest_hard = function()
 		vim.g.everforest_background = "hard"
@@ -74,7 +75,7 @@ local Colorschemes = {
 				theme = "gruvbox-material",
 			},
 		})
-		current_colorscheme = "gruvbox-material"
+		current_colorscheme = "gruvbox_material"
 	end,
 }
 
