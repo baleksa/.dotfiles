@@ -17,10 +17,16 @@ vim.g.maplocalleader = " "
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
 
+-- Put the cursor at the center after some motions
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
 -- Easier +" yanking
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+yg_")
-vim.keymap.set("n", "<leader>y", "\"+y")
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>Y", '"+yg_')
+vim.keymap.set("n", "<leader>y", '"+y')
 -- and pasting
 vim.keymap.set("n", "<leader>p", "\"+p")
 vim.keymap.set("n", "<leader>P", "\"+P")
