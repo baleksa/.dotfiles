@@ -1,5 +1,4 @@
-local M = {
-}
+local M = {}
 
 function M.config()
 	vim.api.nvim_create_autocmd("FileType", { pattern = "netrw", command = "setl bufhidden=delete" })
