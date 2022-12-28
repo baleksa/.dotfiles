@@ -118,11 +118,21 @@ return {
 
 	-- use("ray-x/lsp_signature.nvim") -- Add function signature help while in insert mode
 
+	-- {
+	-- 	"iamcco/markdown-preview.nvim",
+	-- 	build = "cd app && npm install",
+	-- 	config = function()
+	-- 		vim.g.mkdp_filetypes = { "markdown" }
+	-- 	end,
+	-- 	ft = { "markdown" },
+	-- },
 	{
-		"iamcco/markdown-preview.nvim",
-		build = "cd app && npm install",
+		"toppair/peek.nvim",
+		build = "deno task --quiet build:fast",
 		config = function()
-			vim.g.mkdp_filetypes = { "markdown" }
+			require("peek").setup({ theme = "light" })
+			vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+			vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
 		end,
 		ft = { "markdown" },
 	},
@@ -147,4 +157,5 @@ return {
 		config = true,
 	},
 	{ "baleksa/simplebufline.nvim", dev = true },
+	{ "b0o/incline.nvim", config = true },
 }
