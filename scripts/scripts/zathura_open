@@ -1,5 +1,9 @@
 #!/bin/sh
 
-fd -tf -e pdf  -e epub . ~ | fzf --print0 | xargs -0 -I{} swaymsg exec zathura \"{}\"
+fd -tf 	-e pdf \
+	-e epub \
+	-e docx \
+	-e doc \
+	. ~ 	| fzf --print0 | xargs -0 -I{} swaymsg exec zaread \"{}\"
 
 
