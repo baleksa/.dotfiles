@@ -3,7 +3,8 @@ set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 
 # Bluelight filter
-exec gammastep -l 44.6:20.3 -t 6500:3400 -b 1.0:0.8
+# exec gammastep -l 44.6:20.3 -t 6500:3400 -b 1.0:0.8
+exec wlsunset -t3400 -T6500 -l44.7 -L20.3 -g1.0
 exec sway-xkb-switcher --default-lang "English (US)"
 # exec battery_check
 exec pipewire
