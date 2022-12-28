@@ -6,18 +6,18 @@ GREEN='\033[32m'
 NC='\033[0m' # No Color
 
 do_job() {
-    hello_msg="$1"
-    shift
-    bye_msg="$1"
-    shift
-    failed_msg="$1"
-    shift
-    colored_echo "$hello_msg" "$PURPLE"
-    if "$@"; then
-        colored_echo "$bye_msg" "$GREEN"
-    else
-        colored_echo "$failed_msg" "$RED"
-    fi
+	hello_msg="$1"
+	shift
+	bye_msg="$1"
+	shift
+	failed_msg="$1"
+	shift
+	colored_echo "$hello_msg" "$PURPLE"
+	if "$@"; then
+		colored_echo "$bye_msg" "$GREEN"
+	else
+		colored_echo "$failed_msg" "$RED"
+	fi
 }
 
 colored_echo() {
@@ -26,16 +26,25 @@ colored_echo() {
 	echo "${color}${msg}${NC}"
 }
 
-do_job "Updating xbps packages:" "Done!" "Failed!" xi -Su
+do_job "Updating xbps packages." "Done!" "Failed!" xi -Su
 
+#  Lua language server is handled by Mason in neovim.
 # do_job "Updating sumneko lua language server:" "Done!" "Failed!" update_sumneko_lua_server
 
 do_job "Updating neovim to the HEAD github branch." "Done!" "Failed!" update_neovim
 
-do_job "Updating neovim packages via packer.nvim:" "\nDone!" "\nFailed!" nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+# do_job "Updating neovim packages via packer.nvim." "\nDone!" "\nFailed!" \
+# 	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+do_job "Updating neovim packages via lazy.nvim." "\nDone!" "\nFailed!" \
+	nvim --headless "+Lazy! sync" +qa
 
 # You need to call TSUpdateSync to update syncroniously because async command doesn't work in scripts. I guess main process quits and take other threads and forks with it.
-do_job "Updating all installed nvim-treesitter parsers:" "\nDone!" "\nFailed!" nvim --headless -c 'TSUpdateSync all' -c "quitall"
+do_job "Updating all installed nvim-treesitter parsers." "\nDone!" "\nFailed!" \
+	nvim --headless -c 'TSUpdateSync all' -c "quitall"
 
+do_job "Updating all installed Mason packages." "\nDone!" "\nFailed!" \
+	nvim --headless \
+		-c 'autocmd User MasonUpdateAllComplete quitall' \
+		-c 'MasonUpdateAll'
 
 do_job "Updating rust toolchain:" "\nDone!" "\nFailed!" rustup update
