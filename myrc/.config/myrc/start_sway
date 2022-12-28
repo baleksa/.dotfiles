@@ -1,5 +1,6 @@
 #!/bin/sh
 
+export WLR_DRM_NO_MODIFIERS=1 # wluma needs this, but still doesn't work
 # Session
 export XDG_SESSION_TYPE=wayland
 export XDG_SESSION_DESKTOP=sway
