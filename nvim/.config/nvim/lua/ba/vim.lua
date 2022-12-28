@@ -15,6 +15,9 @@ vim.opt.autoindent = true
 -- vim.opt.spelloptions = "camel"
 -- vim.opt.spell = false -- Spellcheck
 
+vim.opt.splitbelow = true -- Put new windows below current
+vim.opt.splitright = true -- Put new windows right of current
+
 vim.opt.termguicolors = true -- Pretty much sure this is default but who gives a fuck
 
 vim.opt.hlsearch = false -- Set highlight on search
