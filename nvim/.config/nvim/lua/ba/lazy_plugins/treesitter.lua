@@ -8,7 +8,7 @@ local M = {
 
 function M.config()
 	require("nvim-treesitter.configs").setup({
-		-- ensure_installed = "all",
+		ensure_installed = "all",
 		matchup = { -- Enable match-up plugin to work with treesitter
 			enable = true,
 		},
@@ -28,9 +28,9 @@ function M.config()
 		},
 		highlight = {
 			enable = true, -- false will disable the whole extension
-			disable = {
-				"help",
-			},
+			-- disable = {
+			-- 	"help",
+			-- },
 		},
 		incremental_selection = {
 			enable = true,
@@ -43,7 +43,7 @@ function M.config()
 		},
 		indent = {
 			enable = true,
-			disable = { "python", "yaml" },
+			-- disable = { "python", "yaml" },
 		},
 		textobjects = {
 			select = {
