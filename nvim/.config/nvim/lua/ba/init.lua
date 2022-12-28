@@ -4,7 +4,6 @@ if use_lazy then
 	require("ba.vim")
 	require("ba.lazy")
 	require("ba.colorscheme")
-	require("ba.autocmd")
 else
 	require("impatient")
 	require("ba.packer")
