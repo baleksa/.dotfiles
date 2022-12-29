@@ -26,7 +26,7 @@ colored_echo() {
 	echo "${color}${msg}${NC}"
 }
 
-do_job "Updating xbps packages." "Done!" "Failed!" xi -Su
+do_job "Updating xbps packages." "Done!" "Failed!" xi -Syu
 
 #  Lua language server is handled by Mason in neovim.
 # do_job "Updating sumneko lua language server:" "Done!" "Failed!" update_sumneko_lua_server
