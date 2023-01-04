@@ -17,6 +17,9 @@ zle_highlight=('paste:none')
 # beeping is annoying
 unsetopt BEEP
 
+# Print unicode combined characters as a single glyph
+setopt combiningchars
+
 # completions
 autoload -Uz compinit
 zstyle ':completion:*' menu select
