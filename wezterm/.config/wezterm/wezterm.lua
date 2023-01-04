@@ -1,5 +1,9 @@
 local wezterm = require("wezterm")
-local select_and_open_url = wezterm.action.QuickSelectArgs({
+local act = wezterm.action
+---
+--- Actions
+---
+local select_and_open_url = act.QuickSelectArgs({
 	label = "open url",
 	patterns = {
 		[[https?://[\w./-]+]],
@@ -10,7 +14,9 @@ local select_and_open_url = wezterm.action.QuickSelectArgs({
 		wezterm.open_with(url)
 	end),
 })
-
+---
+--- Final configuration table
+---
 return {
 	font = wezterm.font("monospace"),
 	font_size = 16,
@@ -23,10 +29,9 @@ return {
 	},
 	hide_tab_bar_if_only_one_tab = true,
 	keys = {
-		{
-			key = "P",
-			mods = "CTRL",
-			action = select_and_open_url,
-		},
+		{ key = "P", mods = "CTRL|SHIFT", action = select_and_open_url },
+		{ key = "S", mods = "CTRL|SHIFT", action = act.ScrollToBottom },
+		{ key = "UpArrow", mods = "SHIFT", action = act.ScrollToPrompt(-1) },
+		{ key = "DownArrow", mods = "SHIFT", action = act.ScrollToPrompt(1) },
 	},
 }
