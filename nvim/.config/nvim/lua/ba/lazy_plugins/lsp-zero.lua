@@ -96,7 +96,6 @@ function M.config()
 		-- library = vim.api.nvim_get_runtime_file("", true),
 	})
 	lsp.setup_servers({
-		"bashls",
 		"gopls",
 		"kotlin_language_server",
 		"pylsp",
@@ -104,9 +103,31 @@ function M.config()
 		"rust_analyzer",
 		"sumneko_lua",
 		"vimls",
-		-- "clangd",
 	})
 	-- Add additional special conf to some servers
+	lsp.configure("bashls", {
+		filetypes = {
+			"sh",
+			"bash",
+			"zsh",
+			".bash_login",
+			".bash_logout",
+			".bash_profile",
+			".bashrc",
+			".profile",
+			".zshenv",
+			".zlogin",
+			".zlogout",
+			".zprofile",
+			".zshrc",
+			"APKBUILD",
+			"PKGBUILD",
+			"eclass",
+			"ebuild",
+			"bazelrc",
+			".bash_aliases",
+		},
+	})
 	lsp.configure(
 		"clangd",
 		vim.tbl_deep_extend(
@@ -193,7 +214,7 @@ function M.config()
 		},
 		automatic_setup = true,
 	})
-	mason_dap.setup_handlers({})
+
 	---
 	-- Misc
 	---
