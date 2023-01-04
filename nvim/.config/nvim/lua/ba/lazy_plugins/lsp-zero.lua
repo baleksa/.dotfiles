@@ -75,7 +75,7 @@ function M.config()
 		bind("n", "]d", vim.diagnostic.goto_next)
 		bind("n", "gl", vim.diagnostic.setloclist)
 
-		bind("n", "<leader>f", vim.lsp.buf.format)
+		bind("n", "<leader>f", lspbuf.format)
 	end
 	lsp.on_attach(common_on_attach)
 

@@ -1,5 +1,4 @@
 return {
-	-- { "lewis6991/impatient.nvim" }, -- Speed up loading Lua modules
 	{
 		"kyazdani42/nvim-web-devicons",
 		dependencies = { "DaikyXendo/nvim-material-icon" },
@@ -158,4 +157,10 @@ return {
 	},
 	{ "baleksa/simplebufline.nvim", dev = true },
 	{ "b0o/incline.nvim", config = true },
+	{
+		"RRethy/vim-illuminate",
+		config = function()
+			require("illuminate").configure()
+		end,
+	},
 }

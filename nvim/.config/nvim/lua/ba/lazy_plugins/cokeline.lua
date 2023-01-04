@@ -1,6 +1,6 @@
 local M = {
 	"noib3/nvim-cokeline",
-	requires = "kyazdani42/nvim-web-devicons", -- If you want devicons
+	dependencies = "kyazdani42/nvim-web-devicons", -- If you want devicons
 	cond = function() return vim.g.status_line == "cokeline" end,
 }
 
