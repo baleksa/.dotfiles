@@ -15,10 +15,6 @@ export PATH="$MYSCRIPTS_DIR:$HOME/.luarocks/bin:$HOME/.local/bin:$PATH:$ANDROID_
 
 # export XDG_RUNTIME_DIR=~/.run
 
-export EDITOR="nvim"
-# export TERMINAL="foot"
-# export BROWSER="firefox-wayland"
-# export DOC_READER="sway_zathura_open"
 
 export GIT_REPOS_DIR=~/repositories
 
@@ -38,7 +34,9 @@ export SDCV_PAGER="less -ri"
 
 export BEMENU_BACKEND="wayland"
 
-export TERMINAL="footclient"
+export EDITOR="nvim"
+export TERM="wezterm"
+export TERMINAL="wezterm"
 export BROWSER="firefox-wayland"
 export DOC_READER="sway_zathura_open"
 
