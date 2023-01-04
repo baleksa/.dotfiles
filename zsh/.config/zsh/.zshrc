@@ -5,7 +5,7 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # Add completion folder to fpath
-[ -d $ZDOTDIR/completion ] && fpath+="$ZDOTDIR/completion/"
+[ -d "$ZDOTDIR/completion" ] && fpath+="$ZDOTDIR/completion/"
 
 
 # some useful options (man zshoptions)
@@ -50,7 +50,7 @@ safe_source "$ZDOTDIR/zsh-vim-mode"
 safe_source "$ZDOTDIR/zsh-aliases"
 
 # Source additional organized into files in $ZDOTDIR/conf.d
-[ -d $ZDOTDIR/conf.d ] && source $ZDOTDIR/conf.d/*
+[ -d "$ZDOTDIR/conf.d" ] && source "$ZDOTDIR"/conf.d/*
 
 # PLUGINS
 #
@@ -66,7 +66,7 @@ safe_source "$ZSH_HISTORY_SUBSTRING_SEARCH"
 # Autopair plugin
 ZSH_AUTOPAIR_DIR="$GIT_REPOS_DIR/.zsh-autopair"
 if [[ ! -d "$ZSH_AUTOPAIR_DIR" ]]; then
-  git clone https://github.com/hlissner/zsh-autopair $ZSH_AUTOPAIR_DIR
+  git clone https://github.com/hlissner/zsh-autopair "$ZSH_AUTOPAIR_DIR"
 fi
 safe_source "$ZSH_AUTOPAIR_DIR/autopair.zsh"
 autopair-init
