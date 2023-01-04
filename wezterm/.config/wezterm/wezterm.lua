@@ -13,7 +13,7 @@ local select_and_open_url = wezterm.action.QuickSelectArgs({
 
 return {
 	font = wezterm.font("monospace"),
-	font_size = 18,
+	font_size = 16,
 	color_scheme_dirs = { "~/.config/wezterm/colors" },
 	color_scheme = "Everforest Light (Hard)",
 	unix_domains = {
