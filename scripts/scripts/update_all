@@ -42,9 +42,9 @@ do_job "Updating neovim packages via lazy.nvim." "\nDone!" "\nFailed!" \
 do_job "Updating all installed nvim-treesitter parsers." "\nDone!" "\nFailed!" \
 	nvim --headless -c 'TSUpdateSync all' -c "quitall"
 
-do_job "Updating all installed Mason packages." "\nDone!" "\nFailed!" \
-	nvim --headless \
-		-c 'autocmd User MasonUpdateAllComplete quitall' \
-		-c 'MasonUpdateAll'
+# do_job "Updating all installed Mason packages." "\nDone!" "\nFailed!" \
+# 	nvim --headless \
+# 		-c 'autocmd User MasonUpdateAllComplete quitall' \
+# 		-c 'MasonUpdateAll'
 
 do_job "Updating rust toolchain:" "\nDone!" "\nFailed!" rustup update
