@@ -19,7 +19,8 @@ local select_and_open_url = act.QuickSelectArgs({
 ---
 return {
 	font = wezterm.font("monospace"),
-	font_size = 16,
+	font_size = 12.0,
+	term = "wezterm",
 	color_scheme_dirs = { "~/.config/wezterm/colors" },
 	color_scheme = "Everforest Light (Hard)",
 	unix_domains = {
