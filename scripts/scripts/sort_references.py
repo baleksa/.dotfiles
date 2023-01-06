@@ -1,4 +1,12 @@
 #!/bin/env python3
+
 import fileinput
 
-print(*sorted([line.strip() for line in list(fileinput.input())]), sep="\n")
+
+def main():
+    refs = sorted((line.strip() for line in fileinput.input()))
+    print(*refs, sep="\n")
+
+
+if __name__ == "__main__":
+    main()
