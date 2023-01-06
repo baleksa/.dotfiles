@@ -98,13 +98,39 @@ function M.config()
 	lsp.setup_servers({
 		"gopls",
 		"kotlin_language_server",
-		"pylsp",
+		-- "pylsp",
 		"r_language_server",
 		"rust_analyzer",
 		"sumneko_lua",
 		"vimls",
 	})
 	-- Add additional special conf to some servers
+	lsp.configure("pylsp", {
+		settings = {
+			pylsp = {
+				plugins = {
+					black = {
+						enabled = true,
+						line_length = 80,
+					},
+					rope_autoimport = { enabled = true },
+					ruff = {
+						enabled = true,
+						executable = vim.fn.stdpath("data") .. "/mason/packages/python-lsp-server/venv/bin/ruff",
+						lineLength = 80,
+						select = {
+							"F",
+							"E",
+							"W",
+							"C",
+							"I",
+							-- "D",
+						},
+					},
+				},
+			},
+		},
+	})
 	lsp.configure("bashls", {
 		filetypes = {
 			"sh",
@@ -183,6 +209,7 @@ function M.config()
 		sources = {
 			-- Formatting
 			null_ls.builtins.formatting.stylua,
+			-- null_ls.builtins.formatting.black,
 			null_ls.builtins.formatting.prettier,
 			null_ls.builtins.formatting.shfmt,
 			null_ls.builtins.formatting.shellharden,
