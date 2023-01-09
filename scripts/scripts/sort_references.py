@@ -4,7 +4,7 @@ import fileinput
 
 
 def main():
-    refs = sorted((line.strip() for line in fileinput.input()))
+    refs = sorted(line.strip() for line in fileinput.input())
     print(*refs, sep="\n")
 
 
