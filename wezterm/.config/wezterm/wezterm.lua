@@ -18,7 +18,10 @@ local select_and_open_url = act.QuickSelectArgs({
 --- Final configuration table
 ---
 return {
-	font = wezterm.font("monospace"),
+	font = wezterm.font({
+		family = "monospace",
+		harfbuzz_features = { "ss02" },
+	}),
 	font_size = 12.0,
 	term = "wezterm",
 	color_scheme_dirs = { "~/.config/wezterm/colors" },
