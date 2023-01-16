@@ -1,2 +1,0 @@
-#!/bin/sh
-footclient -Tfootlauncher zathura_open
