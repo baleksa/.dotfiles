@@ -168,4 +168,5 @@ return {
 			})
 		end,
 	},
+	{"shortcuts/no-neck-pain.nvim"},
 }
