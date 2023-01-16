@@ -18,7 +18,7 @@ set $right l
 # Your preferred programs
 set $term wezterm
 set $browser $BROWSER
-set $doc_reader $DOC_READER
+# set $doc_reader $DOC_READER
 
 set $sway_scripts_dir $XDG_CONFIG_HOME/sway/scripts
 
