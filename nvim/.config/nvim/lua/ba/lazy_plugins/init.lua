@@ -160,7 +160,12 @@ return {
 	{
 		"RRethy/vim-illuminate",
 		config = function()
-			require("illuminate").configure()
+			require("illuminate").configure({
+				filetypes_denylist = {
+					"lir",
+					"fugitive",
+				},
+			})
 		end,
 	},
 }
