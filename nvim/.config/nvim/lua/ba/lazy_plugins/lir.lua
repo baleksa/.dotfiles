@@ -20,7 +20,9 @@ function M.config()
 	require("lir").setup({
 		show_hidden_files = false,
 		ignore = {}, -- { ".DS_Store" "node_modules" } etc.
-		devicons_enable = true,
+		devicons = {
+			enable = true,
+		},
 		mappings = {
 			["l"] = actions.edit,
 			["<C-s>"] = actions.split,
