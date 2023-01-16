@@ -12,7 +12,7 @@
     bindsym $mod+z exec zathura
 
     # Choose a document in $HOME and open it in zathura
-    bindsym $mod+Shift+z exec $doc_reader
+    bindsym $mod+Shift+z exec termlaunch zathura_open
 
     # Kill focused window
     bindsym $mod+Shift+q kill
