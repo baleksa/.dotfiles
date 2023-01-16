@@ -19,7 +19,11 @@ export PATH="$MYSCRIPTS_DIR:$HOME/.luarocks/bin:$HOME/.local/bin:$PATH:$ANDROID_
 export GIT_REPOS_DIR=~/repositories
 
 export FZF_DEFAULT_COMMAND='fd -H .'
+export FZF_DEFAULT_OPTS="--border=rounded
+         --color fg:-1,bg:-1,hl:#268bd2,fg+:#073642,bg+:#eee8d5,hl+:#268bd2
+         --color info:#b58900,prompt:#b58900,pointer:#002b36,marker:#002b36,spinner:#b58900"
 export FZF_CTRL_R_OPTS='--layout=reverse'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
