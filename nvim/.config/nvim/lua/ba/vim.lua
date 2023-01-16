@@ -45,7 +45,12 @@ vim.g.indent_blankline_filetype_exclude = { "help", "packer" }
 vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
 vim.g.indent_blankline_show_trailing_blankline_indent = false
 
-vim.opt.laststatus = 3 -- Set global statusbar.
+vim.o.laststatus = 3 -- Set global statusbar.
+-- Rign align statuscolumn and show git signes after line num
+vim.o.statuscolumn = "%=%r%s%C"
+
+-- Don't use this find better solution for changing cwd
+-- vim.o.autochdir = true 
 ---
 -- Keymaps
 ---
