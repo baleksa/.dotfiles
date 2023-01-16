@@ -30,13 +30,14 @@ local M = {
 		-- Aditional lsp plugins
 		{ url = "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
 		{ "mfussenegger/nvim-jdtls" },
+		"folke/neodev.nvim",
 	},
 }
 
 function M.config()
 	---
 	-- lsp-zero
-	--
+	---
 	local lsp = require("lsp-zero")
 	lsp.preset("manual-setup")
 	lsp.set_preferences({
@@ -92,9 +93,10 @@ function M.config()
 		"vimls",
 	})
 	-- Add neovim and plugins lua files to sumneko-lua
-	lsp.nvim_workspace({
-		-- library = vim.api.nvim_get_runtime_file("", true),
-	})
+	-- lsp.nvim_workspace({
+	-- 	-- library = vim.api.nvim_get_runtime_file("", true),
+	-- })
+	require('neodev').setup({})
 	lsp.setup_servers({
 		"gopls",
 		"kotlin_language_server",
