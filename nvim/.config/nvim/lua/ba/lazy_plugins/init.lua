@@ -169,4 +169,5 @@ return {
 		end,
 	},
 	{"shortcuts/no-neck-pain.nvim"},
+	{ 'RaafatTurki/hex.nvim', config = true },
 }
