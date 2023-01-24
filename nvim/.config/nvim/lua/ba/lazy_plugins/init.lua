@@ -80,7 +80,7 @@ return {
 	{
 		"akinsho/toggleterm.nvim",
 		branch = "main",
-		config = {
+		opts = {
 			open_mapping = [[<c-\>]],
 			autochdir = true,
 		},
@@ -155,7 +155,7 @@ return {
 		"j-hui/fidget.nvim",
 		config = true,
 	},
-	{ "baleksa/simplebufline.nvim", dev = true },
+	-- { "baleksa/simplebufline.nvim", dev = true },
 	{ "b0o/incline.nvim", config = true },
 	{
 		"RRethy/vim-illuminate",
