@@ -76,5 +76,5 @@
   "vim-rhubarb": { "branch": "master", "commit": "cad60fe382f3f501bbb28e113dfe8c0de6e77c75" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "which-key.nvim": { "branch": "main", "commit": "684e96c5e8477f1ee9b3f2e9a12d802fd12c5531" },
-  "zen-mode.nvim": { "branch": "main", "commit": "38a660094dd023176ed4d6ecb1fe028546717f78" }
+  "zen-mode.nvim": { "branch": "main", "commit": "5d8308ef39c14ecbd6850b56959094aa932285c6" }
 }
