@@ -18,17 +18,16 @@ return {
 	{ "sainnhe/gruvbox-material" },
 	{ "ishan9299/nvim-solarized-lua" },
 	{ "rose-pine/neovim", name = "rose-pine" },
+
 	-- tpope's phenomenal plugins
 	{ "tpope/vim-fugitive" }, -- Git commands in nvim
 	{ "tpope/vim-rhubarb" }, -- Fugitive-companion to interact with github
 	{ "tpope/vim-repeat" },
 
 	{ "kylechui/nvim-surround", version = "*", config = true },
+	{ "jcdickinson/wpm.nvim", config = true },
 	-- Comment plugin written in Lua '
-	{
-		"numToStr/Comment.nvim",
-		config = true,
-	},
+	{ "numToStr/Comment.nvim", config = true },
 	-- Automatic tags management,
 	{ "ludovicchabant/vim-gutentags" },
 	-- Don't close vim and don't lose window layout when closing buffers
@@ -167,6 +166,6 @@ return {
 			})
 		end,
 	},
-	{"shortcuts/no-neck-pain.nvim"},
-	{ 'RaafatTurki/hex.nvim', config = true },
+	{ "shortcuts/no-neck-pain.nvim" },
+	{ "RaafatTurki/hex.nvim", config = true },
 }
