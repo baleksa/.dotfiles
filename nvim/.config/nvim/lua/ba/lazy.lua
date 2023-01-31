@@ -1,5 +1,5 @@
 vim.g.status_line = "cokeline"
-vim.g.file_explorer = "lir"
+vim.g.file_explorer = "oil"
 
 -- bootstrap from github
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
