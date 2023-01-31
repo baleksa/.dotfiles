@@ -1,11 +1,12 @@
 #!/bin/sh
 
 # shellcheck disable=2154
-alias ec='file="$(fd -LH . /home/baleksa/.config | fzf)"; nvim ${file:-/home/baleksa/.config}'
-alias nvimrc='file="$(fd -LH . /home/baleksa/.config/nvim | fzf)"; nvim ${file:-/home/baleksa/.config/nvim}'
-alias zshrc='file="$(fd -LH . /home/baleksa/.config/zsh | fzf)"; nvim ${file:-/home/baleksa/.config/zsh}'
-alias swayrc='file="$(fd -LH . /home/baleksa/.config/sway | fzf)"; nvim ${file:-/home/baleksa/.config/sway}'
-alias mrc='file="$(fd -LH . /home/baleksa/.config/myrc | fzf)"; nvim ${file:-/home/baleksa/.config/myrc}'
+alias ec='file="$(fd -LH . "$HOME"/.config | fzf)"; nvim ${file:-"$HOME"/.config}'
+alias nvimrc='file="$(fd -LH . "$HOME"/.config/nvim | fzf)"; nvim ${file:-"$HOME"/.config/nvim}'
+alias zshrc='file="$(fd -LH . "$HOME"/.config/zsh | fzf)"; nvim ${file:-"$HOME"/.config/zsh}'
+alias swayrc='file="$(fd -LH . "$HOME"/.config/sway | fzf)"; nvim ${file:-"$HOME"/.config/sway}'
+alias mrc='file="$(fd -LH . "$HOME"/.config/myrc | fzf)"; nvim ${file:-"$HOME"/.config/myrc}'
+alias ep='proj="$(fd -L -t d -d 1 . $HOME/repositories/ $HOME/coding/ | fzf)"; [ "$proj" ] && nvim "$proj"'
 
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
