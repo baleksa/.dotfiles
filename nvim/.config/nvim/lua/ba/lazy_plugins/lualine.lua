@@ -4,9 +4,24 @@ function M.config()
 	require("lualine").setup({
 		options = {
 			-- theme = 'onedark',
-			component_separators = { left = "|", right = "|" },
+			component_separators = { left = "", right = "" },
 			section_separators = { left = "", right = "" },
+		},
+		sections = {
+			lualine_x = {
+				require("wpm").wpm,
+				require("wpm").historic_graph,
+				"encoding",
+				{
+					"fileformat",
+					symbols = {
+						unix = "",
+					},
+				},
+				"filetype",
+			},
 		},
 	})
 end
+
 return M
