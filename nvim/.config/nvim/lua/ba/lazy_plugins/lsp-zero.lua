@@ -96,7 +96,7 @@ function M.config()
 	-- lsp.nvim_workspace({
 	-- 	-- library = vim.api.nvim_get_runtime_file("", true),
 	-- })
-	require('neodev').setup({})
+	require("neodev").setup({})
 	lsp.setup_servers({
 		"gopls",
 		"kotlin_language_server",
