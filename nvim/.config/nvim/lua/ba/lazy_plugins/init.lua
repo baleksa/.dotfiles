@@ -21,10 +21,9 @@ return {
 	-- tpope's phenomenal plugins
 	{ "tpope/vim-fugitive" }, -- Git commands in nvim
 	{ "tpope/vim-rhubarb" }, -- Fugitive-companion to interact with github
-	{ "tpope/vim-surround" },
 	{ "tpope/vim-repeat" },
-	-- use({ "tpope/vim-vinegar" })
 
+	{ "kylechui/nvim-surround", version = "*", config = true },
 	-- Comment plugin written in Lua '
 	{
 		"numToStr/Comment.nvim",
