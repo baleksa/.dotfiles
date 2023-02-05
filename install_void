@@ -99,6 +99,9 @@ message "INSTALL OTHER PACKAGES"
 xi -Su -y
 xi -y "$(cat ./void_packages.txt)"
 
+message "Install pacakges for development"
+xi -y python3 python3-devel lua lua-devel
+
 message "MANPAGES"
 xi -Su -y xi man-pages-devel man-pages-posix
 makewhatis
