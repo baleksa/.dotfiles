@@ -6,6 +6,7 @@ fd -tf 	-e pdf \
 	-e doc \
 	-e ppt \
 	-e pptx \
+	-e md \
 	. ~ 	| fzf --print0 | xargs -0 -I{} swaymsg exec zaread \"{}\"
 
 
