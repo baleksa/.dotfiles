@@ -91,7 +91,6 @@ libxml2-devel
 light
 lldb
 llvm
-lua-devel
 luarocks
 man-db
 man-pages-devel
@@ -127,14 +126,11 @@ pmount
 proot
 pulseaudio-utils
 python3-Pillow
-python3-devel
 python3-matplotlib
 python3-numpy
 python3-pandas
 python3-pip
 python3-scipy
-qt5-wayland
-qt6-wayland
 razergenie
 ripgrep
 rpi-imager
