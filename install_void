@@ -36,9 +36,10 @@ xi -y zsh
 chsh -s /bin/zsh
 
 message "INSTALLING MESA DRIVERS CPU FIRMWARE"
-xi -y mesa-dri mesa-vaapi mesa-vdpau mesa-vulkan-intel
-xi -y intel-ucode
-xi -y linux-firmware-amd
+xi -y mesa-dri mesa-vaapi mesa-vdpau
+xi -y intel-ucode mesa-vulkan-intel linux-firmware-intel intel-video-accel
+xi -y linux-firmware-amd vulkan-loader
+xi -y nvidia
 
 message "DBUS"
 xi -y dbus && add_service dbus
