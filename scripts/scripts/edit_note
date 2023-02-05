@@ -3,16 +3,27 @@
 # Edit an old or make a new note
 
 if [ "$#" = "0" ]; then
-	note="$(find -H "$MYNOTES_DIR" -name '*.md' | fzf)"
-	note=${note:=$MYNOTES_DIR}
+	note="$(find -H "$MYNOTES_DIR" -type d,f | fzf)"
+	if [ "$note" = "" ]; then
+		nvim "$MYNOTES_DIR"
+		exit
+	fi
 else
 	note="$MYNOTES_DIR/$1"
-	if [ ! -f "$note" ]; then
-		# touch "$note"
-		echo "Enter a title for the note:"
-		read -r title
-		printf "%s\ntitle: \"%s\"\ncreated: \"%s\"\n%s\n" '---' "$title" "$(date -u -Is)" '---' >> "$note"
-	fi
+fi
+echo "$note"
+
+if [ -d "$note" ]; then
+	echo "Enter filename for the note:"
+	read -r fname
+	note="$note/$fname"
+fi
+
+if [ ! -f "$note" ]; then
+	# touch "$note"
+	echo "Enter a title for the note:"
+	read -r title
+	printf "%s\ntitle: \"%s\"\ncreated: \"%s\"\n%s\n" '---' "$title" "$(date -u -Is)" '---' >>"$note"
 fi
 
 nvim "$note"
