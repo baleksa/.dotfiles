@@ -53,21 +53,6 @@ message "MAKE LINUX USE LOCALTIME FOR TIME TO BE ACCURATE IF DUALBOOTING AND SET
 echo 'HARDWARECLOCK=localtime' | sudo tee -a /etc/rc.conf
 xi -y chrony && add_service chronyd
 
-message "MAKE A SCRIPT set_xdg_runtime_dir.sh IN /etc/profile.d/"
-echo '#!/bin/sh
-if (( "$(id -u)" >= 1000 )); then
-	export XDG_RUNTIME_DIR=/run/user/$(id -u)
-fi' | sudo tee -a /etc/profile.d/set_xdg_runtime_dir.sh
-
-message "MAKE A SCRIPT THAT MAKES XDG_RUNTIME_DIR FOR EACH USER ON BOOT"
-echo 'for uid in $(awk -F '\'':'\'' '\''$3>=1000 {print ""$3":"$1}'\'' /etc/passwd); do
-    dirname=$(echo "$uid" | cut -d: -f1)
-    usernm=$(echo "$uid" | cut -d: -f2)
-    mkdir /run/user/"$dirname"
-    chmod 700 /run/user/"$dirname"
-    chown "$usernm" /run/user/"$dirname"
-done' | sudo tee -a /etc/rc.local
-
 message "TLP FOR POWER MANAGEMENT"
 xi -y tlp && add_service tlp
 
