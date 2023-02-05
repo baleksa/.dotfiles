@@ -51,7 +51,7 @@ xi -y socklog-void &&
 usermod -a -G socklog "$USER"
 
 message "MAKE LINUX USE LOCALTIME FOR TIME TO BE ACCURATE IF DUALBOOTING AND SET CHRONY"
-echo 'HARDWARECLOCK=localtime' | sudo tee -a /etc/rc.conf
+echo 'export HARDWARECLOCK=localtime' | sudo tee -a /etc/rc.conf
 xi -y chrony && add_service chronyd
 
 message "TLP FOR POWER MANAGEMENT"
