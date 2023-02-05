@@ -64,10 +64,6 @@ xi -y iwd && add_service iwd && printf '[General]\nUseDefaultInterface=true' | s
 message "ZSH"
 xi -y zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-history-substring-search
 
-message "ALACRITTY and FOOT"
-xi -y alacritty
-xi -y foot
-
 message "PIPEWIRE, ALSA AND BLUETOOTH"
 xi -y pipewire libspa-bluetooth alsa-pipewire wireplumber
 mkdir -p /etc/pipewire
