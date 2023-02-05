@@ -9,3 +9,4 @@ exec sway-xkb-switcher-rust --default-lang "English (US)"
 # exec battery_check
 exec pipewire
 exec pipewire-pulse
+exec wireplumber
