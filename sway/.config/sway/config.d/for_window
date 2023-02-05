@@ -6,4 +6,5 @@ for_window [app_id="zoom" title="zoom.real "] floating enable
 for_window [app_id="zoom" title="Settings"] floating enable
 for_window [app_id="termlauncher"] floating enable
 for_window [title="termlauncher"] floating enable
-
+for_window [app_id="scratchpad"] move scratchpad
+for_window [title="scratchpad"] move scratchpad
