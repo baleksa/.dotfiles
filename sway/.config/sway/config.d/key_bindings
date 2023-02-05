@@ -9,7 +9,7 @@
     bindsym $mod+s exec $browser
 
     # Start a scratchpad terminal
-    bindsym $mod+Shift+s exec $term; move scratchpad; scratchpad show
+    bindsym $mod+Shift+s exec scratchpad
     # Start zathura
     bindsym $mod+z exec zathura
 
@@ -95,7 +95,7 @@
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+Shift+s layout stacking
+    # bindsym $mod+Shift+s layout stacking
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split
 
@@ -168,8 +168,14 @@ bindsym XF86AudioNext exec light -A 5 && light -G | cut -d'.' -f1 > $WOBSOCK
 # Script that switches audio output between analog and hdmi
 bindsym XF86AudioStop exec switch_audio
 
-# Sshot is a small script to screenshot
+# Sshot is a small script to screenshot custom screen area
 bindsym print exec sshot
+# pick_a_color is a small script to get color from a pixel
+bindsym Shift+print exec pick_a_color
+# Screenshot the focused window
+bindsym Ctrl+print exec sshot_window
+# Screenshot the focused monitor
+bindsym $mod+print exec grim -o "$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')" - | wl-copy
 
 # Screen locking
 bindsym $mod+q exec swaylock -f -c 000000
