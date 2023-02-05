@@ -66,8 +66,8 @@ xi -y seatd && add_service seatd && sudo usermod -a -G _seatd "$USER"
 
 message "SWAY"
 xi -y sway swayidle swaylock
-# xi -y qt5-wayland qt6-wayland
-# xi -y kwayland
+xi -y qt5-wayland qt6-wayland
+xi -y kwayland
 
 message "IWD"
 xi -y iwd && add_service iwd && printf '[General]\nUseDefaultInterface=true' | sudo tee -a /etc/iwd/main.conf
