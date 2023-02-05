@@ -6,7 +6,6 @@ Thunar
 Vulkan-Headers
 Vulkan-Tools
 acpi
-alacritty
 alsa-lib-devel
 alsa-pipewire
 alsa-utils
@@ -189,6 +188,7 @@ wezterm
 wezterm-terminfo
 wf-recorder
 wget
+wireplumber
 wl-clipboard
 wlroots
 wlroots-devel
@@ -205,6 +205,7 @@ xf86-input-evdev
 xf86-input-synaptics
 xf86-input-wacom
 xtools
+xxd
 yarn
 zathura
 zathura-djvu
