@@ -54,6 +54,10 @@ message "MAKE LINUX USE LOCALTIME FOR TIME TO BE ACCURATE IF DUALBOOTING AND SET
 echo 'export HARDWARECLOCK=localtime' | sudo tee -a /etc/rc.conf
 xi -y chrony && add_service chronyd
 
+message "Install cronie and set up its service"
+xi -y cronie
+ln -s /etc/sv/cronie /var/service
+
 message "TLP FOR POWER MANAGEMENT"
 xi -y tlp && add_service tlp
 
