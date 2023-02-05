@@ -47,6 +47,7 @@ message "LOGGING"
 xi -y socklog-void &&
 	add_service socklog_unix &&
 	add_service nanoklogd
+usermod -a -G socklog "$USER"
 
 message "MAKE LINUX USE LOCALTIME FOR TIME TO BE ACCURATE IF DUALBOOTING AND SET CHRONY"
 echo 'export HARDWARECLOCK=localtime' | sudo tee -a /etc/rc.conf
