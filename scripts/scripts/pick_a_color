@@ -1,0 +1,9 @@
+#!/bin/sh
+color_string="$(grim -g "$(slurp -p)" -t ppm - |
+	convert - -format '%[pixel:p{0,0}]' txt:- |
+	tail -1 |
+	cut -d' ' -f2- |
+	tr -d 'srgb()'|
+	tr -s ' ' |
+	tr ' ' '\n')"
+echo "$color_string" | tofi -c "${XDG_CONFIG_HOME:-"$HOME"/.config}/tofi/themes/everforest-light-float" | wl-copy
