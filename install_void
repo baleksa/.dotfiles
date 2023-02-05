@@ -35,9 +35,10 @@ message "INSTALLING ZSH AND SETTING IT AS DEFAULT SHELL"
 xi -y zsh
 chsh -s /bin/zsh
 
-message "INSTALLING MESA VGA DRIVERS AND INTEL-UCODE"
+message "INSTALLING MESA DRIVERS CPU FIRMWARE"
 xi -y mesa-dri mesa-vaapi mesa-vdpau mesa-vulkan-intel
 xi -y intel-ucode
+xi -y linux-firmware-amd
 
 message "DBUS"
 xi -y dbus && add_service dbus
