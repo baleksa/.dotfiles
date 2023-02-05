@@ -26,7 +26,7 @@ set $sway_scripts_dir $XDG_CONFIG_HOME/sway/scripts
 # Note: pass the final command to swaymsg so that the resulting window 
 # can be opened on the original workspace that the command was run on.
 # set $menu bemenu-run -p "run:" -i -w -n --fn "font pango:monospace Medium 12" | xargs swaymsg exec --
-set $menu tofi-run --fuzzy-match=true | xargs swaymsg exec --
+set $menu tofi-run -c ~/.config/tofi/themes/dmenu --fuzzy-match=true | xargs swaymsg exec --
 
 # Thin border and inner gaps
 default_border pixel 1
