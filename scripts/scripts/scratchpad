@@ -1,0 +1,10 @@
+#!/bin/sh
+
+title="scratchpad"
+case "$TERMINAL" in
+*wezterm*)
+	wezterm-gui start --class="$title" &
+	;;
+esac
+sleep 0.2s
+swaymsg 'scratchpad show'
