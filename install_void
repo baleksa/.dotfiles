@@ -94,5 +94,9 @@ message "INSTALL OTHER PACKAGES"
 xi -Su -y
 xi -y "$(cat ./void_packages.txt)"
 
+message "MANPAGES"
+xi -Su -y xi man-pages-devel man-pages-posix
+makewhatis
+
 message "REBOOTING NOW"
 sudo reboot now
