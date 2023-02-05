@@ -8,6 +8,8 @@
     # Start a browser
     bindsym $mod+s exec $browser
 
+    # Start a scratchpad terminal
+    bindsym $mod+Shift+s exec $term; move scratchpad; scratchpad show
     # Start zathura
     bindsym $mod+z exec zathura
 
