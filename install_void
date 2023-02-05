@@ -74,7 +74,7 @@ message "PIPEWIRE, ALSA AND BLUETOOTH"
 xi -y pipewire libspa-bluetooth alsa-pipewire wireplumber
 mkdir -p /etc/pipewire
 sed '/path.*=.*pipewire-media-session/s/{/#{/' \
-    /usr/share/pipewire/pipewire.conf > /etc/pipewire/pipewire.conf
+	/usr/share/pipewire/pipewire.conf >/etc/pipewire/pipewire.conf
 sudo mkdir -p /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
