@@ -3,6 +3,7 @@
 add_service() {
 	[ ! -d /var/service/"$1" ] && sudo ln -s /etc/sv/"$1" /var/service
 }
+
 message() {
 	echo "$1:"
 	echo "=================="
@@ -37,7 +38,7 @@ if (( "$(id -u)" >= 1000 )); then
 	export XDG_RUNTIME_DIR=/run/user/$(id -u)
 fi' | sudo tee -a /etc/profile.d/set_xdg_runtime_dir.sh
 
-message "MAKE A SCRIPT THAT MAKES XDG_RUNTIME_DIR FOR EACH USER"
+message "MAKE A SCRIPT THAT MAKES XDG_RUNTIME_DIR FOR EACH USER ON BOOT"
 echo 'for uid in $(awk -F '\'':'\'' '\''$3>=1000 {print ""$3":"$1}'\'' /etc/passwd); do
     dirname=$(echo "$uid" | cut -d: -f1)
     usernm=$(echo "$uid" | cut -d: -f2)
@@ -54,8 +55,8 @@ xi -y seatd && add_service seatd && sudo usermod -a -G _seatd "$USER"
 
 message "SWAY"
 xi -y sway swayidle swaylock
-xi -y qt5-wayland qt6-wayland
-xi -y kwayland
+# xi -y qt5-wayland qt6-wayland
+# xi -y kwayland
 
 message "IWD"
 xi -y iwd && add_service iwd && printf '[General]\nUseDefaultInterface=true' | sudo tee -a /etc/iwd/main.conf
@@ -68,7 +69,10 @@ xi -y alacritty
 xi -y foot
 
 message "PIPEWIRE, ALSA AND BLUETOOTH"
-xi -y pipewire libspa-bluetooth alsa-pipewire
+xi -y pipewire libspa-bluetooth alsa-pipewire wireplumber
+mkdir -p /etc/pipewire
+sed '/path.*=.*pipewire-media-session/s/{/#{/' \
+    /usr/share/pipewire/pipewire.conf > /etc/pipewire/pipewire.conf
 sudo mkdir -p /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
@@ -78,15 +82,15 @@ message "STOW DOTFILES"
 xi -y stow
 stow ./*/
 
-message "FLATPAK AND FLATPAK APPS (zoom, joplin)"
+message "FLATPAK AND FLATPAK APPS (zoom)"
 xi -y flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak --user install flathub net.cozic.joplin_desktop
 flatpak --user install flathub us.zoom.Zoom
 
 message "INSTALL OTHER PACKAGES"
 xi -Su -y
-xargs -a ./manually_installed_packages_void_test xi -y
+xi -y "$(cat ./void_packages.txt)"
+
 message "REBOOTING NOW"
 sudo reboot now
