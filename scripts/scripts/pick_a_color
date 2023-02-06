@@ -6,4 +6,5 @@ color_string="$(grim -g "$(slurp -p)" -t ppm - |
 	tr -d 'srgb()'|
 	tr -s ' ' |
 	tr ' ' '\n')"
-echo "$color_string" | tofi -c "${XDG_CONFIG_HOME:-"$HOME"/.config}/tofi/themes/everforest-light-float" | wl-copy
+[ -z "$color_string" ] && exit
+echo "$color_string" | tofi -c "${XDG_CONFIG_HOME:-"$HOME"/.config}/tofi/themes/everforest-light-float" --prompt-text="Pick:" | wl-copy
