@@ -13,7 +13,7 @@ do_job() {
 	failed_msg="$1"
 	shift
 	colored_echo "$hello_msg" "$PURPLE"
-	if "$@"; then
+	if eval "$*"; then
 		colored_echo "$bye_msg" "$GREEN"
 	else
 		colored_echo "$failed_msg" "$RED"
@@ -33,8 +33,6 @@ do_job "Updating xbps packages." "Done!" "Failed!" xi -Syu
 
 do_job "Updating neovim to the HEAD github branch." "Done!" "Failed!" update_neovim
 
-# do_job "Updating neovim packages via packer.nvim." "\nDone!" "\nFailed!" \
-# 	nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 do_job "Updating neovim packages via lazy.nvim." "\nDone!" "\nFailed!" \
 	nvim --headless "+Lazy! sync" +qa
 
@@ -42,9 +40,6 @@ do_job "Updating neovim packages via lazy.nvim." "\nDone!" "\nFailed!" \
 do_job "Updating all installed nvim-treesitter parsers." "\nDone!" "\nFailed!" \
 	nvim --headless -c 'TSUpdateSync all' -c "quitall"
 
-# do_job "Updating all installed Mason packages." "\nDone!" "\nFailed!" \
-# 	nvim --headless \
-# 		-c 'autocmd User MasonUpdateAllComplete quitall' \
-# 		-c 'MasonUpdateAll'
+do_job "Updating Mason nvim packages:" "\nDone!" "\nFailed!" update_mason_nvim
 
 do_job "Updating rust toolchain:" "\nDone!" "\nFailed!" rustup update
