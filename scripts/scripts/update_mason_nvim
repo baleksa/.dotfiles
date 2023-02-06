@@ -42,7 +42,6 @@ update_python_lsp_extensions() {
 	}
 }
 
-cwd="$PWD"
 update_mason_packages
 status="$?"
 if [ "$status" -ne 0 ]; then
@@ -55,8 +54,5 @@ if [ "$status" -ne 0 ]; then
 	echo "Updating pylsp extension failed with error $status"
 	exit "$status"
 fi
-cd "$cwd" || {
-	echo "Failed to return to $cwd".
-	exit 1
-}
+ 
 exit 0
