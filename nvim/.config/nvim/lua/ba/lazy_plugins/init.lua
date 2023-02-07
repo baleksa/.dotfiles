@@ -158,9 +158,10 @@ return {
 		"b0o/incline.nvim",
 		config = function()
 			require("incline").setup({
-				-- hide = {
+				hide = {
 				-- 	cursorline = true,
-				-- },
+					only_win = true,
+				},
 				window = {
 					margin = {
 						vertical = 0,
