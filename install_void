@@ -110,5 +110,11 @@ message "INSTALL OTHER PACKAGES"
 xi -Su -y
 xi -y "$(cat ./void_packages.txt)"
 
+message "Set default applications for mime types"
+xdg-mime default org.pwmt.zathura.desktop application/pdf
+xdg-mime default org.pwmt.zathura.desktop application/epub+zip
+xdg-mime default nvim.desktop text/english text/plain text/x-makefile text/x-c++hdr text/x-c++src text/x-chdr text/x-csrc text/x-java text/x-moc text/x-pascal text/x-tcl text/x-tex application/x-shellscript text/x-c text/x-c++
+xdg-mime default lf.desktop inode/directory
+
 message "REBOOTING NOW"
 sudo reboot now
