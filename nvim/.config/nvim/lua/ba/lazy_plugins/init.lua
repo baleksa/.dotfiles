@@ -154,7 +154,21 @@ return {
 		config = true,
 	},
 	-- { "baleksa/simplebufline.nvim", dev = true },
-	{ "b0o/incline.nvim", config = true },
+	{
+		"b0o/incline.nvim",
+		config = function()
+			require("incline").setup({
+				-- hide = {
+				-- 	cursorline = true,
+				-- },
+				window = {
+					margin = {
+						vertical = 0,
+					},
+				},
+			})
+		end,
+	},
 	{
 		"RRethy/vim-illuminate",
 		config = function()
