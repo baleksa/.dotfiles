@@ -1,5 +1,5 @@
 #!/bin/sh
-# My .profile called from mathing profile file of shell I am using
 
+# My profile file called from matching profile file of the shell which I am using
 . "$MYRC_DIR/start_sway"
 

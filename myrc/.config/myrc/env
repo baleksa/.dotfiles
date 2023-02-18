@@ -1,4 +1,5 @@
 #!/bin/sh
+
 export MYRC_DIR="$HOME/.config/myrc"
 export MYSCRIPTS_DIR="$HOME/scripts"
 export MYNOTES_DIR="$HOME/notes"
