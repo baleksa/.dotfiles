@@ -89,7 +89,7 @@ return {
 		config = true,
 	},
 
-	{ "lukas-reineke/indent-blankline.nvim" }, -- Add indentation guides even on blank lines
+	{ "lukas-reineke/indent-blankline.nvim" },
 
 	-- Highlight, edit, and navigate code using a fast incremental parsing library
 	{ "nvim-treesitter/nvim-treesitter-textobjects" }, -- Additional textobjects for treesitter,
@@ -181,6 +181,13 @@ return {
 			})
 		end,
 	},
-	{ "shortcuts/no-neck-pain.nvim" },
+	{ "shortcuts/no-neck-pain.nvim", opts = { buffers = {} } },
 	{ "RaafatTurki/hex.nvim", config = true },
+	{ "vim-scripts/Decho" },
+	-- {
+	-- 	"luukvbaal/statuscol.nvim",
+	-- 	config = function()
+	-- 		require("statuscol").setup()
+	-- 	end,
+	-- },
 }
