@@ -10,6 +10,7 @@ vim.opt.linebreak = true
 -- vim.opt.shiftwidth = 8
 -- vim.opt.expandtab = true
 vim.opt.autoindent = true
+vim.o.scrolloff = 5
 
 -- vim.opt.spelllang = "en_us,rs"
 -- vim.opt.spelloptions = "camel"
