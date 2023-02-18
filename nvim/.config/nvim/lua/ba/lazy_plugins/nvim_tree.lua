@@ -69,7 +69,8 @@ function M.config()
 		view.focus()
 	end
 
-	require("nvim-tree").setup({ -- Call setup function
+	require("nvim-tree").setup({
+		-- Call setup function
 		hijack_cursor = true,
 		disable_netrw = true,
 		actions = {
