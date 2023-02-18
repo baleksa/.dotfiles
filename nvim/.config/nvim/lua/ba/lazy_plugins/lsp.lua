@@ -89,7 +89,7 @@ function M.config()
 		"pylsp",
 		"r_language_server",
 		"rust_analyzer",
-		"sumneko_lua",
+		"lua_ls",
 		"vimls",
 	})
 	-- Add neovim and plugins lua files to sumneko-lua
@@ -103,7 +103,7 @@ function M.config()
 		-- "pylsp",
 		"r_language_server",
 		"rust_analyzer",
-		"sumneko_lua",
+		"lua_ls",
 		"vimls",
 	})
 	-- Add additional special conf to some servers
