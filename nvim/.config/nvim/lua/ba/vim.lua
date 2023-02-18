@@ -10,16 +10,18 @@ vim.opt.linebreak = true
 -- vim.opt.shiftwidth = 8
 -- vim.opt.expandtab = true
 vim.opt.autoindent = true
-vim.o.scrolloff = 5
+vim.opt.scrolloff = 5
 
 -- vim.opt.spelllang = "en_us,rs"
 -- vim.opt.spelloptions = "camel"
 -- vim.opt.spell = false -- Spellcheck
 
+vim.opt.backup=true
+
 vim.opt.splitbelow = true -- Put new windows below current
 vim.opt.splitright = true -- Put new windows right of current
 
-vim.opt.termguicolors = true -- Pretty much sure this is default but who gives a fuck
+vim.opt.termguicolors = true
 
 vim.opt.hlsearch = false -- Set highlight on search
 vim.opt.incsearch = true
@@ -47,22 +49,13 @@ vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
 vim.g.indent_blankline_show_trailing_blankline_indent = false
 
 vim.o.laststatus = 3 -- Set global statusbar.
--- Rign align statuscolumn and show git signes after line num
-vim.o.statuscolumn = "%=%r%s%C"
 
 -- Don't use this find better solution for changing cwd
 -- vim.o.autochdir = true 
+
 ---
 -- Keymaps
 ---
--- Modes
---   normal_mode = "n",
---   insert_mode = "i",
---   visual_mode = "v",
---   visual_block_mode = "x",
---   term_mode = "t",
---   command_mode = "c",
-
 local opts = { silent = true } -- Opts for a lots of mappings
 
 --Remap space as leader key
@@ -160,7 +153,6 @@ vim.api.nvim_create_autocmd("FileType", { pattern = "markdown", command = "setlo
 vim.api.nvim_create_autocmd("FileType", { pattern = "text", command = "setlocal tw=80" })
 vim.api.nvim_create_autocmd("FileType", { pattern = "meson", command = "setlocal noet ts=2 sw=2" })
 vim.api.nvim_create_autocmd("FileType", { pattern = "python", command = "setlocal et ts=4 sw=4" })
--- vim.api.nvim_create_autocmd("FileType", { pattern="tex ", command = "hi Error ctermbg=NONE"})
 vim.api.nvim_create_autocmd("FileType", { pattern = "mail", command = "setlocal noautoindent" })
 vim.api.nvim_create_autocmd("FileType", { pattern = "gmi", command = "set wrap linebreak" })
 vim.api.nvim_create_autocmd(
@@ -171,5 +163,3 @@ vim.api.nvim_create_autocmd(
 	"BufRead, BufNewFile",
 	{ pattern = "*", command = "if expand('%:t') == 'PKGBUILD' | set ft=sh | endif" }
 )
-vim.api.nvim_create_autocmd("BufRead, BufNewFile", { pattern = "*/sway/config.d/*", command = "set ft=i3config" })
-vim.api.nvim_create_autocmd("BufRead, BufNewFile", { pattern = "*/.config/myenv/*", command = "set ft=sh" })
