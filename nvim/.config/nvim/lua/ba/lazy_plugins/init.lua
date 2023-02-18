@@ -159,7 +159,7 @@ return {
 		config = function()
 			require("incline").setup({
 				hide = {
-				-- 	cursorline = true,
+					-- 	cursorline = true,
 					only_win = true,
 				},
 				window = {
