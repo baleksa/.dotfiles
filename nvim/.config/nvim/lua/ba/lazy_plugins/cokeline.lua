@@ -24,20 +24,28 @@ function M.config()
 		},
 
 		sidebar = {
-			filetype = "neo-tree",
+			filetype = "no-neck-pain",
 			components = {
 				{
-					text = function()
-						return " cwd: " .. vim.fn.getcwd() .. " "
-					end,
+					text = "",
 					fg = vim.g.terminal_color_3,
 					bg = get_hex("Normal", "bg"),
-					style = "bold",
-					truncation = {
-						direction = "left",
-					}
 				},
 			},
+			-- filetype = "neo-tree",
+			-- components = {
+			-- 	{
+			-- 		text = function()
+			-- 			return " cwd: " .. vim.fn.getcwd() .. " "
+			-- 		end,
+			-- 		fg = vim.g.terminal_color_3,
+			-- 		bg = get_hex("Normal", "bg"),
+			-- 		style = "bold",
+			-- 		truncation = {
+			-- 			direction = "left",
+			-- 		}
+			-- 	},
+			-- },
 		},
 		components = {
 			{
