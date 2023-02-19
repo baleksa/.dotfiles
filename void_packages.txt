@@ -159,6 +159,7 @@ tmux
 tofi
 transmission-gtk
 tree
+tree-sitter
 ttf-opensans
 tty-clock
 tuigreet
