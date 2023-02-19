@@ -1,2 +1,2 @@
 #!/bin/sh
-footclient -Tfootlauncher iwctl
+termlaunch iwctl
