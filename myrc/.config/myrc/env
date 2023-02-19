@@ -5,6 +5,9 @@ export MYSCRIPTS_DIR="$HOME/scripts"
 export MYNOTES_DIR="$HOME/notes"
 
 export XDG_CONFIG_HOME=~/.config
+export XDG_STATE_HOME=~/.local/state
+
+
 export GOPATH="$HOME/go"
 
 export JAVA_HOME="/usr/lib/jvm/openjdk17"
