@@ -16,7 +16,8 @@ vim.opt.scrolloff = 5
 -- vim.opt.spelloptions = "camel"
 -- vim.opt.spell = false -- Spellcheck
 
-vim.opt.backup=true
+vim.opt.backup = true
+vim.opt.backupdir = vim.env.XDG_STATE_HOME .. "/nvim/backup"
 
 vim.opt.splitbelow = true -- Put new windows below current
 vim.opt.splitright = true -- Put new windows right of current
@@ -51,7 +52,7 @@ vim.g.indent_blankline_show_trailing_blankline_indent = false
 vim.o.laststatus = 3 -- Set global statusbar.
 
 -- Don't use this find better solution for changing cwd
--- vim.o.autochdir = true 
+-- vim.o.autochdir = true
 
 ---
 -- Keymaps
