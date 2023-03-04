@@ -223,11 +223,13 @@ function M.config()
 			null_ls.builtins.code_actions.gitsigns,
 		},
 	})
+
 	require("mason-null-ls").setup({
 		ensure_installed = nil,
 		automatic_installation = true,
 		automatic_setup = false,
 	})
+
 	-- Fix https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
 	local old_notify = vim.notify
 	vim.notify = function(msg, ...)
