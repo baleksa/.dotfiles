@@ -42,37 +42,6 @@ return {
 	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 
 	{ "stevearc/dressing.nvim" },
-	-- Packer
-	-- {
-	-- 	"folke/noice.nvim",
-	-- 	config = {
-	-- 		lsp = {
-	-- 			-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-	-- 			override = {
-	-- 				["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-	-- 				["vim.lsp.util.stylize_markdown"] = true,
-	-- 				["cmp.entry.get_documentation"] = true,
-	-- 			},
-	-- 		},
-	-- 		-- you can enable a preset for easier configuration
-	-- 		presets = {
-	-- 			bottom_search = true, -- use a classic bottom cmdline for search
-	-- 			command_palette = true, -- position the cmdline and popupmenu together
-	-- 			long_message_to_split = true, -- long messages will be sent to a split
-	-- 			inc_rename = false, -- enables an input dialog for inc-rename.nvim
-	-- 			lsp_doc_border = false, -- add a border to hover docs and signature help
-	-- 		},
-	-- 	},
-	-- 	dependencies = {
-	-- 		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		-- OPTIONAL:
-	-- 		--   `nvim-notify` is only needed, if you want to use the notification view.
-	-- 		--   If not available, we use `mini` as the fallback
-	-- 		"rcarriga/nvim-notify",
-	-- 	},
-	-- },
-
 	{ "chrisgrieser/nvim-ghengis", dependencies = "stevearc/dressing.nvim" },
 
 	{
@@ -91,14 +60,6 @@ return {
 
 	{ "lukas-reineke/indent-blankline.nvim" },
 
-	-- Highlight, edit, and navigate code using a fast incremental parsing library
-	{ "nvim-treesitter/nvim-treesitter-textobjects" }, -- Additional textobjects for treesitter,
-	{
-		"lewis6991/spellsitter.nvim",
-		config = true,
-	},
-	{ "JoosepAlviste/nvim-ts-context-commentstring" }, -- Comment embedded languages in a right way,
-
 	{
 		"folke/twilight.nvim",
 		-- Dim inactive portions of code
@@ -111,17 +72,6 @@ return {
 		config = true,
 	},
 	{ "prichrd/netrw.nvim" },
-
-	-- use("ray-x/lsp_signature.nvim") -- Add function signature help while in insert mode
-
-	-- {
-	-- 	"iamcco/markdown-preview.nvim",
-	-- 	build = "cd app && npm install",
-	-- 	config = function()
-	-- 		vim.g.mkdp_filetypes = { "markdown" }
-	-- 	end,
-	-- 	ft = { "markdown" },
-	-- },
 	{
 		"toppair/peek.nvim",
 		build = "deno task --quiet build:fast",
@@ -183,17 +133,5 @@ return {
 	{ "shortcuts/no-neck-pain.nvim", opts = { buffers = {} } },
 	{ "RaafatTurki/hex.nvim", config = true },
 	{ "vim-scripts/Decho" },
-	-- {
-	-- 	"luukvbaal/statuscol.nvim",
-	-- 	config = function()
-	-- 		require("statuscol").setup()
-	-- 	end,
-	-- },
-	{ "HiPhish/nvim-ts-rainbow2" },
-	{
-		"m4xshen/smartcolumn.nvim",
-		opts = {
-			scope = "window",
-		},
-	},
+	{ "m4xshen/smartcolumn.nvim", opts = { scope = "window" } },
 }
