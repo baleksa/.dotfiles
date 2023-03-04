@@ -190,4 +190,10 @@ return {
 	-- 	end,
 	-- },
 	{ "HiPhish/nvim-ts-rainbow2" },
+	{
+		"m4xshen/smartcolumn.nvim",
+		opts = {
+			scope = "window",
+		},
+	},
 }
