@@ -259,6 +259,12 @@ function M.config()
 	---
 	-- Setup command to update all installed Mason packages
 	require("mason-update-all").setup()
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "MasonUpdateAllComplete",
+		callback = function()
+			print("mason-update-all has finished")
+		end,
+	})
 end
 
 return M
