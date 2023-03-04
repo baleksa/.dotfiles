@@ -97,7 +97,6 @@ return {
 		"lewis6991/spellsitter.nvim",
 		config = true,
 	},
-	{ url = "https://git.sr.ht/~p00f/nvim-ts-rainbow" }, -- Color nested parentheses diferently for a cleaner view,
 	{ "JoosepAlviste/nvim-ts-context-commentstring" }, -- Comment embedded languages in a right way,
 
 	{
@@ -190,4 +189,5 @@ return {
 	-- 		require("statuscol").setup()
 	-- 	end,
 	-- },
+	{ "HiPhish/nvim-ts-rainbow2" },
 }
