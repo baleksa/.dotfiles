@@ -39,6 +39,10 @@ function M.config()
 		local action = "edit"
 		local node = lib.get_node_at_cursor()
 
+		if node == nil then
+			return
+		end
+
 		-- Just copy what's done normally with vsplit
 		if node.link_to and not node.nodes then
 			require("nvim-tree.actions.node.open-file").fn(action, node.link_to)
@@ -55,6 +59,9 @@ function M.config()
 		-- open as vsplit on current node
 		local action = "vsplit"
 		local node = lib.get_node_at_cursor()
+		if node == nil then
+			return
+		end
 
 		-- Just copy what's done normally with vsplit
 		if node.link_to and not node.nodes then
