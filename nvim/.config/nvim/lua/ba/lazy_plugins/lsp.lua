@@ -174,9 +174,6 @@ function M.config()
 			})
 		)
 	)
-	-- lsp.setup_nvim_cmp({
-	-- 	-- completion = { completeopt = "menu, menuone, noselect" },
-	-- })
 	lsp.setup()
 	---
 	-- cmp
@@ -197,7 +194,7 @@ function M.config()
 			},
 		}),
 	})
-	cmp.setup.cmdline("/", {
+	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
 		sources = {
 			{ name = "buffer" },
