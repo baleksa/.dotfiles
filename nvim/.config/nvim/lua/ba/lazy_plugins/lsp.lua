@@ -229,13 +229,13 @@ function M.config()
 		automatic_setup = false,
 	})
 	-- Fix https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
-	local notify = vim.notify
+	local old_notify = vim.notify
 	vim.notify = function(msg, ...)
 		if msg:match("warning: multiple different client offset_encodings") then
 			return
 		end
 
-		notify(msg, ...)
+		old_notify(msg, ...)
 	end
 	---
 	-- nvim-dap
