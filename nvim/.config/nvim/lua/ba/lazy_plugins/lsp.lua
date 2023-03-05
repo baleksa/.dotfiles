@@ -24,13 +24,11 @@ local M = {
 		"jose-elias-alvarez/null-ls.nvim",
 		"jayp0521/mason-null-ls.nvim",
 
-		-- Debugging
-		"mfussenegger/nvim-dap",
-		"jayp0521/mason-nvim-dap.nvim",
 		-- Aditional lsp plugins
 		{ url = "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
 		{ "mfussenegger/nvim-jdtls" },
 		"folke/neodev.nvim",
+		"simrat39/rust-tools.nvim",
 	},
 }
 
@@ -96,13 +94,16 @@ function M.config()
 	-- lsp.nvim_workspace({
 	-- 	-- library = vim.api.nvim_get_runtime_file("", true),
 	-- })
-	require("neodev").setup({})
+	require("neodev").setup({
+		library = { plugins = { "nvim-dap-ui" }, types = true },
+	})
+
 	lsp.setup_servers({
 		"gopls",
 		"kotlin_language_server",
 		-- "pylsp",
 		"r_language_server",
-		"rust_analyzer",
+		-- "rust_analyzer",
 		"lua_ls",
 		"vimls",
 	})
@@ -174,7 +175,23 @@ function M.config()
 			})
 		)
 	)
+	local rust_analyzer_opts = lsp.build_options("rust_analyzer", {})
 	lsp.setup()
+	---
+	-- rust-tools
+	---
+	local extension_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension"
+	local codelldb_path = extension_path .. "/adapter/codelldb"
+	local liblldb_path = extension_path .. "/lldb/lib/liblldb.so" -- MacOS: This may be .dylib
+	require("rust-tools").setup({
+		server = rust_analyzer_opts,
+		-- hover_actions = {
+		-- 	auto_focus = true,
+		-- },
+		dap = {
+			adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+		},
+	})
 	---
 	-- cmp
 	---
@@ -209,11 +226,9 @@ function M.config()
 			-- Formatting
 			null_ls.builtins.formatting.stylua,
 			-- null_ls.builtins.formatting.black,
-			null_ls.builtins.formatting.prettier,
 			null_ls.builtins.formatting.shfmt,
 			null_ls.builtins.formatting.shellharden,
 			-- Diagnostics
-			null_ls.builtins.diagnostics.eslint,
 			null_ls.builtins.diagnostics.shellcheck,
 			-- Code actions
 			null_ls.builtins.code_actions.shellcheck,
@@ -223,7 +238,7 @@ function M.config()
 
 	require("mason-null-ls").setup({
 		ensure_installed = nil,
-		automatic_installation = true,
+		automatic_installation = false,
 		automatic_setup = false,
 	})
 
@@ -236,22 +251,6 @@ function M.config()
 
 		old_notify(msg, ...)
 	end
-	---
-	-- nvim-dap
-	---
-	local mason_dap = require("mason-nvim-dap")
-	mason_dap.setup({
-		ensure_installed = {
-			"bash",
-			"codelldb",
-			"delve",
-			"firefox",
-			"javadbg",
-			"kotlin",
-			"python",
-		},
-		automatic_setup = true,
-	})
 
 	---
 	-- Misc
