@@ -85,8 +85,6 @@ return {
 
 	{ "godlygeek/tabular" }, -- Vim script for text filtering and alignment,
 
-	{ "Vimjas/vim-python-pep8-indent" }, -- Better python indent,
-
 	{ "andymass/vim-matchup" }, -- More options to do on matching text and extends vim's %,
 
 	{
@@ -94,10 +92,6 @@ return {
 		config = true,
 	},
 	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
-	{ "theHamsta/nvim-dap-virtual-text" },
-	{ "nvim-telescope/telescope-dap.nvim" },
-	-- use("mfussenegger/nvim-dap-python")
-
 	{
 		"j-hui/fidget.nvim",
 		config = true,
