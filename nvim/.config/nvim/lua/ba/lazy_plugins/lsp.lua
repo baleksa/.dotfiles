@@ -90,12 +90,8 @@ function M.config()
 		"lua_ls",
 		"vimls",
 	})
-	-- Add neovim and plugins lua files to sumneko-lua
-	-- lsp.nvim_workspace({
-	-- 	-- library = vim.api.nvim_get_runtime_file("", true),
-	-- })
+
 	require("neodev").setup({
-		library = { plugins = { "nvim-dap-ui" }, types = true },
 	})
 
 	lsp.setup_servers({
