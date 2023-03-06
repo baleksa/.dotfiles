@@ -32,7 +32,7 @@ local Colorschemes = {
 		current_colorscheme = "rose_pine_moon"
 	end,
 	monokai = function()
-		require("monokai").setup()
+		require("monokai").setup({ italics = false })
 		require("lualine").setup({ options = { theme = "powerline" } })
 		current_colorscheme = "monokai"
 	end,
@@ -77,6 +77,15 @@ local Colorschemes = {
 		})
 		current_colorscheme = "gruvbox_material"
 	end,
+	tokyonight = function()
+		vim.cmd.colorscheme("tokyonight")
+		require("lualine").setup({
+			options = {
+				theme = "tokyonight",
+			},
+		})
+		current_colorscheme = "tokyonight"
+	end,
 }
 
 local colorscheme_names = {}
@@ -117,10 +126,8 @@ end
 vim.keymap.set("n", "<leader>cc", changeColorscheme, { silent = true })
 
 local swap_background = function()
-	---@diagnostic disable-next-line: undefined-field
 	if vim.opt.background:get() == "light" then
 		vim.opt.background = "dark"
-		---@diagnostic disable-next-line: undefined-field
 	elseif vim.opt.background:get() == "dark" then
 		vim.opt.background = "light"
 	end
