@@ -11,19 +11,54 @@ return {
 	---
 	-- Colorschemes
 	---
-	{ "tanvirtin/monokai.nvim" },
-	{ "shaunsingh/moonlight.nvim" },
-	{ "nyoom-engineering/oxocarbon.nvim" },
-	{ "sainnhe/everforest" },
-	{ "sainnhe/gruvbox-material" },
-	{ "ishan9299/nvim-solarized-lua" },
-	{ "rose-pine/neovim", name = "rose-pine" },
-
+	{
+		"tanvirtin/monokai.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			italics = false,
+		},
+	},
+	{ "shaunsingh/moonlight.nvim", lazy = false, priority = 1000 },
+	{
+		"nyoom-engineering/oxocarbon.nvim",
+		build = "./install.sh",
+		lazy = false,
+		priority = 1000,
+	},
+	{ "sainnhe/everforest", lazy = false, priority = 1000 },
+	{
+		"sainnhe/gruvbox-material",
+		lazy = false,
+		priority = 1000,
+		cond = false,
+	},
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			disable_italics = true,
+		},
+	},
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			theme = "tokyonight",
+			styles = {
+				comments = { italic = false },
+				keywords = { italic = false },
+			},
+		},
+		lualine_bold = true,
+	},
 	-- tpope's phenomenal plugins
 	{ "tpope/vim-fugitive" }, -- Git commands in nvim
 	{ "tpope/vim-rhubarb" }, -- Fugitive-companion to interact with github
 	{ "tpope/vim-repeat" },
-
 	{ "kylechui/nvim-surround", version = "*", config = true },
 	{ "jcdickinson/wpm.nvim", config = true },
 	-- Comment plugin written in Lua '
