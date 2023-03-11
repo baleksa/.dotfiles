@@ -2,6 +2,7 @@
 -- Set plain vim options, keymaps and autocommands
 ---
 
+vim.opt.background = "light"
 vim.opt.colorcolumn = "80"
 -- vim.opt.textwidth = 80
 vim.opt.wrap = true
