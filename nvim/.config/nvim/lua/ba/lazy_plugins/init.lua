@@ -8,53 +8,6 @@ return {
 			})
 		end,
 	},
-	---
-	-- Colorschemes
-	---
-	{
-		"tanvirtin/monokai.nvim",
-		lazy = false,
-		priority = 1000,
-		opts = {
-			italics = false,
-		},
-	},
-	{ "shaunsingh/moonlight.nvim", lazy = false, priority = 1000 },
-	{
-		"nyoom-engineering/oxocarbon.nvim",
-		build = "./install.sh",
-		lazy = false,
-		priority = 1000,
-	},
-	{ "sainnhe/everforest", lazy = false, priority = 1000 },
-	{
-		"sainnhe/gruvbox-material",
-		lazy = false,
-		priority = 1000,
-		cond = false,
-	},
-	{
-		"rose-pine/neovim",
-		name = "rose-pine",
-		lazy = false,
-		priority = 1000,
-		opts = {
-			disable_italics = true,
-		},
-	},
-	{
-		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
-		opts = {
-			theme = "tokyonight",
-			styles = {
-				comments = { italic = false },
-				keywords = { italic = false },
-			},
-		},
-		lualine_bold = true,
-	},
 	-- tpope's phenomenal plugins
 	{ "tpope/vim-fugitive" }, -- Git commands in nvim
 	{ "tpope/vim-rhubarb" }, -- Fugitive-companion to interact with github
@@ -124,7 +77,11 @@ return {
 
 	{
 		"folke/which-key.nvim",
-		config = true,
+		config = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+			require("which-key").setup()
+		end,
 	},
 	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
 	{
