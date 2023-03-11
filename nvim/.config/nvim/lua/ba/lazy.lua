@@ -18,7 +18,7 @@ vim.opt.runtimepath:prepend(lazypath)
 require("lazy").setup("ba.lazy_plugins", {
 	-- defaults = { lazy = true },
 	dev = { path = "~/coding/nvim_plugins" },
-	install = { colorscheme = { "everforest" } },
+	install = { colorscheme = { "everforest", "shine" } },
 	-- checker = { enabled = true },
 	-- diff = {
 	--   cmd = "terminal_git",
