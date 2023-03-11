@@ -58,9 +58,10 @@ function M.config()
 	vim.keymap.set("n", "<leader>?", function()
 		require("telescope.builtin").oldfiles()
 	end, { silent = true, desc = "Search previously opened files" })
-	vim.keymap.set("n", "z=", function()
-		require("telescope.builtin").spell_suggest(require("telescope.themes").get_cursor({}))
-	end, { desc = "Spelling Suggestions" })
+	-- WhichKey has builtin mapping for 'z='
+	-- vim.keymap.set("n", "z=", function()
+	-- 	require("telescope.builtin").spell_suggest(require("telescope.themes").get_cursor({}))
+	-- end, { desc = "Spelling Suggestions" })
 end
 
 return M
