@@ -97,9 +97,7 @@ function M.config()
 	lsp.setup_servers({
 		"gopls",
 		"kotlin_language_server",
-		-- "pylsp",
 		"r_language_server",
-		-- "rust_analyzer",
 		"lua_ls",
 		"vimls",
 	})
@@ -171,6 +169,7 @@ function M.config()
 			})
 		)
 	)
+	-- Get options for rust-tools
 	local rust_analyzer_opts = lsp.build_options("rust_analyzer", {})
 	lsp.setup()
 	---
