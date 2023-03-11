@@ -38,4 +38,5 @@ return {
 		{ key = "UpArrow", mods = "SHIFT", action = act.ScrollToPrompt(-1) },
 		{ key = "DownArrow", mods = "SHIFT", action = act.ScrollToPrompt(1) },
 	},
+	-- window_padding = { left = 0, top = 0, right = 0, bottom = 0 },
 }
