@@ -125,15 +125,6 @@ local changeColorscheme = function()
 end
 vim.keymap.set("n", "<leader>cc", changeColorscheme, { silent = true })
 
-local swap_background = function()
-	if vim.opt.background:get() == "light" then
-		vim.opt.background = "dark"
-	elseif vim.opt.background:get() == "dark" then
-		vim.opt.background = "light"
-	end
-	Colorschemes[current_colorscheme]()
-end
-vim.keymap.set("n", "<leader>cbg", swap_background, { silent = true })
 
-default_setup()
-Colorschemes[default_colorscheme]()
+-- default_setup()
+-- Colorschemes[default_colorscheme]()
