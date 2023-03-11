@@ -3,6 +3,7 @@ local M = {
 	dependencies = {
 		"mfussenegger/nvim-dap-python",
 		"leoluz/nvim-dap-go",
+		"jbyuki/one-small-step-for-vimkind",
 
 		"jayp0521/mason-nvim-dap.nvim",
 
@@ -29,69 +30,97 @@ function M.config()
 			"kotlin",
 			"python",
 		},
-		automatic_setup = false,
+		automatic_setup = true,
+		-- automatic_setup = {
+		-- 	configurations = function(default)
+		-- 		for _, conf in pairs(default.codelldb) do
+		-- 			conf.env = function()
+		-- 				local variables = {}
+		-- 				for k, v in pairs(vim.fn.environ()) do
+		-- 					table.insert(variables, string.format("%s=%s", k, v))
+		-- 				end
+		-- 				return variables
+		-- 			end
+		-- 		end
+		-- 		return default
+		-- 	end,
+		-- },
+	})
+	mason_dap.setup_handlers({
+		function(source_name)
+			-- all sources with no handler get passed here
+
+			-- Keep original functionality of `automatic_setup = true`
+			require("mason-nvim-dap.automatic_setup")(source_name)
+		end,
+		python = function(_)
+			require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
+		end,
+		delve = function(_)
+			require("dap-go").setup()
+		end,
 	})
 	---
 	-- Setup
 	---
 	local dap, dapui = require("dap"), require("dapui")
-
-	-- Python - debugpy
-	require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
-
-	-- Go - delve
-	-- require("dap-go").setup()
-
-	---
-	-- adapters
-	---
-	dap.adapters.lldb = {
-		type = "executable",
-		command = "/usr/sbin/lldb-vscode", -- adjust as needed, must be absolute path
-		name = "lldb",
-	}
-
-	---
-	-- configurations
-	---
-	-- CPP
-	dap.configurations.cpp = {
-		{
-			name = "Launch",
-			type = "lldb",
-			request = "launch",
-			program = function()
-				return vim.fn.input("Path to executable: " .. vim.fn.getcwd() .. "/".. "file")
-			end,
-			cwd = "${workspaceFolder}",
-			stopOnEntry = false,
-			args = {},
-			-- 💀
-			-- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
-			--
-			--    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-			--
-			-- Otherwise you might get the following error:
-			--
-			--    Error on launch: Failed to attach to the target process
-			--
-			-- But you should be aware of the implications:
-			-- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
-			-- runInTerminal = false,
-			env = function()
-				local variables = {}
-				for k, v in pairs(vim.fn.environ()) do
-					table.insert(variables, string.format("%s=%s", k, v))
-				end
-				return variables
-			end,
-		},
-	}
-	-- C
-	dap.configurations.c = dap.configurations.cpp
-	-- Rust
-	-- You can use this or rust-tools
-	dap.configurations.rust = dap.configurations.cpp
+	--
+	-- -- Python - debugpy
+	--
+	-- -- Go - delve
+	--
+	-- ---
+	-- -- adapters
+	-- ---
+	-- dap.adapters.lldb = {
+	-- 	type = "executable",
+	-- 	command = "/usr/sbin/lldb-vscode", -- adjust as needed, must be absolute path
+	-- 	name = "lldb",
+	-- }
+	-- dap.adapters.nlua = function(callback, config)
+	-- 	callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or 8086 })
+	-- end
+	-- ---
+	-- -- configurations
+	-- ---
+	-- -- Lua
+	-- dap.configurations.lua = {
+	-- 	{
+	-- 		type = "nlua",
+	-- 		request = "attach",
+	-- 		name = "Attach to running Neovim instance",
+	-- 	},
+	-- }
+	-- -- CPP
+	-- dap.configurations.cpp = {
+	-- 	{
+	-- 		name = "Launch",
+	-- 		type = "lldb",
+	-- 		request = "launch",
+	-- 		program = function()
+	-- 			return vim.fn.input({
+	-- 				prompt = "Path to executable: " .. vim.fn.getcwd() .. "/",
+	-- 				completion = "file",
+	-- 			})
+	-- 		end,
+	-- 		cwd = "${workspaceFolder}",
+	-- 		stopOnEntry = false,
+	-- 		showDisassembly = "never",
+	-- 		args = {},
+	-- 		-- 💀
+	-- 		-- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
+	-- 		--
+	-- 		--    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+	-- 		--
+	-- 		-- Otherwise you might get the following error:
+	-- 		--
+	-- 		--    Error on launch: Failed to attach to the target process
+	-- 		--
+	-- 		-- But you should be aware of the implications:
+	-- 		-- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
+	-- 		-- runInTerminal = false,
+	-- 	},
+	-- }
 	---
 	-- nvim-dap-ui
 	---
@@ -109,133 +138,28 @@ function M.config()
 	---
 	-- Keymaps
 	---
-	vim.keymap.set("n", "<F4>", function()
-		require("dapui").open()
-	end)
-	vim.keymap.set("n", "<F5>", function()
-		require("dap").continue()
-	end)
-	vim.keymap.set("n", "<F10>", function()
-		require("dap").step_over()
-	end)
-	vim.keymap.set("n", "<F11>", function()
-		require("dap").step_into()
-	end)
-	vim.keymap.set("n", "<F12>", function()
-		require("dap").step_out()
-	end)
-	vim.keymap.set("n", "<Leader>b", function()
-		require("dap").toggle_breakpoint()
-	end)
-	vim.keymap.set("n", "<Leader>B", function()
-		require("dap").set_breakpoint()
-	end)
-	vim.keymap.set("n", "<Leader>lp", function()
-		require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
-	end)
-	vim.keymap.set("n", "<Leader>dr", function()
-		require("dap").repl.open()
-	end)
-	vim.keymap.set("n", "<Leader>dl", function()
-		require("dap").run_last()
-	end)
-	vim.keymap.set({ "n", "v" }, "<Leader>dh", function()
-		require("dap.ui.widgets").hover()
-	end)
-	vim.keymap.set({ "n", "v" }, "<Leader>dp", function()
-		require("dap.ui.widgets").preview()
-	end)
-	vim.keymap.set("n", "<Leader>df", function()
-		local widgets = require("dap.ui.widgets")
-		widgets.centered_float(widgets.frames)
-	end)
-	vim.keymap.set("n", "<Leader>ds", function()
-		local widgets = require("dap.ui.widgets")
-		widgets.centered_float(widgets.scopes)
-	end)
+	require("which-key").register({
+		d = {
+			name = "DAP",
+			R = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run to Cursor" },
+			E = { "<cmd>lua require'dapui'.eval(vim.fn.input '[Expression] > ')<cr>", "Evaluate Input" },
+			e = { "<cmd>lua require'dapui'.eval()<cr>", "Evaluate" },
+			C = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<cr>", "Conditional Breakpoint" },
+			t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
+			l = { "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", "Log point" },
+			U = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle UI" },
+			["sb"] = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
+			c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
+			h = { "<cmd>lua require'dap.ui.widgets'.hover()<cr>", "Hover Variables" },
+			s = { "<cmd>lua require'dap.ui.widgets'.scopes()<cr>", "Scopes" },
+			i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
+			o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
+			u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
+			p = { "<cmd>lua require'dap'.pause.toggle()<cr>", "Pause" },
+			r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
+			q = { "<cmd>lua require'dap'.terminate()<cr>", "Terminate" },
+		},
+	}, { prefix = "<leader>" })
 end
 
 return M
--- -- Setup all nvim-dap extension plugins
---
--- local dap = require("dap")
---
--- local dapui = require("dapui")
--- dapui.setup()
--- dap.listeners.after.event_initialized["dapui_config"] = function()
---   dapui.open()
--- end
--- dap.listeners.before.event_terminated["dapui_config"] = function()
---   dapui.close()
--- end
--- dap.listeners.before.event_exited["dapui_config"] = function()
---   dapui.close()
--- end
---
--- require("nvim-dap-virtual-text").setup {
--- 	-- virt_text_win_col = 70
--- }
---
---
--- -- Setup nvim-dap
---
---
--- local opts = { noremap = true, silent = true }
---
---
--- -- C C++ Rust conf
--- dap.adapters.lldb = {
--- 	type = "executable",
--- 	command = "/bin/lldb-vscode", -- adjust as needed, must be absolute path
--- 	name = "lldb",require("dapui").setup()
--- }
--- dap.configurations.cpp = {
--- 	{
--- 		name = "Launch",
--- 		type = "lldb",
--- 		request = "launch",
--- 		program = function()
--- 			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
--- 		end,
--- 		cwd = "${workspaceFolder}",
--- 		stopOnEntry = false,
--- 		args = {},
--- 		-- 💀
--- 		-- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
--- 		--
--- 		--    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
--- 		--
--- 		-- Otherwise you might get the following error:
--- 		--
--- 		--    Error on launch: Failed to attach to the target process
--- 		--
--- 		-- But you should be aware of the implications:
--- 		-- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
--- 		-- runInTerminal = false,
--- 		env = function()
--- 			local variables = {}
--- 			for k, v in pairs(vim.fn.environ()) do
--- 				table.insert(variables, string.format("%s=%s", k, v))
--- 			end
--- 			return variables
--- 		end,
--- 	},
--- 	{
--- 		-- If you get an "Operation not permitted" error using this, try disabling YAMA:
--- 		--  echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
--- 		name = "Attach to process",
--- 		type = "lldb", -- Adjust this to match your adapter name (`dap.adapters.<name>`)
--- 		request = "attach",
--- 		pid = require("dap.utils").pick_process,
--- 		args = {},
--- 		env = function()
--- 			local variables = {}
--- 			for k, v in pairs(vim.fn.environ()) do
--- 				table.insert(variables, string.format("%s=%s", k, v))
--- 			end
--- 			return variables
--- 		end,
--- 	},
--- }
--- dap.configurations.c = dap.configurations.cpp
--- dap.configurations.rust = dap.configurations.cpp
