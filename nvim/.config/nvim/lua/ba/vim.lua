@@ -127,6 +127,14 @@ vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 vim.keymap.set("n", "gx", [[:silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>]], opts)
+
+vim.keymap.set("n", "<leader>cbg", function()
+	if vim.opt.background:get() == "light" then
+		vim.opt.background = "dark"
+	elseif vim.opt.background:get() == "dark" then
+		vim.opt.background = "light"
+	end
+end, { silent = true })
 ---
 -- Autocommands
 ---
