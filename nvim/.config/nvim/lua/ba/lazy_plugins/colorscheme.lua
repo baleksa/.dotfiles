@@ -5,7 +5,12 @@ return {
 			undercurl = true,
 			underline = true,
 			bold = true,
-			italic = false,
+			italic = {
+				comments = false,
+				strings = false,
+				operators = false,
+				folds = false,
+			},
 			strikethrough = true,
 			invert_selection = false,
 			invert_signs = false,
@@ -45,8 +50,8 @@ return {
 		config = function()
 			vim.g.everforest_background = "hard"
 			vim.g.everforest_better_performance = 1
-			vim.g.everforest_disable_italic_comment = 1
-			vim.g.everforest_enable_italic = 0
+			vim.g.everforest_disable_italic_comment = 0
+			vim.g.everforest_enable_italic = 1
 			vim.opt.background = "light"
 			vim.cmd.colorscheme("everforest")
 			require("lualine").setup({
@@ -81,7 +86,7 @@ return {
 				comments = { italic = false },
 				keywords = { italic = false },
 			},
+			lualine_bold = true,
 		},
-		lualine_bold = true,
 	},
 }
