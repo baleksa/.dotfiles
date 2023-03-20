@@ -7,12 +7,12 @@ current_kblayout=$(
 
 date=$(date +'%a %d-%m-%Y %R')
 
-bat_perc="$(cat /sys/class/power_supply/BAT0/capacity)"
-if [ "$bat_perc" -lt 100 ]; then
-	bat_time="$(acpi -b | head -1 | cut -d' ' -f5 | sed -E 's/:..$//')"
-	bat_stat="  ${bat_perc}% ${bat_time}"
-else
-	bat_stat=""
-fi
+# bat_perc="$(cat /sys/class/power_supply/BAT0/capacity)"
+# if [ "$bat_perc" -lt 100 ]; then
+# 	bat_time="$(acpi -b | head -1 | cut -d' ' -f5 | sed -E 's/:..$//')"
+# 	bat_stat="  ${bat_perc}% ${bat_time}"
+# else
+# 	bat_stat=""
+# fi
 
 echo "${current_kblayout}  ${date}${bat_stat}"
