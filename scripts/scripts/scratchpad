@@ -6,5 +6,5 @@ case "$TERMINAL" in
 	wezterm-gui start --class="$title" &
 	;;
 esac
-sleep 0.2s
+sleep 0.25s
 swaymsg 'scratchpad show'
