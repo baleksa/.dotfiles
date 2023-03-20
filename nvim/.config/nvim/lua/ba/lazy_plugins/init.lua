@@ -119,5 +119,18 @@ return {
 	{ "shortcuts/no-neck-pain.nvim", opts = { buffers = {} } },
 	{ "RaafatTurki/hex.nvim", config = true },
 	{ "vim-scripts/Decho" },
-	{ "m4xshen/smartcolumn.nvim", opts = { scope = "window" } },
+	{
+		"m4xshen/smartcolumn.nvim",
+		opts = {
+			scope = "window",
+			disabled_filetypes = {
+				"help",
+				"text",
+				"markdown",
+				"lazy",
+				"mason",
+			},
+		},
+	},
+	{ "timmyjose-projects/lox.vim" },
 }
