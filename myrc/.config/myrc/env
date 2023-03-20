@@ -6,7 +6,10 @@ export MYNOTES_DIR="$HOME/notes"
 
 export XDG_CONFIG_HOME=~/.config
 export XDG_STATE_HOME=~/.local/state
-
+export XDG_DATA_DIRS="$HOME/.local/share:$XDG_DATA_DIRS"
+# This need to be set in a system's startup script, if using runit check
+# /etc/profile.d/set_xdg_runtime_dir.sh
+# export XDG_RUNTIME_DIR=~/.run
 
 export GOPATH="$HOME/go"
 
@@ -16,9 +19,6 @@ export ANDROID_SDK_PATH="$HOME/Android/Sdk"
 export ANDROID_STUDIO_PATH="$HOME/Repositories/android-studio/bin"
 
 export PATH="$MYSCRIPTS_DIR:$HOME/.luarocks/bin:$HOME/.local/bin:$PATH:$ANDROID_STUDIO_PATH:$GOPATH/bin:$ANDROID_SDK_PATH/emulator:$ANDROID_SDK_PATH/tools"
-
-# export XDG_RUNTIME_DIR=~/.run
-
 
 export GIT_REPOS_DIR=~/repositories
 
