@@ -216,3 +216,5 @@ zsh-history-substring-search
 zsh-syntax-highlighting
 zzz-user-hooks
 webkit2gtk
+poweralertd
+mako
