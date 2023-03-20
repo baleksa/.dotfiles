@@ -7,4 +7,5 @@ swaylock -f -c 000000
 # Sleep 1 sec to give swaylock enough time to lock the screen. Without 1 sec
 # sleep system suspends at the middle of locking, then when awaken shows 
 # ulocked screen for a sec and locks the screen after that.
-sleep 1
+# It doesn't work with a sleep shorter than 1sec.
+sleep 1s
