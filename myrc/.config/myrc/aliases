@@ -67,7 +67,6 @@ alias stc='rclone bisync gdrive_void_hpi5:todo /home/baleksa/Documents/todo --ex
 alias reboot='sudo reboot'
 alias poweroff='sudo poweroff'
 alias halt='sudo halt'
-alias halt='sudo halt'
 alias zzz='sudo zzz'
 alias ZZZ='sudo ZZZ'
 alias shutdown='sudo shutdown'
