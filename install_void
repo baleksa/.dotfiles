@@ -158,4 +158,4 @@ xdg-mime default nvim.desktop text/english text/plain text/x-makefile text/x-c++
 xdg-mime default lf.desktop inode/directory
 
 message "REBOOTING NOW"
-sudo reboot now
+reboot now
