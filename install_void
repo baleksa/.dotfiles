@@ -121,8 +121,9 @@ xi -Su -y
 xi -y "$(cat ./void_packages.txt)"
 
 message "Set udkiskie polkit rules to enable (un)mounting drives for regular users"
-sudo mkdir -p /etc/pokit-1/rules.d &&
-sudo tee -a /etc/polkit-1/rules.d/50-udiskie.rules <<'script'
+mkdir -p /etc/pokit-1/rules.d
+[ -d /etd/polkit-1/rules.d ] &&
+	sudo tee -a /etc/polkit-1/rules.d/50-udiskie.rules <<'script'
 polkit.addRule(function(action, subject) {
   var YES = polkit.Result.YES;
   var permission = {
@@ -148,6 +149,7 @@ polkit.addRule(function(action, subject) {
   }
 });
 script
+chmod 644 /etc/polkit-1/rules.d/50-udiskie.rules
 
 message "Set default applications for various mime types"
 xdg-mime default org.pwmt.zathura.desktop application/pdf
