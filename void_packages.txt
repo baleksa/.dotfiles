@@ -218,3 +218,4 @@ zzz-user-hooks
 webkit2gtk
 poweralertd
 mako
+elogind
