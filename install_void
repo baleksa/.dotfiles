@@ -41,6 +41,16 @@ xi -y intel-ucode mesa-vulkan-intel linux-firmware-intel intel-video-accel
 xi -y linux-firmware-amd vulkan-loader
 xi -y nvidia
 
+message "MAKE POWER GROUP AND ENABLE IT'S MEMBERS TO RUN POWER COMMANDS"
+groupadd power
+mkdir -p '/etc/sudoers.d'
+[ -d '/etc/sudoers.d' ] &&
+	sudo tee '/etc/sudoers.d/power' <<script
+## Admin user group is allowed to execute halt and reboot
+%power ALL=NOPASSWD: /usr/bin/halt, /usr/bin/reboot, /usr/bin/poweroff, /usr/bin/zzz, /usr/bin/ZZZ
+script
+chmod 0440 '/etc/sudoers.d/power'
+
 message "DBUS"
 xi -y dbus && add_service dbus
 
