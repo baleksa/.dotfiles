@@ -4,6 +4,6 @@ Name=lf
 Comment=Launches the lf file manager
 Icon=utilities-terminal
 # Terminal=true
-Exec=wezterm start lf
+Exec=sh -c "eval $TERM -e lf %F"
 Categories=ConsoleOnly;System;FileTools;FileManager
 MimeType=inode/directory;
