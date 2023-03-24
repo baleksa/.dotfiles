@@ -3,7 +3,9 @@ Type=Application
 Name=lf
 Comment=Launches the lf file manager
 Icon=utilities-terminal
+# This is commented because it doesn't work
 # Terminal=true
+TryExec=lf
 # %f is a file on which xdg-open is called
 Exec=sh -c "eval \$TERM -e lf %f"
 Categories=ConsoleOnly;System;FileTools;FileManager

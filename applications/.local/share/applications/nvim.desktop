@@ -79,7 +79,8 @@ Comment[zh_TW]=編輯文字檔
 TryExec=nvim
 # %F are files on which xdg-open is called
 Exec=sh -c "eval \$TERM -e nvim %F"
-Terminal=false
+# This doesn't work
+# Terminal=true
 Type=Application
 Keywords=Text;editor;
 Keywords[ckb]=دەق;دەستکاریکەر;
