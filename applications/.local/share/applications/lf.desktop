@@ -4,6 +4,7 @@ Name=lf
 Comment=Launches the lf file manager
 Icon=utilities-terminal
 # Terminal=true
-Exec=sh -c "eval $TERM -e lf %F"
+# %f is a file on which xdg-open is called
+Exec=sh -c "eval \$TERM -e lf %f"
 Categories=ConsoleOnly;System;FileTools;FileManager
 MimeType=inode/directory;

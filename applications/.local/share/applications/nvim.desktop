@@ -77,8 +77,9 @@ Comment[wa]=Asspougnî des fitchîs tecses
 Comment[zh_CN]=编辑文本文件
 Comment[zh_TW]=編輯文字檔
 TryExec=nvim
-Exec=sh -c "eval $TERM -e nvim %F"
-# Terminal=true
+# %F are files on which xdg-open is called
+Exec=sh -c "eval \$TERM -e nvim %F"
+Terminal=false
 Type=Application
 Keywords=Text;editor;
 Keywords[ckb]=دەق;دەستکاریکەر;
