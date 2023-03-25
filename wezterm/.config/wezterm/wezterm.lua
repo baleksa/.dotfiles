@@ -18,9 +18,19 @@ local select_and_open_url = act.QuickSelectArgs({
 --- Final configuration table
 ---
 return {
-	font = wezterm.font({
-		family = "monospace",
-		harfbuzz_features = { "ss02" },
+	-- font = wezterm.font({
+	-- 	family = "monospace",
+	-- 	harfbuzz_features = { "ss02" },
+	-- }),
+	font = wezterm.font_with_fallback({
+		{
+			family = "monospace",
+			harfbuzz_features = { "ss02" },
+		},
+		{
+			family = "Symbols Nerd Font Mono",
+			scale = 0.8,
+		},
 	}),
 	font_size = 12.0,
 	term = "wezterm",
