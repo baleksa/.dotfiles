@@ -9,18 +9,18 @@ update_mason_packages() {
 
 update_python_lsp_extensions() {
 	pylsp_path="$HOME/.local/share/nvim/mason/packages/python-lsp-server"
-	[ -d "$pylsp_path" ] || exit 1
 	cd "$pylsp_path" || {
-		echo "Failed to cd to $HOME/.local/share/nvim/mason/packages/python-lsp-server"
+		echo "Failed to cd to $pylsp_path"
 		return 1
 	}
 
+	# shellcheck disable=1091
 	. "$pylsp_path/venv/bin/activate" || {
 		echo "Failed to activate python venv."
 		return 1
 	}
 
-	pip uninstall pyls-isort isort \
+	pip uninstall -y pyls-isort isort \
 		pylint flake8 pycodestyle \
 		autopep8 yapf pyflakes pydocstyle
 	status="$?"
@@ -28,7 +28,7 @@ update_python_lsp_extensions() {
 		echo "Removing useless pip packages failed."
 		return "$status"
 	fi
-	pip install python-lsp-black pylsp-rope \
+	pip install --no-input python-lsp-black pylsp-rope \
 		python-lsp-ruff ruff black rope
 	status="$?"
 	if [ "$status" -ne 0 ]; then
