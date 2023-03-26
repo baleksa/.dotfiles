@@ -29,7 +29,7 @@ return {
 		},
 		{
 			family = "Symbols Nerd Font Mono",
-			scale = 0.8,
+			scale = 0.75,
 		},
 	}),
 	font_size = 12.0,
