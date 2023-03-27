@@ -19,9 +19,8 @@ local changeColorscheme = function()
 				actions.select_default:replace(function()
 					actions.close(prompt_bufnr)
 					local selection = action_state.get_selected_entry()
-					-- print(selection)
-					-- vim.api.nvim_put({ selection[1] }, "", false, true)
-					vim.cmd.colorscheme(selection[1])
+					local picked_colorsceme = selection[1]
+					vim.cmd.colorscheme(picked_colorsceme)
 				end)
 				return true
 			end,
