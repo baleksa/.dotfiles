@@ -3,7 +3,7 @@ local M = { "nvim-lualine/lualine.nvim", dependencies = { "kyazdani42/nvim-web-d
 function M.config()
 	require("lualine").setup({
 		options = {
-			-- theme = 'onedark',
+			-- theme = 'everforest',
 			component_separators = { left = "", right = "" },
 			section_separators = { left = "", right = "" },
 		},

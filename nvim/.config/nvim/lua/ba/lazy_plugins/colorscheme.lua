@@ -6,10 +6,10 @@ return {
 			underline = true,
 			bold = true,
 			italic = {
-				comments = false,
+				comments = true,
 				strings = false,
 				operators = false,
-				folds = false,
+				folds = true,
 			},
 			strikethrough = true,
 			invert_selection = false,
@@ -23,6 +23,7 @@ return {
 			dim_inactive = false,
 			transparent_mode = false,
 		},
+		-- cond = false,
 	},
 	{
 		"tanvirtin/monokai.nvim",
@@ -65,7 +66,7 @@ return {
 		"sainnhe/gruvbox-material",
 		lazy = false,
 		priority = 1000,
-		cond = false,
+		-- cond = false,
 	},
 	{
 		"rose-pine/neovim",
@@ -89,4 +90,12 @@ return {
 			lualine_bold = true,
 		},
 	},
+	-- {
+	-- 	"morhetz/gruvbox",
+	-- 	config = function()
+	-- 		vim.g.grubox_contrast_dark = "hard"
+	-- 		vim.g.grubox_contrast_light = "hard"
+	-- 		vim.g.gruvbox_italicize_comments = true
+	-- 	end,
+	-- },
 }
