@@ -75,6 +75,9 @@ function M.config()
 			},
 		},
 	})
+
+	vim.keymap.set("n", "[b", "<Plug>(cokeline-focus-prev)")
+	vim.keymap.set("n", "]b", "<Plug>(cokeline-focus-next)")
 end
 
 return M
