@@ -7,6 +7,7 @@ SAVEHIST=1000000
 # Add completion folder to fpath
 [ -d "$ZDOTDIR/completion" ] && fpath+="$ZDOTDIR/completion/"
 
+[ -n "$ASDF_DIR" ] && fpath=(${ASDF_DIR}/completions $fpath)
 
 # some useful options (man zshoptions)
 setopt autocd extendedglob nomatch menucomplete
@@ -91,6 +92,8 @@ safe_source /usr/share/fzf/key-bindings.zsh
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
+
+source "$HOME/.asdf/asdf.sh"
 
 eval "$(zoxide init zsh)"
 
