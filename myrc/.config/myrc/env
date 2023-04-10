@@ -18,7 +18,7 @@ export JAVA_HOME="/usr/lib/jvm/openjdk17"
 export ANDROID_SDK_PATH="$HOME/Android/Sdk"
 export ANDROID_STUDIO_PATH="$HOME/Repositories/android-studio/bin"
 
-export PATH="$MYSCRIPTS_DIR:$HOME/.luarocks/bin:$HOME/.local/bin:$PATH:$ANDROID_STUDIO_PATH:$GOPATH/bin:$ANDROID_SDK_PATH/emulator:$ANDROID_SDK_PATH/tools"
+export PATH="$MYSCRIPTS_DIR:$HOME/.luarocks/bin:$HOME/.local/bin:$ANDROID_STUDIO_PATH:$GOPATH/bin:$ANDROID_SDK_PATH/emulator:$ANDROID_SDK_PATH/tools:$PATH"
 
 export GIT_REPOS_DIR=~/repositories
 
