@@ -3,8 +3,18 @@ return {
 		"kyazdani42/nvim-web-devicons",
 		dependencies = { "DaikyXendo/nvim-material-icon" },
 		config = function()
-			require("nvim-web-devicons").setup({
-				override = require("nvim-material-icon").get_icons(),
+			local web_devicons_ok, web_devicons = pcall(require, "nvim-web-devicons")
+			if not web_devicons_ok then
+				return
+			end
+
+			local material_icon_ok, material_icon = pcall(require, "nvim-material-icon")
+			if not material_icon_ok then
+				return
+			end
+
+			web_devicons.setup({
+				override = material_icon.get_icons(),
 			})
 		end,
 	},
@@ -48,17 +58,26 @@ return {
 
 	{ "lukas-reineke/indent-blankline.nvim" },
 
+	{ "folke/trouble.nvim", config = true },
 	{
 		"folke/twilight.nvim",
 		-- Dim inactive portions of code
 		config = true,
 	},
-
 	{
 		"folke/zen-mode.nvim",
 		-- Hides everything except buffer content and enters fullscreen
 		config = true,
 	},
+	{
+		"folke/which-key.nvim",
+		config = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+			require("which-key").setup()
+		end,
+	},
+
 	{ "prichrd/netrw.nvim" },
 	{
 		"toppair/peek.nvim",
@@ -75,14 +94,6 @@ return {
 
 	{ "andymass/vim-matchup" }, -- More options to do on matching text and extends vim's %,
 
-	{
-		"folke/which-key.nvim",
-		config = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-			require("which-key").setup()
-		end,
-	},
 	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
 	{
 		"j-hui/fidget.nvim",
