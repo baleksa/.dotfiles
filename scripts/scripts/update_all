@@ -13,7 +13,7 @@ do_job() {
 	failed_msg="$1"
 	shift
 	colored_echo "$hello_msg" "$PURPLE"
-	if eval "$*"; then
+	if "$@"; then
 		colored_echo "$bye_msg" "$GREEN"
 	else
 		colored_echo "$failed_msg" "$RED"
