@@ -1,5 +1,7 @@
 #!/bin/sh
 
+mason_packages_path="$HOME/.local/share/nvim/mason/packages"
+
 update_mason_packages() {
 	nvim --headless \
 		-c 'autocmd User MasonUpdateAllComplete quitall' \
@@ -7,8 +9,18 @@ update_mason_packages() {
 
 }
 
+update_solargraph_rails() {
+	solargraph_path="$mason_packages_path/solargraph"
+	cd "$solargraph_path" || {
+		echo "Failed to cd to $solargraph_path"
+		return 1
+	}
+
+	gem i --install-dir "$solargraph_path" solargraph-rails
+}
+
 update_python_lsp_extensions() {
-	pylsp_path="$HOME/.local/share/nvim/mason/packages/python-lsp-server"
+	pylsp_path="$mason_packages_path/python-lsp-server"
 	cd "$pylsp_path" || {
 		echo "Failed to cd to $pylsp_path"
 		return 1
@@ -54,5 +66,12 @@ if [ "$status" -ne 0 ]; then
 	echo "Updating pylsp extension failed with error $status"
 	exit "$status"
 fi
- 
+
+update_solargraph_rails
+status="$?"
+if [ "$status" -ne 0 ]; then
+	echo "Adding solargraph-rails to solargraph failed with error $status"
+	exit "$status"
+fi
+
 exit 0
