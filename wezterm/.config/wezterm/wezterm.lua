@@ -36,11 +36,8 @@ return {
 	term = "wezterm",
 	color_scheme_dirs = { "~/.config/wezterm/colors" },
 	color_scheme = "Everforest Light (Hard)",
-	unix_domains = {
-		{
-			name = "unix",
-		},
-	},
+	check_for_updates = false,
+	-- show_update_window = false,
 	hide_tab_bar_if_only_one_tab = true,
 	keys = {
 		{ key = "P", mods = "CTRL|SHIFT", action = select_and_open_url },
