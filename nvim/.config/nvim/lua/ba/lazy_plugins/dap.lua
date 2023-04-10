@@ -9,6 +9,7 @@ local M = {
 
 		"rcarriga/nvim-dap-ui",
 		"theHamsta/nvim-dap-virtual-text",
+		"suketa/nvim-dap-ruby",
 	},
 }
 function M.config()
@@ -45,8 +46,7 @@ function M.config()
 		-- 		return default
 		-- 	end,
 		-- },
-	})
-	mason_dap.setup_handlers({
+		handlers = {
 		function(source_name)
 			-- all sources with no handler get passed here
 
@@ -59,7 +59,11 @@ function M.config()
 		delve = function(_)
 			require("dap-go").setup()
 		end,
+		},
 	})
+
+	require("dap-ruby").setup()
+
 	---
 	-- Setup
 	---
