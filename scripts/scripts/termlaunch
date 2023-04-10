@@ -3,8 +3,11 @@
 window_title="termlauncher"
 
 case "$TERM" in
-	wezterm) wezterm-gui start --class="$window_title" -- "$1"
+wezterm)
+	wezterm --config 'window_close_confirmation="NeverPrompt"' \
+		start --class="$window_title" -- "$1"
 	;;
-	*foot*) start_foot -T"$window_title" "$1"
+*foot*)
+	start_foot -T"$window_title" "$1"
 	;;
 esac
