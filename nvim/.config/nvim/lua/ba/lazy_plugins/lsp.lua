@@ -74,34 +74,54 @@ function M.config()
 		bind("n", "]d", vim.diagnostic.goto_next)
 		bind("n", "gl", vim.diagnostic.setloclist)
 
-		bind("n", "<leader>f", lspbuf.format)
+		bind("n", "<leader>f", function()
+			vim.lsp.buf.format({
+				bufnr = bufnr,
+				async = true,
+				filter = function(client)
+					return client.name ~= "solargraph"
+				end,
+			})
+		end)
 	end
 	lsp.on_attach(common_on_attach)
 
-	lsp.ensure_installed({
+	local auto_install_and_setup = {
+		"gopls",
+		"kotlin_language_server",
+		"lua_ls",
+		"vimls",
+		"html",
+		"cssls",
+		"tsserver",
+		"standardrb",
+	}
+
+	local just_auto_install = {
+		"solargraph",
 		"bashls",
 		"clangd",
-		"gopls",
 		"jdtls",
-		"kotlin_language_server",
 		"pylsp",
-		-- "r_language_server",
 		"rust_analyzer",
-		"lua_ls",
-		"vimls",
-	})
+	}
 
-	require("neodev").setup({
-	})
+	lsp.ensure_installed(vim.list_extend(auto_install_and_setup, just_auto_install))
 
-	lsp.setup_servers({
-		"gopls",
-		"kotlin_language_server",
-		-- "r_language_server",
-		"lua_ls",
-		"vimls",
-	})
+	require("neodev").setup({})
+
+	lsp.setup_servers(vim.list_extend(auto_install_and_setup, {}))
 	-- Add additional special conf to some servers
+	-- lsp.configure("typeprof")
+	lsp.configure("solargraph", {
+		filetypes = {
+			"ruby",
+			"eruby",
+		},
+		init_options = {
+			formatting = false,
+		},
+	})
 	lsp.configure("pylsp", {
 		settings = {
 			pylsp = {
@@ -217,23 +237,64 @@ function M.config()
 	---
 	local null_ls = require("null-ls")
 	null_ls.setup({
+		on_attach = function(client, bufnr)
+			local bufopts = { silent = true, buffer = bufnr }
+			local bind = function(m, lhs, rhs)
+				vim.keymap.set(m, lhs, rhs, bufopts)
+			end
+			local lspbuf = vim.lsp.buf
+
+			bind("n", "K", lspbuf.hover)
+			bind("n", "gd", lspbuf.definition)
+			bind("n", "gD", lspbuf.declaration)
+			bind("n", "gi", lspbuf.implementation)
+			bind("n", "go", lspbuf.type_definition)
+			bind("n", "gr", lspbuf.references)
+			bind("i", "<C-h>", lspbuf.signature_help)
+			bind("n", "<leader>rn", lspbuf.rename)
+			bind("n", "<leader>ca", lspbuf.code_action)
+
+			bind("n", "<leader>d", vim.diagnostic.open_float)
+			bind("n", "[d", vim.diagnostic.goto_prev)
+			bind("n", "]d", vim.diagnostic.goto_next)
+			bind("n", "gl", vim.diagnostic.setloclist)
+
+			bind("n", "<leader>f", function()
+				vim.lsp.buf.format({
+					bufnr = bufnr,
+					async = true,
+					filter = function(client)
+						return client.name ~= "solargraph"
+					end,
+				})
+			end)
+		end,
 		sources = {
+			-- Diagnostics
+			null_ls.builtins.diagnostics.semgrep.with({
+				extra_args = { "--config=auto" },
+			}),
+			-- Code actions
+			null_ls.builtins.code_actions.gitsigns,
 			-- Formatting
+			null_ls.builtins.formatting.yq,
+			-- Lua
 			null_ls.builtins.formatting.stylua,
-			-- null_ls.builtins.formatting.black,
+			-- Ruby
+			null_ls.builtins.diagnostics.reek, -- Complements rubocop
+			null_ls.builtins.diagnostics.erb_lint, -- .erb
+			null_ls.builtins.formatting.htmlbeautifier, -- .erb
+			-- Shell
+			null_ls.builtins.diagnostics.shellcheck,
 			null_ls.builtins.formatting.shfmt,
 			null_ls.builtins.formatting.shellharden,
-			-- Diagnostics
-			null_ls.builtins.diagnostics.shellcheck,
-			-- Code actions
 			null_ls.builtins.code_actions.shellcheck,
-			null_ls.builtins.code_actions.gitsigns,
 		},
 	})
 
 	require("mason-null-ls").setup({
-		ensure_installed = nil,
-		automatic_installation = false,
+		ensure_installed = {},
+		automatic_installation = true,
 		automatic_setup = false,
 	})
 
