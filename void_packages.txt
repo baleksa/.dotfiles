@@ -103,7 +103,6 @@ mesa-vdpau
 mesa-vulkan-intel
 meson
 mpv
-msttcorefonts
 ncurses-devel
 neofetch
 ninja
