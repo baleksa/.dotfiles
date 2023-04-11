@@ -4,9 +4,14 @@ HISTFILE="$ZDOTDIR/.zsh_history"
 HISTSIZE=1000000
 SAVEHIST=1000000
 
+# Useful Functions
+source "$ZDOTDIR/zsh-functions"
+
 # Add completion folder to fpath
 [ -d "$ZDOTDIR/completion" ] && fpath+="$ZDOTDIR/completion/"
 
+
+safe_source "$HOME/.asdf/asdf.sh"
 [ -n "$ASDF_DIR" ] && fpath=(${ASDF_DIR}/completions $fpath)
 
 # some useful options (man zshoptions)
@@ -41,9 +46,6 @@ autoload -Uz add-zsh-hook
 
 # Colors
 autoload -Uz colors && colors
-
-# Useful Functions
-source "$ZDOTDIR/zsh-functions"
 
 # Normal files to source
 safe_source "$ZDOTDIR/zsh-exports"
@@ -92,8 +94,6 @@ safe_source /usr/share/fzf/key-bindings.zsh
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
-
-source "$HOME/.asdf/asdf.sh"
 
 eval "$(zoxide init zsh)"
 
