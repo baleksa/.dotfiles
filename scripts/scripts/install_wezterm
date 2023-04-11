@@ -1,0 +1,15 @@
+#!/bin/sh
+
+version=20230408-112425-69ae8472
+full_name="wezterm-$version"
+
+cd /tmp || exit
+curl -LO "https://github.com/wez/wezterm/releases/download/$version/$full_name-src.tar.gz"
+tar -xzf "$full_name-src.tar.gz"
+cd "$full_name" || exit
+./get-deps
+cargo build --release
+cargo run --release --bin wezterm -- start
+
+cd "$full_name/target/release" || exit
+cp -t ~/.local/bin wezterm wezterm-gui wezterm-mux-server
