@@ -81,10 +81,8 @@ eval "$(starship init zsh)"
 
 safe_source "$ZDOTDIR/zsh-vim-mode"
 
-# Backspace key doesn't work in iserach with this plugin ZSH_AUTOPAIR_DIR="$GIT_REPOS_DIR/.zsh-autopair"
-if [[ ! -d "$ZSH_AUTOPAIR_DIR" ]]; then
-  git clone https://github.com/hlissner/zsh-autopair "$ZSH_AUTOPAIR_DIR"
-fi
+# Backspace key doesn't work in iserach with this plugins
+ZSH_AUTOPAIR_DIR="$GIT_REPOS_DIR/.zsh-autopair"
 safe_source "$ZSH_AUTOPAIR_DIR/autopair.zsh"
 autopair-init
 
