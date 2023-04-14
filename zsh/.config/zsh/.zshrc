@@ -1,6 +1,6 @@
 # History setup
 setopt appendhistory
-HISTFILE="$ZDOTDIR/.zsh_history"
+HISTFILE="${HOME}/.cache/zsh/history"
 HISTSIZE=1000000
 SAVEHIST=1000000
 
@@ -36,66 +36,65 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
-
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-
-autoload -Uz add-zsh-hook
-
 # Colors
 autoload -Uz colors && colors
 
 # Normal files to source
 safe_source "$ZDOTDIR/zsh-exports"
-safe_source "$ZDOTDIR/zsh-vim-mode"
 safe_source "$ZDOTDIR/zsh-aliases"
 
 # Source additional organized into files in $ZDOTDIR/conf.d
 [ -d "$ZDOTDIR/conf.d" ] && source "$ZDOTDIR"/conf.d/*
 
+
+# FZF 
+safe_source /usr/share/fzf/completion.zsh
+safe_source /usr/share/fzf/key-bindings.zsh
+# Bind searching to Alt+r because zsh-vim-mode binds Ctr+r to builtin revsearch
+bindkey -M emacs '^[r' fzf-history-widget
+bindkey -M vicmd '^[r' fzf-history-widget
+bindkey -M viins '^[r' fzf-history-widget
+
+# Edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
+source <(cod init $$ zsh)
+
+eval "$(zoxide init zsh)"
+alias cd=z
+# zle reset-prompt is needed to redisplay the shell prompt after executing the zi
+# command.
+run_zi() {
+	zi
+	zle reset-prompt
+}
+zle -N run_zi
+bindkey "^[z" run_zi
+
+# Use starship for prompt https://github.com/starship/starship
+eval "$(starship init zsh)"
+
 # PLUGINS
 #
-ZSH_SYNTAX_HIGHLIGHT="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-safe_source "$ZSH_SYNTAX_HIGHLIGHT"
+# This order is important!
 
-ZSH_AUTO_SUGG="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-safe_source "$ZSH_AUTO_SUGG"
+safe_source "$ZDOTDIR/zsh-vim-mode"
 
-ZSH_HISTORY_SUBSTRING_SEARCH="/usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
-safe_source "$ZSH_HISTORY_SUBSTRING_SEARCH"
-
-# Autopair plugin
-ZSH_AUTOPAIR_DIR="$GIT_REPOS_DIR/.zsh-autopair"
+# Backspace key doesn't work in iserach with this plugin ZSH_AUTOPAIR_DIR="$GIT_REPOS_DIR/.zsh-autopair"
 if [[ ! -d "$ZSH_AUTOPAIR_DIR" ]]; then
   git clone https://github.com/hlissner/zsh-autopair "$ZSH_AUTOPAIR_DIR"
 fi
 safe_source "$ZSH_AUTOPAIR_DIR/autopair.zsh"
 autopair-init
 
+ZSH_AUTO_SUGG="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+safe_source "$ZSH_AUTO_SUGG"
 
+ZSH_SYNTAX_HIGHLIGHT="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+safe_source "$ZSH_SYNTAX_HIGHLIGHT"
+ZSH_HIGHLIGHT_HIGHLIGHTERS+=brackets
 
+ZSH_HISTORY_SUBSTRING_SEARCH="/usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
+safe_source "$ZSH_HISTORY_SUBSTRING_SEARCH"
 
-# Key-bindings
-bindkey -s '^f' 'lf^M'
-bindkey -s '^v' 'nvim '
-bindkey -s '^z' 'zi^M'
-bindkey "^k" up-line-or-beginning-search # Up
-bindkey "^j" down-line-or-beginning-search # Down
-bindkey -r "^u"
-bindkey -r "^d"
-
-# FZF 
-safe_source /usr/share/fzf/completion.zsh
-safe_source /usr/share/fzf/key-bindings.zsh
-
-
-# Edit line in vim with ctrl-e:
-autoload edit-command-line; zle -N edit-command-line
-bindkey '^e' edit-command-line
-
-eval "$(zoxide init zsh)"
-
-# Use starship for prompt https://github.com/starship/starship
-eval "$(starship init zsh)"

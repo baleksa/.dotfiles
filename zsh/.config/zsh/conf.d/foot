@@ -1,4 +1,6 @@
 # vi: ft=zsh
+#
+autoload -Uz add-zsh-hook
 # Scroll on CTRL-L in foot terminal 
 if [[ $TERM =~ "^foot" ]]; then
     clear-screen-keep-sb() {
