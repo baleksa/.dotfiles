@@ -8,7 +8,7 @@ source "$ZDOTDIR/zsh-functions"
 # Add completion folder to fpath
 [ -d "$ZDOTDIR/completion" ] && fpath+="$ZDOTDIR/completion/"
 
-fpath+="${ZPLUGDIR/zsh-completion/src}"
+fpath+="${ZPLUGDIR}/zsh-completions/src"
 
 safe_source "$HOME/.asdf/asdf.sh"
 [ -n "$ASDF_DIR" ] && fpath=(${ASDF_DIR}/completions $fpath)
