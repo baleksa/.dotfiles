@@ -1,8 +1,6 @@
 # History setup
-setopt appendhistory
-HISTFILE="${HOME}/.cache/zsh/history"
-HISTSIZE=1000000
-SAVEHIST=1000000
+setopt APPEND_HISTORY
+setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 
 # Useful Functions
 source "$ZDOTDIR/zsh-functions"
@@ -32,7 +30,7 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 zstyle ':completion::complete:lsof:*' menu yes select
-zmodload zsh/complist
+# zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
@@ -55,10 +53,6 @@ bindkey -M emacs '^[r' fzf-history-widget
 bindkey -M vicmd '^[r' fzf-history-widget
 bindkey -M viins '^[r' fzf-history-widget
 
-# Edit line in vim with ctrl-e:
-autoload edit-command-line; zle -N edit-command-line
-bindkey '^e' edit-command-line
-
 source <(cod init $$ zsh)
 
 eval "$(zoxide init zsh)"
@@ -75,16 +69,20 @@ bindkey "^[z" run_zi
 # Use starship for prompt https://github.com/starship/starship
 eval "$(starship init zsh)"
 
-# PLUGINS
+# External PLUGINS
 #
 # This order is important!
 
-safe_source "$ZDOTDIR/zsh-vim-mode"
 
-# Backspace key doesn't work in iserach with this plugins
+# Backspace keybindings must go after loading zsh-autopair plugin. That's done
+# in vim-mode plugin
 ZSH_AUTOPAIR_DIR="$GIT_REPOS_DIR/.zsh-autopair"
 safe_source "$ZSH_AUTOPAIR_DIR/autopair.zsh"
 autopair-init
+
+# Must be loaded after zsh-autopair in order for some keybindings (backspace,
+# etc.) will work.
+safe_source "$ZDOTDIR/zsh-vim-mode-no-dep.zsh"
 
 ZSH_AUTO_SUGG="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 safe_source "$ZSH_AUTO_SUGG"
