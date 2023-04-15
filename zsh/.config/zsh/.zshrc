@@ -76,21 +76,17 @@ eval "$(starship init zsh)"
 
 # Backspace keybindings must go after loading zsh-autopair plugin. That's done
 # in vim-mode plugin
-ZSH_AUTOPAIR_DIR="$GIT_REPOS_DIR/.zsh-autopair"
-safe_source "$ZSH_AUTOPAIR_DIR/autopair.zsh"
+source "${ZPLUGDIR}/zsh-autopair/autopair.zsh"
 autopair-init
 
 # Must be loaded after zsh-autopair in order for some keybindings (backspace,
-# etc.) will work.
-safe_source "$ZDOTDIR/zsh-vim-mode-no-dep.zsh"
+# etc.) to work.
+source "${ZDOTDIR}/zsh-vim-mode-no-dep"
 
-ZSH_AUTO_SUGG="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-safe_source "$ZSH_AUTO_SUGG"
+source "${ZPLUGDIR}/zsh-autosuggestions/zsh-autosuggestions.zsh" 
 
-ZSH_SYNTAX_HIGHLIGHT="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-safe_source "$ZSH_SYNTAX_HIGHLIGHT"
+source "${ZPLUGDIR}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=brackets
 
-ZSH_HISTORY_SUBSTRING_SEARCH="/usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
-safe_source "$ZSH_HISTORY_SUBSTRING_SEARCH"
+source "${ZPLUGDIR}/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
