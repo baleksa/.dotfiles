@@ -88,5 +88,17 @@ source "${ZPLUGDIR}/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "${ZPLUGDIR}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=brackets
 
+# https://github.com/zsh-users/zsh-history-substring-search
 source "${ZPLUGDIR}/zsh-history-substring-search/zsh-history-substring-search.zsh"
-
+bindkey '^[k'  history-substring-search-up
+bindkey '^[j' history-substring-search-down
+bindkey -M vicmd '^[k' history-substring-search-up
+bindkey -M vicmd '^[j' history-substring-search-down
+# Bind up and down arrow keys using portable ${terminfo[]} way
+# up=kcuu1 down=kcud1 .
+# ${terminfo[]} doesn't work on my Void system so using hardcoded values for 
+# up and down arrows
+bindkey "^[[A"  history-substring-search-up
+bindkey "^[[B" history-substring-search-down
+bindkey -M vicmd "^[[A" history-substring-search-up
+bindkey -M vicmd "^[[B" history-substring-search-down

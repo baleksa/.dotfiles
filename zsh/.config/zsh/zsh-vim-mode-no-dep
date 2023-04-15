@@ -2,8 +2,10 @@
 # Check https://thevaluable.dev/zsh-install-configure-mouseless/ for
 # explaination.
 
+
 bindkey -v
 export KEYTIMEOUT=1
+
 
 source "${ZPLUGDIR}/cursor_mode.zsh"
 
@@ -34,7 +36,7 @@ zle -N add-surround surround
 zle -N change-surround surround
 # Plain bindkey doesn't work with KEYTIMEOUT=1 because it executes vi 
 # keybindins instead of waiting for the next key.
-# The ugly hack below solves that problem.
+# An ugly hack below solves that problem.
 # https://github.com/softmoth/zsh-vim-mode/issues/33
 #
 # bindkey -M vicmd cs change-surround
@@ -108,13 +110,14 @@ bindkey -M vicmd '/' vi-history-search-forward
 
 # Search through history for a string you've already typed up to the cursor and
 # put cursor at the end
-autoload -U history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^[j" history-beginning-search-forward-end
-bindkey "^[k" history-beginning-search-backward-end
-bindkey -M vicmd "^[j" history-beginning-search-forward-end
-bindkey -M vicmd "^[k" history-beginning-search-backward-end
+# Using https://github.com/zsh-users/zsh-history-substring-search instead
+# autoload -U history-search-end
+# zle -N history-beginning-search-backward-end history-search-end
+# zle -N history-beginning-search-forward-end history-search-end
+# bindkey "^[j" history-beginning-search-forward-end
+# bindkey "^[k" history-beginning-search-backward-end
+# bindkey -M vicmd "^[j" history-beginning-search-forward-end
+# bindkey -M vicmd "^[k" history-beginning-search-backward-end
 
 my-vim-backward-kill-word() {
 	# vi-backward-delete-kill-word works only on inserted text
