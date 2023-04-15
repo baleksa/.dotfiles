@@ -3,14 +3,14 @@ setopt APPEND_HISTORY
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 
 # Useful Functions
-source "$ZDOTDIR/zsh-functions"
+source "$ZDOTDIR/utils.zsh"
 
 # Add completion folder to fpath
 [ -d "$ZDOTDIR/completion" ] && fpath+="$ZDOTDIR/completion/"
 
 fpath+="${ZPLUGDIR}/zsh-completions/src"
 
-safe_source "$HOME/.asdf/asdf.sh"
+source "$HOME/.asdf/asdf.sh"
 [ -n "$ASDF_DIR" ] && fpath=(${ASDF_DIR}/completions $fpath)
 
 # some useful options (man zshoptions)
@@ -39,16 +39,15 @@ source "${ZDOTDIR}/completion.zsh"
 autoload -Uz colors && colors
 
 # Normal files to source
-safe_source "$ZDOTDIR/zsh-exports"
-safe_source "$ZDOTDIR/zsh-aliases"
+source "$ZDOTDIR/aliases.zsh"
 
 # Source additional organized into files in $ZDOTDIR/conf.d
 [ -d "$ZDOTDIR/conf.d" ] && source "$ZDOTDIR"/conf.d/*
 
 
 # FZF 
-safe_source /usr/share/fzf/completion.zsh
-safe_source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
 # Bind searching to Alt+r because zsh-vim-mode binds Ctr+r to builtin revsearch
 bindkey -M emacs '^[r' fzf-history-widget
 bindkey -M vicmd '^[r' fzf-history-widget
@@ -83,7 +82,7 @@ autopair-init
 
 # Must be loaded after zsh-autopair in order for some keybindings (backspace,
 # etc.) to work.
-source "${ZDOTDIR}/zsh-vim-mode-no-dep"
+source "${ZDOTDIR}/zsh-vim-mode-no-dep.zsh"
 
 source "${ZPLUGDIR}/zsh-autosuggestions/zsh-autosuggestions.zsh" 
 
