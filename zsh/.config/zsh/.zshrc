@@ -26,14 +26,14 @@ unsetopt BEEP
 setopt combiningchars
 
 # completions
-autoload -Uz compinit
-zstyle ':completion:*' menu select
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-
-zstyle ':completion::complete:lsof:*' menu yes select
-# zmodload zsh/complist
-compinit
-_comp_options+=(globdots)		# Include hidden files.
+source "${ZDOTDIR}/completion.zsh"
+# autoload -Uz compinit
+# zstyle ':completion:*' menu select
+# zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+#
+# zstyle ':completion::complete:lsof:*' menu yes select
+# compinit
+# _comp_options+=(globdots)		# Include hidden files.
 
 # Colors
 autoload -Uz colors && colors
@@ -70,10 +70,11 @@ bindkey "^[z" run_zi
 # Use starship for prompt https://github.com/starship/starship
 eval "$(starship init zsh)"
 
-# External PLUGINS
+#  PLUGINS
 #
 # This order is important!
 
+source "${ZPLUGDIR}/zsh-bd/bd.zsh"
 
 # Backspace keybindings must go after loading zsh-autopair plugin. That's done
 # in vim-mode plugin
