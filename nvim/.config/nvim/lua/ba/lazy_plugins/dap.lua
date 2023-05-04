@@ -26,33 +26,18 @@ function M.config()
 			"bash",
 			"codelldb",
 			"delve",
-			"firefox",
 			"javadbg",
 			"kotlin",
 			"python",
 		},
 		automatic_setup = true,
-		-- automatic_setup = {
-		-- 	configurations = function(default)
-		-- 		for _, conf in pairs(default.codelldb) do
-		-- 			conf.env = function()
-		-- 				local variables = {}
-		-- 				for k, v in pairs(vim.fn.environ()) do
-		-- 					table.insert(variables, string.format("%s=%s", k, v))
-		-- 				end
-		-- 				return variables
-		-- 			end
-		-- 		end
-		-- 		return default
-		-- 	end,
-		-- },
 		handlers = {
-		function(source_name)
-			-- all sources with no handler get passed here
-
-			-- Keep original functionality of `automatic_setup = true`
-			require("mason-nvim-dap.automatic_setup")(source_name)
-		end,
+		-- function(source_name)
+		-- 	-- all sources with no handler get passed here
+		--
+		-- 	-- Keep original functionality of `automatic_setup = true`
+		-- 	require("mason-nvim-dap.automatic_setup")(source_name)
+		-- end,
 		python = function(_)
 			require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
 		end,
