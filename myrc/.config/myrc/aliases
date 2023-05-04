@@ -1,8 +1,11 @@
 #!/bin/sh
 
-# shellcheck disable=2154
-alias ec='pick_and_nvim "$HOME"/.config'
+alias ec='sh -c cd "$XDG_CONFIG_HOME" && pick_and_nvim "$XDG_CONFIG_HOME"'
 alias ep='edit_project'
+alias es='edit_script'
+alias en='edit_note'
+
+alias se="sudoedit"
 
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
@@ -53,9 +56,6 @@ alias c='clang -Wall -g3 -Werror -pedantic -std=c11'
 alias c++='clang++ -Wall -g3 -Werror -pedantic -std=c++11'
 
 alias t='todo.sh -d ~/.config/todo/todo.conf'
-
-alias es='edit_script'
-alias en='edit_note'
 
 alias u='update_all'
 

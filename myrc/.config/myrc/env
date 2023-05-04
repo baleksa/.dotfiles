@@ -5,6 +5,7 @@ export MYSCRIPTS_DIR="$HOME/scripts"
 export MYNOTES_DIR="$HOME/notes"
 
 # export MANPATH="$HOME/.local/share/man:$MANPATH"
+
 export XDG_CONFIG_HOME=~/.config
 export XDG_STATE_HOME=~/.local/state
 export XDG_DATA_DIRS="$HOME/.local/share:$XDG_DATA_DIRS"
