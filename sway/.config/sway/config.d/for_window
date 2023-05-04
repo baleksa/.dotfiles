@@ -9,3 +9,5 @@ for_window [title="termlauncher"] floating enable
 for_window [app_id="scratchpad"] move scratchpad
 for_window [title="scratchpad"] move scratchpad
 no_focus [title="^Peek preview$"]
+
+# vim: ft=swayconfig

@@ -18,3 +18,5 @@ bar {
 	# focused_workspace #4C7899FF #3a94c5FF #454545FF
     }
 }
+
+# vim: ft=swayconfig

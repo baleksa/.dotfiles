@@ -5,7 +5,7 @@ current_kblayout=$(
 		jq -r '.[] | select(.identifier == "0:0:Wireless_hotkeys") | .xkb_active_layout_name'
 )
 
-date=$(date +'%a %d-%m-%Y %R')
+date=$(date +'%a %d-%b-%Y %R')
 
 # bat_perc="$(cat /sys/class/power_supply/BAT0/capacity)"
 # if [ "$bat_perc" -lt 100 ]; then

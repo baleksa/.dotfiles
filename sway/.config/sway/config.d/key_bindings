@@ -8,6 +8,10 @@
     # Start a browser
     bindsym $mod+s exec $browser
 
+    bindsym $mod+Shift+w exec termlaunch workspace_setup
+
+    bindsym $mod+n exec makoctl dismiss --all
+
     # Start a scratchpad terminal
     bindsym $mod+Shift+s exec scratchpad
     # Start zathura
@@ -38,6 +42,8 @@
 #
 # Moving around:
 #
+    bindsym Alt+Tab workspace back_and_forth
+    bindsym $mod+Tab workspace back_and_forth
     # Move your focus around
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
@@ -182,3 +188,5 @@ bindsym $mod+print exec grim -o "$(swaymsg -t get_outputs | jq -r '.[] | select(
 bindsym $mod+q exec swaylock -f -c 000000
 
 bindsym Pause exec $sway_scripts_dir/toggle_displays
+
+# vim: ft=swayconfig

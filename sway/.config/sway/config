@@ -29,7 +29,7 @@ set $sway_scripts_dir $XDG_CONFIG_HOME/sway/scripts
 set $run tofi-run -c ~/.config/tofi/themes/dmenu --fuzzy-match=true \
 	| xargs swaymsg exec --
 set $drun tofi-drun -c ~/.config/tofi/themes/dmenu \
-	--fuzzy-match=true--drun-launch=true
+	--fuzzy-match=true --drun-launch=true
 
 # Thin border and inner gaps
 default_border pixel 2
