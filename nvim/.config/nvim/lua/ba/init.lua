@@ -1,6 +1,7 @@
 require("ba.vim")
-require("ba.lazy")
 
-if (vim.g.file_explorer == "netrw") then
-	require("ba.netrw").config()
-end
+vim.g.status_line = "cokeline"
+vim.g.file_explorer = "lir"
+
+require("ba.lazy")
+require("ba.map")

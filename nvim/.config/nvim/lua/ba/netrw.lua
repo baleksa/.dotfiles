@@ -1,6 +1,6 @@
 local M = {}
 
-function M.config()
+function M.setup()
 	vim.api.nvim_create_autocmd("FileType", { pattern = "netrw", command = "setl bufhidden=delete" })
 	vim.g.netrw_winsize = 25
 	vim.g.netrw_banner = 0

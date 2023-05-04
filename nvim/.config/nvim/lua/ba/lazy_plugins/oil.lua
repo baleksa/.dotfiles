@@ -13,7 +13,12 @@ function M.config()
 		-- Id is automatically added at the beginning, and name at the end
 		-- See :help oil-columns
 		columns = {
-			"icon",
+				{ "icon", default_file = "", directory = "" },
+				-- {
+				-- 	-- icon = "",
+				-- 	-- color = "#7ebae4",
+				-- 	-- name = "LirFolderNode",
+				-- },
 			-- "permissions",
 			-- "size",
 			-- "mtime",
