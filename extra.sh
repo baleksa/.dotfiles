@@ -2,7 +2,7 @@
 
 . ./utils.sh
 
-greetd_tuigreet_setup() {
+setup_greetd_tuigreet() {
 	xi -Sy greetd tuigreet || exit
 	echo "Installed greetd, tuigreet."
 	{
@@ -25,8 +25,8 @@ greetd_tuigreet_setup() {
 	echo 'Set tuigreet to run /bin/zsh -l'
 }
 
-asdf_setup() {
-	# WARNING: version is hardcoded!
+setup_asdf() {
+	# TODO: version is hardcoded!
 	[ ! -d ~/.asdf ] && git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.3
 
 	xi -Syu python3 gcc make python3-pip
@@ -38,5 +38,15 @@ asdf_setup() {
 	asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
 	asdf install ruby latest
 	asdf global ruby latest
-	sudo xbps-remove ruby
+}
+
+setup_inotify_limits() {
+	sudo tee -a /etx/sysctl.conf <<-SEP
+	# This fixes. WezTerm didn't start because notify was hitting the limit too
+	# ofter.
+	# https://scribe.rip/@ivanermilov/how-to-fix-inotify-cannot-be-used-reverting-to-polling-too-many-open-files-bb1c1437dbf
+	# https://github.com/wez/wezterm/issues/3027
+	fs.inotify.max_user_instances=10000
+	fs.inotify.max_user_watches=640000
+	SEP
 }

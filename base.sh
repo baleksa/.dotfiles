@@ -26,8 +26,9 @@ setup_xdg_runtime_dir() {
 }
 
 setup_dbus() {
-
+	:
 }
+
 init_xbps() {
 	do_job "Doing initial update of xbps" \
 		sudo xbps-install -Sy xbps
