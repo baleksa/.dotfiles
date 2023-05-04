@@ -1,0 +1,5 @@
+#!/bin/sh
+proj="$(fd -L -t d -d 1 . "$HOME/repositories/" "$HOME/coding/" | fzf)"
+[ -z "$proj" ] && exit
+swaymsg -- exec wezterm start --cwd="$proj" -- nvim "$proj"
+swaymsg -- exec wezterm start --cwd="$proj"

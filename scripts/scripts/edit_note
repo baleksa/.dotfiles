@@ -11,7 +11,7 @@ if [ "$#" = "0" ]; then
 else
 	note="$MYNOTES_DIR/$1"
 fi
-echo "$note"
+echo "Picked: $note"
 
 if [ -d "$note" ]; then
 	echo "Enter filename for the note:"

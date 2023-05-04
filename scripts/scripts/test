@@ -1,0 +1,7 @@
+#!/bin/sh
+
+wezterm-gui start --always-new-process &
+pid=$$
+for file in "$XDG_RUNTIME_DIR"/*"$pid"*; do
+	echo "$file"
+done

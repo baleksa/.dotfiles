@@ -16,7 +16,8 @@ update_solargraph_rails() {
 		return 1
 	}
 
-	gem i --install-dir "$solargraph_path" solargraph-rails
+	gem i --install-dir "$solargraph_path" \
+		solargraph-rails
 }
 
 update_python_lsp_extensions() {

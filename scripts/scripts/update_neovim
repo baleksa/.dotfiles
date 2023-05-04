@@ -27,5 +27,7 @@ if [ "$build_status" = "0" ]; then
 	make CMAKE_INSTALL_PREFIX="$HOME/.local" install && echo "Installed nvim."
 else
 	echo "Building nvim failed with exit code $build_status!"
-	exit $build_status
+	exit "$build_status"
 fi
+rm -f ~/.local/share/applications/nvim.desktop
+cd ~/.dotfiles && stow applications

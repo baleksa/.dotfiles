@@ -1,0 +1,40 @@
+#!/bin/env python3
+
+import subprocess
+import time
+
+wifi = ["Ilic", "Ilic5g", "IlicDnevna"]
+connect_command = ["iwctl", "station", "wlo1", "connect"]
+scan_command = ["iwctl", "station", "wlo1", "scan"]
+get_networks_command = ["iwctl", "station", "wlo1", "get-networks"]
+speedtest_command = ["speedtest-cli", "--csv"]
+DOWNLOAD_INDEX = 6
+n_cycle = 1
+wait_for_connection_sec = 10
+wait_after_cycle_sec = 10
+time_series = {}
+
+for network in wifi:
+    time_series[network] = []
+
+for i in range(n_cycle):
+    for network in wifi:
+        subprocess.run(scan_command, stdout=subprocess.DEVNULL)
+        subprocess.run(get_networks_command, stdout=subprocess.DEVNULL)
+        subprocess.run(
+            connect_command + [network],
+        )
+        time.sleep(wait_for_connection_sec)
+        speed_bit_s = float(
+            subprocess.run(
+                speedtest_command, stdout=subprocess.PIPE
+            ).stdout.split(b",")[DOWNLOAD_INDEX]
+        )
+        bits_in_mbyte = 8 * 1024 * 1024
+        speed_mb_s = speed_bit_s / bits_in_mbyte
+        time_series[network].append(speed_mb_s)
+    time.sleep(wait_after_cycle_sec)
+
+for k in time_series:
+    average_speed_mb_s = sum(time_series[k]) / n_cycle
+    print(f"{k:12}: {average_speed_mb_s:12.5f}MB")
