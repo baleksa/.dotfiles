@@ -32,7 +32,7 @@ return {
 			scale = 0.75,
 		},
 	}),
-	font_size = 12.0,
+	font_size = 12,
 	term = "wezterm",
 	color_scheme_dirs = { "~/.config/wezterm/colors" },
 	color_scheme = "Everforest Light (Hard)",
