@@ -2,16 +2,16 @@
 setopt APPEND_HISTORY
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 
-# Useful Functions
-source "$ZDOTDIR/utils.zsh"
+# Useful functions
+source "${ZDOTDIR}/utils.zsh"
 
 # Add completion folder to fpath
-[ -d "$ZDOTDIR/completion" ] && fpath+="$ZDOTDIR/completion/"
+[ -d "${ZDOTDIR}/completion" ] && fpath+="${ZDOTDIR}/completion/"
 
 fpath+="${ZPLUGDIR}/zsh-completions/src"
 
-source "$HOME/.asdf/asdf.sh"
-[ -n "$ASDF_DIR" ] && fpath=(${ASDF_DIR}/completions $fpath)
+source "${HOME}/.asdf/asdf.sh"
+[ -n "${ASDF_DIR}" ] && fpath=(${ASDF_DIR}/completions ${fpath})
 
 # some useful options (man zshoptions)
 setopt autocd extendedglob nomatch menucomplete
@@ -27,22 +27,15 @@ setopt combiningchars
 
 # completions
 source "${ZDOTDIR}/completion.zsh"
-# autoload -Uz compinit
-# zstyle ':completion:*' menu select
-# zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-#
-# zstyle ':completion::complete:lsof:*' menu yes select
-# compinit
-# _comp_options+=(globdots)		# Include hidden files.
 
 # Colors
 autoload -Uz colors && colors
 
 # Normal files to source
-source "$ZDOTDIR/aliases.zsh"
+source "${ZDOTDIR}/aliases.zsh"
 
 # Source additional organized into files in $ZDOTDIR/conf.d
-[ -d "$ZDOTDIR/conf.d" ] && source "$ZDOTDIR"/conf.d/*
+[ -d "${ZDOTDIR}/conf.d" ] && source "${ZDOTDIR}"/conf.d/*
 
 
 # FZF 
@@ -52,8 +45,6 @@ source /usr/share/fzf/key-bindings.zsh
 bindkey -M emacs '^[r' fzf-history-widget
 bindkey -M vicmd '^[r' fzf-history-widget
 bindkey -M viins '^[r' fzf-history-widget
-
-source <(cod init $$ zsh)
 
 eval "$(zoxide init zsh)"
 alias cd=z
@@ -78,7 +69,6 @@ source "${ZPLUGDIR}/zsh-bd/bd.zsh"
 # Backspace keybindings must go after loading zsh-autopair plugin. That's done
 # in vim-mode plugin
 source "${ZPLUGDIR}/zsh-autopair/autopair.zsh"
-autopair-init
 
 # Must be loaded after zsh-autopair in order for some keybindings (backspace,
 # etc.) to work.
