@@ -6,16 +6,22 @@ return {
 		config = function()
 			vim.lsp.set_log_level("ERROR")
 
-			require("lsp-zero.settings").preset({})
+			require("lsp-zero.settings").preset({
+				float_border = "rounded",
+			})
+
 			require("lsp-zero.server").set_sign_icons({
-				-- error = "",
 				error = "",
 				-- error = "✖", -- this can only be used in the git_status source
-				-- error = "",
-				warn = "▲",
+				warn = "󰔷",
+				-- warn = "▲",
 				hint = "",
 				-- hint = "⚑",
-				info = "",
+				-- info = "",
+				info = "",
+			})
+			vim.diagnostic.config({
+				virtual_text = false,
 			})
 		end,
 	},
@@ -65,7 +71,7 @@ return {
 					{ name = "nvim_lsp" },
 					{ name = "buffer", keyword_length = 3 },
 					{ name = "luasnip", keyword_length = 2 },
-					{ name = "nvim_lua" },
+					-- { name = "nvim_lua" },
 					-- { name = "nvim_lsp_signature_help" },
 					{ name = "crates" },
 				},
@@ -92,7 +98,9 @@ return {
 			})
 
 			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
+				mapping = cmp.mapping.preset.cmdline({
+					["<C-y>"] = cmp.mapping(cmp.mapping.confirm({ select = true }), { "i", "c" }),
+				}),
 				sources = cmp.config.sources({
 					{ name = "path" },
 				}, {
@@ -115,8 +123,10 @@ return {
 				build = ":MasonUpdate",
 			},
 			"folke/neodev.nvim", -- for better Lua dev experience
-			{ "smjonas/inc-rename.nvim", opts = { input_buffer_type = "dressing" } },
-
+			{
+				"smjonas/inc-rename.nvim",
+				opts = { input_buffer_type = "dressing" },
+			},
 			{
 				"simrat39/symbols-outline.nvim",
 				config = true,
@@ -134,6 +144,7 @@ return {
 				"vimls",
 				"html",
 				"cssls",
+				"jsonls",
 				"tsserver",
 				"standardrb",
 				"lua_ls",
@@ -152,6 +163,9 @@ return {
 					vim.keymap.set(m, lhs, rhs, vim.tbl_extend("force", bufopts, opts))
 				end
 
+				if client.config.root_dir then
+					vim.api.nvim_set_current_dir(client.config.root_dir)
+				end
 				if client.server_capabilities.documentSymbolProvider and client.name ~= "standardrb" then
 					require("nvim-navic").attach(client, bufnr)
 				end
@@ -172,17 +186,6 @@ return {
 				end)
 
 				bind("n", "<leader>o", "<cmd>SymbolsOutline<CR>")
-
-				-- bind({ "n", "x" }, "gq", function()
-				-- 	vim.lsp.buf.format({
-				-- 		-- bufnr = bufnr,
-				-- 		async = false,
-				-- 		filter = function(client)
-				-- 			return client.name ~= "solargraph"
-				-- 		end,
-				-- 		timeout_ms = 10000,
-				-- 	})
-				-- end)
 			end
 
 			lsp.on_attach(function(client, bufnr)
@@ -200,7 +203,28 @@ return {
 					timeout_ms = 10000,
 				},
 				servers = {
-					["null-ls"] = { "ruby", "lua" },
+					["null-ls"] = {
+						"ruby",
+						"lua",
+						"html",
+						"sh",
+						"bash",
+						"zsh",
+						"markdown",
+						"vue",
+						"css",
+						"scss",
+						"less",
+						"html",
+						"json",
+						"jsonc",
+						"yaml",
+						"markdown.mdx",
+						"graphql",
+						"handlebars",
+					},
+					rust_analyzer = { "rust" },
+					pylsp = { "python" },
 				},
 			})
 
@@ -290,7 +314,15 @@ return {
 			-- 	})
 			-- ))
 
-			lsp.skip_server_setup({ "clangd", "rust-analyzer" })
+			lspconfig.prosemd_lsp.setup({
+				on_attach = function(client, _)
+					if not vim.list_contains(vim.opt_local.spelllang:get(), "en") then
+						client:stop()
+					end
+				end,
+			})
+
+			lsp.skip_server_setup({ "clangd", "rust-analyzer", "prosemd_lsp" })
 
 			lsp.setup()
 		end,
@@ -319,7 +351,7 @@ return {
 		end,
 	},
 	{
-		url = "https://sr.ht/~p00f/clangd_extensions.nvim",
+		url = "https://git.sr.ht/~p00f/clangd_extensions.nvim",
 		-- dependencies = {
 		-- 	"VonHeikemen/lsp-zero.nvim",
 		-- },
@@ -355,80 +387,6 @@ return {
 		},
 	},
 	{
-
-		-- null-ls
-		"jose-elias-alvarez/null-ls.nvim",
-
-		dependencies = {
-			"jayp0521/mason-null-ls.nvim",
-		},
-		config = function()
-			local null_ls = require("null-ls")
-			null_ls.setup({
-				sources = {
-					-- Diagnostics
-					-- Code actions
-					null_ls.builtins.code_actions.gitsigns,
-					-- Formatting
-					null_ls.builtins.formatting.yq,
-					-- Lua
-					null_ls.builtins.formatting.stylua,
-					-- Ruby
-					null_ls.builtins.diagnostics.reek, -- Complements rubocop
-					-- null_ls.builtins.diagnostics.standardrb,
-					-- null_ls.builtins.formatting.standardrb,
-					null_ls.builtins.diagnostics.erb_lint, -- .erb
-					null_ls.builtins.formatting.htmlbeautifier, -- .erb
-					-- Shell
-					null_ls.builtins.diagnostics.shellcheck,
-					null_ls.builtins.formatting.shfmt,
-					null_ls.builtins.formatting.shellharden,
-					null_ls.builtins.code_actions.shellcheck,
-					-- Fish
-					null_ls.builtins.diagnostics.fish,
-					null_ls.builtins.formatting.fish_indent,
-					-- Writing
-					null_ls.builtins.diagnostics.alex,
-					null_ls.builtins.diagnostics.proselint,
-					null_ls.builtins.diagnostics.write_good.with({
-						extra_args = { "--no-passive" },
-					}),
-					null_ls.builtins.diagnostics.mdl,
-					null_ls.builtins.code_actions.proselint,
-					null_ls.builtins.code_actions.ltrs,
-					null_ls.builtins.formatting.mdformat,
-					null_ls.builtins.hover.dictionary,
-				},
-			})
-
-			-- Fixed by setting offsetEncoding for clangd
-			-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
-			--
-			-- Ignore clients with different offset_encodings notification
-			--
-			-- local notify = vim.notify
-			-- vim.notify = function(msg, ...)
-			-- 	if msg:match("warning: multiple different client offset_encodings") then
-			-- 		return
-			-- 	end
-			--
-			-- 	notify(msg, ...)
-			-- end
-
-			require("mason-null-ls").setup({
-				ensure_installed = {},
-				automatic_installation = true,
-				automatic_setup = false,
-			})
-		end,
-	},
-	{
-		"Wansmer/treesj",
-		keys = { "<space>m", "<space>j", "<space>s" },
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = true,
-	},
-	{
 		"SmiteshP/nvim-navic",
 		dependencies = {
 			"neovim/nvim-lspconfig",
@@ -445,7 +403,9 @@ return {
 			"SmiteshP/nvim-navic",
 			"nvim-tree/nvim-web-devicons", -- optional dependency
 		},
-		config = true,
+		opts = {
+			attach_navic = false,
+		},
 	},
 	{
 		"saecki/crates.nvim",
