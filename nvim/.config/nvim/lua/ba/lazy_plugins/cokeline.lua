@@ -1,6 +1,6 @@
 local M = {
 	"noib3/nvim-cokeline",
-	dependencies = "kyazdani42/nvim-web-devicons", -- If you want devicons
+	dependencies = "nvim-tree/nvim-web-devicons", -- If you want devicons
 	cond = function() return vim.g.status_line == "cokeline" end,
 }
 
@@ -8,6 +8,7 @@ function M.config()
 	local get_hex = require("cokeline/utils").get_hex
 
 	require("cokeline").setup({
+		show_if_buffers_are_at_least = 2,
 		default_hl = {
 			-- fg = function(buffer)
 			-- 	return buffer.is_focused and get_hex("ColorColumn", "bg") or get_hex("Normal", "fg")

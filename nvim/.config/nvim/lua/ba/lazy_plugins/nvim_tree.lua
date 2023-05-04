@@ -1,7 +1,7 @@
 local M = {
 	"kyazdani42/nvim-tree.lua",
 	dependencies = {
-		"kyazdani42/nvim-web-devicons",
+		"nvim-tree/nvim-web-devicons",
 	},
 	cond = function()
 		return vim.g.file_explorer == "nvim_tree"

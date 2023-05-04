@@ -1,21 +1,16 @@
 return {
 	{
-		"kyazdani42/nvim-web-devicons",
-		dependencies = { "DaikyXendo/nvim-material-icon" },
+		"nvim-tree/nvim-web-devicons",
+		-- dependencies = { "DaikyXendo/nvim-material-icon" },
+		lazy = true,
 		config = function()
-			local web_devicons_ok, web_devicons = pcall(require, "nvim-web-devicons")
-			if not web_devicons_ok then
-				return
-			end
-
-			local material_icon_ok, material_icon = pcall(require, "nvim-material-icon")
-			if not material_icon_ok then
-				return
-			end
-
-			web_devicons.setup({
-				override = material_icon.get_icons(),
+			require("nvim-web-devicons").setup({
+				-- strict = false,
+				-- default = false,
+				-- color_icons = true,
+				-- override = require("nvim-material-icon").get_icons(),
 			})
+			require("nvim-web-devicons").set_default_icon("", "#6d8086", 65)
 		end,
 	},
 	-- tpope's phenomenal plugins
@@ -67,7 +62,41 @@ return {
 	{
 		"folke/zen-mode.nvim",
 		-- Hides everything except buffer content and enters fullscreen
-		config = true,
+		opts = {
+			options = {
+				signcolumn = true, -- disable signcolumn
+				number = true, -- disable number column
+				relativenumber = true, -- disable relative numbers
+				cursorline = true, -- disable cursorline
+				cursorcolumn = true, -- disable cursor column
+				foldcolumn = true, -- disable fold column
+				list = true, -- disable whitespace characters
+			},
+			plugins = {
+				-- disable some global vim options (vim.o...)
+				-- comment the lines to not apply the options
+				options = {
+					enabled = true,
+					ruler = true, -- disables the ruler text in the cmd line area
+					showcmd = true, -- disables the command in the last line of the screen
+				},
+				twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+				gitsigns = { enabled = true }, -- disables git signs
+				-- this will change the font size on wezterm when in zen mode
+				-- See alse also the Plugins/Wezterm section in this projects README
+				wezterm = {
+					enabled = false,
+					-- can be either an absolute font size or the number of incremental steps
+					font = "+4", -- (10% increase per step)
+				},
+			},
+			on_open = function()
+				require("barbecue.ui").toggle(false)
+			end,
+			on_close = function()
+				require("barbecue.ui").toggle(true)
+			end,
+		},
 	},
 	{
 		"folke/which-key.nvim",
@@ -79,17 +108,6 @@ return {
 	},
 
 	{ "prichrd/netrw.nvim" },
-	{
-		"toppair/peek.nvim",
-		build = "deno task --quiet build:fast",
-		config = function()
-			require("peek").setup({ theme = "light" })
-			vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
-			vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
-		end,
-		ft = { "markdown" },
-	},
-
 	{ "godlygeek/tabular" }, -- Vim script for text filtering and alignment,
 
 	{ "andymass/vim-matchup" }, -- More options to do on matching text and extends vim's %,
@@ -144,4 +162,62 @@ return {
 		},
 	},
 	{ "timmyjose-projects/lox.vim" },
+	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = "kevinhwang91/promise-async",
+		config = function()
+			vim.o.foldcolumn = "1" -- '0' is not bad
+			vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+			vim.o.foldlevelstart = 99
+			vim.o.foldenable = true
+
+			vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+			vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+			require("ufo").setup({
+				-- 					function(bufnr, filetype, buftype)
+				provider_selector = function(_, _, _)
+					return { "treesitter", "indent" }
+				end,
+			})
+		end,
+	},
+	{
+		"lervag/vimtex",
+		config = function()
+			vim.g.vimtex_view_method = "zathura"
+		end,
+		lazy = false,
+	},
+	{
+		"luukvbaal/statuscol.nvim",
+		config = function()
+			local builtin = require("statuscol.builtin")
+			require("statuscol").setup({
+				relculright = true,
+				segments = {
+					{
+						text = { builtin.lnumfunc },
+						condition = { true, builtin.not_empty },
+						-- click = "v:lua.ScLa",
+					},
+					{
+						sign = { name = { "GitSigns" }, maxwidth = 1, auto = true },
+						-- click = "v:lua.ScSa",
+					},
+					{
+						sign = { name = { "Diagnostic" }, maxwidth = 2, auto = true },
+						-- click = "v:lua.ScSa",
+					},
+					-- {
+					-- 	text = { "%s" },
+					-- 	-- click = "v:lua.ScSa",
+					-- },
+					-- {
+					-- 	text = { builtin.foldfunc },
+					-- 	-- click = "v:lua.ScFa",
+					-- },
+				},
+			})
+		end,
+	},
 }

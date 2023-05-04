@@ -3,7 +3,7 @@ local M = {
 	branch = "v2.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 		"MunifTanjim/nui.nvim",
 		{
 			-- only needed if you want to use the commands with "_with_window_picker" suffix

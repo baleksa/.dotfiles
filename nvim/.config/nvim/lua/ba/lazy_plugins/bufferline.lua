@@ -2,7 +2,7 @@ local M = {
 	"akinsho/bufferline.nvim",
 	-- tag = "v3.*",
 	branch = "dev",
-	dependencies = "kyazdani42/nvim-web-devicons",
+	dependencies = "nvim-tree/nvim-web-devicons",
 	cond = function() return vim.g.status_line == "bufferline" end,
 }
 function M.config()

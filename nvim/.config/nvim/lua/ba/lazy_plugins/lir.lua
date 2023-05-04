@@ -2,7 +2,7 @@ local M = {
 	"tamago324/lir.nvim",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"kyazdani42/nvim-web-devicons",
+		"nvim-tree/nvim-web-devicons",
 	},
 	cond = function()
 		return vim.g.file_explorer == "lir"
@@ -22,6 +22,7 @@ function M.config()
 		ignore = {}, -- { ".DS_Store" "node_modules" } etc.
 		devicons = {
 			enable = true,
+			highlight_dirname = false,
 		},
 		mappings = {
 			["l"] = actions.edit,
@@ -56,22 +57,13 @@ function M.config()
 				enable = false,
 				highlight_dirname = false,
 			},
-
-			-- -- You can define a function that returns a table to be passed as the third
-			-- -- argument of nvim_open_win().
-			-- win_opts = function()
-			--   local width = math.floor(vim.o.columns * 0.8)
-			--   local height = math.floor(vim.o.lines * 0.8)
-			--   return {
-			--     border = {
-			--       "+", "─", "+", "│", "+", "─", "+", "│",
-			--     },
-			--     width = width,
-			--     height = height,
-			--     row = 1,
-			--     col = math.floor((vim.o.columns - width) / 2),
-			--   }
-			-- end,
+			-- You can define a function that returns a table to be passed as the third
+			-- argument of nvim_open_win().
+			win_opts = function()
+				return {
+					border = "rounded",
+				}
+			end,
 		},
 		hide_cursor = true,
 		on_init = function()
@@ -89,18 +81,12 @@ function M.config()
 		end,
 	})
 
+	vim.api.nvim_set_hl(0, "LirFloatBorder", {link = "Normal"})
+
 	vim.keymap.set("n", "-", [[<Cmd>execute 'e ' .. expand('%:p:h')<CR>]], { noremap = true })
 	vim.keymap.set("n", "<leader>-", function()
 		require("lir.float").toggle()
 	end, { noremap = true })
-	-- custom folder icon
-	-- require("nvim-web-devicons").set_icon({
-	-- 	lir_folder_icon = {
-	-- 		icon = "",
-	-- 		color = "#7ebae4",
-	-- 		name = "LirFolderNode",
-	-- 	},
-	-- })
 end
 
 return M

@@ -1,4 +1,4 @@
-local M = { "nvim-lualine/lualine.nvim", dependencies = { "kyazdani42/nvim-web-devicons", lazy = true } }
+local M = { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons", lazy = true } }
 
 function M.config()
 	require("lualine").setup({
