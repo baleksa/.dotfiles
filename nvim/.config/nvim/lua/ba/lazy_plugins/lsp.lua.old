@@ -1,0 +1,469 @@
+local M = {
+	-- Lsp, completion, null-ls, debugging
+	"VonHeikemen/lsp-zero.nvim",
+	branch = "v2.x",
+	dependencies = {
+		"neovim/nvim-lspconfig",
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"RubixDev/mason-update-all",
+
+		{
+			"saadparwaiz1/cmp_luasnip",
+			dependencies = {
+				"L3MON4D3/LuaSnip",
+				dependencies = {
+					"rafamadriz/friendly-snippets",
+				},
+			},
+		},
+		{
+			"hrsh7th/cmp-nvim-lsp",
+			dependencies = {
+				"L3MON4D3/LuaSnip",
+				dependencies = {
+					"rafamadriz/friendly-snippets",
+				},
+			},
+		},
+		-- Autocompletion
+		{
+			"hrsh7th/nvim-cmp",
+			-- Add snipetts as a dependency in order for them
+			-- to be loaded on time for nvim-cmp to se them
+			dependencies = {
+				"hrsh7th/cmp-buffer",
+				"hrsh7th/cmp-path",
+				"hrsh7th/cmp-cmdline",
+				"hrsh7th/cmp-nvim-lua",
+				-- "hrsh7th/cmp-nvim-lsp-signature-help",
+			},
+		},
+		{
+			"ray-x/lsp_signature.nvim",
+			opts = {
+				handler_opts = {
+					border = "rounded",
+				},
+				floating_window = false,
+				floating_window_above_cur_line = true,
+				hint_prefix = "➡️ ",
+				padding = " ",
+				zindex = 40,
+				toggle_key = "<C-h>",
+			},
+		},
+
+
+		-- Aditional lsp plugins
+		"folke/neodev.nvim", -- for better Lua dev experience
+		{
+			"simrat39/rust-tools.nvim",
+			dependencies = "mfussenegger/nvim-dap",
+		},
+
+		-- rename with visual feedback
+		{ "smjonas/inc-rename.nvim", opts = { input_buffer_type = "dressing" } },
+		{
+			"Wansmer/treesj",
+			keys = { "<space>m", "<space>j", "<space>s" },
+			dependencies = { "nvim-treesitter/nvim-treesitter" },
+			config = true,
+		},
+		{
+			"simrat39/symbols-outline.nvim",
+			config = true,
+		},
+		{
+			"SmiteshP/nvim-navic",
+			dependencies = {
+				"neovim/nvim-lspconfig",
+			},
+			opts = {
+				highlight = true,
+			},
+		},
+		{
+			"utilyre/barbecue.nvim",
+			name = "barbecue",
+			version = "*",
+			dependencies = {
+				"SmiteshP/nvim-navic",
+				"nvim-tree/nvim-web-devicons", -- optional dependency
+			},
+			config = true,
+		},
+		{
+			"mhanberg/output-panel.nvim",
+			event = "VeryLazy",
+			config = true,
+		},
+		{
+			"saecki/crates.nvim",
+			opts = {
+				null_ls = {
+					enabled = true,
+					name = "crates.nvim",
+				},
+			},
+			event = "BufRead Cargo.toml",
+		},
+	},
+}
+
+function M.config()
+	--- Utils and init
+	local lspconfig = require("lspconfig")
+	vim.lsp.set_log_level("ERROR")
+
+	---
+	-- lsp-zero
+	---
+	local lsp = require("lsp-zero").preset({
+		manage_nvim_cmp = {
+			set_sources = "recommended",
+			set_extra_mappings = true,
+			use_luasnip = true,
+		},
+	})
+
+	lsp.set_sign_icons({
+		-- error = "",
+		error = "",
+		-- error = "✖", -- this can only be used in the git_status source
+		-- error = "",
+		warn = "▲",
+		hint = "",
+		-- hint = "⚑",
+		info = "",
+	})
+
+	-- lsp.format_on_save({
+	-- 	format_opts = {
+	-- 		timeout_ms = 10000,
+	-- 		filter = function(client)
+	-- 			return client.name ~= "solargraph"
+	-- 		end,
+	-- 	},
+	-- 	servers = {},
+	-- })
+
+	local common_on_attach = function(client, bufnr)
+		local bufopts = { silent = true, buffer = bufnr }
+		local bind = function(m, lhs, rhs, opts)
+			opts = opts or {}
+			vim.keymap.set(m, lhs, rhs, vim.tbl_extend("force", bufopts, opts))
+		end
+
+		if client.server_capabilities.documentSymbolProvider and client.name ~= "standardrb" then
+			require("nvim-navic").attach(client, bufnr)
+		end
+
+		bind({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action)
+		-- bind("i", "<C-h>", lspbuf.signature_help)
+		--
+		bind("n", "<leader>rn", function()
+			return ":IncRename " .. vim.fn.expand("<cword>")
+		end, { expr = true })
+
+		bind("n", "<leader>d", vim.diagnostic.open_float)
+		bind("n", "[e", function()
+			vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+		end)
+		bind("n", "]e", function()
+			vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+		end)
+
+		bind("n", "<leader>o", "<cmd>SymbolsOutline<CR>")
+
+		bind({ "n", "x" }, "gq", function()
+			vim.lsp.buf.format({
+				-- bufnr = bufnr,
+				async = false,
+				filter = function(client)
+					return client.name ~= "solargraph"
+				end,
+				timeout_ms = 10000,
+			})
+		end)
+	end
+
+	lsp.on_attach(function(client, bufnr)
+		lsp.default_keymaps({
+			buffer = bufnr,
+			omit = { "gl" },
+			preserve_mappings = false,
+		})
+		common_on_attach(client, bufnr)
+	end)
+
+	local auto_install_and_setup = {
+		"gopls",
+		"kotlin_language_server",
+		"vimls",
+		"html",
+		"cssls",
+		"tsserver",
+		"standardrb",
+	}
+
+	local just_auto_install = {
+		-- "lua_ls",
+		"solargraph",
+		"bashls",
+		"clangd",
+		-- "jdtls",
+		"pylsp",
+		"rust_analyzer",
+	}
+
+	lsp.ensure_installed(vim.list_extend(auto_install_and_setup, just_auto_install))
+
+	lsp.setup_servers(vim.list_extend(auto_install_and_setup, {}))
+	-- Add additional special conf to some servers
+	--
+
+	require("neodev").setup({})
+	lspconfig.lua_ls.setup({
+		settings = {
+			Lua = {
+				format = {
+					enable = false,
+				},
+			},
+		},
+	})
+
+	lspconfig.solargraph.setup({
+		filetypes = {
+			"ruby",
+			"eruby",
+		},
+		init_options = {
+			formatting = false,
+		},
+	})
+
+	lspconfig.pylsp.setup({
+		settings = {
+			pylsp = {
+				plugins = {
+					black = {
+						enabled = true,
+						line_length = 80,
+					},
+					rope_autoimport = { enabled = true },
+					ruff = {
+						enabled = true,
+						-- executable = vim.fn.stdpath("data") .. "/mason/packages/python-lsp-server/venv/bin/ruff",
+						lineLength = 80,
+						extendSelect = {
+							"W",
+							"C",
+							"I",
+							"D",
+						},
+					},
+				},
+			},
+		},
+	})
+
+	lspconfig.bashls.setup({
+		filetypes = {
+			"sh",
+			"bash",
+			"zsh",
+			".bash_login",
+			".bash_logout",
+			".bash_profile",
+			".bashrc",
+			".profile",
+			".zshenv",
+			".zlogin",
+			".zlogout",
+			".zprofile",
+			".zshrc",
+			"APKBUILD",
+			"PKGBUILD",
+			"eclass",
+			"ebuild",
+			"bazelrc",
+			".bash_aliases",
+		},
+	})
+
+	lspconfig.clangd.setup(vim.tbl_deep_extend(
+		"error",
+		{},
+		require("clangd_extensions").prepare({
+			server = {
+				cmd = {
+					vim.fn.stdpath("data") .. "/mason/bin/clangd",
+					"--background-index",
+					"--suggest-missing-includes",
+					"--clang-tidy",
+					"--header-insertion=iwyu",
+				},
+			},
+		})
+	))
+	-- Get options for rust-tools
+	local rust_analyzer_opts = lsp.build_options("rust_analyzer", {})
+
+	lsp.setup()
+
+	---
+	-- Rust via rust-tools
+	---
+	local extension_path = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension"
+	local codelldb_path = extension_path .. "/adapter/codelldb"
+	local liblldb_path = extension_path .. "/lldb/lib/liblldb.so" -- MacOS: This may be .dylib
+	require("rust-tools").setup({
+		server = rust_analyzer_opts,
+		-- hover_actions = {
+		-- 	auto_focus = true,
+		-- },
+		dap = {
+			adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+		},
+	})
+
+	---
+	-- cmp
+	---
+
+	-- Load friendly snippets
+
+	local cmp = require("cmp")
+	cmp.setup({
+		window = {
+			completion = cmp.config.window.bordered(),
+			documentation = cmp.config.window.bordered(),
+		},
+		sources = {
+			{ name = "path" },
+			{ name = "nvim_lsp" },
+			{ name = "buffer", keyword_length = 3 },
+			{ name = "luasnip", keyword_length = 2 },
+			{ name = "nvim_lua" },
+			{ name = "nvim_lsp_signature_help" },
+			{ name = "crates" },
+		},
+	})
+
+	cmp.setup.filetype("gitcommit", {
+		sources = cmp.config.sources({
+			{ name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
+		}, {
+			{ name = "buffer" },
+		}),
+	})
+
+	cmp.setup.cmdline({ "/", "?" }, {
+		mapping = cmp.mapping.preset.cmdline({}),
+		sources = {
+			{ name = "buffer" },
+		},
+	})
+
+	cmp.setup.cmdline(":", {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = cmp.config.sources({
+			{ name = "path" },
+		}, {
+			{ name = "cmdline" },
+		}),
+	})
+	-- cmp.setup.cmdline(":", {
+	-- 	mapping = cmp.mapping.preset.cmdline({
+	-- 		["<C-y>"] = cmp.mapping(cmp.mapping.confirm({ select = true }), { "i", "c" }),
+	-- 	}),
+	-- 	sources = cmp.config.sources({
+	-- 		{ name = "path" },
+	-- 	}, {
+	-- 		{
+	-- 			name = "cmdline",
+	-- 			option = {
+	-- 				ignore_cmds = { "Man", "!" },
+	-- 			},
+	-- 		},
+	-- 	}),
+	-- })
+	-- cmp.setup.cmdline({ "/", "?" }, {
+	-- 	mapping = cmp.mapping.preset.cmdline(),
+	-- 	sources = {
+	-- 		{ name = "buffer" },
+	-- 	},
+	-- })
+	---
+	-- null-ls
+	---
+	local null_ls = require("null-ls")
+	null_ls.setup({
+		sources = {
+			-- Diagnostics
+			-- Code actions
+			null_ls.builtins.code_actions.gitsigns,
+			-- Formatting
+			null_ls.builtins.formatting.yq,
+			-- Lua
+			null_ls.builtins.formatting.stylua,
+			-- Ruby
+			null_ls.builtins.diagnostics.reek, -- Complements rubocop
+			-- null_ls.builtins.diagnostics.standardrb,
+			-- null_ls.builtins.formatting.standardrb,
+			null_ls.builtins.diagnostics.erb_lint, -- .erb
+			null_ls.builtins.formatting.htmlbeautifier, -- .erb
+			-- Shell
+			null_ls.builtins.diagnostics.shellcheck,
+			null_ls.builtins.formatting.shfmt,
+			null_ls.builtins.formatting.shellharden,
+			null_ls.builtins.code_actions.shellcheck,
+			-- Fish
+			null_ls.builtins.diagnostics.fish,
+			null_ls.builtins.formatting.fish_indent,
+			-- Writing
+			null_ls.builtins.diagnostics.alex,
+			null_ls.builtins.diagnostics.proselint,
+			null_ls.builtins.diagnostics.write_good.with({
+				extra_args = { "--no-passive" },
+			}),
+			null_ls.builtins.diagnostics.mdl,
+			null_ls.builtins.code_actions.proselint,
+			null_ls.builtins.code_actions.ltrs,
+			null_ls.builtins.formatting.mdformat,
+			null_ls.builtins.hover.dictionary,
+		},
+	})
+
+	require("mason-null-ls").setup({
+		ensure_installed = {},
+		automatic_installation = true,
+		automatic_setup = false,
+	})
+
+	-- Fix https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
+	local old_notify = vim.notify
+	vim.notify = function(msg, ...)
+		if msg:match("warning: multiple different client offset_encodings") then
+			return
+		end
+
+		old_notify(msg, ...)
+	end
+
+	---
+	-- Misc
+	---
+	-- Setup command to update all installed Mason packages
+	require("mason-update-all").setup()
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "MasonUpdateAllComplete",
+		callback = function()
+			print("mason-update-all has finished")
+		end,
+	})
+end
+
+return M
