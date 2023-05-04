@@ -8,6 +8,7 @@ export MYNOTES_DIR="$HOME/notes"
 export XDG_CONFIG_HOME=~/.config
 export XDG_STATE_HOME=~/.local/state
 export XDG_DATA_DIRS="$HOME/.local/share:$XDG_DATA_DIRS"
+export XDG_CACHE_HOME=~/.cache
 # This need to be set in a system's startup script, if using runit check
 # /etc/profile.d/set_xdg_runtime_dir.sh
 # export XDG_RUNTIME_DIR=~/.run
