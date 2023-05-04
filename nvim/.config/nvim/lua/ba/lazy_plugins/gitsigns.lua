@@ -7,6 +7,7 @@ local M = {
 
 function M.config()
 	require("gitsigns").setup({
+		sign_priority = 20,
 		signs = {
 			add = {
 				hl = "GitSignsAdd",
@@ -22,13 +23,15 @@ function M.config()
 			},
 			delete = {
 				hl = "GitSignsDelete",
-				text = "契",
+				text = "",
+				-- text = "契",
 				numhl = "GitSignsDeleteNr",
 				linehl = "GitSignsDeleteLn",
 			},
 			topdelete = {
 				hl = "GitSignsDelete",
-				text = "契",
+				text = "",
+				-- text = "契",
 				numhl = "GitSignsDeleteNr",
 				linehl = "GitSignsDeleteLn",
 			},
