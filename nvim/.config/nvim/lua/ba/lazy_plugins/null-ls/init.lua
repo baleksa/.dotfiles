@@ -8,7 +8,6 @@ local M = {
 }
 
 M.config = function()
-
 	local ltcc = require("ba.lazy_plugins.null-ls.ltcc")
 	local function is_spelllang_en()
 		return vim.list_contains(vim.opt_local.spelllang:get(), "en")
@@ -18,6 +17,7 @@ M.config = function()
 	local ca = null_ls.builtins.code_actions
 	local diag = null_ls.builtins.diagnostics
 	local fmt = null_ls.builtins.formatting
+
 	local sources = {
 		-- Don't run cspell from null-ls, run it manually if needed
 		-- ca.cspell.with({
@@ -27,9 +27,9 @@ M.config = function()
 		-- 	extra_args = { "-u", "-c", os.getenv("HOME") .. "/.config/cspell.json" },
 		-- }),
 		-- Diagnostics
-		ltcc.diagnostics,
+		-- Don't enable ltcc because it returns many useless spelling
+		-- mistakes.
 		-- Code actions
-		ltcc.code_actions,
 		ca.gitsigns,
 		-- Formatting
 		fmt.yq,
@@ -122,6 +122,21 @@ M.config = function()
 	--
 	-- 	notify(msg, ...)
 	-- end
+
+	vim.api.nvim_create_user_command("Ltcc", function()
+		local null_ls = require("null-ls")
+		if not null_ls.is_registered("ltcc") then
+			null_ls.register({
+				name = "ltcc",
+				sources = {
+					ltcc.diagnostics,
+					ltcc.code_actions,
+				},
+			})
+		else
+			require("null-ls").toggle("ltcc")
+		end
+	end, {})
 
 	require("mason-null-ls").setup({
 		ensure_installed = {},
