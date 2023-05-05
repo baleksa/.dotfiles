@@ -27,8 +27,11 @@ end
 
 local function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
-		return "Everforest Dark (Hard)"
+		return "tokyonight_night"
+		-- return "Gruvbox dark, hard (base16)"
+		-- return "Everforest Dark (Hard)"
 	else
+		-- return "Gruvbox light, hard (base16)"
 		return "Everforest Light (Hard)"
 	end
 end
@@ -54,15 +57,18 @@ return {
 	font_size = 12,
 	term = "wezterm",
 	color_scheme_dirs = { "~/.config/wezterm/colors" },
+	-- color_scheme = "tokyonight_night",
 	color_scheme = scheme_for_appearance(get_appearance()),
 	check_for_updates = false,
 	-- show_update_window = false,
 	hide_tab_bar_if_only_one_tab = true,
 	keys = {
-		{ key = "P", mods = "CTRL|SHIFT", action = select_and_open_url },
-		{ key = "S", mods = "CTRL|SHIFT", action = act.ScrollToBottom },
+		{ key = "F", mods = "CTRL|SHIFT", action = select_and_open_url },
+		{ key = "G", mods = "CTRL|SHIFT", action = act.ScrollToBottom },
 		{ key = "UpArrow", mods = "SHIFT", action = act.ScrollToPrompt(-1) },
 		{ key = "DownArrow", mods = "SHIFT", action = act.ScrollToPrompt(1) },
+		{ key = "K", mods = "CTRL|SHIFT", action = act.ScrollByPage(-0.5) },
+		{ key = "J", mods = "CTRL|SHIFT", action = act.ScrollByPage(0.5) },
 	},
 	-- window_padding = { left = 0, top = 0, right = 0, bottom = 0 },
 }
