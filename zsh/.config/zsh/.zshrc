@@ -1,5 +1,7 @@
 # History setup
-setopt APPEND_HISTORY
+# Append command and time to $HISTFILE after executing it
+setopt INC_APPEND_HISTORY
+setopt INC_APPEND_HISTORY_TIME
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 
 # Useful functions
@@ -34,17 +36,16 @@ autoload -Uz colors && colors
 # Normal files to source
 source "${ZDOTDIR}/aliases.zsh"
 
-# Source additional organized into files in $ZDOTDIR/conf.d
 [ -d "${ZDOTDIR}/conf.d" ] && source "${ZDOTDIR}"/conf.d/*
 
 
 # FZF 
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
-# Bind searching to Alt+r because zsh-vim-mode binds Ctr+r to builtin revsearch
-bindkey -M emacs '^[r' fzf-history-widget
-bindkey -M vicmd '^[r' fzf-history-widget
-bindkey -M viins '^[r' fzf-history-widget
+# Using Ctrl+r so Alt is not needed
+# bindkey -M emacs '^[r' fzf-history-widget
+# bindkey -M vicmd '^[r' fzf-history-widget
+# bindkey -M viins '^[r' fzf-history-widget
 
 eval "$(zoxide init zsh)"
 alias cd=z
@@ -55,7 +56,8 @@ run_zi() {
 	zle reset-prompt
 }
 zle -N run_zi
-bindkey "^[z" run_zi
+bindkey -M vicmd "^[z" run_zi
+bindkey -M viins "^[z" run_zi
 
 # Use starship for prompt https://github.com/starship/starship
 eval "$(starship init zsh)"
