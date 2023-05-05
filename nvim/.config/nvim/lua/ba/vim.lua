@@ -49,7 +49,6 @@ vim.opt.signcolumn = "auto:2"
 
 vim.opt.fillchars:append( "foldclose:,foldopen:,foldsep: ")
 
---Map blankline
 vim.g.indent_blankline_char = "┊"
 vim.g.indent_blankline_filetype_exclude = { "help", "packer" }
 vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
@@ -63,7 +62,7 @@ vim.o.laststatus = 3 -- Set global statusbar.
 ---
 -- Keymaps
 ---
-local opts = { silent = true } -- Opts for a lots of mappings
+local opts = { silent = true } -- Opts for a lot of mappings
 
 --Remap space as leader key
 vim.keymap.set("", "<Space>", "<Nop>", { silent = true })
@@ -141,6 +140,7 @@ vim.keymap.set("n", "<leader>cbg", function()
 		vim.opt.background = "light"
 	end
 end, { silent = true })
+
 ---
 -- Autocommands
 ---
