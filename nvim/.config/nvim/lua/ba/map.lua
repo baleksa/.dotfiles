@@ -19,7 +19,7 @@ bindx("<leader>cs", function()
 	-- nvim_replace_termcodes() to replace termcodes.
 	-- nvim_input() won't work because it doesn't block, so keys won't get
 	-- executed
-	-- feedkeys() could be used but syntax is somewhat uglier
+	-- feedkeys() could be used but its syntax is somewhat uglier
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", false, true, true), "nx", false)
 	vim.cmd(":'<,'>w! !cspell stdin")
 	vim.cmd.normal("gn")
