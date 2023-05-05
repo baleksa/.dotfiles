@@ -10,5 +10,6 @@ exec sway-xkb-switcher-rust --default-lang "English (US)"
 exec pipewire
 exec pipewire-pulse
 exec wireplumber
+exec darkman run
 exec poweralertd
 # vim: ft=swayconfig
