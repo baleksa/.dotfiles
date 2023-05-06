@@ -33,16 +33,16 @@ update_python_lsp_extensions() {
 		return 1
 	}
 
-	pip uninstall -y pyls-isort isort \
-		pylint flake8 pycodestyle \
-		autopep8 yapf pyflakes pydocstyle
-	status="$?"
-	if [ "$status" -ne 0 ]; then
-		echo "Removing useless pip packages failed."
-		return "$status"
-	fi
-	pip install --no-input python-lsp-black pylsp-rope \
-		python-lsp-ruff ruff black rope
+	# pip uninstall -y pyls-isort isort \
+	# 	pylint flake8 pycodestyle \
+	# 	autopep8 yapf pyflakes pydocstyle
+	# status="$?"
+	# if [ "$status" -ne 0 ]; then
+	# 	echo "Removing useless pip packages failed."
+	# 	return "$status"
+	# fi
+	pip install --no-input pylsp-rope \
+		python-lsp-ruff ruff rope
 	status="$?"
 	if [ "$status" -ne 0 ]; then
 		echo "Updating used pip packages failed."
@@ -51,7 +51,7 @@ update_python_lsp_extensions() {
 
 	deactivate || {
 		echo "Failed to deactivate python venv."
-		return 1
+		exit 1
 	}
 }
 
