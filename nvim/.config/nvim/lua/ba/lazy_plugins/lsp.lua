@@ -20,8 +20,11 @@ return {
         -- info = "",
         info = "",
       })
+
       vim.diagnostic.config({
         virtual_text = false,
+        -- TODO: Find out why this line doesn't work
+        float = { source = true },
       })
     end,
   },
@@ -184,7 +187,15 @@ return {
           return ":IncRename " .. vim.fn.expand("<cword>")
         end, { expr = true })
 
-        bind("n", "<leader>d", vim.diagnostic.open_float)
+        bind("n", "<leader>d", function()
+          vim.diagnostic.open_float({ source = true })
+        end)
+        bind("n", "[d", function()
+          vim.diagnostic.goto_prev({ float = { source = true } })
+        end)
+        bind("n", "]d", function()
+          vim.diagnostic.goto_next({ float = { source = true } })
+        end)
         bind("n", "[e", function()
           vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
         end)
@@ -287,8 +298,8 @@ return {
                 extendSelect = { "I", "W", "Q", "B", "D" },
                 lineLength = 88,
               },
-              rope_autoimport = { enabled = true },
-              rope_completion = { enabled = true },
+              -- rope_autoimport = { enabled = true },
+              -- rope_completion = { enabled = true },
               -- Ruff disables them all
               -- autopep8 = { enabled = false },
               -- flake8 = { enabled = false },
