@@ -26,7 +26,7 @@ setup_greetd_tuigreet() {
 }
 
 setup_asdf() {
-	# TODO: version is hardcoded!
+	# HACK: version is hardcoded!
 	[ ! -d ~/.asdf ] && git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.3
 
 	xi -Syu python3 gcc make python3-pip

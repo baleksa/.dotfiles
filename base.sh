@@ -40,7 +40,8 @@ init_xbps() {
 		sudo xbps-install -Sy xtools void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree
 }
 
-configure_git() {
+gonfigure_git() {
+	# HACK: hardcoded values
 	git config --global user.email "skr.aleksa@gmail.com"
 	git config --global user.name "Aleksa Blagojević"
 }
