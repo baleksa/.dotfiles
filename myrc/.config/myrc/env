@@ -50,5 +50,7 @@ export TERM="wezterm"
 export TERMINAL="wezterm"
 export BROWSER="firefox-wayland"
 export DOC_READER="sway_zathura_open"
+export PDFREADER="zathura"
+export DOCREADER="zaread"
 
 export SWAY_SCRIPTS="$HOME/.config/sway/scripts"

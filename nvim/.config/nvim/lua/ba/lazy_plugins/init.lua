@@ -152,6 +152,7 @@ return {
 		"m4xshen/smartcolumn.nvim",
 		opts = {
 			scope = "window",
+			colorcolumn = "88",
 			disabled_filetypes = {
 				"help",
 				"text",

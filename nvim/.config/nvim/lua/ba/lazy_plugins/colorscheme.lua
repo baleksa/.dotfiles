@@ -53,15 +53,18 @@ return {
 			vim.g.everforest_better_performance = 1
 			vim.g.everforest_disable_italic_comment = 0
 			vim.g.everforest_enable_italic = 0
-		end,
-		config = function()
-			vim.cmd.colorscheme("everforest")
-			require("lualine").setup({
-				options = {
-					theme = "everforest",
+			vim.g.everforest_colors_override = {
+				bg3 = {
+					"#DDD8BE",
+					-- I think this is 256 based color
+					-- if termguicolors is not set.
+					-- This value is a random big number
+					-- could be bad choice.
+					"235",
 				},
-			})
+			}
 		end,
+		config = function() end,
 	},
 	{
 		"sainnhe/gruvbox-material",
@@ -82,6 +85,7 @@ return {
 		"folke/tokyonight.nvim",
 		lazy = false,
 		priority = 1000,
+		style = "storm",
 		opts = {
 			theme = "tokyonight",
 			styles = {
