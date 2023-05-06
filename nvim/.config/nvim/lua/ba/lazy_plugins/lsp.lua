@@ -275,24 +275,32 @@ return {
       --   },
       -- })
 
+      -- Doesn't work if called from single file in home directory.
+      -- Sometimes uses a lot of CPU.
+      -- Learn how mypy and rope work so you know how to configurethem.
       lspconfig.pylsp.setup({
         settings = {
           pylsp = {
             plugins = {
+              ruff = {
+                enabled = true,
+                extendSelect = { "I", "W", "Q", "B", "D" },
+                lineLength = 88,
+              },
               rope_autoimport = { enabled = true },
-              -- ruff = {
-              --   enabled = true,
-              --   lineLength = 88,
-              --   extendSelect = {
-              --     "W",
-              --     "C",
-              --     "I",
-              --     "D",
-              --   },
+              rope_completion = { enabled = true },
+              -- Ruff disables them all
+              -- autopep8 = { enabled = false },
+              -- flake8 = { enabled = false },
+              -- mccabe = { enabled = false },
+              -- pycodestyle = { enabled = false },
+              -- pyflakes = { enabled = false },
+              -- pylint = { enabled = false },
+              -- yapf = { enabled = false },
             },
           },
         },
-        -- single_file_support = false,
+        single_file_support = true,
       })
 
       lspconfig.bashls.setup({

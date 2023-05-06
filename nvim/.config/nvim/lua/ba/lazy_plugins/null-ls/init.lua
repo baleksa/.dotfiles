@@ -37,8 +37,16 @@ M.config = function()
     diag.selene,
     fmt.stylua,
     -- Python
-    diag.ruff,
-    fmt.ruff,
+    -- diag.ruff.with({
+    --   extra_args = {
+    --     -- { "--extend-select", "B", "Q" },
+    --   },
+    -- }),
+    -- fmt.ruff.with({
+    --   extra_args = {
+    --     -- { "--extend-select", "B", "Q" },
+    --   },
+    -- }),
     fmt.black,
     -- Ruby
     diag.reek, -- Complements rubocop
