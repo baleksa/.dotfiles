@@ -1,0 +1,52 @@
+#!/bin/env python
+
+from typing import Tuple
+
+
+def get_rgb(hexcolor: str) -> Tuple[int, int, int]:
+    rhex = hexcolor[1:3]
+    # print(rhex)
+    ghex = hexcolor[3:5]
+    # print(ghex)
+    bhex = hexcolor[5:]
+    # print(bhex)
+
+    return int("0x" + rhex, 16), int("0x" + ghex, 16), int("0x" + bhex, 16)
+
+
+def gamma_exp(val: int) -> float:
+    srgb = val / 255
+    if srgb <= 0.03928:
+        return srgb / 12.92
+    else:
+        return ((srgb + 0.055) / 1.055) ** 2.4
+
+
+def compute_rel_lum(color: Tuple[int, int, int]):
+    rgb = tuple(map(gamma_exp, color))
+    rl = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]
+    return rl
+
+
+def contrast_ratio(rl1, rl2):
+    return (rl1 + 0.05) / (rl2 + 0.05)
+
+
+def get_contrast(color1, color2):
+    l1 = compute_rel_lum(color1)
+    l2 = compute_rel_lum(color2)
+    l1, l2 = max(l1, l2), min(l1, l2)
+    # print(l1 ,l2)
+    return contrast_ratio(l1, l2)
+
+
+def main():
+    c1 = get_rgb(input())
+    print("First color = ", c1)
+    c2 = get_rgb(input())
+    print("Second color = ", c2)
+    print(f"Contrast ratio: {get_contrast(c1, c2):.3} : 1.0")
+
+
+if __name__ == "__main__":
+    main()
