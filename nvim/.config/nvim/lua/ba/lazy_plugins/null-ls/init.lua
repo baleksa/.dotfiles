@@ -119,7 +119,7 @@ M.config = function()
   null_ls.setup({
     debug = true,
     sources = sources,
-    diagnostics_format = "#{m} [#{s}]",
+    -- diagnostics_format = "#{m} [#{s}]",
   })
 
   -- Fixed by setting offsetEncoding for clangd
