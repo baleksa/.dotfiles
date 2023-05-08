@@ -25,6 +25,7 @@ cursor_bg = '#5c6a72'
 cursor_border = '#5c6a72'
 cursor_fg = '#fffbef'
 foreground = '#454545'
+# foreground = '#292524'
 
 [colors.indexed]
 
