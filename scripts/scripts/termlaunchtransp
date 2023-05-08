@@ -1,0 +1,15 @@
+#!/bin/sh
+
+window_title="termlauncher"
+
+case "$TERM" in
+wezterm)
+	wezterm --config 'window_close_confirmation="NeverPrompt"' \
+		--config 'window_background_opacity=0.5' \
+		--config 'text_background_opacity=0.7' \
+		start --class="$window_title" -- "$@"
+	;;
+*foot*)
+	start_foot -T"$window_title" "$1"
+	;;
+esac
