@@ -11,5 +11,7 @@ exec pipewire
 exec pipewire-pulse
 exec wireplumber
 exec darkman run
+exec kanshi
 exec poweralertd
+
 # vim: ft=swayconfig
