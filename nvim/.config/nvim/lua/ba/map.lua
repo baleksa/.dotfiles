@@ -1,3 +1,5 @@
+-- Mappings that require something else except neovim
+
 local bind = function(m, l, r, opts)
   vim.keymap.set(m, l, r, opts)
 end

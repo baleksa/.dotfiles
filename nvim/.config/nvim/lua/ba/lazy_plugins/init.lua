@@ -4,12 +4,7 @@ return {
     -- dependencies = { "DaikyXendo/nvim-material-icon" },
     lazy = true,
     config = function()
-      require("nvim-web-devicons").setup({
-        -- strict = false,
-        -- default = false,
-        -- color_icons = true,
-        -- override = require("nvim-material-icon").get_icons(),
-      })
+      require("nvim-web-devicons").setup({})
       require("nvim-web-devicons").set_default_icon("", "#6d8086", 65)
     end,
   },
@@ -224,6 +219,47 @@ return {
           -- },
         },
       })
+    end,
+  },
+  {
+    "ggandor/leap.nvim",
+    config = function()
+      require("leap").add_default_mappings()
+    end,
+  },
+  {
+    "phaazon/hop.nvim",
+    config = function()
+      -- place this in one of your configuration file(s)
+      local hop = require("hop")
+      hop.setup()
+      local directions = require("hop.hint").HintDirection
+      vim.keymap.set("", "f", function()
+        hop.hint_char1({
+          direction = directions.AFTER_CURSOR,
+          current_line_only = true,
+        })
+      end, { remap = true })
+      vim.keymap.set("", "F", function()
+        hop.hint_char1({
+          direction = directions.BEFORE_CURSOR,
+          current_line_only = true,
+        })
+      end, { remap = true })
+      vim.keymap.set("", "t", function()
+        hop.hint_char1({
+          direction = directions.AFTER_CURSOR,
+          current_line_only = true,
+          hint_offset = -1,
+        })
+      end, { remap = true })
+      vim.keymap.set("", "T", function()
+        hop.hint_char1({
+          direction = directions.BEFORE_CURSOR,
+          current_line_only = true,
+          hint_offset = 1,
+        })
+      end, { remap = true })
     end,
   },
 }

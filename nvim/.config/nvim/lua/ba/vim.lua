@@ -1,6 +1,37 @@
 ---
+---
 -- Set plain vim options, keymaps and autocommands
 ---
+local function color_nvim()
+	-- Set colorschemes for light bg
+	local cc = "everforest"
+	local llcc = "everforest"
+	-- If bg=dark change accordingly
+	if vim.o.background == "dark" then
+		cc = "tokyonight"
+		llcc = "tokyonight"
+	end
+
+	vim.cmd.colorscheme(cc)
+	require("lualine").setup({
+		options = {
+			theme = llcc,
+		},
+	})
+end
+
+-- vim.api.nvim_create_autocmd("VimEnter", {
+-- 	callback = function()
+-- 		color_nvim()
+-- 	end,
+-- })
+
+vim.api.nvim_create_autocmd("OptionSet", {
+	pattern = "background",
+	callback = function()
+		color_nvim()
+	end,
+})
 
 vim.opt.colorcolumn = "80"
 -- vim.opt.textwidth = 80
@@ -46,7 +77,7 @@ vim.opt.updatetime = 50 -- Decrease update time
 vim.opt.signcolumn = "auto:2"
 -- vim.opt.statuscolumn = "%!v:lua.get_statuscol()"
 
-vim.opt.fillchars:append( "foldclose:,foldopen:,foldsep: ")
+vim.opt.fillchars:append("foldclose:,foldopen:,foldsep: ")
 
 vim.g.indent_blankline_char = "┊"
 vim.g.indent_blankline_filetype_exclude = { "help", "packer" }
@@ -69,8 +100,18 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 --Remap for dealing with word wrap
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
+vim.keymap.set(
+  "n",
+  "k",
+  "v:count == 0 ? 'gk' : 'k'",
+  { noremap = true, expr = true, silent = true }
+)
+vim.keymap.set(
+  "n",
+  "j",
+  "v:count == 0 ? 'gj' : 'j'",
+  { noremap = true, expr = true, silent = true }
+)
 
 -- Put the cursor at the center after some motions
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -130,14 +171,19 @@ vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
-vim.keymap.set("n", "gx", [[:silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>]], opts)
+vim.keymap.set(
+  "n",
+  "gx",
+  [[:silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>]],
+  opts
+)
 
 vim.keymap.set("n", "<leader>cbg", function()
-	if vim.opt.background:get() == "light" then
-		vim.opt.background = "dark"
-	else
-		vim.opt.background = "light"
-	end
+  if vim.o.background == "light" then
+    vim.o.background = "dark"
+  else
+    vim.o.background = "light"
+  end
 end, { silent = true })
 
 ---
@@ -145,11 +191,22 @@ end, { silent = true })
 ---
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-	pattern = "*",
-	callback = function()
-		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 150, on_visual = false })
-	end,
-	group = vim.api.nvim_create_augroup("highlight_yank", {}),
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank({
+      higroup = "IncSearch",
+      timeout = 150,
+      on_visual = false,
+    })
+  end,
+  group = vim.api.nvim_create_augroup("highlight_yank", {}),
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    vim.keymap.set("n", "j", "j", { noremap = true, buffer = true })
+  end,
 })
 -- vim.api.nvim_create_autocmd("FileType", { pattern = "c", command = "setlocal noet ts=8 sw=8 tw=80" })
 -- vim.api.nvim_create_autocmd("FileType", { pattern = "h", command = "setlocal noet ts=8 sw=8 tw=80" })
@@ -170,10 +227,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- vim.api.nvim_create_autocmd("FileType", { pattern = "mail", command = "setlocal noautoindent" })
 -- vim.api.nvim_create_autocmd("FileType", { pattern = "gmi", command = "set wrap linebreak" })
 vim.api.nvim_create_autocmd(
-	"BufRead, BufNewFile",
-	{ pattern = "*", command = "if expand('%:t') == 'APKBUILD' | set ft=sh | endif" }
+  "BufRead, BufNewFile",
+  {
+    pattern = "*",
+    command = "if expand('%:t') == 'APKBUILD' | set ft=sh | endif",
+  }
 )
 vim.api.nvim_create_autocmd(
-	"BufRead, BufNewFile",
-	{ pattern = "*", command = "if expand('%:t') == 'PKGBUILD' | set ft=sh | endif" }
+  "BufRead, BufNewFile",
+  {
+    pattern = "*",
+    command = "if expand('%:t') == 'PKGBUILD' | set ft=sh | endif",
+  }
 )
