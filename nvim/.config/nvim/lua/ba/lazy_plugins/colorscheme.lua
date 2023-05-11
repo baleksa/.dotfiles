@@ -53,25 +53,36 @@ return {
       vim.g.everforest_better_performance = 1
       vim.g.everforest_disable_italic_comment = 0
       vim.g.everforest_enable_italic = 0
-      vim.g.everforest_colors_override = {
-        bg3 = {
-          -- Color that the scheme uses for List Chars, Special Keys,
-          -- Tab Line Label Background (inactive) is too bright
-          "#DDD8BE",
-          -- I think this is 256 based color
-          -- if termguicolors is not set.
-          -- This value is a random big number
-          -- could be bad choice.
-          "235",
-        },
-      }
+      -- vim.g.everforest_colors_override = {
+      --   bg3 = {
+      --     -- Color that the scheme uses for List Chars, Special Keys,
+      --     -- Tab Line Label Background (inactive) is too bright
+      --     "#DDD8BE",
+      --     -- I think this is 256 based color
+      --     -- if termguicolors is not set.
+      --     -- This value is a random big number
+      --     -- could be bad choice.
+      --     "235",
+      --   },
+      -- }
     end,
-    config = function() end,
+    config = function()
+      local cc = "everforest"
+      local llcc = "everforest"
+      if vim.o.background == "light" then
+        vim.cmd.colorscheme(cc)
+        require("lualine").setup({
+          options = {
+            theme = llcc,
+          },
+        })
+      end
+    end,
   },
   {
     "sainnhe/gruvbox-material",
     lazy = false,
-    priority = 1000,
+    -- priority = 1000,
     -- cond = false,
   },
   {
@@ -96,6 +107,19 @@ return {
       },
       lualine_bold = true,
     },
+    config = function()
+      local cc = "tokyonight"
+      local llcc = "tokyonight"
+      if vim.o.background == "dark" then
+        vim.cmd.colorscheme(cc)
+        require("lualine").setup({
+          options = {
+            theme = llcc,
+          },
+        })
+      end
+    end,
+
   },
   -- {
   -- 	"morhetz/gruvbox",
