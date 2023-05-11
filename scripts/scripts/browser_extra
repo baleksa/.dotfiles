@@ -1,0 +1,5 @@
+#!/bin/sh
+
+"$BROWSER" --new-window "https://web.whatsapp.com/"
+sleep 1s
+"$BROWSER" --new-tab "https://www.youtube.com/watch?v=jfKfPfyJRdk"

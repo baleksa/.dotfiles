@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if ! pgrep firefox 2>/dev/null; then
+	swaymsg workspace 1
+	"$BROWSER" &
+	sleep 1s
+fi
