@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Script that spawns a command in a terminal window with custom window title ( name
+# attribute in sway ). I use it as an universal cli launcher.
+
+# In my sway config there is a for_window rule that centers and makes floating containers
+# with this title.
 window_title="termlauncher"
 
 case "$TERM" in

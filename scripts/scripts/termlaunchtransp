@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Same as termlauncher but makes window transparent.
+
 window_title="termlauncher"
 
 case "$TERM" in
