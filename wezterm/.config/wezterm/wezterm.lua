@@ -56,6 +56,19 @@ local keys = {
 	{ key = "J", mods = "CTRL|SHIFT", action = act.ScrollByPage(0.5) },
 }
 
+-- This doesn't work as expected
+-- Font size problem is fixed by wezterm_font_for_monitor shell script
+-- local function font_for_monitor()
+-- 	local monitor_name = io.popen("swaymsg -t get_outputs | jq '.[] | select(.focused == true) | .name'", "r")
+-- 		:read("*l")
+-- 	wezterm.log_error(monitor_name)
+-- 	if monitor_name == '"eDP-1"' then
+-- 		return 16
+-- 	end
+--
+-- 	return 14
+-- end
+
 return {
 	font = fonts,
 	font_size = 12,

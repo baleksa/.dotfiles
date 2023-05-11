@@ -3,7 +3,7 @@
 # Basics:
 
     # Start a terminal
-    bindsym $mod+Return exec $term
+    bindsym $mod+Return exec wezterm_font_for_monitor
 
     # Start a browser
     bindsym $mod+s exec $browser
