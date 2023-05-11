@@ -3,6 +3,9 @@
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
+    id 1
+    output eDP-1 
+    output DP-1
     position top
 
     # When the status_command prints a new line to stdout, swaybar updates.
@@ -19,4 +22,22 @@ bar {
     }
 }
 
+# bar {
+#     id 2
+#     output DP-2
+#     position top
+#
+#     # When the status_command prints a new line to stdout, swaybar updates.
+#     # The default just shows the current date and time.
+#     status_command while $sway_scripts_dir/statusbar_text ; do sleep 1; done
+#
+#     modifier Mod5
+#
+#     colors {
+#         statusline #ffffff
+#         background #323232
+#         inactive_workspace #32323200 #32323200 #5c5c5c
+# 	# focused_workspace #4C7899FF #3a94c5FF #454545FF
+#     }
+# }
 # vim: ft=swayconfig
