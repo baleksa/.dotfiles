@@ -17,8 +17,8 @@
     # Start zathura
     bindsym $mod+z exec zathura
 
-    # Choose a document in $HOME and open it in zathura
-    bindsym $mod+Shift+z exec termlaunch zathura_open
+    # Start it using zsh so env vars are set
+    bindsym $mod+Shift+z exec 'zsh -i -c "termlaunch zathura_open"'
 
     # Kill focused window
     bindsym $mod+Shift+q kill
@@ -42,8 +42,6 @@
 #
 # Moving around:
 #
-    bindsym Alt+Tab workspace back_and_forth
-    bindsym $mod+Tab workspace back_and_forth
     # Move your focus around
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
@@ -78,7 +76,8 @@
     bindsym $mod+7 workspace number 7
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
+    bindsym $mod+0 workspace port
+    bindsym $mod+Ctrl+0 workspace extra
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -89,9 +88,14 @@
     bindsym $mod+Shift+7 move container to workspace number 7
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
+    bindsym $mod+Shift+0 move container to workspace port
+    bindsym $mod+Ctrl+Shift+0 move container to workspace extra
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
+    bindsym Alt+Tab workspace back_and_forth
+    bindsym $mod+Tab workspace back_and_forth
+    bindsym $mod+Ctrl+h workspace prev
+    bindsym $mod+Ctrl+l workspace next
 #
 # Layout stuff:
 #
@@ -131,7 +135,7 @@
     bindsym $mod+minus scratchpad show
 
 
-    bindsym $mod+Shift+b bar mode toggle
+    bindsym $mod+Shift+b bar mode toggle 1
 
 #
 # Resizing containers:
