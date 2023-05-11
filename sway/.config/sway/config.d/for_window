@@ -1,13 +1,19 @@
 for_window [app_id="Firefox" title="Firefox — Sharing Indicator"] kill
+
+assign [app_id="Firefox-extra"] workspace extra
+
 for_window [app_id="zoom" title="Zoom - Free Account"] floating disable
 for_window [app_id="zoom" title="Zoom Meeting"] floating disable
 for_window [app_id="zoom" title="Choose ONE of the audio conference options"] floating enable
 for_window [app_id="zoom" title="zoom.real "] floating enable
 for_window [app_id="zoom" title="Settings"] floating enable
+
 for_window [app_id="termlauncher"] floating enable
 for_window [title="termlauncher"] floating enable
+
 for_window [app_id="scratchpad"] move scratchpad
 for_window [title="scratchpad"] move scratchpad
+
 no_focus [title="^Peek preview$"]
 
 # vim: ft=swayconfig
