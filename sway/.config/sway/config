@@ -16,7 +16,7 @@ set $up k
 set $right l
 
 # Your preferred programs
-set $term wezterm
+set $term $TERM
 set $browser $BROWSER
 # set $doc_reader $DOC_READER
 
@@ -45,8 +45,8 @@ font pango:monospace Medium 12
 
 seat seat0 hide_cursor 3000
 
-include $HOME/.config/sway/config.d/*
 include /etc/sway/config.d/*
+include $HOME/.config/sway/config.d/*
 
 # If you run apps that need dbus then you need to run this
 # command so env vars would be visible to dbus and so to the apps.
