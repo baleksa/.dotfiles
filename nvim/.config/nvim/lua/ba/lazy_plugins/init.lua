@@ -4,7 +4,9 @@ return {
     -- dependencies = { "DaikyXendo/nvim-material-icon" },
     lazy = true,
     config = function()
-      require("nvim-web-devicons").setup({})
+      require("nvim-web-devicons").setup({
+        color_icons = true,
+      })
       require("nvim-web-devicons").set_default_icon("", "#6d8086", 65)
     end,
   },

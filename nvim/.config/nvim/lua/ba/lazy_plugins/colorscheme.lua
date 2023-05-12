@@ -47,7 +47,7 @@ return {
   {
     "sainnhe/everforest",
     lazy = false,
-    priority = 1000,
+    priority = 100,
     init = function()
       vim.g.everforest_background = "hard"
       vim.g.everforest_better_performance = 1
@@ -67,13 +67,11 @@ return {
       -- }
     end,
     config = function()
-      local cc = "everforest"
-      local llcc = "everforest"
       if vim.o.background == "light" then
-        vim.cmd.colorscheme(cc)
+        vim.cmd.colorscheme("everforest")
         require("lualine").setup({
           options = {
-            theme = llcc,
+            theme = "everforest",
           },
         })
       end
@@ -96,30 +94,27 @@ return {
   },
   {
     "folke/tokyonight.nvim",
-    lazy = false,
+    -- lazy = false,
     priority = 1000,
     style = "storm",
-    opts = {
-      theme = "tokyonight",
-      styles = {
-        comments = { italic = false },
-        keywords = { italic = false },
-      },
-      lualine_bold = true,
-    },
     config = function()
-      local cc = "tokyonight"
-      local llcc = "tokyonight"
+      require("tokyonight").setup({
+        theme = "tokyonight",
+        styles = {
+          comments = { italic = false },
+          keywords = { italic = false },
+        },
+        lualine_bold = true,
+      })
       if vim.o.background == "dark" then
-        vim.cmd.colorscheme(cc)
+        vim.cmd.colorscheme("tokyonight")
         require("lualine").setup({
           options = {
-            theme = llcc,
+            theme = "tokyonight",
           },
         })
       end
     end,
-
   },
   -- {
   -- 	"morhetz/gruvbox",
