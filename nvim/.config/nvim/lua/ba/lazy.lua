@@ -20,7 +20,7 @@ require("lazy").setup("ba.lazy_plugins", {
 			-- If you put colorschemes that set vim.g.background
 			-- option to different values here it can lead to
 			-- strange behaviour
-			"everforest",
+			-- "everforest",
 		},
 	},
 	-- checker = { enabled = true },
