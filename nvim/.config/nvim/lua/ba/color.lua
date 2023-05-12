@@ -26,4 +26,5 @@ vim.api.nvim_create_user_command(
 vim.api.nvim_create_autocmd("OptionSet", {
   pattern = "background",
   callback = color_nvim,
+	group = vim.api.nvim_create_augroup("ColorLua", {})
 })
