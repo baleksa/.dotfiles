@@ -1,0 +1,6 @@
+#!/bin/sh
+
+sed -i '/\[colors\]/q' ~/.config/foot.ini
+cat ~/.config/foot/colorschemes/everforest_light >> ~/.config/foot/foot.ini
+theme.sh everforest-light
+pkill -USR1 zsh

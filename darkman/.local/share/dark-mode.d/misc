@@ -1,0 +1,6 @@
+#!/bin/sh
+
+makoctl set-mode dark
+
+notify-send --app-name="darkman" --urgency=low --icon=/usr/share/icons/gnome/32x32/status/weather-clear-night.png "Switching to dark mode"
+

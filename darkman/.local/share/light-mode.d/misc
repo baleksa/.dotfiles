@@ -1,0 +1,5 @@
+#!/bin/sh
+
+makoctl set-mode light
+
+notify-send --app-name="darkman" --urgency=low -i /usr/share/icons/gnome/32x32/status/weather-clear.png "Switching to light mode"

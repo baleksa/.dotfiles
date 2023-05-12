@@ -1,0 +1,6 @@
+#!/bin/sh
+
+sed -i '/\[colors\]/q' ~/.config/foot.ini
+cat ~/.config/foot/colorschemes/tokyonight >> ~/.config/foot/foot.ini
+theme.sh tokyo-night
+pkill -USR1 zsh
