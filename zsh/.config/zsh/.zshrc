@@ -7,6 +7,8 @@ setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history
 # Useful functions
 source "${ZDOTDIR}/utils.zsh"
 
+source "${ZDOTDIR}/signal_handlers.zsh"
+
 # Add completion folder to fpath
 [ -d "${ZDOTDIR}/completion" ] && fpath+="${ZDOTDIR}/completion/"
 
