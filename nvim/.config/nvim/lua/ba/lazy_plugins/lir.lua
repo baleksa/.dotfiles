@@ -82,8 +82,9 @@ function M.config()
   })
 
   vim.api.nvim_set_hl(0, "LirFloatBorder", { link = "Normal" })
+  local lir_au = vim.api.nvim_create_augroup("Lir", { clear = true })
 
-  vim.api.nvim_create_autocmd("OptionSet", {
+  vim.api.nvim_create_autocmd({ "OptionSet" }, {
     pattern = "background",
     callback = function()
       require("nvim-web-devicons").set_icon({
@@ -94,7 +95,11 @@ function M.config()
         },
       })
     end,
+    group = lir_au,
   })
+  vim.api.nvim_create_autocmd({ "ColorScheme" }, {
+    -- pattern = "*",
+    callback = function()
       require("nvim-web-devicons").set_icon({
         lir_folder_icon = {
           icon = "",
@@ -102,6 +107,16 @@ function M.config()
           name = "LirFolderNode",
         },
       })
+    end,
+    group = lir_au,
+  })
+  require("nvim-web-devicons").set_icon({
+    lir_folder_icon = {
+      icon = "",
+      color = "#7ebae4",
+      name = "LirFolderNode",
+    },
+  })
 
   vim.keymap.set(
     "n",
