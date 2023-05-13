@@ -1,11 +1,12 @@
 return {
   {
     "nvim-tree/nvim-web-devicons",
-    -- dependencies = { "DaikyXendo/nvim-material-icon" },
+    dependencies = { "DaikyXendo/nvim-material-icon" },
     lazy = true,
     config = function()
       require("nvim-web-devicons").setup({
         color_icons = true,
+        override = require("nvim-material-icon").get_icons(),
       })
       require("nvim-web-devicons").set_default_icon("", "#6d8086", 65)
     end,
