@@ -2,6 +2,27 @@ return {
   {
     "ibhagwan/fzf-lua",
     config = function()
+      require("fzf-lua").setup({
+        keymap = {
+          builtin = {},
+          fzf = {
+            ["ctrl-k"] = "up",
+            ["ctrl-j"] = "down",
+          },
+        },
+      })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "fzf",
+        callback = function()
+          vim.keymap.del({ "n", "t" }, "<c-k>")
+          vim.keymap.del({ "n", "t" }, "<c-j>")
+          vim.keymap.del({ "n", "t" }, "<c-h>")
+          vim.keymap.del({ "n", "t" }, "<c-l>")
+        end,
+        group = vim.api.nvim_create_augroup("FzfMap", { clear = true }),
+      })
+
       vim.keymap.set("n", "<leader><space>", function()
         require("fzf-lua").buffers()
       end, { silent = true, desc = "Search opened buffers" })
@@ -39,26 +60,26 @@ return {
       -- end, { silent = true, desc = "Pick a colorscheme" })
     end,
   },
- --  {
- --    "junegunn/fzf",
- --    init = function()
- --      vim.cmd([[
-	-- let g:fzf_colors =
-	-- \ { 'fg':         ['fg', 'Normal'],
-	--   \ 'bg':         ['bg', 'Normal'],
-	--   \ 'preview-bg': ['bg', 'NormalFloat'],
-	--   \ 'hl':         ['fg', 'Comment'],
-	--   \ 'fg+':        ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-	--   \ 'bg+':        ['bg', 'CursorLine', 'CursorColumn'],
-	--   \ 'hl+':        ['fg', 'Statement'],
-	--   \ 'info':       ['fg', 'PreProc'],
-	--   \ 'border':     ['fg', 'Ignore'],
-	--   \ 'prompt':     ['fg', 'Conditional'],
-	--   \ 'pointer':    ['fg', 'Exception'],
-	--   \ 'marker':     ['fg', 'Keyword'],
-	--   \ 'spinner':    ['fg', 'Label'],
-	--   \ 'header':     ['fg', 'Comment'] }
-	-- ]])
- --    end,
- --  },
+  --  {
+  --    "junegunn/fzf",
+  --    init = function()
+  --      vim.cmd([[
+  -- let g:fzf_colors =
+  -- \ { 'fg':         ['fg', 'Normal'],
+  --   \ 'bg':         ['bg', 'Normal'],
+  --   \ 'preview-bg': ['bg', 'NormalFloat'],
+  --   \ 'hl':         ['fg', 'Comment'],
+  --   \ 'fg+':        ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  --   \ 'bg+':        ['bg', 'CursorLine', 'CursorColumn'],
+  --   \ 'hl+':        ['fg', 'Statement'],
+  --   \ 'info':       ['fg', 'PreProc'],
+  --   \ 'border':     ['fg', 'Ignore'],
+  --   \ 'prompt':     ['fg', 'Conditional'],
+  --   \ 'pointer':    ['fg', 'Exception'],
+  --   \ 'marker':     ['fg', 'Keyword'],
+  --   \ 'spinner':    ['fg', 'Label'],
+  --   \ 'header':     ['fg', 'Comment'] }
+  -- ]])
+  --    end,
+  --  },
 }
