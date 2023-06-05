@@ -18,6 +18,7 @@ function M.config()
   local clipboard_actions = require("lir.clipboard.actions")
 
   require("lir").setup({
+    hide_cursor = true,
     show_hidden_files = false,
     ignore = {}, -- { ".DS_Store" "node_modules" } etc.
     devicons = {
@@ -52,7 +53,6 @@ function M.config()
       ["P"] = clipboard_actions.paste,
     },
     float = {
-      winblend = 0,
       curdir_window = {
         enable = false,
         highlight_dirname = false,
@@ -65,24 +65,44 @@ function M.config()
         }
       end,
     },
-    hide_cursor = true,
     on_init = function()
-      -- use visual mode
-      vim.api.nvim_buf_set_keymap(
-        0,
-        "x",
-        "J",
-        ':<C-u>lua require"lir.mark.actions".toggle_mark("v")<CR>',
-        { noremap = true, silent = true }
-      )
+      -- Because of https://github.com/neovim/neovim/issues/22614 wrap in
+      -- vim.schedule to echo message with proper color
+      vim.schedule(function()
+        -- use visual mode
+        vim.api.nvim_buf_set_keymap(
+          0,
+          "x",
+          "J",
+          ':<C-u>lua require"lir.mark.actions".toggle_mark("v")<CR>',
+          { noremap = true, silent = true }
+        )
 
-      -- echo cwd
-      vim.api.nvim_echo({ { vim.fn.expand("%:p"), "Normal" } }, false, {})
+        -- echo cwd
+        vim.api.nvim_echo({ { vim.fn.expand("%:p"), "Normal" } }, false, {})
+      end)
     end,
   })
 
-  vim.api.nvim_set_hl(0, "LirFloatBorder", { link = "Normal" })
   local lir_au = vim.api.nvim_create_augroup("Lir", { clear = true })
+
+  vim.schedule(function()
+    vim.api.nvim_set_hl(0, "LirFloatBorder", { link = "Normal" })
+    vim.cmd([[
+	highlight def LirTransparentCursor gui=strikethrough blend=100
+    ]])
+  end)
+
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*",
+    callback = function()
+      vim.api.nvim_set_hl(0, "LirFloatBorder", { link = "Normal" })
+      vim.cmd([[
+	highlight def LirTransparentCursor gui=strikethrough blend=100
+	]])
+    end,
+    group = lir_au,
+  })
 
   vim.api.nvim_create_autocmd({ "OptionSet" }, {
     pattern = "background",
@@ -96,26 +116,6 @@ function M.config()
       })
     end,
     group = lir_au,
-  })
-  vim.api.nvim_create_autocmd({ "ColorScheme" }, {
-    -- pattern = "*",
-    callback = function()
-      require("nvim-web-devicons").set_icon({
-        lir_folder_icon = {
-          icon = "",
-          color = "#7ebae4",
-          name = "LirFolderNode",
-        },
-      })
-    end,
-    group = lir_au,
-  })
-  require("nvim-web-devicons").set_icon({
-    lir_folder_icon = {
-      icon = "",
-      color = "#7ebae4",
-      name = "LirFolderNode",
-    },
   })
 
   vim.keymap.set(
