@@ -7,7 +7,7 @@ vim.opt_local.spell = true
 -- vim.opt_local.spelllang = { "en" }
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
-	pattern = "*.md",
+	pattern = "md",
 	callback = function()
 		local lang_rs = vim.list_contains(vim.opt_local.spelllang:get(), "sr")
 		if lang_rs then
@@ -79,7 +79,7 @@ end, {})
 vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = "*.md",
 	callback = build,
-	-- group = mdgroup,
+	group = mdgroup,
 })
 
 build()
