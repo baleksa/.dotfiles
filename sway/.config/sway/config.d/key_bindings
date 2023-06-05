@@ -10,7 +10,7 @@
     # Start a browser
     bindsym $mod+s exec $browser
 
-    bindsym $mod+Shift+w exec termlaunch workspace_setup
+    bindsym $mod+Shift+w exec 'zsh -i -c "termlaunch workspace_setup"'
 
     bindsym $mod+n exec makoctl dismiss --all
 
