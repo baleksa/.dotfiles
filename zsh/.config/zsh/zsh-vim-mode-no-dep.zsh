@@ -130,5 +130,15 @@ zle -N my-vim-backward-kill-word
 bindkey '^w' my-vim-backward-kill-word
 # You can't delete a whole word in isearch mode
 bindkey -M 'command' '^w' vi-backward-kill-word
-# Use fzf's Ctrl-R binding
+
+# Using fzf's Ctrl-R binding instead of built-in one
 # bindkey '^r' history-incremental-search-backward
+
+
+# Yank to the zsh internall buffer and to the system clipboard
+function vi-yank-wayland-clipboard {
+    zle vi-yank
+   echo "$CUTBUFFER" | wl-copy
+}
+zle -N vi-yank-wayland-clipboard
+bindkey -M vicmd 'y' vi-yank-wayland-clipboard
