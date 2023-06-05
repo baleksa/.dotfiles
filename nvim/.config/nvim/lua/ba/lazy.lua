@@ -15,14 +15,14 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("ba.lazy_plugins", {
 	-- defaults = { lazy = true },
 	dev = { path = "~/coding/nvim_plugins" },
-	install = {
-		colorscheme = {
-			-- If you put colorschemes that set vim.g.background
-			-- option to different values here it can lead to
-			-- strange behaviour
-			-- "everforest",
-		},
-	},
+	-- install = {
+	-- 	colorscheme = {
+	-- 		-- If you put colorschemes that set vim.g.background
+	-- 		-- option to different values here it can lead to
+	-- 		-- strange behaviour
+	-- 		-- "everforest",
+	-- 	},
+	-- },
 	-- checker = { enabled = true },
 	-- diff = {
 	--   cmd = "terminal_git",
@@ -38,6 +38,7 @@ require("lazy").setup("ba.lazy_plugins", {
 			"matchit",
 			"matchparen",
 			"netrwPlugin",
+			"netrw",
 			"tarPlugin",
 			"tohtml",
 			"tutor",

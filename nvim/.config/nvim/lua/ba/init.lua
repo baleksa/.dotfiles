@@ -5,4 +5,3 @@ vim.g.file_explorer = "lir"
 
 require("ba.lazy")
 require("ba.map")
-require("ba.color")
