@@ -13,5 +13,6 @@ exec wireplumber
 exec darkman run
 exec kanshi
 exec poweralertd
-
+exec easyeffects --gapplication-service
+exec noisetorch -i
 # vim: ft=swayconfig
