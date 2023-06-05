@@ -1,7 +1,7 @@
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/baleksa/Pictures/purple_planet_w11_bg.jpg fill
+# output * bg /home/baleksa/Pictures/purple_planet_w11_bg.jpg fill
 #
 # Example configuration:
 #
