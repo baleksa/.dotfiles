@@ -1,3 +1,5 @@
 #!/bin/sh
 
-sleep "$1" && swaymsg "exec termlaunch tty-clock"
+sleep "$1"
+notify-send -u critical "END OF SESSION" "Work session is done. Go on 15min brake."
+swaymsg "exec termlaunch tty-clock"

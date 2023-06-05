@@ -1,0 +1,15 @@
+#!/bin/sh
+
+make distclean && echo "Cleaned build dirs."
+make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/.local"
+build_status=$?
+if [ "$build_status" = "0" ]; then
+	echo "Built nvim. Now installing."
+	rm -rf /home/baleksa/.local/share/nvim/runtime && echo "Removed old VIMRUNTIME"
+	make CMAKE_INSTALL_PREFIX="$HOME/.local" install && echo "Installed nvim."
+else
+	echo "Building nvim failed with exit code $build_status!"
+	exit "$build_status"
+fi
+rm -f ~/.local/share/applications/nvim.desktop
+cd ~/.dotfiles && stow applications

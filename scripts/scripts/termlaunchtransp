@@ -12,6 +12,6 @@ wezterm)
 		start --class="$window_title" -- "$@"
 	;;
 *foot*)
-	start_foot -T"$window_title" "$1"
+	foot -T"$window_title" -o "colors.alpha=0.1" "$@"
 	;;
 esac

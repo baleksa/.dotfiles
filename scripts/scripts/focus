@@ -1,0 +1,13 @@
+#!/bin/sh
+
+case "$1" in
+on)
+	swaymsg "output eDP-1 dpms off"
+	swaymsg "output DP-2 dpms off"
+	;;
+off)
+	swaymsg "output eDP-1 dpms on"
+	swaymsg "output DP-2 dpms on"
+	;;
+*) ;;
+esac
