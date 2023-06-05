@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sed -i '/\[colors\]/q' ~/.config/foot.ini
-cat ~/.config/foot/colorschemes/tokyonight >> ~/.config/foot/foot.ini
-theme.sh tokyo-night
+sed -i '/\[colors\]/q' /home/baleksa/.config/foot/foot.ini
+cat /home/baleksa/.config/foot/colorschemes/tokyonight >> /home/baleksa/.config/foot/foot.ini
+# theme.sh tokyo-night
 pkill -USR1 zsh

@@ -1,5 +1,9 @@
 #!/bin/sh
 
+oldswaybg="$(pid of swaybg)"
+swaymsg "output * bg /home/baleksa/Pictures/book_room_forest.png fill"
+kill "$oldswaybg"
+
 makoctl set-mode dark
 
 notify-send --app-name="darkman" --urgency=low --icon=/usr/share/icons/gnome/32x32/status/weather-clear-night.png "Switching to dark mode"
