@@ -124,6 +124,7 @@ function M.config()
     [[<Cmd>execute 'e ' .. expand('%:p:h')<CR>]],
     { noremap = true }
   )
+
   vim.keymap.set("n", "<leader>-", function()
     require("lir.float").toggle()
   end, { noremap = true })
