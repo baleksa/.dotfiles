@@ -1,13 +1,21 @@
 return {
   {
     "nvim-tree/nvim-web-devicons",
-    dependencies = { "DaikyXendo/nvim-material-icon" },
+    -- dependencies = { "DaikyXendo/nvim-material-icon" },
     lazy = true,
-    config = function()
-      require("nvim-web-devicons").setup({
+    opts = function()
+      return {
         color_icons = true,
-        override = require("nvim-material-icon").get_icons(),
-      })
+        -- override = require("nvim-material-icon").get_icons(),
+      }
+    end,
+    config = function(_, opts)
+      require("nvim-web-devicons").setup(opts)
+      -- Fixed by VimEnter autocmd in after/plugin/color.lua
+      -- Using vim.schedule() makes screen flicker 
+      -- vim.schedule(function()
+      --   require("nvim-web-devicons").set_up_highlights()
+      -- end)
       require("nvim-web-devicons").set_default_icon("", "#6d8086", 65)
     end,
   },
