@@ -1,0 +1,23 @@
+## OneDark
+alpha=1.0
+foreground=c3c0b8
+background=080F20
+regular0=1E2127 
+regular1=e06c75
+regular2=98c379
+regular3=d19a66
+regular4=61afef
+regular5=c678dd
+regular6=56b6c2
+regular7=abb2bf
+bright0=5c6370
+bright1=e06c75
+bright2=98c379
+bright3=d19a66
+bright4=61afef
+bright5=c678dd
+bright6=56b6c2
+bright7=ffffff
+selection-foreground=080F20
+selection-background=d3d0c8
+
