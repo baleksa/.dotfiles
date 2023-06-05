@@ -1,6 +1,7 @@
 return {
   {
     "ellisonleao/gruvbox.nvim",
+    lazy = true,
     opts = {
       undercurl = true,
       underline = true,
@@ -35,22 +36,21 @@ return {
   },
   {
     "shaunsingh/moonlight.nvim",
-    -- lazy = false,
+    lazy = true,
     -- priority = 1000,
   },
   {
     "nyoom-engineering/oxocarbon.nvim",
     build = "./install.sh",
-    -- lazy = false,
+    lazy = true,
     -- priority = 1000,
   },
   {
     "sainnhe/everforest",
     lazy = false,
-    priority = 100,
+    priority = 1000,
     init = function()
       vim.g.everforest_background = "hard"
-      vim.g.everforest_better_performance = 1
       vim.g.everforest_disable_italic_comment = 0
       vim.g.everforest_enable_italic = 0
       -- vim.g.everforest_colors_override = {
@@ -66,27 +66,18 @@ return {
       --   },
       -- }
     end,
-    config = function()
-      if vim.o.background == "light" then
-        vim.cmd.colorscheme("everforest")
-        require("lualine").setup({
-          options = {
-            theme = "everforest",
-          },
-        })
-      end
-    end,
+    opts = {},
   },
   {
     "sainnhe/gruvbox-material",
-    lazy = false,
+    lazy = true,
     -- priority = 1000,
     -- cond = false,
   },
   {
     "rose-pine/neovim",
     name = "rose-pine",
-    -- lazy = false,
+    lazy = true,
     -- priority = 1000,
     opts = {
       disable_italics = true,
@@ -96,25 +87,17 @@ return {
     "folke/tokyonight.nvim",
     -- lazy = false,
     priority = 1000,
-    style = "storm",
-    config = function()
-      require("tokyonight").setup({
+    opts = {
+      {
         theme = "tokyonight",
+        style = "strom",
         styles = {
           comments = { italic = false },
           keywords = { italic = false },
         },
         lualine_bold = true,
-      })
-      if vim.o.background == "dark" then
-        vim.cmd.colorscheme("tokyonight")
-        require("lualine").setup({
-          options = {
-            theme = "tokyonight",
-          },
-        })
-      end
-    end,
+      },
+    },
   },
   -- {
   -- 	"morhetz/gruvbox",
