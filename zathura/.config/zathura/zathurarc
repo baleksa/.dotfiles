@@ -1,4 +1,11 @@
 set selection-clipboard clipboard
+set scroll-page-aware "true"
 set default-bg \#5b7f72
+set adjust-open "best-fit"
+set recolor "true"
+# Works only with zathura-pdf-poppler
+set recolor-reverse-video "true"
+# This keeps colors of images nice when coloring if using zathura-pdf-mupdf
+set recolor-keephue "true"
 set recolor-lightcolor \#fffbef
 set recolor-darkcolor   \#222222
