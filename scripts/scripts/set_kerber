@@ -2,11 +2,9 @@
 
 # Script that sets my three monitor setup, opens apps and places them as I desire.
 
-# Using pgrep is not as portable as ps cax | grep command but it's much cleaner.
+# Using pgrep is not as portable as using ps cax | grep command but it's much cleaner.
 if ! pgrep firefox 2>/dev/null; then
-	swaymsg workspace 1
-	"$BROWSER" &
-	sleep 2s
+	swaymsg "workspace 1, exec \$BROWSER, workspace 2"
 fi
 
 swaymsg workspace portrait output DP-2, workspace portrait
