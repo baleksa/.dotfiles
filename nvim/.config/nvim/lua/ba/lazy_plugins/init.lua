@@ -12,7 +12,7 @@ return {
     config = function(_, opts)
       require("nvim-web-devicons").setup(opts)
       -- Fixed by VimEnter autocmd in after/plugin/color.lua
-      -- Using vim.schedule() makes screen flicker 
+      -- Using vim.schedule() makes screen flicker
       -- vim.schedule(function()
       --   require("nvim-web-devicons").set_up_highlights()
       -- end)
@@ -126,6 +126,7 @@ return {
   { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
   {
     "j-hui/fidget.nvim",
+    tag = "legacy",
     config = true,
   },
   -- { "baleksa/simplebufline.nvim", dev = true },
