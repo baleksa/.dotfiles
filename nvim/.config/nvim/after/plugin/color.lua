@@ -44,11 +44,11 @@ vim.api.nvim_create_autocmd("OptionSet", {
 --   end,
 -- })
 
--- if vim.o.bg == "dark" then
---   vim.cmd.colorscheme("tokyonight")
---   require("lualine").setup({
---     options = {
---       theme = "tokyonight",
---     },
---   })
--- end
+if vim.o.bg == "dark" then
+  vim.cmd.colorscheme("tokyonight")
+  require("lualine").setup({
+    options = {
+      theme = "tokyonight",
+    },
+  })
+end
