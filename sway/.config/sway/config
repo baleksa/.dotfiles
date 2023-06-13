@@ -48,7 +48,7 @@ seat seat0 hide_cursor 3000
 include /etc/sway/config.d/*
 include $HOME/.config/sway/config.d/*
 
-# If you run apps that need dbus then you need to run this
+# If you run apps that need dbus you need to run this
 # command so env vars would be visible to dbus and so to the apps.
 exec hash dbus-update-activation-environment 2>/dev/null && \
 	dbus-update-activation-environment --all
