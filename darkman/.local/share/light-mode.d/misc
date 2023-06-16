@@ -1,7 +1,7 @@
 #!/bin/sh
 
-oldswaybg="$(pid of swaybg)"
-(swaybg -i ~/Pictures/green_village.jpg -o \* -m fill)
+oldswaybg="$(pidof swaybg)"
+(swaybg -i ~/Pictures/green_village.jpg -o \* -m fill &)
 kill "$oldswaybg"
 
 makoctl set-mode light
