@@ -1,5 +1,7 @@
 #!/bin/sh
 
+light -S 15
+
 oldswaybg="$(pidof swaybg)"
 (swaybg -i ~/Pictures/book_room_forest.png -o \* -m fill &)
 kill "$oldswaybg"
