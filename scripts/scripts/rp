@@ -1,3 +1,0 @@
-#!/bin/sh
-
-exec zathura '/home/baleksa/books/Psy/Psy4/rp/John H. Flavell - The Developmental Psychology of Jean Piaget (2011, Literary Licensing) - libgen.lc.pdf'
