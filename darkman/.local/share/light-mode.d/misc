@@ -3,7 +3,7 @@
 light -S 80
 
 oldswaybg="$(pidof swaybg)"
-(swaybg -i ~/Pictures/green_village.jpg -o \* -m fill &)
+swaybg -i ~/Pictures/green_village.jpg -o \* -m fill &
 kill "$oldswaybg"
 
 makoctl set-mode light
