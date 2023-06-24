@@ -1,0 +1,4 @@
+inherits = "everforest_light"
+[ palette ]
+bg0 = "#fffbef"
+fg = "#454545"
