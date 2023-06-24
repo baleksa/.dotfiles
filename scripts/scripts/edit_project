@@ -3,5 +3,5 @@ proj="$(fd -L -t d -d 1 . "$HOME/repositories/" "$HOME/coding/" | fzf)"
 [ -d "$proj" ] && {
 	# echo "Directory"
 	cd "$proj" || exit
-	nvim .
+	"$EDITOR" .
 }

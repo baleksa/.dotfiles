@@ -5,7 +5,7 @@
 if [ "$#" = "0" ]; then
 	note="$(find -H "$MYNOTES_DIR" -type d,f | fzf)"
 	if [ "$note" = "" ]; then
-		nvim "$MYNOTES_DIR"
+		"$EDITOR" "$MYNOTES_DIR"
 		exit
 	fi
 else
@@ -26,5 +26,5 @@ if [ ! -f "$note" ]; then
 	printf "%s\ntitle: \"%s\"\ncreated: \"%s\"\n%s\n" '---' "$title" "$(date -u -Is)" '---' >>"$note"
 fi
 
-nvim "$note"
+"$EDITOR" "$note"
 [ -e "$note" ] && [ ! -s "$note" ] && rm "$note"

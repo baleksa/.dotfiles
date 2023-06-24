@@ -1,6 +1,6 @@
 #!/bin/sh
 
-alias ec='sh -c cd "$XDG_CONFIG_HOME" && pick_and_nvim "$XDG_CONFIG_HOME"'
+alias ec='sh -c cd "$XDG_CONFIG_HOME" && pick_and_edit "$XDG_CONFIG_HOME"'
 alias ep='edit_project'
 alias es='edit_script'
 alias en='edit_note'

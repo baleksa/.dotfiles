@@ -12,5 +12,5 @@ else
 		chmod +x "$script"
 	fi
 fi
-nvim "$script"
+"$EDITOR" "$script"
 [ -e "$script" ] && [ ! -s "$script" ] && rm "$script"
