@@ -104,19 +104,19 @@ function M.config()
     group = lir_au,
   })
 
-  vim.api.nvim_create_autocmd({ "OptionSet" }, {
-    pattern = "background",
-    callback = function()
-      require("nvim-web-devicons").set_icon({
-        lir_folder_icon = {
-          icon = "",
-          color = "#7ebae4",
-          name = "LirFolderNode",
-        },
-      })
-    end,
-    group = lir_au,
-  })
+  -- vim.api.nvim_create_autocmd({ "OptionSet" }, {
+  --   pattern = "background",
+  --   callback = function()
+  --     require("nvim-web-devicons").set_icon({
+  --       lir_folder_icon = {
+  --         icon = "",
+  --         color = "#7ebae4",
+  --         name = "LirFolderNode",
+  --       },
+  --     })
+  --   end,
+  --   group = lir_au,
+  -- })
 
   vim.keymap.set(
     "n",

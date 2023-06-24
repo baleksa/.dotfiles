@@ -1,23 +1,22 @@
 return {
   {
     "nvim-tree/nvim-web-devicons",
-    -- dependencies = { "DaikyXendo/nvim-material-icon" },
     lazy = true,
-    opts = function()
-      return {
-        color_icons = true,
-        -- override = require("nvim-material-icon").get_icons(),
-      }
-    end,
-    config = function(_, opts)
-      require("nvim-web-devicons").setup(opts)
-      -- Fixed by VimEnter autocmd in after/plugin/color.lua
-      -- Using vim.schedule() makes screen flicker
-      -- vim.schedule(function()
-      --   require("nvim-web-devicons").set_up_highlights()
-      -- end)
-      require("nvim-web-devicons").set_default_icon("", "#6d8086", 65)
-    end,
+    opts = {},
+    -- opts = function()
+    --   return {
+    --     color_icons = true,
+    --   }
+    -- end,
+    -- config = function(_, opts)
+    --   require("nvim-web-devicons").setup(opts)
+    --   -- Fixed by VimEnter autocmd in after/plugin/color.lua
+    --   -- Using vim.schedule() here makes the screen flicker
+    --   -- vim.schedule(function()
+    --   --   require("nvim-web-devicons").set_up_highlights()
+    --   -- end)
+    --   require("nvim-web-devicons").set_default_icon("", "#6d8086", 65)
+    -- end,
   },
   -- tpope's phenomenal plugins
   { "tpope/vim-fugitive" }, -- Git commands in nvim

@@ -19,11 +19,6 @@ local function color_nvim()
       theme = llcc,
     },
   })
-
-  -- Because of a racing confition without this line highlights are not set on
-  -- startup
-  -- Done by VimEnter autocmd bellow
-  -- require("nvim-web-devicons").set_up_highlights()
 end
 
 local color_lua = vim.api.nvim_create_augroup("ColorLua", {})
@@ -40,15 +35,18 @@ vim.api.nvim_create_autocmd("OptionSet", {
 -- screen flickers
 -- vim.api.nvim_create_autocmd({ "VimEnter" }, {
 --   callback = function()
---     require("nvim-web-devicons").set_up_highlights()
+--     -- vim.schedule(function()
+--       require("nvim-web-devicons").set_up_highlights()
+--     -- end)
 --   end,
 -- })
 
-if vim.o.bg == "dark" then
-  vim.cmd.colorscheme("tokyonight")
-  require("lualine").setup({
-    options = {
-      theme = "tokyonight",
-    },
-  })
-end
+-- if vim.o.bg == "dark" then
+--   vim.cmd.colorscheme("tokyonight")
+--   require("lualine").setup({
+--     options = {
+--       theme = "tokyonight",
+--     },
+--   })
+-- end
+color_nvim()
