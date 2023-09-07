@@ -273,4 +273,12 @@ return {
       end, { remap = true })
     end,
   },
+  {
+    "echasnovski/mini.files",
+    version = false,
+    opts = {},
+    cond = function()
+      return vim.g.file_explorer == "mini"
+    end,
+  },
 }
