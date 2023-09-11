@@ -11,11 +11,11 @@ return {
       })
 
       require("lsp-zero.server").set_sign_icons({
-        error = "",
+        error = "",
         -- error = "✖", -- this can only be used in the git_status source
         warn = "󰔷",
         -- warn = "▲",
-        hint = "",
+        hint = "",
         -- hint = "⚑",
         -- info = "",
         info = "",
@@ -49,6 +49,7 @@ return {
     },
     config = function()
       -- Here is where you configure the autocompletion settings.
+        error = "",
       -- The arguments for .extend() have the same shape as `manage_nvim_cmp`:
       -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/api-reference.md#manage_nvim_cmp
 
