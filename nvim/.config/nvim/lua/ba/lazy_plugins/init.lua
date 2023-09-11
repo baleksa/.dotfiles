@@ -280,5 +280,14 @@ return {
     cond = function()
       return vim.g.file_explorer == "mini"
     end,
+    config = function(_, opts)
+      require("mini.files").setup(opts)
+      vim.keymap.set("n", "-", function()
+        MiniFiles.open()
+      end, {})
+      vim.keymap.set("n", "<leader>-", function()
+        MiniFiles.open(vim.api.nvim_buf_get_name(0))
+      end, {})
+    end,
   },
 }
