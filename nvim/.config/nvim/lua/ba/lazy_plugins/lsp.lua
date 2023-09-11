@@ -11,7 +11,7 @@ return {
       })
 
       require("lsp-zero.server").set_sign_icons({
-        error = "",
+        error = "󰅘",
         -- error = "✖", -- this can only be used in the git_status source
         warn = "󰔷",
         -- warn = "▲",
