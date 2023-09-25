@@ -41,7 +41,6 @@ return {
   },
   {
     "nyoom-engineering/oxocarbon.nvim",
-    build = "./install.sh",
     lazy = true,
     -- priority = 1000,
   },

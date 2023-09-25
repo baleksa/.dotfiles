@@ -5,12 +5,15 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "JoosepAlviste/nvim-ts-context-commentstring",
-      "HiPhish/nvim-ts-rainbow2",
       "nvim-treesitter/playground",
     },
     config = function()
       require("nvim-treesitter.configs").setup({
+        ensure_installed = {},
+        ignore_install = {},
+        sync_install = false,
         auto_install = true,
+        modules = {},
         playground = {
           enable = true,
           disable = {},
@@ -34,7 +37,7 @@ return {
         highlight = {
           enable = true,
           -- disable = { "help", },
-          disable = function(lang, buf)
+          disable = function(_, buf)
             local max_filesize = 100 * 1024 -- 100 KB
             local ok, stats =
               pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
@@ -54,9 +57,9 @@ return {
         context_commentstring = {
           enable = true,
         },
-        rainbow = {
-          enable = true,
-        },
+        -- rainbow = {
+        --   enable = true,
+        -- },
         incremental_selection = {
           enable = true,
           keymaps = {
@@ -141,5 +144,32 @@ return {
     opts = {
       enable = true,
     },
+  },
+  {
+    "https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git",
+    config = function()
+      -- This module contains a number of default definitions
+      local rainbow_delimiters = require("rainbow-delimiters")
+
+      vim.g.rainbow_delimiters = {
+        strategy = {
+          [""] = rainbow_delimiters.strategy["global"],
+          vim = rainbow_delimiters.strategy["local"],
+        },
+        query = {
+          [""] = "rainbow-delimiters",
+          lua = "rainbow-blocks",
+        },
+        highlight = {
+          "RainbowDelimiterRed",
+          "RainbowDelimiterYellow",
+          "RainbowDelimiterBlue",
+          "RainbowDelimiterOrange",
+          "RainbowDelimiterGreen",
+          "RainbowDelimiterViolet",
+          "RainbowDelimiterCyan",
+        },
+      }
+    end,
   },
 }
