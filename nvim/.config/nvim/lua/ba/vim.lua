@@ -162,8 +162,7 @@ end, { silent = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
   pattern = "*",
   callback = function()
-    vim.highlight.on_yank({
-      higroup = "IncSearch",
+    vim.highlight.on_yank({ higroup = "IncSearch",
       timeout = 150,
       on_visual = false,
     })
@@ -184,7 +183,8 @@ vim.api.nvim_create_autocmd("FileType", {
 -- vim.api.nvim_create_autocmd("FileType", { pattern = "go", command = "setlocal noet ts=4 sw=4" })
 -- vim.api.nvim_create_autocmd("FileType", { pattern = "lua", command = "setlocal noet ts=4 sw=4" })
 -- vim.api.nvim_create_autocmd("FileType", { pattern = "sh", command = "setlocal noet ts=8 sw=8" })
--- vim.api.nvim_create_autocmd("BufRead, BufNewFile", { pattern = "*.js", command = "setlocal et ts=2 sw=2" })
+-- vim.api.nvim_create_autocmd("BufRead", { pattern = "*.js", command = "setlocal et ts=2 sw=2" })
+-- vim.api.nvim_create_autocmd("BufNewFile", { pattern = "*.js", command = "setlocal et ts=2 sw=2" })
 -- vim.api.nvim_create_autocmd("FileType", { pattern = "html", command = "setlocal et ts=2 sw=2" })
 -- vim.api.nvim_create_autocmd("FileType", { pattern = "htmldjango", command = "setlocal et ts=2 sw=2" })
 -- vim.api.nvim_create_autocmd("FileType", { pattern = "scss", command = "setlocal et ts=2 sw=2" })
@@ -196,14 +196,14 @@ vim.api.nvim_create_autocmd("FileType", {
 -- vim.api.nvim_create_autocmd("FileType", { pattern = "mail", command = "setlocal noautoindent" })
 -- vim.api.nvim_create_autocmd("FileType", { pattern = "gmi", command = "set wrap linebreak" })
 vim.api.nvim_create_autocmd(
-  "BufRead, BufNewFile",
+{"BufRead", "BufNewFile"},
   {
     pattern = "*",
     command = "if expand('%:t') == 'APKBUILD' | set ft=sh | endif",
   }
 )
 vim.api.nvim_create_autocmd(
-  "BufRead, BufNewFile",
+{"BufRead", "BufNewFile"},
   {
     pattern = "*",
     command = "if expand('%:t') == 'PKGBUILD' | set ft=sh | endif",
