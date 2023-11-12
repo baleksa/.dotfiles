@@ -55,12 +55,12 @@ update_python_lsp_extensions() {
 	}
 }
 
-update_mason_packages
-status="$?"
-if [ "$status" -ne 0 ]; then
-	echo "Updating mason packages failed with error $status"
-	exit "$status"
-fi
+# update_mason_packages
+# status="$?"
+# if [ "$status" -ne 0 ]; then
+# 	echo "Updating mason packages failed with error $status"
+# 	exit "$status"
+# fi
 update_python_lsp_extensions
 status="$?"
 if [ "$status" -ne 0 ]; then
