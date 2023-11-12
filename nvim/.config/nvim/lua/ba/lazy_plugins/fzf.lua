@@ -15,10 +15,10 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "fzf",
         callback = function()
-          vim.keymap.set({ "n", "t" }, "<c-k>", "<c-k>", {buffer = true})
-          vim.keymap.set({ "n", "t" }, "<c-j>", "<c-j>", {buffer = true})
-          vim.keymap.set({ "n", "t" }, "<c-h>", "<c-h>", {buffer = true})
-          vim.keymap.set({ "n", "t" }, "<c-l>", "<c-l>", {buffer = true})
+          vim.keymap.set({ "n", "t" }, "<c-k>", "<c-k>", { buffer = true })
+          vim.keymap.set({ "n", "t" }, "<c-j>", "<c-j>", { buffer = true })
+          vim.keymap.set({ "n", "t" }, "<c-h>", "<c-h>", { buffer = true })
+          vim.keymap.set({ "n", "t" }, "<c-l>", "<c-l>", { buffer = true })
         end,
         group = vim.api.nvim_create_augroup("FzfMap", { clear = true }),
       })

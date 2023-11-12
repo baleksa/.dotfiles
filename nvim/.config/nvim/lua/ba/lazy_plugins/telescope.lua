@@ -4,7 +4,7 @@ local M = {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-dap.nvim",
-  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
 }
 function M.config()
@@ -22,8 +22,7 @@ function M.config()
         find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
       },
     },
-    extensions = {
-    },
+    extensions = {},
   })
 
   require("telescope").load_extension("fzf")
