@@ -17,7 +17,7 @@ function M.config()
         {
           "fileformat",
           symbols = {
-            unix = "",
+            unix = "󰌽",
           },
         },
         "filetype",
