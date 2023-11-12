@@ -31,15 +31,18 @@ return {
   -- Don't close vim and don't lose window layout when closing buffers
   { "moll/vim-bbye" },
 
-  -- UI to select things (files, grep results, open buffers...)
-  -- It sets vim.ui.select to telescope. That means for example that
-  -- neovim core stuff can fill the telescope picker. Example would
-  -- be lua vim.lsp.buf.code_action().
-  { "nvim-telescope/telescope-ui-select.nvim" },
-  -- Fzf algorithm in C too make telescope faster
-  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-
-  { "stevearc/dressing.nvim" },
+  {
+    "stevearc/dressing.nvim",
+    opts = {
+      select = {
+        backend = {
+          -- "telescope",
+          "fzf_lua",
+          "fzf",
+        },
+      },
+    },
+  },
   { "chrisgrieser/nvim-ghengis", dependencies = "stevearc/dressing.nvim" },
 
   {
@@ -174,49 +177,49 @@ return {
     },
   },
   { "timmyjose-projects/lox.vim" },
-  {
-    "kevinhwang91/nvim-ufo",
-    dependencies = {
-      "kevinhwang91/promise-async",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    event = "BufRead",
-    keys = {
-      {
-        "zR",
-        function()
-          require("ufo").openAllFolds()
-        end,
-      },
-      {
-        "zM",
-        function()
-          require("ufo").closeAllFolds()
-        end,
-      },
-      {
-        "K",
-        function()
-          local winid = require("ufo").peekFoldedLinesUnderCursor()
-          if not winid then
-            vim.lsp.buf.hover()
-          end
-        end,
-      },
-    },
-    config = function()
-      vim.o.foldcolumn = "1" -- '0' is not bad
-      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-      vim.o.foldlevelstart = 99
-      vim.o.foldenable = true
-
-      require("ufo").setup({
-        provider_selector = function(bufnr, filetype, buftype)
-          return { "treesitter", "indent" }
-        end,
-      })
-    end,
-  },
+  -- {
+  --   "kevinhwang91/nvim-ufo",
+  --   dependencies = {
+  --     "kevinhwang91/promise-async",
+  --     "nvim-treesitter/nvim-treesitter",
+  --   },
+  --   event = "BufRead",
+  --   keys = {
+  --     {
+  --       "zR",
+  --       function()
+  --         require("ufo").openAllFolds()
+  --       end,
+  --     },
+  --     {
+  --       "zM",
+  --       function()
+  --         require("ufo").closeAllFolds()
+  --       end,
+  --     },
+  --     {
+  --       "K",
+  --       function()
+  --         local winid = require("ufo").peekFoldedLinesUnderCursor()
+  --         if not winid then
+  --           vim.lsp.buf.hover()
+  --         end
+  --       end,
+  --     },
+  --   },
+  --   config = function()
+  --     vim.o.foldcolumn = "1" -- '0' is not bad
+  --     vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+  --     vim.o.foldlevelstart = 99
+  --     vim.o.foldenable = true
+  --
+  --     require("ufo").setup({
+  --       provider_selector = function(bufnr, filetype, buftype)
+  --         return { "treesitter", "indent" }
+  --       end,
+  --     })
+  --   end,
+  -- },
   {
     "lervag/vimtex",
     config = function()

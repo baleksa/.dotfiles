@@ -100,5 +100,8 @@
         "/home/baleksa/.local/share/nvim/lazy/trouble.nvim/lua",
         "/home/baleksa/.dotfiles/nvim/.config/nvim/lua",
         "${3rd}/luv/library"
+    ],
+    "diagnostics.disable": [
+        "missing-fields"
     ]
 }

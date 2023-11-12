@@ -3,7 +3,30 @@ return {
     "VonHeikemen/lsp-zero.nvim",
     branch = "v3.x",
     lazy = true,
-    config = false,
+    config = function()
+      vim.lsp.set_log_level("ERROR")
+
+      require("lsp-zero.settings").preset({
+        float_border = "rounded",
+      })
+
+      require("lsp-zero.server").set_sign_icons({
+        error = "󰅘",
+        -- error = "✖", -- this can only be used in the git_status source
+        warn = "󰔷",
+        -- warn = "▲",
+        hint = "",
+        -- hint = "⚑",
+        -- info = "",
+        info = "",
+      })
+
+      vim.diagnostic.config({
+        virtual_text = false,
+        -- TODO: Find out why this line doesn't work
+        float = { source = true },
+      })
+    end,
   },
 
   -- Autocompletion
@@ -25,11 +48,17 @@ return {
       "saadparwaiz1/cmp_luasnip",
     },
     config = function()
+      -- Here is where you configure the autocompletion settings.
+      local lsp_zero = require("lsp-zero")
+      -- The arguments for .extend() have the same shape as `manage_nvim_cmp`:
+      -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/api-reference.md#manage_nvim_cmp
       require("luasnip.loaders.from_vscode").lazy_load()
 
+      local cmp_format = lsp_zero.cmp_format()
+
+      -- And you can configure cmp even more, if you want to.
       local cmp = require("cmp")
-      local cmp_format = require("lsp-zero").cmp_format()
-      local cmp_action = require("lsp-zero").cmp_action()
+      -- local cmp_action = require("lsp-zero.cmp").action()
 
       cmp.setup({
         formatting = cmp_format,
@@ -52,17 +81,7 @@ return {
           },
         },
         mapping = cmp.mapping.preset.insert({
-          -- `Enter` key to confirm completion
-          ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-
-          -- Ctrl+Space to trigger completion menu
-          ["<C-Space>"] = cmp.mapping.complete(),
-
-          -- Navigate between snippet placeholder
-          ["<C-f>"] = cmp_action.luasnip_jump_forward(),
-          ["<C-b>"] = cmp_action.luasnip_jump_backward(),
-
-          -- Scroll up and down in the completion documentation
+          -- scroll up and down the documentation window
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
         }),
@@ -98,6 +117,7 @@ return {
       })
     end,
   },
+
   -- LSP
   {
     "williamboman/mason-lspconfig.nvim",
@@ -125,28 +145,7 @@ return {
 
       local lsp_zero = require("lsp-zero")
 
-      -- lsp_zero.extend_lspconfig()
-
-      lsp_zero.set_sign_icons({
-        error = "󰅘",
-        -- error = "✖", -- this can only be used in the git_status source
-        warn = "󰔷",
-        -- warn = "▲",
-        hint = "",
-        -- hint = "⚑",
-        -- info = "",
-        info = "",
-      })
-
       local common_on_attach = function(client, bufnr)
-        vim.lsp.set_log_level("ERROR")
-
-        vim.diagnostic.config({
-          virtual_text = false,
-          -- TODO: Find out why this line doesn't work
-          float = { source = true, border = "rounded" },
-        })
-
         local bufopts = { silent = true, buffer = bufnr }
         local bind = function(m, lhs, rhs, opts)
           opts = opts or {}
@@ -198,41 +197,46 @@ return {
         common_on_attach(client, bufnr)
       end)
 
+      lsp_zero.format_mapping("gq", {
+        format_opts = {
+          async = false,
+          timeout_ms = 10000,
+        },
+        servers = {
+          ["null-ls"] = {
+            "bash",
+            "css",
+            -- "go",
+            "graphql",
+            "handlebars",
+            "html",
+            "html",
+            "json",
+            "jsonc",
+            "less",
+            "lua",
+            "markdown",
+            "markdown.mdx",
+            "python",
+            "ruby",
+            "scss",
+            "sh",
+            "vue",
+            "yaml",
+            "zsh",
+          },
+          -- gopls = { "go", "gomod", "gowork", "gotmpl" },
+          rust_analyzer = { "rust" },
+        },
+      })
+
       require("mason").setup({})
       require("mason-lspconfig").setup({
         ensure_installed = {},
         handlers = {
           lsp_zero.default_setup,
           clangd = lsp_zero.noop,
-          rust_analyzer = function()
-            local extension_path = vim.fn.stdpath("data")
-              .. "/mason/packages/codelldb/extension"
-            local codelldb_path = extension_path .. "/adapter/codelldb"
-            local liblldb_path = extension_path .. "/lldb/lib/liblldb.so" -- MacOS: This may be .dylib
-
-            local rust_tools = require("rust-tools")
-            rust_tools.setup({
-              server = {
-                on_attach = function(_, bufnr)
-                  vim.keymap.set(
-                    "n",
-                    "<leader>ha",
-                    rust_tools.hover_actions.hover_actions,
-                    { buffer = bufnr }
-                  )
-                end,
-              },
-              -- hover_actions = {
-              -- 	auto_focus = true,
-              -- },
-              dap = {
-                adapter = require("rust-tools.dap").get_codelldb_adapter(
-                  codelldb_path,
-                  liblldb_path
-                ),
-              },
-            })
-          end,
+          rust_analyzer = lsp_zero.noop,
           jdtls = lsp_zero.noop,
           lua_ls = function()
             -- local lua_opts = lsp_zero.nvim_lua_ls()
@@ -241,7 +245,7 @@ return {
               settings = {
                 Lua = {
                   format = {
-                    enable = true,
+                    enable = false,
                   },
                 },
               },
@@ -347,6 +351,35 @@ return {
   },
   {
     "simrat39/rust-tools.nvim",
+    config = function()
+      local extension_path = vim.fn.stdpath("data")
+        .. "/mason/packages/codelldb/extension"
+      local codelldb_path = extension_path .. "/adapter/codelldb"
+      local liblldb_path = extension_path .. "/lldb/lib/liblldb.so" -- MacOS: This may be .dylib
+
+      local rust_tools = require("rust-tools")
+      rust_tools.setup({
+        server = {
+          on_attach = function(_, bufnr)
+            vim.keymap.set(
+              "n",
+              "<leader>ha",
+              rust_tools.hover_actions.hover_actions,
+              { buffer = bufnr }
+            )
+          end,
+        },
+        -- hover_actions = {
+        -- 	auto_focus = true,
+        -- },
+        dap = {
+          adapter = require("rust-tools.dap").get_codelldb_adapter(
+            codelldb_path,
+            liblldb_path
+          ),
+        },
+      })
+    end,
   },
   {
     url = "https://git.sr.ht/~p00f/clangd_extensions.nvim",
@@ -426,4 +459,16 @@ return {
     },
     event = "BufRead Cargo.toml",
   },
+  -- {
+  --   "RubixDev/mason-update-all",
+  --   config = function()
+  --     require("mason-update-all").setup()
+  --     vim.api.nvim_create_autocmd("User", {
+  --       pattern = "MasonUpdateAllComplete",
+  --       callback = function()
+  --         print("mason-update-all has finished")
+  --       end,
+  --     })
+  --   end,
+  -- },
 }

@@ -1,8 +1,10 @@
 local M = {
   -- null-ls
-  "jose-elias-alvarez/null-ls.nvim",
+  "nvimtools/none-ls.nvim",
 
   dependencies = {
+    "VonHeikemen/lsp-zero.nvim",
+    {'williamboman/mason-lspconfig.nvim'},
     "jayp0521/mason-null-ls.nvim",
   },
 }
@@ -33,6 +35,8 @@ M.config = function()
     ca.gitsigns,
     -- Formatting
     fmt.yq,
+    -- Go
+    -- fmt.gofmt,
     -- Lua
     diag.selene,
     fmt.stylua,
