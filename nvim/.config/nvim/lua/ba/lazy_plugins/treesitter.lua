@@ -4,9 +4,10 @@ return {
     build = ":TSUpdate",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
-      "JoosepAlviste/nvim-ts-context-commentstring",
       "nvim-treesitter/playground",
     },
+    -- init = function()
+    -- end,
     config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {},
@@ -52,9 +53,6 @@ return {
           -- disable = { "python", "yaml", },
         },
         matchup = {
-          enable = true,
-        },
-        context_commentstring = {
           enable = true,
         },
         -- rainbow = {
