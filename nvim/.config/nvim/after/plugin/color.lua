@@ -25,7 +25,9 @@ local color_lua = vim.api.nvim_create_augroup("ColorLua", {})
 
 vim.api.nvim_create_autocmd("OptionSet", {
   pattern = "background",
-  callback = color_nvim,
+  callback = function()
+    vim.schedule(color_nvim)
+  end,
   group = color_lua,
 })
 
@@ -50,3 +52,4 @@ vim.api.nvim_create_autocmd("OptionSet", {
 --   })
 -- end
 color_nvim()
+vim.schedule(color_nvim)

@@ -47,7 +47,7 @@ function M.config()
       },
       untracked = {
         -- hl = "GitSignsAdd",
-        text = "┆",
+        text = "┊",
         -- numhl = "GitSignsAddNr",
         -- linehl = "GitSignsAddLn",
       },

@@ -52,6 +52,7 @@ return {
       vim.g.everforest_background = "hard"
       vim.g.everforest_disable_italic_comment = 0
       vim.g.everforest_enable_italic = 0
+      vim.g.everforest_better_performance = 0
       -- vim.g.everforest_colors_override = {
       --   bg3 = {
       --     -- Color that the scheme uses for List Chars, Special Keys,

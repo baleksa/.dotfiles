@@ -58,7 +58,30 @@ return {
     config = true,
   },
 
-  { "lukas-reineke/indent-blankline.nvim" },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    dependencies = {
+      "https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git",
+    },
+    main = "ibl",
+    opts = {
+      indent = { char = "┆" },
+      scope = {
+        highlight = {
+          "RainbowDelimiterRed",
+          "RainbowDelimiterYellow",
+          "RainbowDelimiterBlue",
+          "RainbowDelimiterOrange",
+          "RainbowDelimiterGreen",
+          "RainbowDelimiterViolet",
+          "RainbowDelimiterCyan",
+        },
+        include = {
+          node_type = { lua = { "return_statement", "table_constructor" } },
+        },
+      },
+    },
+  },
 
   {
     "folke/todo-comments.nvim",

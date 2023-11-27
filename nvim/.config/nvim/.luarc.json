@@ -103,5 +103,8 @@
     ],
     "diagnostics.disable": [
         "missing-fields"
+    ],
+    "diagnostics.globals": [
+        "MiniFiles"
     ]
 }
