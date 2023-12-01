@@ -6,11 +6,13 @@ return {
     "nvim-treesitter/nvim-treesitter",
     "williamboman/mason-lspconfig.nvim",
   },
-  -- enabled = false, -- https://github.com/ray-x/go.nvim/issues/398
-  config = function()
-    require("go").setup()
+  opts = {
+    diagnostic = false,
+  },
+  config = function(_, opts)
+    require("go").setup(opts)
   end,
-  event = { "CmdlineEnter" },
+  -- event = { "CmdlineEnter" },
   ft = { "go", "gomod" },
   build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
 }
