@@ -10,7 +10,7 @@ exec wireplumber
 # Start kanshi before darkman so background is set properly
 exec kanshi
 # exec darkman run
-exec poweralertd
+exec poweralertd -s
 exec easyeffects --gapplication-service
 exec noisetorch -i
 # vim: ft=swayconfig
