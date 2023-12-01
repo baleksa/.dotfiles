@@ -1,8 +1,19 @@
+export ZPLUGDIR="${ZDOTDIR}/plugins"
+
 # History setup
+export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"    # History filepath
+export HISTSIZE=100000
+export SAVEHIST=120000
 # Append command and time to $HISTFILE after executing it
 setopt INC_APPEND_HISTORY
 setopt INC_APPEND_HISTORY_TIME
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
+# Use modern file-locking mechanisms, for better safety & performance.
+setopt HIST_FCNTL_LOCK
+# Keep only the most recent copy of each duplicate entry in history.
+setopt HIST_IGNORE_ALL_DUPS
+# Auto-sync history between concurrent sessions.
+setopt SHARE_HISTORY
 
 # Useful functions
 source "${ZDOTDIR}/utils.zsh"
@@ -14,8 +25,8 @@ source "${ZDOTDIR}/signal_handlers.zsh"
 
 fpath+="${ZPLUGDIR}/zsh-completions/src"
 
-source "${HOME}/.asdf/asdf.sh"
-[ -n "${ASDF_DIR}" ] && fpath=(${ASDF_DIR}/completions ${fpath})
+# source "${HOME}/.asdf/asdf.sh"
+# [ -n "${ASDF_DIR}" ] && fpath=(${ASDF_DIR}/completions ${fpath})
 
 # some useful options (man zshoptions)
 setopt autocd extendedglob nomatch menucomplete

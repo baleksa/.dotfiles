@@ -17,7 +17,7 @@ _comp_options+=(globdots) # With hidden files
 
 # Only work with the Zsh function vman
 # See $DOTFILES/zsh/scripts.zsh
-autoload -Uz compinit; compinit
+autoload -Uz compinit && compinit
 compdef vman="man"
 
 # +---------+
@@ -78,12 +78,12 @@ zstyle ':completion:*' group-name ''
 zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
 
 # See ZSHCOMPWID "completion matching control"
-# zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' '+' '+r:|[._-]=* r:|=*' '+l:|=* r:|=*'
+# zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
 zstyle ':completion:*' matcher-list \
 	'+m:{[:lower:]}={[:upper:]}' \
-	'+' \
 	'+r:|[._-]=* r:|=*' \
-	'+l:|=*'
+	'+l:|=* r:|=*'
 
 zstyle ':completion:*' keep-prefix true
 
