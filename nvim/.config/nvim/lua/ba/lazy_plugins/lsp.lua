@@ -100,24 +100,27 @@ return {
   },
   -- LSP
   {
+    "williamboman/mason.nvim",
+    build = ":MasonUpdate",
+  },
+  {
+    "smjonas/inc-rename.nvim",
+    opts = { input_buffer_type = "dressing" },
+  },
+  {
+    "simrat39/symbols-outline.nvim",
+    config = true,
+  },
+  {
     "williamboman/mason-lspconfig.nvim",
     dependencies = {
-      { "hrsh7th/cmp-nvim-lsp" },
+      "hrsh7th/cmp-nvim-lsp",
       "neovim/nvim-lspconfig",
-      { "williamboman/mason-lspconfig.nvim" },
-      {
-        "williamboman/mason.nvim",
-        build = ":MasonUpdate",
-      },
+      "williamboman/mason-lspconfig.nvim",
+      "williamboman/mason.nvim",
       "folke/neodev.nvim", -- for better Lua dev experience
-      {
-        "smjonas/inc-rename.nvim",
-        opts = { input_buffer_type = "dressing" },
-      },
-      {
-        "simrat39/symbols-outline.nvim",
-        config = true,
-      },
+      "smjonas/inc-rename.nvim",
+      "simrat39/symbols-outline.nvim",
     },
     config = function()
       -- This is where all the LSP shenanigans will live
@@ -138,14 +141,13 @@ return {
         info = "",
       })
 
+      vim.diagnostic.config({
+        virtual_text = false,
+        float = { source = true, border = "rounded" },
+      })
+
       local common_on_attach = function(client, bufnr)
         vim.lsp.set_log_level("ERROR")
-
-        vim.diagnostic.config({
-          virtual_text = false,
-          -- TODO: Find out why this line doesn't work
-          float = { source = true, border = "rounded" },
-        })
 
         local bufopts = { silent = true, buffer = bufnr }
         local bind = function(m, lhs, rhs, opts)
