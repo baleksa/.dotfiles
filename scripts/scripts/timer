@@ -1,5 +1,5 @@
 #!/bin/sh
 
 sleep "$1"
-notify-send -u critical "END OF SESSION" "Work session is done. Go on 15min brake."
+notify-send -u critical "$2" "$3"
 swaymsg "exec termlaunch tty-clock"
