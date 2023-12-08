@@ -71,7 +71,7 @@ local keys = {
 
 return {
 	font = fonts,
-	font_size = 12,
+	font_size = 10,
 	term = "wezterm",
 	color_scheme_dirs = { "~/.config/wezterm/colors" },
 	-- color_scheme = "tokyonight_night",
