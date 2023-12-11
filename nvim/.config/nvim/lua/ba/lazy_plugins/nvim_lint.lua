@@ -1,10 +1,11 @@
 return {
   "mfussenegger/nvim-lint",
   config = function()
-    local selene = require("lint").linters.selene
+    local lint = require("lint")
+    local selene = lint.linters.selene
     selene.args = {
       "--config",
-      function()
+      function() -- find selene.toml file
         local conf = vim.fs.find(
           { "selene.toml" },
           { type = "file", upward = true, path = vim.api.nvim_buf_get_name(0) }
@@ -18,14 +19,17 @@ return {
       "json",
       "-",
     }
-    require("lint").linters_by_ft = {
+    lint.linters_by_ft = {
       lua = { "selene" },
+      zsh = { "zsh" },
     }
     vim.api.nvim_create_autocmd(
       { "BufWritePost", "InsertLeave", "TextChanged" },
       {
+        group = vim.api.nvim_create_augroup("lint", { clear = true }),
         callback = function()
-          require("lint").try_lint()
+          lint.try_lint()
+          lint.try_lint("codespell")
         end,
       }
     )
