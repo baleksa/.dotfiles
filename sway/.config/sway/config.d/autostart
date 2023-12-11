@@ -1,6 +1,7 @@
 # Bluelight filter
 # exec gammastep -l 44.6:20.3 -t 6500:3400 -b 1.0:0.8
 # exec wlsunset -t3400 -T6500 -l44.7 -L20.3 -g1.0 -S '06:30' -s '20:00'
+exec set_theme_mode
 exec wlsunset -t3400 -T6500 -g1.0 -S '06:30' -s '20:00'
 exec sway-xkb-switcher-rust --default-lang "English (US)"
 # exec battery_check
