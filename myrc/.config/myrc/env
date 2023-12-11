@@ -28,11 +28,13 @@ export GIT_REPOS_DIR=~/repositories
 
 export FZF_DEFAULT_COMMAND='fd -H .'
 export FZF_DEFAULT_OPTS_NO_THEME="--border=rounded"
-export FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS_NO_THEME}"
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_NO_THEME"
 export FZF_CTRL_R_OPTS='--layout=reverse'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-export MANPAGER='nvim +Man!'
+export MANPAGER='nvimpager'
+export PAGER='nvimpager'
+# export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 
 export CHROME_FLAGS="--ozone-platform-hint=auto"
@@ -53,5 +55,8 @@ export BROWSER="firefox-wayland"
 export DOC_READER="sway_zathura_open"
 export PDFREADER="zathura"
 export DOCREADER="zaread"
+
+export DAY_H="06"
+export NIGHT_H="21"
 
 export SWAY_SCRIPTS="$HOME/.config/sway/scripts"
