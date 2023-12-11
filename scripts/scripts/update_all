@@ -40,3 +40,4 @@ do_job "Updating all installed nvim-treesitter parsers." "\nDone!" "\nFailed!" \
 do_job "Updating Mason nvim packages:" "\nDone!" "\nFailed!" update_mason_nvim
 
 do_job "Updating rust toolchain:" "\nDone!" "\nFailed!" rustup update
+do_job "Updating tealdeer cache:" "\nDone!" "\nFailed!" tldr --update

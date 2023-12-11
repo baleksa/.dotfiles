@@ -1,0 +1,11 @@
+#!/bin/sh
+curr_time_h="$(($(date +%H)))"
+day_h="$((${DAY_H:-06}))"
+night_h="$((${NIGHT_H:-20}))"
+if [ "$curr_time_h" -gt "$night_h" ]; then
+	darkmanctl set dark
+elif [ "$curr_time_h" -lt "$day_h" ]; then
+	darkmanctl set dark
+else
+	darkmanctl set light
+fi
