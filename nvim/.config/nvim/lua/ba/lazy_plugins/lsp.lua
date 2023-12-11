@@ -296,9 +296,6 @@ return {
                 ".zshrc",
                 "APKBUILD",
                 "PKGBUILD",
-                "eclass",
-                "ebuild",
-                "bazelrc",
                 ".bash_aliases",
               },
             })
