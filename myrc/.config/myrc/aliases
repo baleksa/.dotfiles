@@ -27,6 +27,8 @@ alias psmem='ps auxf | sort -nr -k 4 | head -5'
 alias pscpu='ps auxf | sort -nr -k 3 | head -5'
 alias p='ps aux | grep '
 
+alias vim="nvim --clean"
+
 alias g='lazygit'
 alias m="git checkout main"
 alias s="git checkout stable"
