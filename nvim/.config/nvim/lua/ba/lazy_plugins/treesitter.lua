@@ -1,7 +1,17 @@
+local disable = function(lang, bufnr)
+  if lang == "zig" then
+    return true
+  end
+  local line_count = vim.api.nvim_buf_line_count(bufnr)
+  if line_count > 1000 then
+    return true
+  end
+end
 return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    -- cond = false,
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/playground",
@@ -17,7 +27,11 @@ return {
         modules = {},
         playground = {
           enable = true,
-          disable = {},
+          disable = function(lang, bufnr)
+            if disable(lang, bufnr) then
+              return true
+            end
+          end,
           -- Debounced time for highlighting nodes in the playground from source code
           updatetime = 25,
           -- Whether the query persists across vim sessions
@@ -38,11 +52,8 @@ return {
         highlight = {
           enable = true,
           -- disable = { "help", },
-          disable = function(_, buf)
-            local max_filesize = 100 * 1024 -- 100 KB
-            local ok, stats =
-              pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-            if ok and stats and stats.size > max_filesize then
+          disable = function(lang, bufnr)
+            if disable(lang, bufnr) then
               return true
             end
           end,
@@ -50,16 +61,27 @@ return {
         },
         indent = {
           enable = true,
-          -- disable = { "python", "yaml", },
+          disable = function(lang, bufnr)
+            if disable(lang, bufnr) then
+              return true
+            end
+          end,
         },
         matchup = {
           enable = true,
+          disable = function(lang, bufnr)
+            if disable(lang, bufnr) then
+              return true
+            end
+          end,
         },
-        -- rainbow = {
-        --   enable = true,
-        -- },
         incremental_selection = {
           enable = true,
+          disable = function(lang, bufnr)
+            if disable(lang, bufnr) then
+              return true
+            end
+          end,
           keymaps = {
             init_selection = "gnn",
             node_incremental = "grn",
@@ -70,6 +92,11 @@ return {
         textobjects = {
           select = {
             enable = true,
+            disable = function(lang, bufnr)
+              if disable(lang, bufnr) then
+                return true
+              end
+            end,
             -- Automatically jump forward to textobj, similar to targets.vim
             lookahead = true,
             keymaps = {
@@ -115,6 +142,11 @@ return {
           },
           move = {
             enable = true,
+            disable = function(lang, bufnr)
+              if disable(lang, bufnr) then
+                return true
+              end
+            end,
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
               ["]m"] = "@function.outer",
@@ -141,10 +173,16 @@ return {
     "nvim-treesitter/nvim-treesitter-context",
     opts = {
       enable = true,
+      disable = function(lang, bufnr)
+        if disable(lang, bufnr) then
+          return true
+        end
+      end,
     },
   },
   {
     "https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git",
+    -- cond = false,
     config = function()
       -- This module contains a number of default definitions
       local rainbow = require("rainbow-delimiters")
@@ -169,6 +207,9 @@ return {
           [""] = 110,
           lua = 210,
         },
+        blacklist = {
+          "zig",
+        },
         highlight = {
           "RainbowDelimiterRed",
           "RainbowDelimiterYellow",
@@ -180,5 +221,10 @@ return {
         },
       })
     end,
+  },
+  {
+    -- Treesitter is disabled because it's too slow, it takles 2s for neovim to start
+    -- with ts enabled  for zig
+    "ziglang/zig.vim",
   },
 }

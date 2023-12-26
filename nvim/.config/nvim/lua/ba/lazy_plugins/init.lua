@@ -60,6 +60,7 @@ return {
 
   {
     "lukas-reineke/indent-blankline.nvim",
+    -- cond = false,
     dependencies = {
       "https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git",
     },
@@ -174,6 +175,7 @@ return {
   },
   {
     "RRethy/vim-illuminate",
+    -- cond = false,
     config = function()
       require("illuminate").configure({
         filetypes_denylist = {

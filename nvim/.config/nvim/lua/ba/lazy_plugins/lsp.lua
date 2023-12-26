@@ -148,6 +148,7 @@ return {
 
       local common_on_attach = function(client, bufnr)
         vim.lsp.set_log_level("ERROR")
+        -- client.server_capabilities.semanticTokensProvider = nil
 
         local bufopts = { silent = true, buffer = bufnr }
         local bind = function(m, lhs, rhs, opts)
