@@ -44,9 +44,8 @@ alias ls='ls --color=auto'
 alias la='ls -a'
 alias ll='ls -la'
 
-alias pip='pip3'
+# alias pip='pip3'
 
-alias xqr='xbps-query -Rs'
 alias xr='sudo xbps-remove'
 
 alias clangse='clang -Wall -g3 -Werror -pedantic -std=c11'
