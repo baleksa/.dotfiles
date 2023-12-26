@@ -21,16 +21,17 @@ return {
     end,
     cmd = { "Glow", "Gloww" },
   },
-  {
-    "euclio/vim-markdown-composer",
-    build = "cargo build --release --locked",
-    ft = { "markdown" },
-    config = function()
-      vim.g.markdown_composer_autostart = 0
-      -- vim.g.markdown_composer_external_renderer = "pandoc -f markdown -t html"
-      vim.g.markdown_composer_syntax_theme = "base16/solarized-light"
-    end,
-  },
+  -- {
+  -- It's 400mb plugin
+  --   "euclio/vim-markdown-composer",
+  --   build = "cargo build --release --locked",
+  --   ft = { "markdown" },
+  --   config = function()
+  --     vim.g.markdown_composer_autostart = 0
+  --     -- vim.g.markdown_composer_external_renderer = "pandoc -f markdown -t html"
+  --     vim.g.markdown_composer_syntax_theme = "base16/solarized-light"
+  --   end,
+  -- },
   {
     "toppair/peek.nvim",
     build = "deno task --quiet build:fast",

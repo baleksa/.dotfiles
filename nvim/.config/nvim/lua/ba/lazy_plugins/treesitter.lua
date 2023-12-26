@@ -147,12 +147,19 @@ return {
     "https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git",
     config = function()
       -- This module contains a number of default definitions
-      local rainbow_delimiters = require("rainbow-delimiters")
+      local rainbow = require("rainbow-delimiters")
 
       require("rainbow-delimiters.setup").setup({
         strategy = {
-          [""] = rainbow_delimiters.strategy["global"],
-          vim = rainbow_delimiters.strategy["local"],
+          [""] = function(bufnr)
+            local line_count = vim.api.nvim_buf_line_count(bufnr)
+            if line_count > 2000 then
+              return nil
+              -- elseif line_count > 1000 then
+              --   return rainbow.strategy["global"]
+            end
+            return rainbow.strategy["local"]
+          end,
         },
         query = {
           [""] = "rainbow-delimiters",
