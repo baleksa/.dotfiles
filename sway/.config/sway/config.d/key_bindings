@@ -1,5 +1,5 @@
 # See https://github.com/francma/wob
-# Setting up wob here secures that wob is ready to be used in the keybindings bellow
+# Setting up wob here secures that wob is ready to be used in the keybindings below
 # without counting on the specific order of sourcing of files in config.d
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
@@ -9,7 +9,7 @@ exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 # Basics:
 
     # Start a terminal
-    bindsym $mod+Return exec start_foot
+    bindsym $mod+Return exec foot
     bindsym $mod+Ctrl+Return exec foot
     bindsym $mod+Shift+Return exec wezterm_font_for_monitor
 
@@ -177,7 +177,7 @@ bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && w
 bindsym XF86AudioPlay exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed -E '/\[MUTED\]/! s/.+\.// ; /\[MUTED\]/ s/.*/0/' > $WOBSOCK
 
 # On this laptop XF86brightness keys change brightness by default using builtin
-# way that works without any aditional bindings. Two lines below add bindings to
+# way that works without any additional bindings. Two lines below add bindings to
 # these keys which will show progress bar to signal brightness level after
 # changing it
 bindsym XF86MonBrightnessUp exec light -G | cut -d'.' -f1 > $WOBSOCK
