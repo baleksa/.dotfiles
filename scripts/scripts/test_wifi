@@ -1,9 +1,13 @@
 #!/bin/env python3
 
 import subprocess
+import sys
 import time
 
-wifi = ["Ilic", "Ilic5g", "IlicDnevna"]
+if len(sys.argv) - 1 > 0:
+    wifi_networks = sys.argv[1:]
+else:
+    wifi_networks = ["VG_tndr5", "VG_tndr"]
 connect_command = ["iwctl", "station", "wlo1", "connect"]
 scan_command = ["iwctl", "station", "wlo1", "scan"]
 get_networks_command = ["iwctl", "station", "wlo1", "get-networks"]
@@ -14,11 +18,15 @@ wait_for_connection_sec = 10
 wait_after_cycle_sec = 10
 time_series = {}
 
-for network in wifi:
+for network in wifi_networks:
     time_series[network] = []
 
+print(f"Testing wifi speeds for networks: {wifi_networks}")
+print(f"Running {n_cycle} cycles:")
+
 for i in range(n_cycle):
-    for network in wifi:
+    print(f"Running cycle {i+1}")
+    for network in wifi_networks:
         subprocess.run(scan_command, stdout=subprocess.DEVNULL)
         subprocess.run(get_networks_command, stdout=subprocess.DEVNULL)
         subprocess.run(
@@ -35,6 +43,8 @@ for i in range(n_cycle):
         time_series[network].append(speed_mb_s)
     time.sleep(wait_after_cycle_sec)
 
+print("{:12}|{:>12}".format("SSID", "Speed"))
+print("{:12} {:>12}".format("____", "_____"))
 for k in time_series:
     average_speed_mb_s = sum(time_series[k]) / n_cycle
-    print(f"{k:12}: {average_speed_mb_s:12.5f}MB")
+    print(f"{k:12}:{average_speed_mb_s:10.2f}MB")
