@@ -11,6 +11,9 @@ auto-pairs = true
 rulers = [120]
 idle-timeout = 50
 
+[editor.file-picker]
+hidden = false
+
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
@@ -18,14 +21,33 @@ select = "underline"
 
 [editor.indent-guides]
 render = true
-character =  "┆"
+character = "┆"
 # character = "▏"
 
 [editor.lsp]
 display-messages = true
-display-inlay-hints = true
+display-inlay-hints = false
 
 [editor.statusline]
-left = ["mode", "spinner", "file-name", "file-type", "total-line-numbers", "file-encoding"]
+left = [
+	"mode",
+	"spinner",
+	"file-name",
+	"file-type",
+	"total-line-numbers",
+	"file-encoding",
+]
 center = []
-right = ["selections", "primary-selection-length", "position", "position-percentage", "spacer", "diagnostics", "workspace-diagnostics", "version-control"]
+right = [
+	"selections",
+	"primary-selection-length",
+	"position",
+	"position-percentage",
+	"spacer",
+	"diagnostics",
+	"workspace-diagnostics",
+	"version-control",
+]
+
+[editor.gutters]
+layout = ["line-numbers", "spacer", "diff"]
