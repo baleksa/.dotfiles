@@ -1,5 +1,16 @@
 local disable = function(lang, bufnr)
-  if lang == "zig" then
+  local function str_in_list(list, str)
+    for _, v in ipairs(list) do
+      if v == str then
+        return true
+      end
+    end
+    return false
+  end
+  local disable_list = {
+    "zig",
+  }
+  if str_in_list(disable_list, lang) then
     return true
   end
   local line_count = vim.api.nvim_buf_line_count(bufnr)

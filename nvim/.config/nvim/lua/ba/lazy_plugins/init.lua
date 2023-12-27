@@ -121,7 +121,7 @@ return {
         twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
         gitsigns = { enabled = true }, -- disables git signs
         -- this will change the font size on wezterm when in zen mode
-        -- See alse also the Plugins/Wezterm section in this projects README
+        -- See also the Plugins/Wezterm section in this projects README
         wezterm = {
           enabled = false,
           -- can be either an absolute font size or the number of incremental steps
@@ -253,35 +253,34 @@ return {
     end,
     lazy = false,
   },
+  { "sitiom/nvim-numbertoggle" },
   {
     "luukvbaal/statuscol.nvim",
+    -- cond = false,
     config = function()
-      -- local builtin = require("statuscol.builtin")
+      local builtin = require("statuscol.builtin")
       require("statuscol").setup({
         relculright = true,
-        -- segments = {
-        --   {
-        --     text = { builtin.lnumfunc },
-        --     condition = { true, builtin.not_empty },
-        --     -- click = "v:lua.ScLa",
-        --   },
-        --   --{
-        --   --  sign = { name = { "GitSigns" }, maxwidth = 1, auto = true },
-        --   --  -- click = "v:lua.ScSa",
-        --   --},
-        --   --{
-        --   --  sign = { name = { "Diagnostic" }, maxwidth = 2, auto = true },
-        --   --  -- click = "v:lua.ScSa",
-        --   --},
-        --   {
-        --     text = { "%s" },
-        --     -- click = "v:lua.ScSa",
-        --   },
-        --   {
-        --     text = { builtin.foldfunc },
-        --     -- click = "v:lua.ScFa",
-        --   },
-        -- },
+        segments = {
+          {
+            sign = {
+              name = { "Diagnostic.*" },
+              maxwidth = 1,
+              auto = false,
+            },
+          },
+          {
+            text = { builtin.lnumfunc, " " },
+            condition = { true, builtin.not_empty },
+          },
+          {
+            sign = {
+              namespace = { "gitsigns.*" },
+              maxwidth = 1,
+              auto = false,
+            },
+          },
+        },
       })
     end,
   },

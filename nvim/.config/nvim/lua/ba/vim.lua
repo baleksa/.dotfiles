@@ -34,6 +34,8 @@ vim.opt.rnu = true
 
 vim.opt.mouse = "a" -- Enable mouse mode
 
+vim.g.python3_host_prog = "/usr/sbin/python"
+
 vim.opt.breakindent = true -- Enable break indent
 
 vim.opt.undofile = true -- Save undo history
@@ -42,9 +44,6 @@ vim.opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in 
 vim.opt.smartcase = true
 
 vim.opt.updatetime = 50 -- Decrease update time
-
-vim.opt.signcolumn = "auto:2"
--- vim.opt.statuscolumn = "%!v:lua.get_statuscol()"
 
 vim.opt.fillchars:append("foldclose:,foldopen:,foldsep: ")
 
