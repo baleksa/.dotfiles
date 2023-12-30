@@ -22,7 +22,7 @@ return {
   { "tpope/vim-fugitive" }, -- Git commands in nvim
   { "tpope/vim-rhubarb" }, -- Fugitive-companion to interact with github
   { "tpope/vim-repeat" },
-  { "kylechui/nvim-surround", version = "*", config = true },
+  { "kylechui/nvim-surround", version = "*", opts = {}, event = "VeryLazy" },
   { "jcdickinson/wpm.nvim", config = true },
   -- Comment plugin written in Lua '
   -- Automatic tags management,
