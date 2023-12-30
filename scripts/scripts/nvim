@@ -1,0 +1,10 @@
+#!/bin/sh
+
+system_bin="/usr/bin/nvim"
+prelease_bin="${HOME}/.local/bin/nvim"
+
+if [ "${NVIM_VERSION:-"system"}" = "system" ]; then
+	"$system_bin" "$@"
+else
+	"$prelease_bin" "$@"
+fi

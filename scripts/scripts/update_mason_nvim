@@ -41,8 +41,8 @@ update_python_lsp_extensions() {
 	# 	echo "Removing useless pip packages failed."
 	# 	return "$status"
 	# fi
-	pip install --no-input pylsp-rope \
-		python-lsp-ruff ruff rope
+	pip install --no-input \
+		python-lsp-ruff
 	status="$?"
 	if [ "$status" -ne 0 ]; then
 		echo "Updating used pip packages failed."

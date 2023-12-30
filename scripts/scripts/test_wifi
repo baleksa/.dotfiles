@@ -34,9 +34,9 @@ for i in range(n_cycle):
         )
         time.sleep(wait_for_connection_sec)
         speed_bit_s = float(
-            subprocess.run(
-                speedtest_command, stdout=subprocess.PIPE
-            ).stdout.split(b",")[DOWNLOAD_INDEX]
+            subprocess.run(speedtest_command, stdout=subprocess.PIPE).stdout.split(
+                b","
+            )[DOWNLOAD_INDEX]
         )
         bits_in_mbyte = 8 * 1024 * 1024
         speed_mb_s = speed_bit_s / bits_in_mbyte

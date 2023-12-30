@@ -1,0 +1,12 @@
+#!/bin/sh
+
+nightly_release_url='https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage'
+download_dir="${HOME}/.local/bin"
+binary_name='nvim'
+
+if [ -e ~/.local/bin/nvim ]; then
+	curl --silent -RL --output-dir "$download_dir" --output "$binary_name" -z "${download_dir}/${binary_name}" "$nightly_release_url"
+else
+	curl --silent -RL --output-dir "$download_dir" --output "$binary_name" "$nightly_release_url"
+	chmod +x "${download_dir}/${binary_name}"
+fi
