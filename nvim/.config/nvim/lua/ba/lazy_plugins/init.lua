@@ -182,6 +182,7 @@ return {
           "lir",
           "fugitive",
         },
+        large_file_cutoff = vim.g.too_large_file_lnum,
       })
     end,
   },
@@ -256,6 +257,7 @@ return {
   { "sitiom/nvim-numbertoggle" },
   {
     "luukvbaal/statuscol.nvim",
+    -- branch = "0.10",
     -- cond = false,
     config = function()
       local builtin = require("statuscol.builtin")
@@ -372,5 +374,43 @@ return {
         { desc = "Spider-ge" }
       )
     end,
+  },
+  {
+    "VonHeikemen/searchbox.nvim",
+    dependencies = {
+      { "MunifTanjim/nui.nvim" },
+    },
+    keys = {
+      {
+        mode = "n",
+        "<leader>ss",
+        "<cmd>SearchBoxIncSearch<cr>",
+      },
+      {
+        mode = "n",
+        "<leader>sr",
+        "<cmd>SearchBoxReplace<cr>",
+      },
+      {
+        mode = "x",
+        "<leader>s",
+        "<cmd>SearchBoxIncSearch visual_mode=true<cr>",
+      },
+    },
+    opts = {},
+  },
+  {
+    "VonHeikemen/fine-cmdline.nvim",
+    keys = {
+      {
+        mode = "n",
+        "<CR>",
+        "<cmd>FineCmdline<cr>",
+      },
+    },
+    dependencies = {
+      { "MunifTanjim/nui.nvim" },
+    },
+    opts = {},
   },
 }

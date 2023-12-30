@@ -21,7 +21,6 @@ return {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-nvim-lua",
-      -- "hrsh7th/cmp-nvim-lsp-signature-help",
       "saadparwaiz1/cmp_luasnip",
     },
     config = function()
@@ -43,7 +42,6 @@ return {
           { name = "buffer", keyword_length = 3 },
           { name = "luasnip", keyword_length = 2 },
           -- { name = "nvim_lua" },
-          -- { name = "nvim_lsp_signature_help" },
           { name = "crates" },
         },
         sorting = {
@@ -144,11 +142,26 @@ return {
       vim.diagnostic.config({
         virtual_text = false,
         float = { source = true, border = "rounded" },
+        update_in_insert = false,
+      })
+
+      vim.api.nvim_create_autocmd("ModeChanged", {
+        pattern = { "n:i", "v:s" },
+        desc = "Disable diagnostics in insert and select mode",
+        callback = function(e)
+          vim.diagnostic.disable(e.buf)
+        end,
+      })
+      vim.api.nvim_create_autocmd("ModeChanged", {
+        pattern = "i:n",
+        desc = "Enable diagnostics when leaving insert mode",
+        callback = function(e)
+          vim.diagnostic.enable(e.buf)
+        end,
       })
 
       local common_on_attach = function(client, bufnr)
         vim.lsp.set_log_level("ERROR")
-        -- client.server_capabilities.semanticTokensProvider = nil
 
         local bufopts = { silent = true, buffer = bufnr }
         local bind = function(m, lhs, rhs, opts)
@@ -167,11 +180,11 @@ return {
         end
 
         bind({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action)
-        -- bind("i", "<C-h>", lspbuf.signature_help)
+        -- bind("i", "<C-h>", vim.lsp.buf.signature_help)
         --
         bind("n", "<leader>rn", function()
           return ":IncRename " .. vim.fn.expand("<cword>")
-        end, { expr = true })
+        end, { expr = true, desc = "Rename ident under cursor" })
 
         bind("n", "<leader>d", function()
           vim.diagnostic.open_float({ source = true })
@@ -206,7 +219,6 @@ return {
         ensure_installed = {},
         handlers = {
           lsp_zero.default_setup,
-          clangd = lsp_zero.noop,
           rust_analyzer = function()
             local extension_path = vim.fn.stdpath("data")
               .. "/mason/packages/codelldb/extension"
@@ -262,6 +274,8 @@ return {
                       enabled = true,
                       extendSelect = { "I", "W", "Q", "B", "D" },
                       lineLength = 88,
+                      format = { "I" },
+                      unsafeFixes = true,
                     },
                     -- rope_autoimport = { enabled = true },
                     -- rope_completion = { enabled = true },
@@ -354,31 +368,16 @@ return {
     -- 	"VonHeikemen/lsp-zero.nvim",
     -- },
     config = function()
-      -- Fix for
-      -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
       require("clangd_extensions").setup({
-        cmd = {
-          "clangd",
-          "--background-index",
-          "--suggest-missing-includes",
-          "--clang-tidy",
-          "--header-insertion=iwyu",
-        },
-        server = {
-          capabilities = vim.tbl_deep_extend(
-            "force",
-            vim.lsp.protocol.make_client_capabilities(),
-            require("cmp_nvim_lsp").default_capabilities(),
-            {
-              offsetEncoding = { "utf-16", "utf-8", "utf-32" },
-            }
-          ),
+        inlay_hints = {
+          only_current_line = true,
         },
       })
     end,
   },
   {
     "ray-x/lsp_signature.nvim",
+    -- cond = false,
     opts = {
       handler_opts = {
         border = "rounded",

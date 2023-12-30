@@ -14,7 +14,7 @@ local disable = function(lang, bufnr)
     return true
   end
   local line_count = vim.api.nvim_buf_line_count(bufnr)
-  if line_count > 1000 then
+  if line_count > vim.g.too_large_file_lnum then
     return true
   end
 end
@@ -202,7 +202,7 @@ return {
         strategy = {
           [""] = function(bufnr)
             local line_count = vim.api.nvim_buf_line_count(bufnr)
-            if line_count > 2000 then
+            if line_count > vim.g.too_large_file_lnum then
               return nil
             elseif line_count > 1000 then
               return rainbow.strategy["global"]

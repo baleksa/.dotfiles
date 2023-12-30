@@ -17,8 +17,17 @@ return {
   },
   {
     "Wansmer/treesj",
-    keys = { "<space>m", "<space>j", "<space>s" },
+    keys = {
+      {
+        "<space>j",
+        function()
+          require("treesj").toggle()
+        end,
+      },
+    },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
-    config = true,
+    opts = {
+      use_default_keymaps = false,
+    },
   },
 }
