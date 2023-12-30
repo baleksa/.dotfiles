@@ -125,8 +125,7 @@ return {
       -- lsp-zero will use default setup config for all installed and available server
 
       local lsp_zero = require("lsp-zero")
-
-      -- lsp_zero.extend_lspconfig()
+      local lspconfig = require("lspconfig")
 
       lsp_zero.set_sign_icons({
         error = "󰅘",
@@ -141,6 +140,7 @@ return {
 
       vim.diagnostic.config({
         virtual_text = false,
+        underline = false,
         float = { source = true, border = "rounded" },
         update_in_insert = false,
       })
@@ -252,11 +252,14 @@ return {
           lua_ls = function()
             -- local lua_opts = lsp_zero.nvim_lua_ls()
             require("neodev").setup({})
-            require("lspconfig").lua_ls.setup({
+            lspconfig.lua_ls.setup({
               settings = {
                 Lua = {
                   format = {
-                    enable = true,
+                    enable = false,
+                  },
+                  diagnostics = {
+                    globals = { "vim" },
                   },
                 },
               },
@@ -266,7 +269,7 @@ return {
             -- Doesn't work if called from single file in home directory.
             -- Sometimes uses a lot of CPU.
             -- Learn how mypy and rope work so you know how to configurethem.
-            require("lspconfig").pylsp.setup({
+            lspconfig.pylsp.setup({
               settings = {
                 pylsp = {
                   plugins = {
@@ -293,8 +296,25 @@ return {
               single_file_support = true,
             })
           end,
+          fennel_language_server = function()
+            lspconfig.fennel_language_server.setup({
+              root_dir = lspconfig.util.root_pattern("fnl", "lua"),
+              settings = {
+                fennel = {
+                  workspace = {
+                    -- If you are using hotpot.nvim or aniseed,
+                    -- make the server aware of neovim runtime files.
+                    library = vim.api.nvim_list_runtime_paths(),
+                  },
+                  diagnostics = {
+                    globals = { "vim", "jit", "comment" },
+                  },
+                },
+              },
+            })
+          end,
           bashls = function()
-            require("lspconfig").bashls.setup({
+            lspconfig.bashls.setup({
               filetypes = {
                 "sh",
                 "bash",
@@ -316,7 +336,7 @@ return {
             })
           end,
           prosemd_lsp = function()
-            require("lspconfig").prosemd_lsp.setup({
+            lspconfig.prosemd_lsp.setup({
               on_attach = function(client, _)
                 if
                   not vim.list_contains(vim.opt_local.spelllang:get(), "en")
@@ -329,34 +349,19 @@ return {
         },
       })
 
-      -- lspconfig.solargraph.setup({
-      --   filetypes = {
-      --     "ruby",
-      --     "eruby",
-      --   },
-      --   init_options = {
-      --     formatting = false,
-      --   },
-      -- })
-
-      -- lspconfig.pyright.setup({
-      -- 			settings = {
-      -- 				python = {
-      -- 					analysis = {
-      -- 						autoImportCompletions = true,
-      -- 						autoImportUserSymbols = true,
-      -- 					}
-      -- 				}
-      -- 			}
-      -- 		})
-
-      -- lspconfig.ruff_lsp.setup({
-      --   init_options = {
-      --     settings = {
-      --       args = {},
-      --     },
-      --   },
-      -- })
+      lspconfig.fennel_ls.setup({
+        root_dir = lspconfig.util.root_pattern("fnl", "lua"),
+        settings = {
+          ["fennel-ls"] = {
+            workspace = {
+              -- If you are using hotpot.nvim or aniseed,
+              -- make the server aware of neovim runtime files.
+              library = vim.api.nvim_list_runtime_paths(),
+            },
+            ["extra-globals"] = table.concat({ "vim", "jit", "comment" }, " "),
+          },
+        },
+      })
     end,
   },
   {

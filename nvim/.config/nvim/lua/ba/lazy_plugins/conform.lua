@@ -16,6 +16,9 @@ return {
       sh = { "shellharden", "shfmt" },
       bash = { "shfmt", "shellharden" },
       zsh = { "shellharden", "shfmt" },
+      fennel = { "fnlfmt" },
+      clojure = { "joker" },
+      clojurescript = { "joker" },
       ["*"] = { "codespell" },
     },
     -- Set up format-on-save

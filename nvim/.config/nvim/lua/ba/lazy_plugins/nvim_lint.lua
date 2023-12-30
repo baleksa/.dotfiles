@@ -22,6 +22,8 @@ return {
     lint.linters_by_ft = {
       lua = { "selene" },
       zsh = { "zsh" },
+      clojure = { "joker" },
+      clojurescript = { "joker" },
     }
     vim.api.nvim_create_autocmd(
       { "BufWritePost", "InsertLeave", "TextChanged" },

@@ -6,3 +6,6 @@ vim.g.file_explorer = "mini"
 
 require("ba.lazy")
 require("ba.map")
+-- nfnl compiled lua
+-- I can't find better solution to mix lua and fennel
+require("ba.lua")
