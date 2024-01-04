@@ -13,6 +13,7 @@ do_job() {
 	failed_msg="$1"
 	shift
 	colored_echo "$hello_msg" "$PURPLE"
+	echo "$@"
 	if "$@"; then
 		colored_echo "$bye_msg" "$GREEN"
 	else
@@ -30,14 +31,17 @@ do_job "Updating xbps packages." "Done!" "Failed!" xi -Syu
 
 # do_job "Updating neovim to the HEAD github branch." "Done!" "Failed!" update_neovim
 
-do_job "Updating neovim packages via lazy.nvim." "\nDone!" "\nFailed!" \
+do_job "Updating neovim packages via lazy.nvim." "Done!" "Failed!" \
 	nvim --headless "+Lazy! sync" +qa
 
 # You need to call TSUpdateSync to update syncroniously because async command doesn't work in scripts. I guess main process quits and take other threads and forks with it.
-do_job "Updating all installed nvim-treesitter parsers." "\nDone!" "\nFailed!" \
+do_job "Updating all installed nvim-treesitter parsers." "Done!" "Failed!" \
 	nvim --headless -c 'TSUpdateSync all' -c "quitall"
 
-do_job "Updating Mason nvim packages:" "\nDone!" "\nFailed!" update_mason_nvim
+do_job "Updating Mason nvim packages." "Done!" "Failed!" update_mason_nvim
 
-do_job "Updating rust toolchain:" "\nDone!" "\nFailed!" rustup update
-do_job "Updating tealdeer cache:" "\nDone!" "\nFailed!" tldr --update
+do_job "Updating rust toolchain." "Done!" "Failed!" rustup update
+
+do_job "Updating tealdeer cache." "Done!" "Failed!" tldr --update
+
+do_job "Syncing local xlocate database with the official git based." "Done!" "Failed!" xlocate -S
