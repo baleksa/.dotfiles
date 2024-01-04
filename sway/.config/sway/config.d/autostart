@@ -14,4 +14,5 @@ exec kanshi
 exec poweralertd -s
 exec easyeffects --gapplication-service
 exec noisetorch -i
+exec sway-alttab
 # vim: ft=swayconfig

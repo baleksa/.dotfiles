@@ -35,7 +35,8 @@ set $drun tofi-drun -c ~/.config/tofi/themes/dmenu \
 # Thin border and inner gaps
 default_border pixel 2
 default_floating_border pixel 2
-client.focused #3a94c5 #df69ba #ffffff
+# client.focused #3a94c5 #df69ba #ffffff
+client.focused #d48f94 #df69ba #ffffff
 gaps inner 2
 hide_edge_borders smart
 
@@ -50,6 +51,18 @@ seat seat0 hide_cursor 3000
 # command so env vars would be visible to dbus and so to the apps.
 exec hash dbus-update-activation-environment 2>/dev/null && \
 	dbus-update-activation-environment --all
+
+workspace   1    output   eDP-1
+workspace   3    output   eDP-1
+workspace   5    output   eDP-1
+workspace   7    output   eDP-1
+workspace   9    output   eDP-1
+
+workspace   2    output  DP-1 eDP-1
+workspace   4    output  DP-1 eDP-1
+workspace   6    output  DP-1 eDP-1
+workspace   8    output  DP-1 eDP-1
+workspace  10  	 output  DP-1 eDP-1
 
 include /etc/sway/config.d/*
 include $HOME/.config/sway/config.d/*
