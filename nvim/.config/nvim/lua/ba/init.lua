@@ -6,6 +6,9 @@ vim.g.file_explorer = "mini"
 
 require("ba.lazy")
 require("ba.map")
+if vim.g.file_explorer == "netrw" then
+  require("ba.netrw").setup()
+end
 -- nfnl compiled lua
 -- I can't find better solution to mix lua and fennel
 require("ba.lua")

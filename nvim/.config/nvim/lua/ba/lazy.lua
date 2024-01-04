@@ -56,7 +56,3 @@ require("lazy").setup("ba.lazy_plugins", {
   -- -- },
   -- debug = true,
 })
-
-if vim.g.file_explorer == "netrw" then
-  require("ba.netrw").setup()
-end
