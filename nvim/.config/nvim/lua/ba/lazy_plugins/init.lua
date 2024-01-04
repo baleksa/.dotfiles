@@ -151,6 +151,10 @@ return {
     tag = "legacy",
     config = true,
   },
+  {
+    "nacro90/numb.nvim",
+    opts = {},
+  },
   -- { "baleksa/simplebufline.nvim", dev = true },
   {
     "b0o/incline.nvim",
@@ -255,6 +259,7 @@ return {
     config = function()
       local builtin = require("statuscol.builtin")
       require("statuscol").setup({
+        -- relculright = true,
         segments = {
           {
             sign = {
