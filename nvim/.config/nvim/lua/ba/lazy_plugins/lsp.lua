@@ -16,15 +16,21 @@ return {
         dependencies = {
           "rafamadriz/friendly-snippets",
         },
+        version = "v2.*",
+        build = "make install_jsregexp",
       },
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-nvim-lua",
       "saadparwaiz1/cmp_luasnip",
+      "PaterJason/cmp-conjure",
     },
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip.loaders.from_vscode").lazy_load({
+        paths = { "../snippets" },
+      })
 
       local cmp = require("cmp")
       local cmp_format = require("lsp-zero").cmp_format()
@@ -41,7 +47,7 @@ return {
           { name = "nvim_lsp" },
           { name = "buffer", keyword_length = 3 },
           { name = "luasnip", keyword_length = 2 },
-          -- { name = "nvim_lua" },
+          { name = "conjure" },
           { name = "crates" },
         },
         sorting = {
@@ -195,12 +201,12 @@ return {
         bind("n", "]d", function()
           vim.diagnostic.goto_next({ float = { source = true } })
         end)
-        bind("n", "[e", function()
-          vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
-        end)
-        bind("n", "]e", function()
-          vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
-        end)
+        -- bind("n", "[e", function()
+        --   vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+        -- end)
+        -- bind("n", "]e", function()
+        --   vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+        -- end)
 
         bind("n", "<leader>o", "<cmd>SymbolsOutline<CR>")
       end
