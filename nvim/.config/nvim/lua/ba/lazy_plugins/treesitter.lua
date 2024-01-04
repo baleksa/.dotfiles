@@ -26,6 +26,7 @@ return {
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/playground",
+      "RRethy/nvim-treesitter-endwise",
     },
     -- init = function()
     -- end,
@@ -36,6 +37,9 @@ return {
         sync_install = false,
         auto_install = true,
         modules = {},
+        endwise = {
+          enable = true,
+        },
         playground = {
           enable = true,
           disable = function(lang, bufnr)
