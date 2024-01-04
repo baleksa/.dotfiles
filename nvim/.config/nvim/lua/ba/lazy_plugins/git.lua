@@ -4,8 +4,7 @@ local M = {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    ops = {
-      sign_priority = 20,
+    opts = {
       signs = {
         add = { text = "🮇" }, -- text = "+", },
         change = { text = "🮇" }, -- text = "~", },
@@ -68,15 +67,22 @@ local M = {
   },
   {
     "NeogitOrg/neogit",
+    keys = {
+      {
+        "<leader>g",
+        "<cmd>Neogit<cr>",
+        desc = "Launch Neogit",
+      },
+    },
     dependencies = {
       "nvim-lua/plenary.nvim", -- required
       "sindrets/diffview.nvim", -- optional - Diff integration
       "ibhagwan/fzf-lua", -- optional
     },
     opts = {},
-    config = function(_, opts)
-      require("neogit").setup(opts)
-    end,
+    -- config = function(_, opts)
+    --   require("neogit").setup(opts)
+    -- end,
   },
   {
     "pwntester/octo.nvim",
@@ -87,6 +93,7 @@ local M = {
     },
     opts = {
       picker = "fzf-lua",
+      mappings = {},
     },
   },
 }
