@@ -28,9 +28,6 @@ return {
     },
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
-      require("luasnip.loaders.from_vscode").lazy_load({
-        paths = { "../snippets" },
-      })
 
       local cmp = require("cmp")
       local cmp_format = require("lsp-zero").cmp_format()
