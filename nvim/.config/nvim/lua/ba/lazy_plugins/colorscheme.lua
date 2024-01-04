@@ -107,4 +107,9 @@ return {
   -- 		vim.g.gruvbox_italicize_comments = true
   -- 	end,
   -- },
+  {
+    "nvim-tree/nvim-web-devicons",
+    lazy = true,
+    opts = {},
+  },
 }

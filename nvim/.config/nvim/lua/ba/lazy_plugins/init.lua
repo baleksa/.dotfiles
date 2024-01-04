@@ -1,8 +1,5 @@
 return {
   {
-    "nvim-tree/nvim-web-devicons",
-    lazy = true,
-    opts = {},
     -- opts = function()
     --   return {
     --     color_icons = true,
@@ -19,8 +16,6 @@ return {
     -- end,
   },
   -- tpope's phenomenal plugins
-  { "tpope/vim-fugitive" }, -- Git commands in nvim
-  { "tpope/vim-rhubarb" }, -- Fugitive-companion to interact with github
   { "tpope/vim-repeat" },
   { "kylechui/nvim-surround", version = "*", opts = {}, event = "VeryLazy" },
   { "jcdickinson/wpm.nvim", config = true },
@@ -257,12 +252,9 @@ return {
   { "sitiom/nvim-numbertoggle" },
   {
     "luukvbaal/statuscol.nvim",
-    -- branch = "0.10",
-    -- cond = false,
     config = function()
       local builtin = require("statuscol.builtin")
       require("statuscol").setup({
-        relculright = true,
         segments = {
           {
             sign = {
