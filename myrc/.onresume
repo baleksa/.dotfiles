@@ -1,2 +1,5 @@
 #!/bin/sh
+
+. "$HOME"/.config/myrc/run_env
+
 set_theme_mode
