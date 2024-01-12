@@ -30,4 +30,10 @@ return {
       use_default_keymaps = false,
     },
   },
+  {
+    "bkad/CamelCaseMotion",
+    init = function()
+      vim.g.camelcasemotion_key = "<leader>"
+    end,
+  },
 }
