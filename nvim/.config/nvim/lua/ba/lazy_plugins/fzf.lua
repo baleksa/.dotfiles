@@ -58,7 +58,7 @@ return {
       -- vim.keymap.set("n", "<leader>fcc", function()
       --   require("fzf-lua").colorschemes()
       -- end, { silent = true, desc = "Pick a colorscheme" })
-      vim.api.nvim_create_autocmd("VimEnter", {
+      vim.api.nvim_create_autocmd("UIEnter", {
         group = vim.api.nvim_create_augroup("FzfDir", { clear = true }),
         callback = function()
           if vim.bo.filetype ~= "" and vim.bo.filetype ~= "oil" then
