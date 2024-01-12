@@ -58,28 +58,17 @@ return {
       -- vim.keymap.set("n", "<leader>fcc", function()
       --   require("fzf-lua").colorschemes()
       -- end, { silent = true, desc = "Pick a colorscheme" })
+      vim.api.nvim_create_autocmd("VimEnter", {
+        group = vim.api.nvim_create_augroup("FzfDir", { clear = true }),
+        callback = function()
+          if vim.bo.filetype ~= "" and vim.bo.filetype ~= "oil" then
+            return
+          end
+          if vim.api.nvim_buf_get_lines(0, 0, -1, false)[1] == "" then
+            require("fzf-lua").files()
+          end
+        end,
+      })
     end,
   },
-  --  {
-  --    "junegunn/fzf",
-  --    init = function()
-  --      vim.cmd([[
-  -- let g:fzf_colors =
-  -- \ { 'fg':         ['fg', 'Normal'],
-  --   \ 'bg':         ['bg', 'Normal'],
-  --   \ 'preview-bg': ['bg', 'NormalFloat'],
-  --   \ 'hl':         ['fg', 'Comment'],
-  --   \ 'fg+':        ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  --   \ 'bg+':        ['bg', 'CursorLine', 'CursorColumn'],
-  --   \ 'hl+':        ['fg', 'Statement'],
-  --   \ 'info':       ['fg', 'PreProc'],
-  --   \ 'border':     ['fg', 'Ignore'],
-  --   \ 'prompt':     ['fg', 'Conditional'],
-  --   \ 'pointer':    ['fg', 'Exception'],
-  --   \ 'marker':     ['fg', 'Keyword'],
-  --   \ 'spinner':    ['fg', 'Label'],
-  --   \ 'header':     ['fg', 'Comment'] }
-  -- ]])
-  --    end,
-  --  },
 }

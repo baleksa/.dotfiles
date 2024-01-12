@@ -5,7 +5,7 @@ local M = {
       return vim.g.file_explorer == "oil"
     end,
     opts = {
-      default_file_explorer = true,
+      default_file_explorer = false,
       -- Id is automatically added at the beginning, and name at the end
       -- See :help oil-columns
       columns = {
@@ -89,10 +89,11 @@ local M = {
         },
       },
     },
-    config = function(_, opts)
+    init = function()
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
-
+    end,
+    config = function(_, opts)
       require("oil").setup(opts)
 
       vim.keymap.set("n", "<leader>-", function()
