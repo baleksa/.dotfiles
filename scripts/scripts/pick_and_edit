@@ -4,6 +4,6 @@ pick="$(fd -LH . "$@" | fzf)"
 # [ "$#" = 1 ] && : "${pick:="$1"}"
 [ -d "$pick" ] && {
 	cd "$pick" || exit
-	eval $EDITOR .
+	"$EDITOR" .
 }
-[ -f "$pick" ] && "$EDITOR"  "$pick"
+[ -f "$pick" ] && "$EDITOR" "$pick"
