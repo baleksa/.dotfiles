@@ -1,0 +1,7 @@
+#!/bin/sh
+# Capture environment vars to load them when needed, e.g. in cron jobs, or in scripts
+# which are run in clean environments
+
+output_file="$XDG_CONFIG_HOME/myrc/run_env"
+
+export -p >"$output_file"
