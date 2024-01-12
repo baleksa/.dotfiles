@@ -222,35 +222,7 @@ return {
         ensure_installed = {},
         handlers = {
           lsp_zero.default_setup,
-          rust_analyzer = function()
-            local extension_path = vim.fn.stdpath("data")
-              .. "/mason/packages/codelldb/extension"
-            local codelldb_path = extension_path .. "/adapter/codelldb"
-            local liblldb_path = extension_path .. "/lldb/lib/liblldb.so" -- MacOS: This may be .dylib
-
-            local rust_tools = require("rust-tools")
-            rust_tools.setup({
-              server = {
-                on_attach = function(_, bufnr)
-                  vim.keymap.set(
-                    "n",
-                    "<leader>ha",
-                    rust_tools.hover_actions.hover_actions,
-                    { buffer = bufnr }
-                  )
-                end,
-              },
-              -- hover_actions = {
-              -- 	auto_focus = true,
-              -- },
-              dap = {
-                adapter = require("rust-tools.dap").get_codelldb_adapter(
-                  codelldb_path,
-                  liblldb_path
-                ),
-              },
-            })
-          end,
+          rust_analyzer = lsp_zero.noop,
           jdtls = lsp_zero.noop,
           lua_ls = function()
             -- local lua_opts = lsp_zero.nvim_lua_ls()
@@ -368,7 +340,9 @@ return {
     end,
   },
   {
-    "simrat39/rust-tools.nvim",
+    "mrcjkb/rustaceanvim",
+    version = "^3", -- Recommended
+    ft = { "rust" },
   },
   {
     url = "https://git.sr.ht/~p00f/clangd_extensions.nvim",
