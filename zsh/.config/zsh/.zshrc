@@ -114,7 +114,7 @@ bindkey "^[[B" history-substring-search-down
 bindkey -M vicmd "^[[A" history-substring-search-up
 bindkey -M vicmd "^[[B" history-substring-search-down
 
-mode="$(darkmanctl get)"
+mode="$(darkman get)"
 if [ "$mode" = "dark" ]; then
 	export FZF_DEFAULT_OPTS="
 	--color=bg+:#292e42,bg:#24283b,spinner:#bb9af7,hl:#565f89,fg:#c0caf5,header:#565f89,info:#7dcfff,pointer:#bb9af7,marker:#7dcfff,fg+:#ffffff,preview-bg:#24283b,prompt:#bb9af7,hl+:#bb9af7
