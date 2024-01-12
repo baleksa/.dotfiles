@@ -102,10 +102,10 @@ vim.keymap.set("v", "<leader>P", '"+P')
 vim.keymap.set("n", "<leader>q", "<cmd>bdelete<cr>")
 
 -- Easier window navigation
-vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
-vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
-vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
-vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
+vim.keymap.set("n", "<A-h>", "<C-w>h", opts)
+vim.keymap.set("n", "<A-j>", "<C-w>j", opts)
+vim.keymap.set("n", "<A-k>", "<C-w>k", opts)
+vim.keymap.set("n", "<A-l>", "<C-w>l", opts)
 
 -- Resize with arrows
 vim.keymap.set("n", "<C-Up>", ":resize +2<CR>", opts)
@@ -134,10 +134,13 @@ vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 local term_opts = { silent = true }
 -- Better terminal navigation
-vim.keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
-vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
-vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
-vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+vim.keymap.set("t", "<A-h>", "<C-\\><C-N><C-w>h", term_opts)
+vim.keymap.set("t", "<A-j>", "<C-\\><C-N><C-w>j", term_opts)
+vim.keymap.set("t", "<A-k>", "<C-\\><C-N><C-w>k", term_opts)
+vim.keymap.set("t", "<A-l>", "<C-\\><C-N><C-w>l", term_opts)
+vim.keymap.set("t", "<A-o>", "<C-\\><C-n><C-o>", term_opts)
+vim.keymap.set("t", "<A-n>", "<C-\\><C-n>", term_opts)
+vim.keymap.set("t", "<A-6>", "<C-\\><C-n><C-6>", term_opts)
 
 vim.keymap.set(
   "n",
