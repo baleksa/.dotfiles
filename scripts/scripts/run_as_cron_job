@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# First clear the env and then only set vars that cron would when running jobs
+# Vars are hardcoded and gotten by running cronjob: * * * * * export -p
+env -i \
+	USER=baleksa \
+	HOME=/home/baleksa \
+	LOGNAME=baleksa \
+	PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+	SHELL=/bin/sh \
+	PWD=/home/baleksa \
+	"$@"
