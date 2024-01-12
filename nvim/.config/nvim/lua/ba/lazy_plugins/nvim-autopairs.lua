@@ -13,7 +13,7 @@ return {
     -- },
     -- map_cr = false,
     -- map_bs = false,
-    disable_filetype = { "TelescopePrompt", "spectre_panel", "fzf" },
+    disable_filetype = { "TelescopePrompt", "spectre_panel", "fzf", "clojure" },
     -- fast_wrap = {
     --   map = "<M-e>",
     --   chars = { "{", "[", "(", '"', "'" },
@@ -60,6 +60,7 @@ return {
               -- end,
             },
           },
+          clojure = false,
           -- Disable for tex
           tex = false,
         },

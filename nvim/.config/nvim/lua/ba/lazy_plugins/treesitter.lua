@@ -213,6 +213,7 @@ return {
             end
             return rainbow.strategy["local"]
           end,
+          clojure = rainbow.strategy["global"],
         },
         query = {
           [""] = "rainbow-delimiters",
