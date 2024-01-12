@@ -30,13 +30,38 @@ local M = {
     end,
     init = function()
       -- Set configuration options here
-      vim.g["conjure#debug"] = true
+      vim.g["conjure#debug"] = false
 
       -- Disable the documentation mapping
       vim.g["conjure#mapping#doc_word"] = false
       -- Rebind it from K to <prefix>gk
       vim.g["conjure#mapping#doc_word"] = "gk"
       vim.g["conjure#extract#tree_sitter#enabled"] = true
+
+      vim.api.nvim_create_autocmd("BufNewFile", {
+        group = vim.api.nvim_create_augroup(
+          "conjure_log_disable_lsp",
+          { clear = true }
+        ),
+        pattern = { "conjure-log-*" },
+        callback = function()
+          vim.diagnostic.disable(0)
+        end,
+        desc = "Conjure Log disable LSP diagnostics",
+      })
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          vim.bo.commentstring = ";; %s"
+        end,
+        desc = "Lisp style line comment",
+        group = vim.api.nvim_create_augroup("comment_config", { clear = true }),
+        pattern = { "clojure" },
+      })
+      vim.api.nvim_create_user_command(
+        "Clj",
+        "terminal clj -M:repl/conjure",
+        {}
+      )
     end,
   },
   {
@@ -110,13 +135,5 @@ local M = {
     -- end,
     build = "cargo build --release",
   },
-  -- {
-  --   "harrygallagher4/nvim-parinfer-rust",
-  --   ft = { "clojure" },
-  --   opts = {},
-  --   config = function(_, opts)
-  --     require("parinfer").setup(opts)
-  --   end,
-  -- },
 }
 return M
