@@ -24,8 +24,8 @@ export PATH="$MYSCRIPTS_DIR:$HOME/.luarocks/bin:$HOME/.local/bin:$ANDROID_STUDIO
 
 export GIT_REPOS_DIR=~/repositories
 
-export FZF_DEFAULT_COMMAND='fd -H .'
-export FZF_DEFAULT_OPTS_NO_THEME="--border=rounded"
+export FZF_DEFAULT_COMMAND='fd -L --strip-cwd-prefix .'
+export FZF_DEFAULT_OPTS_NO_THEME="--border=rounded --cycle --filepath-word"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_NO_THEME"
 export FZF_CTRL_R_OPTS='--layout=reverse'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -47,7 +47,7 @@ export SDCV_PAGER="less -ri"
 export BEMENU_BACKEND="wayland"
 
 export EDITOR="nvim"
-# Don't set term like this because you use a couple of different terminal you moron.
+# Don't set term like this because you use a couple of different terminals you moron.
 # export TERM="foot"
 # export TERMINAL="foot"
 export BROWSER="firefox-wayland"
