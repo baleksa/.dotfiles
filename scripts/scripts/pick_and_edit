@@ -1,9 +1,9 @@
 #!/bin/sh
-[ "$#" = 0 ] && exit
-pick="$(fd -LH . "$@" | fzf)"
-# [ "$#" = 1 ] && : "${pick:="$1"}"
+
+dirs="${@:-.}"
+pick="$(fd -L . $dirs | fzf)"
 [ -d "$pick" ] && {
 	cd "$pick" || exit
-	"$EDITOR" .
+	"$EDITOR"
 }
 [ -f "$pick" ] && "$EDITOR" "$pick"

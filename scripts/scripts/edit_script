@@ -3,8 +3,9 @@
 # Edit an old or make a new script
 
 if [ "$#" = "0" ]; then
-	script="$(find -H "$MYSCRIPTS_DIR" -type f | fzf)"
-	script=${script:=$MYSCRIPTS_DIR}
+	cd "$MYSCRIPTS_DIR" || exit
+	script="$(fd -t file . | fzf)"
+	[ "$script" = "" ] && exit
 else
 	script="$MYSCRIPTS_DIR/$1"
 	if [ ! -f "$script" ]; then
@@ -13,4 +14,4 @@ else
 	fi
 fi
 "$EDITOR" "$script"
-[ -e "$script" ] && [ ! -s "$script" ] && rm "$script"
+[ -f "$script" ] && [ ! -s "$script" ] && rm "$script"

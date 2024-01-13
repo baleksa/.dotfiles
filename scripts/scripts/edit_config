@@ -1,0 +1,6 @@
+#!/bin/sh
+cd "$XDG_CONFIG_HOME" || exit
+pick="$(fzf)"
+if [ -r "$pick" ]; then
+	"$EDITOR" "$pick"
+fi
