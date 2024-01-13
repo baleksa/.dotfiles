@@ -64,7 +64,7 @@ return {
           if vim.bo.filetype ~= "" and vim.bo.filetype ~= "oil" then
             return
           end
-          if vim.api.nvim_buf_get_lines(0, 0, -1, false)[1] == "" then
+          if vim.fn.isdirectory(vim.fn.argv(0)) ~= 0 then
             require("fzf-lua").files()
           end
         end,
