@@ -20,6 +20,8 @@ source "$ZDOTDIR"/utils.zsh
 
 source "$ZDOTDIR"/signal_handlers.zsh
 
+. "$MYRC_DIR"/funcs.sh
+
 # Add completion folder to fpath
 [ -d "$ZDOTDIR"/completion ] && fpath+="$ZDOTDIR"/completion/
 
