@@ -67,3 +67,5 @@ alias halt='sudo halt'
 alias zzz='sudo zzz'
 alias ZZZ='sudo ZZZ'
 alias shutdown='sudo shutdown'
+
+alias sd="spotifyd --no-daemon"
