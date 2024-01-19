@@ -1,0 +1,3 @@
+MD_CMD="pandoc"
+MD_ARG="-f gfm"
+READER=zathura
