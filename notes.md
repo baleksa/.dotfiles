@@ -28,7 +28,7 @@ applications also require installing the kwayland package.
 ## IWD
 
 Use IWD for wireless network. It needs dbus service started or to be started
-with dbus-launch. IWD clashes with udevd, to surpress udev's message about error
+with dbus-launch. IWD clashes with udevd, to suppress udev's message about error
 with changing net interface prevent IWD from manipulating the network interfaces
 in this way by adding:
 
@@ -49,3 +49,12 @@ folder, then set up paths if needed. On void `zsh-autosuggestions` and
 
 Add `"keyboard.dispatch": "keyCode"` to settings.json for swapcapsesc to work
 with extensions.
+
+## gtk-launch
+
+gtk-launch uses hardcoded list of terminals, so if you wan't your terminal to
+work you need to link your terminal's binary to `/usr/bin/xdg-terminal-exec`.
+In my case it is: `sudo ln -s /usr/bin/foot /usr/bin/xdg-terimnal-exec`. Check
+this
+[link](https://unix.stackexchange.com/questions/707469/error-with-gtk-launch-unable-to-find-terminal-required-for-application)
+for more info. 
