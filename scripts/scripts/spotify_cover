@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# Script to be used as a spotifyd's on event hook
+#
+cover_path=/tmp/spotify_cover_img
+
+if [ ! -f "$cover_path" ]; then
+	cover_url="$(spotify_player get key playback | jq '.item.album.images.[0].url' --raw-output)"
+	[ "$cover_url" = "null" ] && exit
+	curl -sL "$cover_url" -o "$cover_path"
+fi
+
+case "$PLAYER_EVENT" in
+"change") ;;
+"start") ;;
+"stop") ;;
+"load") ;;
+"play")
+	sleep 1.5s
+	cover_url="$(spotify_player get key playback | jq '.item.album.images.[0].url' --raw-output)"
+	curl -sL "$cover_url" -o "$cover_path"
+	;;
+"pause") ;;
+"preload") ;;
+"endoftrack") ;;
+"volumeset") ;;
+"preloading") ;;
+"unavailabe") ;;
+esac
+[ -f "$cover_path" ] && img2sixel "$cover_path"
