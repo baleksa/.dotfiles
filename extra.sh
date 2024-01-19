@@ -19,10 +19,10 @@ setup_greetd_tuigreet() {
 		vt = 1
 
 		[default_session]
-		command = "tuigreet --cmd '/bin/zsh -l'"
+		command = "tuigreet --cmd '\$SHELL --login'"
 		user = "greeter"
-		EOF
-	echo 'Set tuigreet to run /bin/zsh -l'
+	EOF
+	echo 'Set tuigreet to run default login shell'
 }
 
 setup_asdf() {
@@ -42,11 +42,11 @@ setup_asdf() {
 
 setup_inotify_limits() {
 	sudo tee -a /etx/sysctl.conf <<-SEP
-	# This fixes. WezTerm didn't start because notify was hitting the limit too
-	# ofter.
-	# https://scribe.rip/@ivanermilov/how-to-fix-inotify-cannot-be-used-reverting-to-polling-too-many-open-files-bb1c1437dbf
-	# https://github.com/wez/wezterm/issues/3027
-	fs.inotify.max_user_instances=10000
-	fs.inotify.max_user_watches=640000
+		# This fixes. WezTerm didn't start because notify was hitting the limit too
+		# often.
+		# https://scribe.rip/@ivanermilov/how-to-fix-inotify-cannot-be-used-reverting-to-polling-too-many-open-files-bb1c1437dbf
+		# https://github.com/wez/wezterm/issues/3027
+		fs.inotify.max_user_instances=10000
+		fs.inotify.max_user_watches=640000
 	SEP
 }
