@@ -1,4 +1,5 @@
 for_window [app_id="Firefox" title="Firefox — Sharing Indicator"] kill
+for_window [app_id="Firefox" title="Password Required - Mozilla Firefox"] floating enable
 
 assign [app_id="Firefox-extra"] workspace extra
 
