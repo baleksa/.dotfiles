@@ -67,6 +67,7 @@ local M = {
   },
   {
     "NeogitOrg/neogit",
+    -- cond = false,
     keys = {
       {
         "<leader>g",
@@ -86,6 +87,7 @@ local M = {
   },
   {
     "pwntester/octo.nvim",
+    -- cond = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",

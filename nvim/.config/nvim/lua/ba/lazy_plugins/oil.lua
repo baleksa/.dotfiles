@@ -5,7 +5,7 @@ local M = {
       return vim.g.file_explorer == "oil"
     end,
     opts = {
-      default_file_explorer = false,
+      -- default_file_explorer = false,
       -- Id is automatically added at the beginning, and name at the end
       -- See :help oil-columns
       columns = {

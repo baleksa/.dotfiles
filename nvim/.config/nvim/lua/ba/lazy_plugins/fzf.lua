@@ -61,10 +61,13 @@ return {
       vim.api.nvim_create_autocmd("UIEnter", {
         group = vim.api.nvim_create_augroup("FzfDir", { clear = true }),
         callback = function()
-          if vim.bo.filetype ~= "" and vim.bo.filetype ~= "oil" then
-            return
-          end
-          if vim.fn.isdirectory(vim.fn.argv(0)) ~= 0 then
+          -- if vim.bo.filetype ~= "" and vim.bo.filetype ~= "oil" then
+          --   return
+          -- end
+          -- if vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv(0)) ~= 0 then
+          --   require("fzf-lua").files()
+          -- end
+          if vim.bo.filetype == "oil" then
             require("fzf-lua").files()
           end
         end,
