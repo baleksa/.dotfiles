@@ -61,11 +61,9 @@ alias d='sdcv --color'
 alias st='sync_todo'
 alias stc='rclone bisync gdrive_void_hpi5:todo /home/baleksa/Documents/todo --exclude "todo.txt.bak" --exclude "report.txt"'
 
-alias reboot='sudo reboot'
-alias poweroff='sudo poweroff'
-alias halt='sudo halt'
+alias reboot='loginctl reboot'
+alias poweroff='loginctl poweroff'
 alias zzz='sudo zzz'
 alias ZZZ='sudo ZZZ'
-alias shutdown='sudo shutdown'
 
 alias sd="spotifyd --no-daemon"
