@@ -56,6 +56,6 @@ export PDFREADER="zathura"
 export DOCREADER="zaread"
 
 export DAY_H="06"
-export NIGHT_H="21"
+export NIGHT_H="20"
 
 export SWAY_SCRIPTS="$HOME/.config/sway/scripts"
