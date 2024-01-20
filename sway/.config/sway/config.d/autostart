@@ -7,8 +7,6 @@ exec wlsunset -t3400 -T6500 -g1.0 -S '06:30' -s '20:00'
 exec sway-xkb-switcher-rust --default-lang "English (US)"
 # exec battery_check
 exec pipewire
-exec pipewire-pulse
-exec wireplumber
 # Start kanshi before darkman so background is set properly
 exec kanshi
 # exec darkman run
