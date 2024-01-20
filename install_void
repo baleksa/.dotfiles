@@ -28,12 +28,25 @@ if [ "$(id -u)" -ge 1000 ]; then
 fi
 script
 
+sudo touch /etc/sv/runsvdir-"$USER"
+if [ -f /etc/sv/runsvdir-"$USER" ]; then
+	sudo tee /etc/sv/runsvdir-"$USER"/ <<script
+#!/bin/sh
+
+export USER="$USER"
+export HOME="$HOME"
+script
+	sudo tee /etc/sv/runsvdir-"$USER"/ <<'script'
+groups="$(id -Gn "$USER" | tr ' ' ':')"
+svdir="$HOME/service"
+
+exec chpst -u "$USER:$groups" runsvdir "$svdir"
+script
+	sudo ln -s /etc/sv/runvdir-"$USER" /var/service/
+fi
+
 message "INSTALLING XTOOLS AND ENABLING NONFREE REPO"
 sudo xbps-install -Su -y xtools void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree
-
-message "INSTALLING ZSH AND SETTING IT AS DEFAULT SHELL"
-xi -y zsh
-chsh -s /bin/zsh
 
 message "INSTALLING MESA DRIVERS CPU FIRMWARE"
 xi -y mesa-dri mesa-vaapi mesa-vdpau
@@ -47,9 +60,10 @@ mkdir -p '/etc/sudoers.d'
 [ -d '/etc/sudoers.d' ] &&
 	sudo tee '/etc/sudoers.d/power' <<script
 ## Admin user group is allowed to execute halt and reboot
-%power ALL=NOPASSWD: /usr/bin/halt, /usr/bin/reboot, /usr/bin/poweroff, /usr/bin/zzz, /usr/bin/ZZZ
+%power ALL=NOPASSWD: /usr/bin/zzz, /usr/bin/ZZZ
 script
 chmod 0440 '/etc/sudoers.d/power'
+sudo usermod -a -G power "$USER"
 
 message "DBUS"
 xi -y dbus && add_service dbus
@@ -83,17 +97,30 @@ message "IWD"
 xi -y iwd && add_service iwd && printf '[General]\nUseDefaultInterface=true' | sudo tee -a /etc/iwd/main.conf
 
 message "ZSH"
+message "INSTALLING ZSH AND SETTING IT AS DEFAULT SHELL"
+xi -y zsh
+chsh -s /bin/zsh
 xi -y zsh-autosuggestions zsh-completions zsh-syntax-highlighting zsh-history-substring-search
 
 message "PIPEWIRE, ALSA AND BLUETOOTH"
-xi -y pipewire libspa-bluetooth alsa-pipewire wireplumber
-mkdir -p /etc/pipewire
-sed '/path.*=.*pipewire-media-session/s/{/#{/' \
-	/usr/share/pipewire/pipewire.conf >/etc/pipewire/pipewire.conf
+xi -y pipewire libspa-bluetooth alsa-pipewire
+
+sudo mkdir -p /etc/pipewire/pipewire.conf.d
+sudo ln -s /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
+sudo ln -s /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/
+
+: "${XDG_CONFIG_HOME:=${HOME}/.config}"
+mkdir -p "${XDG_CONFIG_HOME}/pipewire/pipewire.conf.d"
+ln -s /usr/share/examples/wireplumber/10-wireplumber.conf "${XDG_CONFIG_HOME}/pipewire/pipewire.conf.d/"
+ln -s /usr/share/examples/pipewire/20-pipewire-pulse.conf "${XDG_CONFIG_HOME}/pipewire/pipewire.conf.d/"
+
 sudo mkdir -p /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d
 sudo ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d
 xi -y bluez && add_service bluetoothd && sudo usermod -a -G bluetooth "$USER"
+
+message "XDG Desktop Portals"
+xi -y xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wrl
 
 message "STOW DOTFILES"
 xi -y stow
@@ -109,13 +136,12 @@ message "Install terminals: wezterm and foot"
 xi -y wezterm wezterm-terminfo
 xi -y foot foot-terminfo
 
-message "Install pacakges for development"
+message "Install packages for development"
 xi -y python3 python3-devel lua lua-devel
 
 message "MANPAGES"
 xi -Su -y xi man-pages-devel man-pages-posix
 makewhatis
-
 
 message "Set udkiskie polkit rules to enable (un)mounting drives for regular users"
 polkit_rules_d="/etc/pokit-1/rules.d"

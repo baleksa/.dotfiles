@@ -6,23 +6,22 @@ setup_greetd_tuigreet() {
 	xi -Sy greetd tuigreet || exit
 	echo "Installed greetd, tuigreet."
 	{
-		sudo rm /var/service/agetty-tty1 &&
-			sudo ln -s /etc/sv/greetd /var/service
+		sudo rm /var/service/agetty-tty1
+		sudo ln -s /etc/sv/greetd /var/service
 	} || exit
 	echo "Removed agetty-tty1 service, added greetd service."
 	sudo useradd -M -G video greeter || exit
 	echo "Make greeter user and added it to video group"
 	sudo chmod -R go+r /etc/greetd/ || exit
 	echo "Set /etc/greetd MOD"
-	sudo tee /etc/greetd/config.toml <<-EOF
+	sudo tee /etc/greetd/config.toml <<-'EOF'
 		[terminal]
 		vt = 1
 
 		[default_session]
-		command = "tuigreet --cmd '\$SHELL --login'"
+		command = "tuigreet -t --remember -g 'Hi, compagnon de misères!' --power-reboot 'loginctl reboot' --power-shutdown 'loginctl poweroff' --cmd '$SHELL --login'"
 		user = "greeter"
 	EOF
-	echo 'Set tuigreet to run default login shell'
 }
 
 setup_asdf() {
