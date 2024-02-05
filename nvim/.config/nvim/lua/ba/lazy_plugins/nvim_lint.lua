@@ -24,6 +24,7 @@ return {
       zsh = { "zsh" },
       clojure = { "joker" },
       clojurescript = { "joker" },
+      go = { "golangcilint" },
     }
     vim.api.nvim_create_autocmd(
       { "BufWritePost", "InsertLeave", "TextChanged" },
