@@ -6,6 +6,9 @@ oldswaybg="$(pidof swaybg)"
 swaybg -i ~/Pictures/green_village.jpg -o \* -m fill &
 kill "$oldswaybg"
 
+gsettings set org.gnome.desktop.interface gtk-theme "Adwaita"
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
+
 makoctl set-mode light
 
 notify-send --app-name="darkman" --urgency=low -i /usr/share/icons/gnome/32x32/status/weather-clear.png "Switching to light mode"

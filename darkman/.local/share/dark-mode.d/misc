@@ -8,5 +8,7 @@ kill "$oldswaybg"
 
 makoctl set-mode dark
 
-notify-send --app-name="darkman" --urgency=low --icon=/usr/share/icons/gnome/32x32/status/weather-clear-night.png "Switching to dark mode"
+gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
+notify-send --app-name="darkman" --urgency=low --icon=/usr/share/icons/gnome/32x32/status/weather-clear-night.png "Switching to dark mode"
