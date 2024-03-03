@@ -3,25 +3,16 @@
 . ./utils.sh
 
 setup_xdg_runtime_dir() {
-
-	message "Make XDG_RUNTIME_DIR and set its owner for each user"
-	sudo tee -a /etc/rc.local <<-'script'
-		for uid in $(awk -F ':' '$3>=1000 {print ""$3":"$1}' /etc/passwd); do
-		    dirname=$(echo "$uid" | cut -d: -f1)
-		    usernm=$(echo "$uid" | cut -d: -f2)
-		    mkdir /run/user/"$dirname"
-		    chmod 700 /run/user/"$dirname"
-		    chown "$usernm" /run/user/"$dirname"
-		done
-	script
-
-	message "Make a script that sets XDG_RUNTIME_DIR for every user on boot"
-	sudo tee /etc/profile.d/set_xdg_runtime_dir.sh <<-'script'
-		#!/bin/sh
-		if [ "$(id -u)" -ge 1000 ]; then
-			export XDG_RUNTIME_DIR="/run/user/$(id -u)"
-		fi
-	script
+	dirname="$(id -u)"
+	mkdir /run/user/"$dirname"
+	chmod 700 /run/user/"$dirname"
+	chown "$USER" /run/user/"$dirname"
+	sudo tee /etc/profile.d/set_xdg_runtime_dir.sh <<'script'
+#!/bin/sh
+if [ "$(id -u)" -ge 1000 ]; then
+	export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+fi
+script
 
 }
 

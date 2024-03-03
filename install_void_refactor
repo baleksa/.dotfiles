@@ -9,7 +9,6 @@ do_job "Adding script which sets XDG_RUNTIME_DIR for all users on boot:" \
 
 do_job "Init xbps and install helper packages" init_xbps
 
-
 message "INSTALLING ZSH AND SETTING IT AS DEFAULT SHELL"
 xi -y zsh
 chsh -s /bin/zsh
@@ -88,7 +87,7 @@ message "Install terminals: wezterm and foot"
 xi -y wezterm wezterm-terminfo
 xi -y foot foot-terminfo
 
-message "Install pacakges for development"
+message "Install packages for development"
 xi -y python3 python3-devel lua lua-devel
 
 message "MANPAGES"

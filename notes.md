@@ -18,10 +18,10 @@ install `tlp`, and enable tlp service
 
 ## Sway and Wayland
 
-Sway needs XDG_RUNDIR set and access to seats, elogind doesn't work on
-voidlinux, so you have to install `seatd`, add user to \_seatd group, start
-seatd service and then start Sway. Qt5-based applications require installing the
-qt5-wayland package and setting the environment variable
+Sway needs XDG_RUNTIMEDIR set and access to seats, so if you don't want to
+install elogind, you have to install `seatd`, add user to \_seatd group,
+start seatd service and then start Sway. Qt5-based applications require
+installing the qt5-wayland package and setting the environment variable
 QT_QPA_PLATFORM=wayland-egl to enable their Wayland backend. Some KDE specific
 applications also require installing the kwayland package.
 
@@ -52,7 +52,7 @@ with extensions.
 
 ## gtk-launch
 
-gtk-launch uses hardcoded list of terminals, so if you wan't your terminal to
+gtk-launch uses hardcoded list of terminals, so if you want foot terminal to
 work you need to link your terminal's binary to `/usr/bin/xdg-terminal-exec`.
 In my case it is: `sudo ln -s /usr/bin/foot /usr/bin/xdg-terimnal-exec`. Check
 this
