@@ -198,6 +198,10 @@ vim.api.nvim_create_autocmd("FileType", {
 -- vim.api.nvim_create_autocmd("FileType", { pattern = "python", command = "setlocal et ts=4 sw=4" })
 -- vim.api.nvim_create_autocmd("FileType", { pattern = "mail", command = "setlocal noautoindent" })
 -- vim.api.nvim_create_autocmd("FileType", { pattern = "gmi", command = "set wrap linebreak" })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "gohtmltmpl", "gotexttmpl" },
+  command = [[setlocal commentstring={{/*\ %s\ */}}]],
+})
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*",
   command = "if expand('%:t') == 'APKBUILD' | set ft=sh | endif",
@@ -221,4 +225,15 @@ end
 vim.api.nvim_create_autocmd("ColorScheme", {
   desc = "Clear LSP highlight groups",
   callback = hide_semantic_highlights,
+})
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.html", "*.html.tmpl" },
+  group = vim.api.nvim_create_augroup("gotmpldetect", {}),
+  callback = function()
+    local ext = vim.fn.expand("%:e")
+    if (ext == "html" or ext == "html.tmpl") and vim.fn.search("{{") ~= 0 then
+      vim.cmd.setfiletype("gohtmltmpl")
+    end
+  end,
 })
