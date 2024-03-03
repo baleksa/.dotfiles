@@ -7,44 +7,39 @@ import time
 if len(sys.argv) - 1 > 0:
     wifi_networks = sys.argv[1:]
 else:
-    wifi_networks = ["VG_tndr5", "VG_tndr"]
+    print("Usage: test_wifi [SSID ...]")
+    exit(1)
+
 connect_command = ["iwctl", "station", "wlo1", "connect"]
 scan_command = ["iwctl", "station", "wlo1", "scan"]
 get_networks_command = ["iwctl", "station", "wlo1", "get-networks"]
 speedtest_command = ["speedtest-cli", "--csv"]
 DOWNLOAD_INDEX = 6
-n_cycle = 1
-wait_for_connection_sec = 10
-wait_after_cycle_sec = 10
-time_series = {}
-
-for network in wifi_networks:
-    time_series[network] = []
+n_cycles = 1
+wait_for_connection_sec = 5
+test_results = {}
 
 print(f"Testing wifi speeds for networks: {wifi_networks}")
-print(f"Running {n_cycle} cycles:")
 
-for i in range(n_cycle):
-    print(f"Running cycle {i+1}")
-    for network in wifi_networks:
-        subprocess.run(scan_command, stdout=subprocess.DEVNULL)
-        subprocess.run(get_networks_command, stdout=subprocess.DEVNULL)
-        subprocess.run(
-            connect_command + [network],
-        )
-        time.sleep(wait_for_connection_sec)
-        speed_bit_s = float(
-            subprocess.run(speedtest_command, stdout=subprocess.PIPE).stdout.split(
-                b","
-            )[DOWNLOAD_INDEX]
-        )
-        bits_in_mbyte = 8 * 1024 * 1024
-        speed_mb_s = speed_bit_s / bits_in_mbyte
-        time_series[network].append(speed_mb_s)
-    time.sleep(wait_after_cycle_sec)
+subprocess.run(scan_command, stdout=subprocess.DEVNULL)
+subprocess.run(get_networks_command, stdout=subprocess.DEVNULL)
+
+for network in wifi_networks:
+    subprocess.run(
+        connect_command + [network],
+    )
+    time.sleep(wait_for_connection_sec)
+    speed_bit_s = float(
+        subprocess.run(speedtest_command, stdout=subprocess.PIPE).stdout.split(b",")[
+            DOWNLOAD_INDEX
+        ]
+    )
+    bits_in_mbyte = 8 * 1024 * 1024
+    speed_MB_s = speed_bit_s / bits_in_mbyte
+    test_results[network] = speed_MB_s
 
 print("{:12}|{:>12}".format("SSID", "Speed"))
 print("{:12} {:>12}".format("____", "_____"))
-for k in time_series:
-    average_speed_mb_s = sum(time_series[k]) / n_cycle
-    print(f"{k:12}:{average_speed_mb_s:10.2f}MB")
+for ssid in wifi_networks:
+    wifi_speed = test_results[ssid]
+    print(f"{ssid:12}:{wifi_speed:10.2f}MB")
