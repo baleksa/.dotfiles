@@ -1,6 +1,5 @@
 #!/bin/sh
 
-export WLR_DRM_NO_MODIFIERS=1 # wluma needs this, but still doesn't work
 # Session
 export XDG_SESSION_TYPE=wayland
 export XDG_SESSION_DESKTOP=sway
@@ -15,13 +14,6 @@ export GTK_BACKEND=wayland
 export ELM_DISPLAY=wl
 # export WAYLAND_DEBUG=1 # Uncomment this line to enable more verbose logging
 
-# D-Bus
-# If the session bus is not available it is spawned and wrapper round our program
-# Otherwise we spawn our program directly
-# if [ -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
-#     drs=dbus-run-session
-# fi
-if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-	# exec ${drs} sway
+if [ "$DISPLAY" = "" ] && [ "$(tty)" = "/dev/tty1" ]; then
 	exec dbus-run-session sway
 fi

@@ -1,17 +1,14 @@
-#!/bin/sh
-
 export MYRC_DIR="$HOME/.config/myrc"
 export MYSCRIPTS_DIR="$HOME/scripts"
 export MYNOTES_DIR="$HOME/notes"
 
 export XDG_CONFIG_HOME=~/.config
 export XDG_STATE_HOME=~/.local/state
-# export XDG_DATA_DIRS="$HOME/.local/share:$XDG_DATA_DIRS"
 export XDG_CACHE_HOME=~/.cache
 export XDG_DATA_HOME=~/.local/share
-# This need to be set in a system's startup script, if using runit check
-# /etc/profile.d/set_xdg_runtime_dir.sh
-# export XDG_RUNTIME_DIR=~/.run
+
+export DAY_H="06"
+export NIGHT_H="20"
 
 export GOPATH="$HOME/go"
 
@@ -29,6 +26,19 @@ export FZF_DEFAULT_OPTS_NO_THEME="--border=rounded --cycle --filepath-word"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_NO_THEME"
 export FZF_CTRL_R_OPTS='--layout=reverse'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+curr_time_h="$(date +%H)"
+if [ "$curr_time_h" -ge "$NIGHT_H" ]; then
+	export FZF_DEFAULT_OPTS="
+	--color=bg+:#292e42,bg:#24283b,spinner:#bb9af7,hl:#565f89,fg:#c0caf5,header:#565f89,info:#7dcfff,pointer:#bb9af7,marker:#7dcfff,fg+:#ffffff,preview-bg:#24283b,prompt:#bb9af7,hl+:#bb9af7 $FZF_DEFAULT_OPTS_NO_THEME"
+elif [ "$curr_time_h" -lt "$DAY_H" ]; then
+	export FZF_DEFAULT_OPTS="
+	--color=bg+:#292e42,bg:#24283b,spinner:#bb9af7,hl:#565f89,fg:#c0caf5,header:#565f89,info:#7dcfff,pointer:#bb9af7,marker:#7dcfff,fg+:#ffffff,preview-bg:#24283b,prompt:#bb9af7,hl+:#bb9af7 $FZF_DEFAULT_OPTS_NO_THEME"
+else
+	export FZF_DEFAULT_OPTS="
+         --color fg:-1,bg:-1,hl:#268bd2,fg+:#073642,bg+:#eee8d5,hl+:#268bd2
+         --color info:#b58900,prompt:#b58900,pointer:#002b36,marker:#002b36,spinner:#b58900
+	 $FZF_DEFAULT_OPTS_NO_THEME"
+fi
 
 export MANPAGER='nvimpager'
 export PAGER='nvimpager'
@@ -55,7 +65,5 @@ export DOC_READER="sway_zathura_open"
 export PDFREADER="zathura"
 export DOCREADER="zaread"
 
-export DAY_H="06"
-export NIGHT_H="20"
-
 export SWAY_SCRIPTS="$HOME/.config/sway/scripts"
+# vim: ft=sh
