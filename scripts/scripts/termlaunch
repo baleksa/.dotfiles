@@ -7,6 +7,10 @@
 # with this title.
 window_title="termlauncher"
 
+if [ "$TERM" = "linux" ]; then
+	TERM="foot"
+fi
+
 case "$TERM" in
 wezterm)
 	wezterm --config 'window_close_confirmation="NeverPrompt"' \
