@@ -1,0 +1,5 @@
+#!/bin/sh
+
+go clean -x -modcache
+
+cd ~/.cargo/ && cargo-cache --remove-dir all
