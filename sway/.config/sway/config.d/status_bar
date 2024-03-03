@@ -6,7 +6,7 @@ bar {
     id 1
     output eDP-1 
     output DP-1
-    position top
+    position bottom
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.

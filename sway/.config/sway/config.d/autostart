@@ -3,8 +3,9 @@
 # exec wlsunset -t3400 -T6500 -l44.7 -L20.3 -g1.0 -S '06:30' -s '20:00'
 exec capture_env
 exec set_theme_mode
+exec gsettings set org.gnome.desktop.interface icon-theme 'Arc'
 exec wlsunset -t3400 -T6500 -g1.0 -S '06:30' -s '20:00'
-exec sway-xkb-switcher-rust --default-lang "English (US)"
+exec sway-xkb-switcher-rust --default-lang "English (US)" --tabbed-apps "Firefox,chromium"
 # exec battery_check
 exec pipewire
 # Start kanshi before darkman so background is set properly
@@ -13,4 +14,5 @@ exec kanshi
 exec poweralertd -s
 exec easyeffects --gapplication-service
 exec noisetorch -i
+exec spotifyd
 # vim: ft=swayconfig
