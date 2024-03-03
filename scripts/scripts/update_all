@@ -44,4 +44,4 @@ do_job "Updating rust toolchain." "Done!" "Failed!" rustup update
 
 do_job "Updating tealdeer cache." "Done!" "Failed!" tldr --update
 
-do_job "Syncing local xlocate database with the official git based." "Done!" "Failed!" sudo xlocate -S
+do_job "Syncing local xlocate database with the official git based." "Done!" "Failed!" xlocate -S

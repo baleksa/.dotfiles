@@ -7,16 +7,7 @@
 # 	swaymsg "workspace 1, exec \$BROWSER, workspace 2"
 # fi
 
-swaymsg workspace portrait output DP-2, workspace portrait
-swaymsg workspace extra output DP-2, workspace extra, layout tabbed
-
-# swaymsg exec "$BROWSER --new-instance -P extra --name 'Firefox-extra'"
-
-# zathura ~/notes/TODO.pdf &
-# pid=$!
-# (
-# while ! swaymsg "[pid=${pid}] move workspace extra" >/dev/null 2>&1; do true; done
-# ) &
+swaymsg workspace extra, layout tabbed
 
 swaymsg workspace portrait
 swaymsg workspace 2
