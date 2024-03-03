@@ -6,7 +6,7 @@ oldswaybg="$(pidof swaybg)"
 swaybg -i ~/Pictures/green_village.jpg -o \* -m fill &
 kill "$oldswaybg"
 
-gsettings set org.gnome.desktop.interface gtk-theme "Adwaita"
+gsettings set org.gnome.desktop.interface gtk-theme "Arc"
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
 
 makoctl set-mode light

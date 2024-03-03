@@ -1,6 +1,4 @@
 #!/bin/sh
 
-sed -i '/\[colors\]/q' /home/baleksa/.config/foot/foot.ini
-cat /home/baleksa/.config/foot/colorschemes/everforest_light >> /home/baleksa/.config/foot/foot.ini
-# theme.sh everforest-light
+ln -fs ~/.config/foot/colorschemes/everforest_light ~/.config/foot/theme
 pkill -USR1 zsh
