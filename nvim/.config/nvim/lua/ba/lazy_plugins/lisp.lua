@@ -64,12 +64,12 @@ local M = {
       )
     end,
   },
-  {
-    "julienvincent/nvim-paredit-fennel",
-    dependencies = { "julienvincent/nvim-paredit" },
-    ft = { "fennel" },
-    opts = {},
-  },
+  -- {
+  --   "julienvincent/nvim-paredit-fennel",
+  --   dependencies = { "julienvincent/nvim-paredit" },
+  --   ft = { "fennel" },
+  --   opts = {},
+  -- },
   -- {
   --   "julienvincent/nvim-paredit",
   --   ft = { "clojure", "fennel" },
@@ -126,14 +126,17 @@ local M = {
       require("treesitter-sexp").setup(opts)
     end,
   },
+  -- {
+  --   "eraserhd/parinfer-rust",
+  --   ft = { "clojure", "fennel", "lisp", "scheme" },
+  --   -- opts = {},
+  --   -- config = function(plugin, _)
+  --   --   -- vim.opt.rtp:append(plugin.dir .. "target/release")
+  --   -- end,
+  --   build = "cargo build --release",
+  -- },
   {
-    "eraserhd/parinfer-rust",
-    ft = { "clojure", "fennel", "lisp", "scheme" },
-    -- opts = {},
-    -- config = function(plugin, _)
-    --   -- vim.opt.rtp:append(plugin.dir .. "target/release")
-    -- end,
-    build = "cargo build --release",
+    "gpanders/nvim-parinfer",
   },
 }
 return M
