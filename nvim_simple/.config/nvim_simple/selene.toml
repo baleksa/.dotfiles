@@ -1,0 +1,3 @@
+std="neovim"
+[lints]
+mixed_table = "allow"
