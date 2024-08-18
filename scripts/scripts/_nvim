@@ -1,0 +1,21 @@
+#!/bin/sh
+
+system_bin="/usr/bin/nvim"
+prelease_bin="${HOME}/.local/bin/nvim"
+
+if [ "${NVIM_VERSION:-"system"}" = "system" ]; then
+	bin="$system_bin"
+else
+	bin="$prelease_bin"
+fi
+
+if [ "$#" -eq 0 ]; then
+	exec "$bin"
+fi
+
+if [ "$#" -eq 1 ] && [ -d "$1" ]; then
+	cd "$1" || (echo "Can't cd to $1" && exit)
+	exec "$bin" ./
+else
+	exec "$bin" "$@"
+fi

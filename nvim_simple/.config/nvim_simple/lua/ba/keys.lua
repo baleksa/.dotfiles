@@ -56,3 +56,6 @@ vim.keymap.set("t", "<A-l>", "<C-\\><C-N><C-w>l", {})
 vim.keymap.set("t", "<A-o>", "<C-\\><C-n><C-o>", {})
 vim.keymap.set("t", "<A-n>", "<C-\\><C-n>", {})
 vim.keymap.set("t", "<A-6>", "<C-\\><C-n><C-6>", {})
+
+-- Netrw
+vim.keymap.set("n", "<leader>-", ":Explore<CR>", {})

@@ -260,6 +260,7 @@ end
 
 local lsp = require("lspconfig")
 lsp.gopls.setup({})
+lsp.bashls.setup({})
 lsp.lua_ls.setup({
   settings = {
     Lua = {

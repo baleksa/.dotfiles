@@ -30,19 +30,27 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
--- Set keywords bold, comments italic
-vim.api.nvim_create_autocmd("Colorscheme", {
-  group = vim.api.nvim_create_augroup("Fix colorscheme", {}),
+-- Turn relative numbers in insert mode
+vim.api.nvim_create_autocmd("InsertEnter", {
+  group = vim.api.nvim_create_augroup("IE", {}),
   callback = function()
-    vim.cmd([[highlight Keyword gui=bold]])
-    vim.cmd([[highlight Comment gui=italic]])
+    vim.o.rnu = false
+  end,
+})
+vim.api.nvim_create_autocmd("InsertLeave", {
+  group = vim.api.nvim_create_augroup("IL", {}),
+  callback = function()
+    vim.o.rnu = true
+    vim.o.nu = true
   end,
 })
 
--- vim.api.nvim_create_autocmd("OptionSet", {
---   pattern = "background",
---   callback = function() end,
---   group = 1,
--- })
-
-vim.cmd.colorscheme("quiet")
+vim.api.nvim_create_autocmd("OptionSet", {
+  pattern = "background",
+  group = vim.api.nvim_create_augroup("ColorNvim", {}),
+  callback = function()
+    vim.schedule(function()
+      vim.cmd.colorscheme(vim.o.background)
+    end)
+  end,
+})

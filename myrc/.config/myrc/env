@@ -66,4 +66,5 @@ export PDFREADER="zathura"
 export DOCREADER="zaread"
 
 export SWAY_SCRIPTS="$HOME/.config/sway/scripts"
+export NVIM_APPNAME="nvim_simple"
 # vim: ft=sh
